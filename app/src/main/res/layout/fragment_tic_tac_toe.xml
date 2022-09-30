@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tic_tac_toe_app_choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:text="@string/tic_tac_toe_app_choice"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/tic_tac_toe_app_choice_result"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_empty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_app_choice"/>
+
+    <TextView
+        android:id="@+id/tic_tac_toe_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score_separator"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_app_choice_result"
+        app:layout_constraintBottom_toTopOf="@+id/tic_tac_toe_self_choice" />
+
+    <ImageView
+        android:id="@+id/tic_tac_toe_self_choice"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_empty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tic_tac_toe_choice" />
+
+    <TextView
+        android:id="@+id/tic_tac_toe_app_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/zero"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_score_separator"
+        app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_score_separator"
+        app:layout_constraintBottom_toTopOf="@+id/tic_tac_toe_score_separator" />
+
+    <TextView
+        android:id="@+id/tic_tac_toe_score_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score_separator"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_app_choice_result"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_separator"
+        app:layout_constraintBottom_toBottomOf="@id/tic_tac_toe_separator" />
+
+    <TextView
+        android:id="@+id/tic_tac_toe_self_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/zero"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_score_separator"
+        app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_score_separator"
+        app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_score_separator" />
+
+    <TextView
+        android:id="@+id/tic_tac_toe_choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/tic_tac_toe_self_choice"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tic_tac_toe_choice_paper"/>
+
+    <ImageView
+        android:id="@+id/tic_tac_toe_choice_rock"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@null"
+        android:src="@drawable/tic_tac_toe_rock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_choice_paper"
+        app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_choice_paper"
+        app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_choice_paper" />
+
+    <ImageView
+        android:id="@+id/tic_tac_toe_choice_paper"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="32dp"
+        android:contentDescription="@null"
+        android:src="@drawable/tic_tac_toe_paper"
+        app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_choice_rock"
+        app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_choice_scissors"
+        app:layout_constraintBottom_toTopOf="@+id/tic_tac_toe_reset_button" />
+
+    <ImageView
+        android:id="@+id/tic_tac_toe_choice_scissors"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@null"
+        android:src="@drawable/tic_tac_toe_scissors"
+        app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_choice_paper"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_choice_paper"
+        app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_choice_paper" />
+
+    <Button
+        android:id="@+id/tic_tac_toe_reset_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="32dp"
+        android:text="@string/reset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

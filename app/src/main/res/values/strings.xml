@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Papps</string>
+    <string name="apps">Apps</string>
+    <string name="games">Jogos</string>
+
+    <!-- Home -->
+    <string name="home_click_here">Clique aqui\npara começar\na aventura!</string>
+
+    <!-- Drawer -->
+    <!-- Drawer Header -->
+    <string name="drawer_header_title">Papps</string>
+
+    <!-- Drawer Items -->
+    <string name="app_name_random_number">Número Aleatório</string>
+    <string name="app_name_tip">Gorjeta</string>
+    <string name="app_name_click_counter">Contador de Cliques</string>
+    <string name="app_name_coin_flipper">Cara ou Coroa</string>
+    <string name="app_name_tic_tac_toe">Pedra, Papel e Tesoura</string>
+
+    <!-- Drawer Bottom Items -->
+    <string name="privacy_policy">Política de Privacidade</string>
+
+    <!-- All Apps and Games -->
+    <string name="zero">0</string>
+    <string name="zero_decimal">R$ 0.00</string>
+    <string name="one">1</string>
+    <string name="ten">10</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="reset">Reset</string>
+    <string name="value_with_cipher">R\u0024 %1$d</string>
+    <string name="value_with_percentage">%1$d \%%</string>
+    <string name="score_separator">X</string>
+    <string name="click_here">Clique Aqui!</string>
+
+    <!-- All Apps -->
+    <!-- Random Number -->
+    <string name="random_number_min_higher_than_max">Max must be higher than Min</string>
+    <string name="random_number_no_input_found">Min and Max cannot be empty</string>
+
+    <!-- Tip -->
+    <string name="tip_value_hint">Digite o Valor da Conta ex: 37.50</string>
+    <string name="tip_zero_percentage">0 %</string>
+    <string name="tip_total">Total</string>
+    <string name="tip_no_input_found">Favor Digitar o Valor da Conta</string>
+
+    <!-- All Games -->
+    <!-- Coin Flipper -->
+    <string name="coin_flipper_title">Resultado</string>
+    <string name="coin_flipper_win_or_lose">Ganhou ou Perdeu?</string>
+    <string name="coin_flipper_choice">Escolha Uma Opção Abaixo</string>
+    <string name="coin_flipper_heads">Heads</string>
+    <string name="coin_flipper_tails">Tails</string>
+    <string name="coin_flipper_won">Ganhou</string>
+    <string name="coin_flipper_lost">Perdeu</string>
+
+    <!-- Click Counter -->
+    <string name="click_counter_clicks">Cliques</string>
+    <string name="click_counter_click_anywhere">Clique em qualquer lugar da tela!</string>
+
+    <!-- Tic Tac Toe -->
+    <string name="tic_tac_toe_app_choice">Escolha do App</string>
+    <string name="tic_tac_toe_self_choice">Escolha Uma Opção Abaixo</string>
+</resources>

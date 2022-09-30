@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_drawer"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:title="@string/apps">
+            <menu>
+                <item
+                    android:id="@+id/item_click_counter"
+                    android:title="@string/app_name_click_counter" />
+                <item
+                    android:id="@+id/item_random_number"
+                    android:title="@string/app_name_random_number" />
+                <item
+                    android:id="@+id/item_tip"
+                    android:title="@string/app_name_tip" />
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:title="@string/games">
+            <menu>
+                <item
+                    android:id="@+id/item_coin_flipper"
+                    android:title="@string/app_name_coin_flipper" />
+                <item
+                    android:id="@+id/item_tic_tac_toe"
+                    android:title="@string/app_name_tic_tac_toe" />
+            </menu>
+        </item>
+    </group>
+</menu>
