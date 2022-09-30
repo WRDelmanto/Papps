@@ -3,16 +3,19 @@ package com.wrdelmanto.papps
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.Gravity.LEFT
 import android.view.MenuItem
 import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 import android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
 import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+import android.view.View.SYSTEM_UI_FLAG_LOW_PROFILE
 import android.widget.ImageView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
@@ -30,7 +33,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var drawerBottom: NavigationView
     private lateinit var drawerIcon: ImageView
 
-    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -50,6 +52,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerIcon.setOnClickListener { activityMain.openDrawer(LEFT) }
         drawer.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
         drawerBottom.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        setupNavigationAndStatusBar()
     }
 
     @SuppressLint("RtlHardcoded")
@@ -84,9 +91,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             ft.addToBackStack(null)
             ft.commit()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        } catch (e: Exception) { e.printStackTrace() }
     }
 
     /**
@@ -97,14 +102,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     /**
      * Setup navigation and status bar
      */
-    @RequiresApi(Build.VERSION_CODES.R)
+    @Suppress("DEPRECATION")
     private fun setupNavigationAndStatusBar() {
+        changeSystemUiColor()
+
         // Hide navigation bar = SYSTEM_UI_FLAG_HIDE_NAVIGATION and SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         // Hide status bar = SYSTEM_UI_FLAG_FULLSCREEN
         window.decorView.systemUiVisibility = SYSTEM_UI_FLAG_HIDE_NAVIGATION or SYSTEM_UI_FLAG_IMMERSIVE_STICKY or SYSTEM_UI_FLAG_FULLSCREEN
+    }
 
-        // Change status bar color
-        // window.statusBarColor = ContextCompat.getColor(applicationContext,R.color.status_bar_color);
+    private fun changeSystemUiColor () {
+        window.statusBarColor = ContextCompat.getColor(applicationContext, R.color.navigation_bar_color)
+        window.navigationBarColor = ContextCompat.getColor(applicationContext, R.color.navigation_bar_color)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun hideSystemUi() {
+        window.decorView.systemUiVisibility = (
+            SYSTEM_UI_FLAG_LOW_PROFILE
+                or SYSTEM_UI_FLAG_FULLSCREEN
+                or SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                or SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun showSystemUI() {
+        window.decorView.systemUiVisibility = (
+            SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
 
     companion object {
