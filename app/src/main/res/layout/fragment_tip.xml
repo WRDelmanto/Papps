@@ -33,13 +33,14 @@
 
     <TextView
         android:id="@+id/tip_percentage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="@string/tip_zero_percentage"
+        android:text="@string/ten_with_cipher"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tip_tip"
         app:layout_constraintTop_toBottomOf="@+id/tip_value_input" />
 
     <SeekBar
@@ -81,12 +82,13 @@
 
     <TextView
         android:id="@+id/tip_total"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/tip_total"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tip_tip"
+        app:layout_constraintEnd_toEndOf="@+id/tip_tip"
         app:layout_constraintTop_toBottomOf="@+id/tip_tip" />
 
     <TextView
