@@ -2,7 +2,7 @@
 #### # ====================================
 #### # Author:		William Rodrigues Delmanto
 #### # Description:	Papps - Personal Apps
-#### # Client:		Play Store
+#### # Client:		All
 #### # ====================================
 
 ## About
