@@ -15,11 +15,25 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@null" />
 
+    <TextView
+        android:id="@+id/tip_cipher_value_input"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="32dp"
+        android:gravity="center"
+        android:text="@string/cipher"
+        android:textColor="@color/defaul_text_color"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tip_value_input"
+        app:layout_constraintBottom_toBottomOf="@+id/tip_value_input">
+    </TextView>
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/tip_value_input"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginTop="16dp"
         android:hint="@string/tip_value_hint"
         android:inputType="number|numberDecimal"
@@ -27,7 +41,7 @@
         android:textColorLink="@color/tip_orange"
         android:backgroundTint="@color/tip_orange"
         android:textCursorDrawable="@null"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tip_cipher_value_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tip_coins" />
 

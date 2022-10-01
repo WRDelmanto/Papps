@@ -30,6 +30,7 @@
     <string name="min">Min</string>
     <string name="max">Max</string>
     <string name="reset">Reset</string>
+    <string name="cipher">R$ </string>
     <string name="value_with_cipher">R\u0024 %1$d</string>
     <string name="value_with_percentage">%1$d \%%</string>
     <string name="score_separator">X</string>
@@ -41,7 +42,7 @@
     <string name="random_number_no_input_found">Min and Max cannot be empty</string>
 
     <!-- Tip -->
-    <string name="tip_value_hint">Digite o Valor da Conta ex: 37.50</string>
+    <string name="tip_value_hint">Digite o valor da conta ex: R$ 37.50</string>
     <string name="tip_zero_percentage">0 %</string>
     <string name="tip_total">Total</string>
     <string name="tip_no_input_found">Favor Digitar o Valor da Conta</string>
