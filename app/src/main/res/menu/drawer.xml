@@ -10,13 +10,16 @@
             <menu>
                 <item
                     android:id="@+id/item_click_counter"
-                    android:title="@string/app_name_click_counter" />
+                    android:title="@string/app_name_click_counter"
+                    android:icon="@drawable/click_counter_logo"/>
                 <item
                     android:id="@+id/item_random_number"
-                    android:title="@string/app_name_random_number" />
+                    android:title="@string/app_name_random_number"
+                    android:icon="@drawable/random_number_logo"/>
                 <item
                     android:id="@+id/item_tip"
-                    android:title="@string/app_name_tip" />
+                    android:title="@string/app_name_tip"
+                    android:icon="@drawable/tip_logo"/>
             </menu>
         </item>
     </group>
@@ -26,10 +29,12 @@
             <menu>
                 <item
                     android:id="@+id/item_coin_flipper"
-                    android:title="@string/app_name_coin_flipper" />
+                    android:title="@string/app_name_coin_flipper"
+                    android:icon="@drawable/coin_flipper_logo"/>
                 <item
                     android:id="@+id/item_tic_tac_toe"
-                    android:title="@string/app_name_tic_tac_toe" />
+                    android:title="@string/app_name_tic_tac_toe"
+                    android:icon="@drawable/tic_tac_toe_logo"/>
             </menu>
         </item>
     </group>
