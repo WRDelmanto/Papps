@@ -15,7 +15,6 @@ import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.hideKeyboard
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.showNormalToast
-import kotlin.math.roundToLong
 
 class TipFragment : Fragment() {
     private lateinit var value: EditText
@@ -71,11 +70,11 @@ class TipFragment : Fragment() {
         val valueInput = value.text.toString()
 
         if (valueInput.isNotEmpty()) {
-            val tip = valueInput.toDouble() * percentage * 0.01
+            val tip = valueInput.toDouble() * percentage.toDouble() * TRANSFORM_TO_PERCENTAGE
             val total = valueInput.toDouble() + tip
 
-            tipOutput.text = getString(R.string.value_with_cipher, tip.roundToLong())
-            totalOutput.text = getString(R.string.value_with_cipher, total.roundToLong())
+            tipOutput.text = getString(R.string.value_with_cipher, tip.toString())
+            totalOutput.text = getString(R.string.value_with_cipher, total.toString())
 
             logD { "valueInput=$valueInput, tipPercentage=$percentage, tip=$tip, total=$total" }
         } else {
@@ -86,5 +85,9 @@ class TipFragment : Fragment() {
 
             logD { "valueInput=Empty" }
         }
+    }
+
+    companion object {
+        const val TRANSFORM_TO_PERCENTAGE = 0.01
     }
 }
