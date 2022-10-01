@@ -24,7 +24,7 @@ import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
 import com.wrdelmanto.papps.apps.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
-import com.wrdelmanto.papps.games.ticTacToe.TicTacToeFragment
+import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var activityMain: DrawerLayout
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             // Games
             R.id.item_coin_flipper -> switchFragment(homeFragmentContainer.id, CoinFlipperFragment())
-            R.id.item_tic_tac_toe -> switchFragment(homeFragmentContainer.id, TicTacToeFragment())
+            R.id.item_rock_paper_scissors -> switchFragment(homeFragmentContainer.id, RockPaperScissorsFragment())
 
             // Drawer Bottom
             R.id.item_privacy_policy -> openPrivacyPolicy()

@@ -16,7 +16,7 @@
     <string name="app_name_tip">Gorjeta</string>
     <string name="app_name_click_counter">Contador de Cliques</string>
     <string name="app_name_coin_flipper">Cara ou Coroa</string>
-    <string name="app_name_tic_tac_toe">Pedra, Papel e Tesoura</string>
+    <string name="app_name_rock_paper_scissors">Pedra, Papel e Tesoura</string>
 
     <!-- Drawer Bottom Items -->
     <string name="privacy_policy">Política de Privacidade</string>
@@ -61,7 +61,7 @@
     <string name="click_counter_clicks">Cliques</string>
     <string name="click_counter_click_anywhere">Clique em qualquer lugar da tela!</string>
 
-    <!-- Tic Tac Toe -->
-    <string name="tic_tac_toe_app_choice">Escolha do App</string>
-    <string name="tic_tac_toe_self_choice">Escolha Uma Opção Abaixo</string>
+    <!-- Rock Paper Scissors -->
+    <string name="rock_paper_scissors_app_choice">Escolha do App</string>
+    <string name="rock_paper_scissors_self_choice">Escolha Uma Opção Abaixo</string>
 </resources>

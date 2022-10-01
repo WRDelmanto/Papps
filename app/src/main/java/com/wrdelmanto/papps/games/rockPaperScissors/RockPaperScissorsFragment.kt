@@ -1,4 +1,4 @@
-package com.wrdelmanto.papps.games.ticTacToe
+package com.wrdelmanto.papps.games.rockPaperScissors
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.logD
 import java.util.Random
 
-class TicTacToeFragment : Fragment() {
+class RockPaperScissorsFragment : Fragment() {
     private lateinit var appChoiceResultImage: ImageView
     private lateinit var selfChoiceResultImage: ImageView
     private lateinit var appScore: TextView
@@ -27,21 +27,21 @@ class TicTacToeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_tic_tac_toe, container, false)
+        return inflater.inflate(R.layout.fragment_rock_paper_scissors, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        appChoiceResultImage = view.findViewById(R.id.tic_tac_toe_app_choice_result)
-        selfChoiceResultImage = view.findViewById(R.id.tic_tac_toe_self_choice)
-        appScore = view.findViewById(R.id.tic_tac_toe_app_score)
-        selfScore = view.findViewById(R.id.tic_tac_toe_self_score)
-        selfChoiceResult = view.findViewById(R.id.tic_tac_toe_choice)
-        selfChoiceRock = view.findViewById(R.id.tic_tac_toe_choice_rock)
-        selfChoicePaper = view.findViewById(R.id.tic_tac_toe_choice_paper)
-        selfChoiceScissors = view.findViewById(R.id.tic_tac_toe_choice_scissors)
-        resetButton = view.findViewById(R.id.tic_tac_toe_reset_button)
+        appChoiceResultImage = view.findViewById(R.id.rock_paper_scissors_app_choice_result)
+        selfChoiceResultImage = view.findViewById(R.id.rock_paper_scissors_self_choice)
+        appScore = view.findViewById(R.id.rock_paper_scissors_app_score)
+        selfScore = view.findViewById(R.id.rock_paper_scissors_self_score)
+        selfChoiceResult = view.findViewById(R.id.rock_paper_scissors_choice)
+        selfChoiceRock = view.findViewById(R.id.rock_paper_scissors_choice_rock)
+        selfChoicePaper = view.findViewById(R.id.rock_paper_scissors_choice_paper)
+        selfChoiceScissors = view.findViewById(R.id.rock_paper_scissors_choice_scissors)
+        resetButton = view.findViewById(R.id.rock_paper_scissors_reset_button)
 
         initiateListeners()
     }
@@ -55,9 +55,9 @@ class TicTacToeFragment : Fragment() {
 
     private fun onChoice(selfChoice: String) {
         when (selfChoice) {
-        "Rock" -> selfChoiceResultImage.setImageResource(R.drawable.tic_tac_toe_rock)
-        "Paper" -> selfChoiceResultImage.setImageResource(R.drawable.tic_tac_toe_paper)
-        "Scissors" -> selfChoiceResultImage.setImageResource(R.drawable.tic_tac_toe_scissors)
+        "Rock" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_rock)
+        "Paper" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_paper)
+        "Scissors" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_scissors)
         }
 
         val appChoice = generetaAppChoice()
@@ -70,9 +70,9 @@ class TicTacToeFragment : Fragment() {
         val appChoice = options[Random().nextInt(3)]
 
         when (appChoice) {
-            "Rock" -> appChoiceResultImage.setImageResource(R.drawable.tic_tac_toe_rock)
-            "Paper" -> appChoiceResultImage.setImageResource(R.drawable.tic_tac_toe_paper)
-            "Scissors" -> appChoiceResultImage.setImageResource(R.drawable.tic_tac_toe_scissors)
+            "Rock" -> appChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_rock)
+            "Paper" -> appChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_paper)
+            "Scissors" -> appChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_scissors)
         }
 
         return appChoice
