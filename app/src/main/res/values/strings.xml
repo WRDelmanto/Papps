@@ -12,6 +12,7 @@
     <string name="drawer_header_title">Papps</string>
 
     <!-- Drawer Items -->
+    <string name="app_name_random_letter">Letra Aleatória</string>
     <string name="app_name_random_number">Número Aleatório</string>
     <string name="app_name_tip">Gorjeta</string>
     <string name="app_name_click_counter">Contador de Cliques</string>

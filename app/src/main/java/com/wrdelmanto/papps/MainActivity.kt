@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.navigation.NavigationView
 import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
+import com.wrdelmanto.papps.apps.randomLetter.RandomLetterFragment
 import com.wrdelmanto.papps.apps.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             // Apps
             R.id.item_click_counter -> switchFragment(homeFragmentContainer.id, ClickCounterFragment())
+            R.id.item_random_letter -> switchFragment(homeFragmentContainer.id, RandomLetterFragment())
             R.id.item_random_number -> switchFragment(homeFragmentContainer.id, RandomNumberFragment())
             R.id.item_tip -> switchFragment(homeFragmentContainer.id, TipFragment())
 

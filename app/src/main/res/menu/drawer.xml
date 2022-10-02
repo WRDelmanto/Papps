@@ -13,6 +13,10 @@
                     android:title="@string/app_name_click_counter"
                     android:icon="@drawable/click_counter_logo"/>
                 <item
+                    android:id="@+id/item_random_letter"
+                    android:title="@string/app_name_random_letter"
+                    android:icon="@drawable/random_letter_logo"/>
+                <item
                     android:id="@+id/item_random_number"
                     android:title="@string/app_name_random_number"
                     android:icon="@drawable/random_number_logo"/>
