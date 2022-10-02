@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.hideKeyboard
 import com.wrdelmanto.papps.utils.logD
+import com.wrdelmanto.papps.utils.roundTo2Decimals
 import com.wrdelmanto.papps.utils.showNormalToast
 
 class TipFragment : Fragment() {
@@ -73,10 +74,10 @@ class TipFragment : Fragment() {
             val tip = valueInput.toDouble() * percentage.toDouble() * TRANSFORM_TO_PERCENTAGE
             val total = valueInput.toDouble() + tip
 
-            tipOutput.text = getString(R.string.value_with_cipher, tip.toString())
-            totalOutput.text = getString(R.string.value_with_cipher, total.toString())
+            tipOutput.text = getString(R.string.value_with_cipher, roundTo2Decimals(tip))
+            totalOutput.text = getString(R.string.value_with_cipher, roundTo2Decimals(total))
 
-            logD { "valueInput=$valueInput, tipPercentage=$percentage, tip=$tip, total=$total" }
+            logD { "valueInput=$valueInput, tipPercentage=$percentage, tip=${tipOutput.text}, total=${totalOutput.text}" }
         } else {
             tipOutput.setText(R.string.zero)
             totalOutput.setText(R.string.zero)
