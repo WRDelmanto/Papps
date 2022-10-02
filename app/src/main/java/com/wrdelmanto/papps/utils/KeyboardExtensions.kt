@@ -34,7 +34,7 @@ fun Activity.hideKeyboard() = hideKeyboard(currentFocus ?: View(this))
  */
 private fun Context.openKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
 
     logD { "openKeyboard" }
 }
