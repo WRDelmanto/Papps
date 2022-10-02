@@ -32,18 +32,20 @@
             android:id="@+id/click_counter_addition_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0"/>
+            android:alpha="0" />
 
         <TextView
             android:id="@+id/click_counter_click_anywhere"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="32dp"
             android:text="@string/click_counter_click_anywhere"
             android:textSize="18sp"
-            android:layout_marginBottom="32dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/click_counter_reset_button" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/click_counter_text_clicks"
+            app:layout_constraintBottom_toTopOf="@+id/click_counter_reset_button"/>
 
         <Button
             android:id="@+id/click_counter_reset_button"

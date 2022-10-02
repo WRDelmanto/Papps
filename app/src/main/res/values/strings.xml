@@ -52,7 +52,7 @@
     <!-- Coin Flipper -->
     <string name="coin_flipper_title">Resultado</string>
     <string name="coin_flipper_win_or_lose">Ganhou ou Perdeu?</string>
-    <string name="coin_flipper_choice">Escolha Uma Opção Abaixo</string>
+    <string name="coin_flipper_choice">Escolha uma opção abaixo</string>
     <string name="coin_flipper_heads">Heads</string>
     <string name="coin_flipper_tails">Tails</string>
     <string name="coin_flipper_won">Ganhou</string>

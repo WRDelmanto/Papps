@@ -33,12 +33,14 @@ class RandomLetterFragment : Fragment() {
 
     private fun initiateListeners() = randomizerButton.setOnClickListener { generateRandomLetter() }
 
+    @Suppress("DEPRECATION")
     private fun generateRandomLetter() {
         val randomLetter = ('A'..'Z').randomString(1)
 
         result.apply {
             text = randomLetter
-            textSize = 36F
+            textSize = 128F
+            setTextColor(resources.getColor(R.color.color_secondary))
         }
 
         logD { "randomLetter=$randomLetter" }

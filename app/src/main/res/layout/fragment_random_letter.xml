@@ -21,5 +21,5 @@
         android:id="@+id/random_letter_click_here"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0"/>
+        android:alpha="0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

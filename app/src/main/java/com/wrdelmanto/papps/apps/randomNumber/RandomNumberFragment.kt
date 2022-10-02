@@ -39,6 +39,7 @@ class RandomNumberFragment : Fragment() {
 
     private fun initiateListeners() = randomizerButton.setOnClickListener { hideKeyboard(); generateRandomNumber() }
 
+    @Suppress("DEPRECATION")
     private fun generateRandomNumber() {
         val min = minInput.text.toString()
         val max = maxInput.text.toString()
@@ -50,7 +51,11 @@ class RandomNumberFragment : Fragment() {
 
         if (min.toInt() <= max.toInt()) {
             val randomNumber = (min.toInt()..max.toInt()).random()
-            result.text = randomNumber.toString()
+            result.apply {
+                text = randomNumber.toString()
+                textSize = 128F
+                setTextColor(resources.getColor(R.color.color_primary))
+            }
 
             logD { "min=$min, max=$max, randomNumber=$randomNumber" }
         } else context?.let { showNormalToast(it, R.string.random_number_min_higher_than_max) }

@@ -68,6 +68,7 @@ class CoinFlipperFragment : Fragment() {
         ) { // User Wins
             result.apply {
                 text = getString(R.string.coin_flipper_won)
+                textSize = 32F
                 setTextColor(GREEN)
             }
 
@@ -76,6 +77,7 @@ class CoinFlipperFragment : Fragment() {
         } else { // App Wins
             result.apply {
                 text = getString(R.string.coin_flipper_lost)
+                textSize = 32F
                 setTextColor(RED)
             }
 
@@ -85,8 +87,12 @@ class CoinFlipperFragment : Fragment() {
     }
 
     private fun resetScore() {
-        result.text = getString(R.string.coin_flipper_win_or_lose)
-        result.setTextColor(GRAY)
+        result.apply {
+            text = getString(R.string.coin_flipper_win_or_lose)
+            textSize = 20F
+            setTextColor(GRAY)
+        }
+
         appScore.text = getString(R.string.zero)
         selfScore.text = getString(R.string.zero)
         resultImage.setImageResource(R.drawable.ic_empty)
