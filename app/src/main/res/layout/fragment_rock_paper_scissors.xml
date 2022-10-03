@@ -130,8 +130,9 @@
         app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_choice_paper"
         app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_choice_paper" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/rock_paper_scissors_reset_button"
+        android:background="@drawable/general_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"

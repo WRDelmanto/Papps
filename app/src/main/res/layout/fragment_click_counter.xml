@@ -47,8 +47,9 @@
             app:layout_constraintTop_toBottomOf="@+id/click_counter_text_clicks"
             app:layout_constraintBottom_toTopOf="@+id/click_counter_reset_button"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/click_counter_reset_button"
+            android:background="@drawable/general_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="32dp"

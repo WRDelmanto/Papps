@@ -96,8 +96,9 @@
         app:layout_constraintTop_toTopOf="@+id/coin_flipper_heads_image"
         app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_heads_image" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/coin_flipper_reset_button"
+        android:background="@drawable/general_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"

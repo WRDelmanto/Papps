@@ -9,6 +9,8 @@
     <!-- Base Colors -->
     <color name="color_primary">#004aad</color>
     <color name="color_secondary">#8c52ff</color>
+    <color name="general_button_background_tint">#f0f0f0</color>
+    <color name="general_button_border_tint">#a8a8a8</color>
 
     <!-- All Apps -->
     <!-- Random Number -->
