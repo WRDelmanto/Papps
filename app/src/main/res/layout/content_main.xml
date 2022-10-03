@@ -13,7 +13,7 @@
         android:id="@+id/home_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.wrdelmanto.papps.apps.home.HomeFragment"
+        class="com.wrdelmanto.papps.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home">
     </androidx.fragment.app.FragmentContainerView>
 </androidx.appcompat.widget.LinearLayoutCompat>
