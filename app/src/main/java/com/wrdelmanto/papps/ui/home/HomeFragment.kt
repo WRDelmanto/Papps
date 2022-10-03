@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
-import com.wrdelmanto.papps.utils.countApps
-import com.wrdelmanto.papps.utils.countGames
 
 class HomeFragment : Fragment() {
     private lateinit var homeLogo: ImageView
@@ -33,8 +31,5 @@ class HomeFragment : Fragment() {
     /**
      * Function created to test features.
      */
-    private fun activateEasterEgg() {
-        countApps()
-        countGames()
-    }
+    private fun activateEasterEgg() {}
 }
