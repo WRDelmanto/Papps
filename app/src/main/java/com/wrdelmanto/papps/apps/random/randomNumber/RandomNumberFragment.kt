@@ -1,4 +1,4 @@
-package com.wrdelmanto.papps.apps.randomNumber
+package com.wrdelmanto.papps.apps.random.randomNumber
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -54,7 +54,7 @@ class RandomNumberFragment : Fragment() {
             result.apply {
                 text = randomNumber.toString()
                 textSize = 128F
-                setTextColor(resources.getColor(R.color.color_primary))
+                setTextColor(resources.getColor(R.color.color_secondary))
             }
 
             logD { "min=$min, max=$max, randomNumber=$randomNumber" }

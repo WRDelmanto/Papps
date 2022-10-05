@@ -1,4 +1,4 @@
-package com.wrdelmanto.papps.apps.randomLetter
+package com.wrdelmanto.papps.apps.random.randomLetter
 
 import android.os.Bundle
 import android.view.LayoutInflater
