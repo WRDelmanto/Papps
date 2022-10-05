@@ -36,7 +36,7 @@
     <string name="reset">Reset</string>
     <string name="cipher">R$ </string>
     <string name="value_with_cipher">R\u0024 %1$s</string>
-    <string name="value_with_percentage">%1$d \%%</string>
+    <string name="value_with_percentage">%1$s \%%</string>
     <string name="score_separator">X</string>
     <string name="click_here">Clique Aqui!</string>
 

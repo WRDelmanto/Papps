@@ -17,7 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/random_bottom_nav_view"
-        class="com.wrdelmanto.papps.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home">
     </androidx.fragment.app.FragmentContainerView>
 

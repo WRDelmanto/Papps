@@ -42,7 +42,8 @@ class TipFragment : Fragment() {
         tipOutput = view.findViewById(R.id.tip_tip_output)
         totalOutput = view.findViewById(R.id.tip_total_output)
 
-        tipPercentage.text = getString(R.string.value_with_percentage, tipPercentageSeekBar.progress)
+        tipPercentage.text =
+            String.format(getString(R.string.value_with_percentage), tipPercentageSeekBar.progress.toString())
         percentage = tipPercentageSeekBar.progress
 
         initiateListeners()
@@ -58,7 +59,8 @@ class TipFragment : Fragment() {
         tipPercentageSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 percentage = progress
-                tipPercentage.text = getString(R.string.value_with_percentage, progress)
+                tipPercentage.text =
+                    String.format(getString(R.string.value_with_percentage), tipPercentageSeekBar.progress.toString())
                 calculateTotalOutput()
             }
 
@@ -79,8 +81,8 @@ class TipFragment : Fragment() {
 
             logD { "valueInput=$valueInput, tipPercentage=$percentage, tip=${tipOutput.text}, total=${totalOutput.text}" }
         } else {
-            tipOutput.setText(R.string.zero)
-            totalOutput.setText(R.string.zero)
+            tipOutput.setText(R.string.zero_decimal)
+            totalOutput.setText(R.string.zero_decimal)
 
             context?.let { showNormalToast(it, R.string.tip_no_input_found) }
 

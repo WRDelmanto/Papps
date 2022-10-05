@@ -21,6 +21,7 @@ import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
 import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
+import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.utils.hideSystemUi
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.switchNavBarColor
@@ -69,6 +70,7 @@ class MainActivity :
         randomBottomNavMenuRandomLetter = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_letter)
         randomBottomNavMenuRandomnumber = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
+        switchFragment(homeFragmentContainer.id, HomeFragment())
         setupNavigationAndStatusBar()
         initiateListeners()
     }
