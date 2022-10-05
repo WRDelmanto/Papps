@@ -42,7 +42,7 @@ fun Fragment.openKeyboard() = view?.let { activity?.openKeyboard(it) }
 fun Activity.openKeyboard() = openKeyboard(currentFocus ?: View(this))
 
 /**
- * Check if keyboard is already open.
+ * Check if soft keyboard is open.
  */
 fun View.isKeyboardOpen(): Boolean {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
