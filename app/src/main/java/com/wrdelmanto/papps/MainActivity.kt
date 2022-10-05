@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Gravity.LEFT
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -30,11 +31,14 @@ class MainActivity :
     NavigationView.OnNavigationItemSelectedListener,
     NavigationBarView.OnItemReselectedListener
 {
+    // App Bar
+    private lateinit var drawerIcon: ImageView
+    private lateinit var appBarTitle: TextView
+
     // Drawer
     private lateinit var activityMain: DrawerLayout
     private lateinit var homeFragmentContainer: FragmentContainerView
     private lateinit var drawer: NavigationView
-    private lateinit var drawerIcon: ImageView
 
     // Drawer Bottom
     private lateinit var drawerBottom: NavigationView
@@ -48,11 +52,14 @@ class MainActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // App Bar
+        drawerIcon = findViewById(R.id.app_bar_main_drawer)
+        appBarTitle = findViewById(R.id.app_bar_main_title)
+
         // Drawer
         activityMain = findViewById(R.id.activity_main)
         homeFragmentContainer = findViewById(R.id.home_fragment_container)
         drawer = findViewById(R.id.drawer)
-        drawerIcon = findViewById(R.id.imageView_drawer)
 
         // Drawer Bottom
         drawerBottom = findViewById(R.id.drawer_bottom)
@@ -68,8 +75,10 @@ class MainActivity :
 
     @SuppressLint("RtlHardcoded")
     private fun initiateListeners() {
-        // Drawer
+        // App Bar
         drawerIcon.setOnClickListener { activityMain.openDrawer(LEFT) }
+
+        // Drawer
         drawer.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
 
         // Drawer Bottom
@@ -121,6 +130,8 @@ class MainActivity :
             menuItem.itemId == R.id.random_bottom_nav_menu_random_letter ||
             menuItem.itemId == R.id.random_bottom_nav_menu_random_number
 
+        updateAppBarTitle(menuItem)
+
         activityMain.closeDrawer(LEFT)
         return true
     }
@@ -146,6 +157,26 @@ class MainActivity :
             ft.addToBackStack(null)
             ft.commit()
         } catch (e: Exception) { e.printStackTrace() }
+    }
+
+    private fun updateAppBarTitle(menuItem: MenuItem) {
+        appBarTitle.text = when (menuItem.itemId) {
+            // Apps
+            R.id.drawer_click_counter -> getString(R.string.app_name_click_counter)
+            R.id.drawer_random_letter -> getString(R.string.app_name_random_letter)
+            R.id.drawer_random_number -> getString(R.string.app_name_random_number)
+            R.id.drawer_tip -> getString(R.string.app_name_tip)
+
+            // Games
+            R.id.drawer_coin_flipper -> getString(R.string.app_name_coin_flipper)
+            R.id.drawer_rock_paper_scissors -> getString(R.string.app_name_rock_paper_scissors)
+
+            // Random bottom nav
+            R.id.random_bottom_nav_menu_random_letter -> getString(R.string.app_name_random_letter)
+            R.id.random_bottom_nav_menu_random_number -> getString(R.string.app_name_random_number)
+
+            else -> ""
+        }
     }
 
     /**
