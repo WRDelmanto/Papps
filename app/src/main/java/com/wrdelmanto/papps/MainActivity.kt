@@ -22,10 +22,8 @@ import com.wrdelmanto.papps.apps.tip.TipFragment
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
 import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
-import com.wrdelmanto.papps.utils.hideSystemUi
 import com.wrdelmanto.papps.utils.logD
-import com.wrdelmanto.papps.utils.switchNavBarColor
-import com.wrdelmanto.papps.utils.switchStatusBarColor
+import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 
 class MainActivity :
     AppCompatActivity(),
@@ -71,7 +69,7 @@ class MainActivity :
         randomBottomNavMenuRandomnumber = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
         switchFragment(homeFragmentContainer.id, HomeFragment())
-        setupNavigationAndStatusBar()
+        setupNavigationAndStatusBar(applicationContext, window)
         initiateListeners()
     }
 
@@ -95,7 +93,7 @@ class MainActivity :
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        setupNavigationAndStatusBar()
+        setupNavigationAndStatusBar(applicationContext, window)
     }
 
     @SuppressLint("RtlHardcoded")
@@ -185,16 +183,6 @@ class MainActivity :
      * Show Privacy Policy Screen
      */
     private fun openPrivacyPolicy() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
-
-    /**
-     * Setup navigation and status bar
-     */
-    @Suppress("DEPRECATION")
-    private fun setupNavigationAndStatusBar() {
-        switchNavBarColor(applicationContext, window)
-        switchStatusBarColor(applicationContext, window)
-        hideSystemUi(window)
-    }
 
     companion object {
         /**
