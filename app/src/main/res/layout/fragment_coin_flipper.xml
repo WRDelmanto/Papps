@@ -22,6 +22,7 @@
         android:id="@+id/coin_flipper_result_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginBottom="128dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_empty"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +65,13 @@
 
     <TextView
         android:id="@+id/coin_flipper_choice_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="64dp"
         android:text="@string/coin_flipper_choice"
         android:textSize="24sp"
-        android:layout_marginTop="64dp"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coin_flipper_result_image" />

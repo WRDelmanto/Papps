@@ -47,7 +47,7 @@
     <string name="random_number_no_input_found">Min and Max cannot be empty</string>
 
     <!-- Tip -->
-    <string name="tip_value_hint">Digite o valor da conta ex: R$ 37.50</string>
+    <string name="tip_value_hint"><font size="14">Digite o valor da conta ex: R$ 37.50</font></string>
     <string name="tip_zero_percentage">0 %</string>
     <string name="tip_total">Total</string>
     <string name="tip_no_input_found">Favor Digitar o Valor da Conta</string>
