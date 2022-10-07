@@ -6,4 +6,4 @@
 #### # ====================================
 
 ## About
-This is a repository to store Papps.
+Papps is an Android Application with apps and games.
