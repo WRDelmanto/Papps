@@ -6,6 +6,17 @@
     android:minHeight="100dp">
 
     <ImageView
+        android:id="@+id/drawer_header_line_top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/color_line_primary_secondary"
+        android:gravity="center_horizontal"
+        android:contentDescription="@null"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/drawer_header_logo"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -30,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="@id/drawer_header_logo"/>
 
     <ImageView
-        android:id="@+id/drawer_header_line"
+        android:id="@+id/drawer_header_line_bottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/color_line_primary_secondary"
