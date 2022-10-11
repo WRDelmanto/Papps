@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- All Apps and Games -->
+    <dimen name="margin_edges">32dp</dimen>
+
+    <dimen name="margin_elements_small">8dp</dimen>
+    <dimen name="margin_elements_normal">16dp</dimen>
+    <dimen name="margin_elements_large">32dp</dimen>
+    <dimen name="margin_elements_xlarge">64dp</dimen>
+
+    <dimen name="image_size_normal">100dp</dimen>
+
+    <dimen name="margin_elements_score">8dp</dimen>
+
+    <dimen name="font_size_small">8sp</dimen>
+    <dimen name="font_size_normal">16sp</dimen>
+    <dimen name="font_size_normal_above">24sp</dimen>
+    <dimen name="font_size_large">36sp</dimen>
+    <dimen name="font_size_xlarge">64sp</dimen>
+</resources>
