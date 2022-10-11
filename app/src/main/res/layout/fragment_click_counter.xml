@@ -41,6 +41,7 @@
             android:layout_marginBottom="@dimen/margin_edges"
             android:text="@string/click_counter_click_anywhere"
             android:textSize="@dimen/font_size_normal"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/click_counter_reset_button"/>

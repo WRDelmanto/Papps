@@ -13,6 +13,7 @@
         android:layout_marginBottom="@dimen/margin_elements_xlarge"
         android:textSize="@dimen/font_size_large"
         android:text="@string/coin_flipper_win_or_lose"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="@+id/coin_flipper_result_image"
         app:layout_constraintEnd_toEndOf="@+id/coin_flipper_result_image"
         app:layout_constraintBottom_toTopOf="@+id/coin_flipper_result_image">
