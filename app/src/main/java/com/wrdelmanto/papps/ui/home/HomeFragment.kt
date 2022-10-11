@@ -32,5 +32,7 @@ class HomeFragment : Fragment() {
     /**
      * Function created to test features.
      */
-    private fun activateEasterEgg() = logD { getString(R.string.easter_egg_activated) }
+    private fun activateEasterEgg() {
+        logD { getString(R.string.easter_egg_activated)}
+    }
 }
