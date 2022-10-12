@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.randomString
+import com.wrdelmanto.papps.utils.startBlinkingAnimation
+import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
 class RandomLetterFragment : Fragment() {
     private lateinit var result: TextView
@@ -28,10 +30,15 @@ class RandomLetterFragment : Fragment() {
         result = view.findViewById(R.id.random_letter_result)
         randomizerButton = view.findViewById(R.id.random_letter_click_here)
 
+        startBlinkingAnimation(result)
+
         initiateListeners()
     }
 
-    private fun initiateListeners() = randomizerButton.setOnClickListener { generateRandomLetter() }
+    private fun initiateListeners() = randomizerButton.setOnClickListener {
+        stopBlinkingAnimation(result)
+        generateRandomLetter()
+    }
 
     @Suppress("DEPRECATION")
     private fun generateRandomLetter() {

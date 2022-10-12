@@ -12,6 +12,8 @@ import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.hideKeyboard
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.showNormalToast
+import com.wrdelmanto.papps.utils.startBlinkingAnimation
+import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
 class RandomNumberFragment : Fragment() {
     private lateinit var result: TextView
@@ -34,10 +36,16 @@ class RandomNumberFragment : Fragment() {
         minInput = view.findViewById(R.id.random_number_min_input)
         maxInput = view.findViewById(R.id.random_number_max_input)
 
+        startBlinkingAnimation(result)
+
         initiateListeners()
     }
 
-    private fun initiateListeners() = randomizerButton.setOnClickListener { hideKeyboard(); generateRandomNumber() }
+    private fun initiateListeners() = randomizerButton.setOnClickListener {
+        hideKeyboard()
+        stopBlinkingAnimation(result)
+        generateRandomNumber()
+    }
 
     @Suppress("DEPRECATION")
     private fun generateRandomNumber() {

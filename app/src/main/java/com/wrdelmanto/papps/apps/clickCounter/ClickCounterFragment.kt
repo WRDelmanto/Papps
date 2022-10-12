@@ -10,6 +10,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.logD
+import com.wrdelmanto.papps.utils.startBlinkingAnimation
+import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
 class ClickCounterFragment : Fragment() {
     private lateinit var counter: TextView
@@ -32,12 +34,14 @@ class ClickCounterFragment : Fragment() {
         clickAnywhere = view.findViewById(R.id.click_counter_click_anywhere)
         resetButton = view.findViewById(R.id.click_counter_reset_button)
 
+        startBlinkingAnimation(clickAnywhere)
+
         initiateListeners()
     }
 
     private fun initiateListeners() {
-        additionButton.setOnClickListener { addition() }
-        resetButton.setOnClickListener { resetCounter() }
+        additionButton.setOnClickListener { stopBlinkingAnimation(clickAnywhere); addition() }
+        resetButton.setOnClickListener { startBlinkingAnimation(clickAnywhere); resetCounter() }
     }
 
     private fun addition() {
