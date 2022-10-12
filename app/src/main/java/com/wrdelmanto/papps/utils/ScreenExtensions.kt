@@ -4,11 +4,15 @@ import android.content.res.Resources
 import kotlin.math.absoluteValue
 
 /**
- * @return True if font is large or largest.
+ * Check if font or diplay is large or largest.
+ *
+ * @return True if font or diplay is large or largest.
  */
 fun isFontOrDisplayLarge() = isFontSizeLarge()
 
 /**
+ * Get font size.
+ *
  * @return Font size.
  */
 fun getFontSize(): String {
@@ -23,6 +27,8 @@ fun getFontSize(): String {
 }
 
 /**
+ * Check if font is large or largest.
+ *
  * @return True if font is large or largest.
  */
 fun isFontSizeLarge(): Boolean = getFontSize() == "Large" || getFontSize() == "Largest"

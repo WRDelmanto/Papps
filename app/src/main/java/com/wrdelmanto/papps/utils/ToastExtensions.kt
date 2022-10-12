@@ -12,61 +12,124 @@ import es.dmoral.toasty.Toasty
 
 /**
  * Error Toast
+ *
+ * @param context
+ * @param text
+ * @param duration
  */
 fun showErrorToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT) {
     configToast()
     Toasty.error(context, text, duration, true).show()
 }
 
+/**
+ * Error Toast
+ *
+ * @param context
+ * @param resId
+ * @param duration
+ */
 fun showErrorToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
     showErrorToast(context, context.resources.getText(resId), duration)
 
 /**
  * Success Toast
+ *
+ * @param context
+ * @param text
+ * @param duration
  */
 fun showSuccessToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT) {
     configToast()
     Toasty.success(context, text, duration, true).show()
 }
 
+/**
+ * Success Toast
+ *
+ * @param context
+ * @param resId
+ * @param duration
+ */
 fun showSuccessToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
     showSuccessToast(context, context.resources.getText(resId), duration)
 
 /**
  * Info Toast
+ *
+ * @param context
+ * @param text
+ * @param duration
  */
 fun showInfoToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT) {
     configToast()
     Toasty.info(context, text, duration, true).show()
 }
 
+/**
+ * Info Toast
+ *
+ * @param context
+ * @param resId
+ * @param duration
+ */
 fun showInfoToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
     showInfoToast(context, context.resources.getText(resId), duration)
 
 /**
  * Warning Toast
+ *
+ * @param context
+ * @param text
+ * @param duration
  */
 fun showWarningToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT) {
     configToast()
     Toasty.warning(context, text, duration, true).show()
 }
 
+/**
+ * Warning Toast
+ *
+ * @param context
+ * @param resId
+ * @param duration
+ */
 fun showWarningToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
     showWarningToast(context, context.resources.getText(resId), duration)
 
 /**
  * Normal Toast w/o icon
+ *
+ * @param context
+ * @param text
+ * @param duration
  */
 fun showNormalToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT, icon: Drawable? = null) {
     configToast()
     Toasty.normal(context, text, duration).show()
 }
 
+/**
+ * Normal Toast w/o icon
+ *
+ * @param context
+ * @param resId
+ * @param duration
+ */
 fun showNormalToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
     showNormalToast(context, context.resources.getText(resId), duration)
 
 /**
  * Custom Toast
+ *
+ * @param context
+ * @param text
+ * @param icon
+ * @param tintColor
+ * @param duration
+ * @param withIcon
+ * @param shouldTint
  */
 fun showCustomToast(
     context: Context,
@@ -89,6 +152,17 @@ fun showCustomToast(
     ).show()
 }
 
+/**
+ * Custom Toast
+ *
+ * @param context
+ * @param resId
+ * @param icon
+ * @param tintColor
+ * @param duration
+ * @param withIcon
+ * @param shouldTint
+ */
 fun showCustomToast(
     context: Context,
     resId: Int,
@@ -108,6 +182,9 @@ fun showCustomToast(
         shouldTint
     )
 
+/**
+ * Configure Toast.
+ */
 private fun configToast() {
     Toasty.Config.getInstance()
         .allowQueue(false)

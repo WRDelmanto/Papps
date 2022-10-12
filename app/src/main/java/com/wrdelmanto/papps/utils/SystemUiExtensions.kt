@@ -9,6 +9,9 @@ import com.wrdelmanto.papps.R
 
 /**
  * Setup navigation and status bar
+ *
+ * @param context
+ * @param window
  */
 @Suppress("DEPRECATION")
 fun setupNavigationAndStatusBar(context: Context, window: Window) {
@@ -18,6 +21,9 @@ fun setupNavigationAndStatusBar(context: Context, window: Window) {
 
 /**
  * Setup status bar.
+ *
+ * @param context
+ * @param window
  */
 @Suppress("DEPRECATION")
 private fun setupStatusBar(context: Context, window: Window) {
@@ -29,12 +35,18 @@ private fun setupStatusBar(context: Context, window: Window) {
 
 /**
  * Setup navigation bar.
+ *
+ * @param context
+ * @param window
  */
 @Suppress("DEPRECATION")
 private fun setupNavBar(context: Context, window: Window) = changeNavBarColor(context, window)
 
 /**
  * Change status bar color.
+ *
+ * @param context
+ * @param window
  */
 private fun changeStatusBarColor(context: Context, window: Window) {
     window.statusBarColor = ContextCompat.getColor(context, R.color.status_bar_color)
@@ -42,6 +54,9 @@ private fun changeStatusBarColor(context: Context, window: Window) {
 
 /**
  * Change navigation bar color.
+ *
+ * @param context
+ * @param window
  */
 private fun changeNavBarColor(context: Context, window: Window) {
     window.navigationBarColor = ContextCompat.getColor(context, R.color.navigation_bar_color)

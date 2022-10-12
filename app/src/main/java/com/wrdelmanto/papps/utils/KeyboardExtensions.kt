@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 
 /**
  * Hide soft keyboard after a dialog.
+ *
+ * @param view
  */
 private fun Context.hideKeyboard(view: View) {
     if (!view.isKeyboardOpen()) return
@@ -20,12 +22,20 @@ private fun Context.hideKeyboard(view: View) {
     logD { "hideKeyboard" }
 }
 
+/**
+ * Hide soft keyboard after a dialog.
+ */
 fun Fragment.hideKeyboard() = view?.let { activity?.hideKeyboard(it) }
 
+/**
+ * Hide soft keyboard after a dialog.
+ */
 fun Activity.hideKeyboard() = hideKeyboard(currentFocus ?: View(this))
 
 /**
  * Open soft keyboard after a dialog.
+ *
+ * @param view
  */
 @Suppress("DEPRECATION")
 private fun Context.openKeyboard(view: View) {
@@ -37,12 +47,20 @@ private fun Context.openKeyboard(view: View) {
     logD { "openKeyboard" }
 }
 
+/**
+ * Open soft keyboard after a dialog.
+ */
 fun Fragment.openKeyboard() = view?.let { activity?.openKeyboard(it) }
 
+/**
+ * Open soft keyboard after a dialog.
+ */
 fun Activity.openKeyboard() = openKeyboard(currentFocus ?: View(this))
 
 /**
  * Check if soft keyboard is open.
+ *
+ * @return True if soft keyboard is open
  */
 fun View.isKeyboardOpen(): Boolean {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
