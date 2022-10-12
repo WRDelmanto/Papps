@@ -6,4 +6,4 @@
 #### # ====================================
 
 ## About
-Papps is an Android Application with apps and games.
+Papps is an Android Application that puts together games and utilities.
