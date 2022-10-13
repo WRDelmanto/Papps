@@ -21,6 +21,11 @@ class RandomNumberFragment : Fragment() {
     private lateinit var minInput: EditText
     private lateinit var maxInput: EditText
 
+    private var numberHistoryMultableList = mutableListOf("", "", "", "")
+    private lateinit var firstHistory: TextView
+    private lateinit var secondHistory: TextView
+    private lateinit var thirdHistory: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
@@ -35,6 +40,10 @@ class RandomNumberFragment : Fragment() {
         randomizerButton = view.findViewById(R.id.random_number_click_here)
         minInput = view.findViewById(R.id.random_number_min_input)
         maxInput = view.findViewById(R.id.random_number_max_input)
+
+        firstHistory = view.findViewById(R.id.random_number_history_first)
+        secondHistory = view.findViewById(R.id.random_number_history_second)
+        thirdHistory = view.findViewById(R.id.random_number_history_third)
 
         startBlinkingAnimation(result)
 
@@ -59,6 +68,7 @@ class RandomNumberFragment : Fragment() {
 
         if (min.toInt() <= max.toInt()) {
             val randomNumber = (min.toInt()..max.toInt()).random()
+            updateNumberHistory(randomNumber.toString())
             result.apply {
                 text = randomNumber.toString()
                 textSize = 128F
@@ -67,5 +77,14 @@ class RandomNumberFragment : Fragment() {
 
             logD { "min=$min, max=$max, randomNumber=$randomNumber" }
         } else context?.let { showNormalToast(it, R.string.random_number_min_higher_than_max) }
+    }
+
+    private fun updateNumberHistory(randomNumber: String) {
+        if (numberHistoryMultableList.size >= 5) numberHistoryMultableList.removeLast()
+        numberHistoryMultableList.add(0, randomNumber)
+
+        firstHistory.text = numberHistoryMultableList[1]
+        secondHistory.text = numberHistoryMultableList[2]
+        thirdHistory.text = numberHistoryMultableList[3]
     }
 }

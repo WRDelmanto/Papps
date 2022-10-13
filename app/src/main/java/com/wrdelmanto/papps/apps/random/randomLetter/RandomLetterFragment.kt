@@ -17,6 +17,13 @@ class RandomLetterFragment : Fragment() {
     private lateinit var result: TextView
     private lateinit var randomizerButton: Button
 
+    private var letterHistoryMultableList = mutableListOf("", "", "", "", "", "")
+    private lateinit var firstHistory: TextView
+    private lateinit var secondHistory: TextView
+    private lateinit var thirdHistory: TextView
+    private lateinit var fourthHistory: TextView
+    private lateinit var fifthHistory: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
@@ -29,6 +36,12 @@ class RandomLetterFragment : Fragment() {
 
         result = view.findViewById(R.id.random_letter_result)
         randomizerButton = view.findViewById(R.id.random_letter_click_here)
+
+        firstHistory = view.findViewById(R.id.random_letter_history_first)
+        secondHistory = view.findViewById(R.id.random_letter_history_second)
+        thirdHistory = view.findViewById(R.id.random_letter_history_third)
+        fourthHistory = view.findViewById(R.id.random_letter_history_fourth)
+        fifthHistory = view.findViewById(R.id.random_letter_history_fifth)
 
         startBlinkingAnimation(result)
 
@@ -43,6 +56,7 @@ class RandomLetterFragment : Fragment() {
     @Suppress("DEPRECATION")
     private fun generateRandomLetter() {
         val randomLetter = ('A'..'Z').randomString(1)
+        updateLetterHistory(randomLetter)
 
         result.apply {
             text = randomLetter
@@ -51,5 +65,16 @@ class RandomLetterFragment : Fragment() {
         }
 
         logD { "randomLetter=$randomLetter" }
+    }
+
+    private fun updateLetterHistory(randomLetter: String) {
+        if (letterHistoryMultableList.size >= 5) letterHistoryMultableList.removeLast()
+        letterHistoryMultableList.add(0, randomLetter)
+
+        firstHistory.text = letterHistoryMultableList[1]
+        secondHistory.text = letterHistoryMultableList[2]
+        thirdHistory.text = letterHistoryMultableList[3]
+        fourthHistory.text = letterHistoryMultableList[4]
+        fifthHistory.text = letterHistoryMultableList[5]
     }
 }

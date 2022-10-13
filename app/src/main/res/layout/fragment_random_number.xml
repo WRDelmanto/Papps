@@ -19,6 +19,43 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <TextView
+        android:id="@+id/random_number_history_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_edges"
+        android:textSize="@dimen/font_size_xlarge"
+        android:ellipsize="end"
+        android:alpha="1.0"
+        app:layout_constraintStart_toStartOf="@+id/random_number_result"
+        app:layout_constraintEnd_toEndOf="@+id/random_number_result"
+        app:layout_constraintTop_toBottomOf="@+id/random_number_result">
+    </TextView>
+
+    <TextView
+        android:id="@+id/random_number_history_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_large"
+        android:ellipsize="end"
+        android:alpha="0.75"
+        app:layout_constraintStart_toStartOf="@+id/random_number_history_first"
+        app:layout_constraintEnd_toEndOf="@+id/random_number_history_first"
+        app:layout_constraintTop_toBottomOf="@+id/random_number_history_first">
+    </TextView>
+
+    <TextView
+        android:id="@+id/random_number_history_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_normal"
+        android:ellipsize="end"
+        android:alpha="0.5"
+        app:layout_constraintStart_toStartOf="@+id/random_number_history_second"
+        app:layout_constraintEnd_toEndOf="@+id/random_number_history_second"
+        app:layout_constraintTop_toBottomOf="@+id/random_number_history_second">
+    </TextView>
+
     <Button
         android:id="@+id/random_number_click_here"
         android:layout_width="match_parent"

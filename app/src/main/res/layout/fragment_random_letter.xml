@@ -19,6 +19,71 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <TextView
+        android:id="@+id/random_letter_history_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_elements_normal"
+        android:layout_marginHorizontal="@dimen/margin_edges"
+        android:paddingHorizontal="@dimen/padding_elements_small"
+        android:textSize="@dimen/font_size_normal_above"
+        android:alpha="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/random_letter_result">
+    </TextView>
+
+    <TextView
+        android:id="@+id/random_letter_history_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_elements_normal"
+        android:paddingHorizontal="@dimen/padding_elements_small"
+        android:textSize="@dimen/font_size_normal_above"
+        android:alpha="0.8"
+        app:layout_constraintStart_toStartOf="@+id/random_letter_history_first"
+        app:layout_constraintEnd_toEndOf="@+id/random_letter_history_first"
+        app:layout_constraintTop_toBottomOf="@+id/random_letter_history_first">
+    </TextView>
+
+    <TextView
+        android:id="@+id/random_letter_history_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_elements_normal"
+        android:paddingHorizontal="@dimen/padding_elements_small"
+        android:textSize="@dimen/font_size_normal_above"
+        android:alpha="0.6"
+        app:layout_constraintStart_toStartOf="@+id/random_letter_history_second"
+        app:layout_constraintEnd_toEndOf="@+id/random_letter_history_second"
+        app:layout_constraintTop_toBottomOf="@+id/random_letter_history_second">
+    </TextView>
+
+    <TextView
+        android:id="@+id/random_letter_history_fourth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_elements_normal"
+        android:paddingHorizontal="@dimen/padding_elements_small"
+        android:textSize="@dimen/font_size_normal_above"
+        android:alpha="0.4"
+        app:layout_constraintStart_toStartOf="@+id/random_letter_history_third"
+        app:layout_constraintEnd_toEndOf="@+id/random_letter_history_third"
+        app:layout_constraintTop_toBottomOf="@+id/random_letter_history_third">
+    </TextView>
+
+    <TextView
+        android:id="@+id/random_letter_history_fifth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_elements_normal"
+        android:paddingHorizontal="@dimen/padding_elements_small"
+        android:textSize="@dimen/font_size_normal_above"
+        android:alpha="0.25"
+        app:layout_constraintStart_toStartOf="@+id/random_letter_history_fourth"
+        app:layout_constraintEnd_toEndOf="@+id/random_letter_history_fourth"
+        app:layout_constraintTop_toBottomOf="@+id/random_letter_history_fourth">
+    </TextView>
+
     <Button
         android:id="@+id/random_letter_click_here"
         android:layout_width="match_parent"
