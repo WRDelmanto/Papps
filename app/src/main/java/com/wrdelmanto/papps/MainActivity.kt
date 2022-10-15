@@ -160,9 +160,8 @@ class MainActivity :
 
             if (supportFragmentManager.findFragmentById(fragmentId) == null) {
                 ft.add(fragmentId, newFragment, fragmentName)
-            } else {
+            } else if (supportFragmentManager.fragments[0].tag != fragmentName)
                 ft.replace(fragmentId, newFragment, fragmentName)
-            }
 
             ft.addToBackStack(null)
             ft.commit()
