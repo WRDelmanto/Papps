@@ -71,7 +71,7 @@ class MainActivity :
         randomBottomNavMenuRandomLetter = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_letter)
         randomBottomNavMenuRandomnumber = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
-        switchFragment(homeFragmentContainer.id, HomeFragment())
+        switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
         setupNavigationAndStatusBar(applicationContext, window)
         initiateListeners()
     }
@@ -104,26 +104,31 @@ class MainActivity :
         when (menuItem.itemId) {
             // Drawer
             // Apps
-            R.id.drawer_click_counter -> switchFragment(homeFragmentContainer.id, ClickCounterFragment())
+            R.id.drawer_click_counter ->
+                switchFragment(homeFragmentContainer.id, ClickCounterFragment(), "CLICK_COUNTER")
             R.id.drawer_random_letter -> {
-                switchFragment(homeFragmentContainer.id, RandomLetterFragment())
+                switchFragment(homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER")
                 randomBottomNavMenuRandomLetter.isChecked = true
             }
             R.id.drawer_random_number -> {
-                switchFragment(homeFragmentContainer.id, RandomNumberFragment())
+                switchFragment(homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER")
                 randomBottomNavMenuRandomnumber.isChecked = true
             }
-            R.id.drawer_tip -> switchFragment(homeFragmentContainer.id, TipFragment())
+            R.id.drawer_tip -> switchFragment(homeFragmentContainer.id, TipFragment(), "TIP")
             // Games
-            R.id.drawer_coin_flipper -> switchFragment(homeFragmentContainer.id, CoinFlipperFragment())
-            R.id.drawer_rock_paper_scissors -> switchFragment(homeFragmentContainer.id, RockPaperScissorsFragment())
+            R.id.drawer_coin_flipper ->
+                switchFragment(homeFragmentContainer.id, CoinFlipperFragment(), "COIN_FLIPPER")
+            R.id.drawer_rock_paper_scissors ->
+                switchFragment(homeFragmentContainer.id, RockPaperScissorsFragment(), "RPCK_PAPER_SCISSORS")
 
             // Drawer Bottom
             R.id.drawer_bottom_privacy_policy -> openPrivacyPolicy()
 
             // Random bottom nav
-            R.id.random_bottom_nav_menu_random_letter -> switchFragment(homeFragmentContainer.id, RandomLetterFragment())
-            R.id.random_bottom_nav_menu_random_number -> switchFragment(homeFragmentContainer.id, RandomNumberFragment())
+            R.id.random_bottom_nav_menu_random_letter ->
+                switchFragment(homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER")
+            R.id.random_bottom_nav_menu_random_number ->
+                switchFragment(homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER")
         }
 
         // Random bottom nav
@@ -142,19 +147,21 @@ class MainActivity :
     override fun onNavigationItemReselected(menuItem: MenuItem) {
         when (menuItem.itemId) {
             // Random bottom nav
-            R.id.random_bottom_nav_menu_random_letter -> logD { getString(R.string.fragment_already_open, "Random Letter") }
-            R.id.random_bottom_nav_menu_random_number -> logD { getString(R.string.fragment_already_open, "Random Number") }
+            R.id.random_bottom_nav_menu_random_letter ->
+                logD { getString(R.string.fragment_already_open, "RANDOM_LETTER") }
+            R.id.random_bottom_nav_menu_random_number ->
+                logD { getString(R.string.fragment_already_open, "RANDOM_NUMBER") }
         }
     }
 
-    private fun switchFragment(fragmentId: Int, newFragment: Fragment) {
+    private fun switchFragment(fragmentId: Int, newFragment: Fragment, fragmentName: String) {
         try {
             val ft = supportFragmentManager.beginTransaction()
 
             if (supportFragmentManager.findFragmentById(fragmentId) == null) {
-                ft.add(fragmentId, newFragment)
+                ft.add(fragmentId, newFragment, fragmentName)
             } else {
-                ft.replace(fragmentId, newFragment)
+                ft.replace(fragmentId, newFragment, fragmentName)
             }
 
             ft.addToBackStack(null)
