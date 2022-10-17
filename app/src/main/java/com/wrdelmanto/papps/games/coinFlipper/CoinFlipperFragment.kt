@@ -67,7 +67,7 @@ class CoinFlipperFragment : Fragment() {
             || selfChoice == getString(R.string.coin_flipper_tails) && resultCoinFlip == getString(R.string.coin_flipper_tails)
         ) { // User Wins
             result.apply {
-                text = getString(R.string.coin_flipper_won)
+                text = getString(R.string.won)
                 textSize = 32F
                 setTextColor(GREEN)
             }
@@ -76,7 +76,7 @@ class CoinFlipperFragment : Fragment() {
             selfScore.text = result.toString()
         } else { // App Wins
             result.apply {
-                text = getString(R.string.coin_flipper_lost)
+                text = getString(R.string.lost)
                 textSize = 32F
                 setTextColor(RED)
             }

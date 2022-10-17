@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tic_tac_toe_rows_and_columns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_edges"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a11"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a12"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="@dimen/margin_elements_small"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_a11"
+            app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_a13"
+            app:layout_constraintTop_toTopOf="parent">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a13"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a21"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a22"
+            app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a22">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a22"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="@dimen/margin_elements_small"
+            android:layout_marginTop="@dimen/margin_elements_small"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_a12"
+            app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_a12"
+            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_a12">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a23"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a22"
+            app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a22">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a31"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a32"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="@dimen/margin_elements_small"
+            android:layout_marginTop="@dimen/margin_elements_small"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_a22"
+            app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_a22"
+            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_a22"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_a33"
+            android:background="@drawable/general_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a32"
+            app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a32">
+        </androidx.appcompat.widget.AppCompatButton>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/tic_tac_toe_game_modes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_edges"
+        android:layout_marginTop="@dimen/margin_elements_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_rows_and_columns">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_pve_button"
+            android:background="@drawable/general_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/pve"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_pvp_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_pvp_button"
+            android:background="@drawable/general_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/pvp"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_pve_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </androidx.appcompat.widget.AppCompatButton>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tic_tac_toe_reset_button"
+        android:background="@drawable/general_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_edges"
+        android:layout_marginBottom="@dimen/margin_edges"
+        android:text="@string/reset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+    </androidx.appcompat.widget.AppCompatButton>
+</androidx.constraintlayout.widget.ConstraintLayout>

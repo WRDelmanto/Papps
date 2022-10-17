@@ -14,6 +14,7 @@
     <string name="app_name_tip">Gorjeta</string>
     <string name="app_name_click_counter">Contador de Cliques</string>
     <string name="app_name_coin_flipper">Cara ou Coroa</string>
+    <string name="app_name_tic_tac_toe">Jogo da Velha</string>
     <string name="app_name_rock_paper_scissors">Pedra, Papel e Tesoura</string>
 
     <!-- Drawer Bottom Items -->
@@ -40,8 +41,18 @@
     <string name="value_with_percentage">%1$s \%%</string>
     <string name="score_separator">X</string>
     <string name="click_here">Clique Aqui!</string>
+    <string name="pve">PvE</string>
+    <string name="pvp">PvP</string>
+    <string name="clicks">Cliques</string>
+    <string name="click_anywhere">Clique em qualquer lugar da tela!</string>
+    <string name="won">Ganhou</string>
+    <string name="lost">Perdeu</string>
 
     <!-- All Apps -->
+    <!-- Click Counter -->
+
+    <!-- Random Letter -->
+
     <!-- Random Number -->
     <string name="random_number_min_higher_than_max">Max must be higher than Min</string>
     <string name="random_number_no_input_found">Min and Max cannot be empty</string>
@@ -54,17 +65,12 @@
 
     <!-- All Games -->
     <!-- Coin Flipper -->
-    <string name="coin_flipper_title">Resultado</string>
     <string name="coin_flipper_win_or_lose">Ganhou ou Perdeu?</string>
     <string name="coin_flipper_choice">Escolha uma opção abaixo</string>
     <string name="coin_flipper_heads">Heads</string>
     <string name="coin_flipper_tails">Tails</string>
-    <string name="coin_flipper_won">Ganhou</string>
-    <string name="coin_flipper_lost">Perdeu</string>
 
-    <!-- Click Counter -->
-    <string name="click_counter_clicks">Cliques</string>
-    <string name="click_counter_click_anywhere">Clique em qualquer lugar da tela!</string>
+    <!-- Tic Tac Toe -->
 
     <!-- Rock Paper Scissors -->
     <string name="rock_paper_scissors_app_choice">Escolha do App</string>

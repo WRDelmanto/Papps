@@ -22,6 +22,7 @@ import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
 import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
+import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
@@ -118,6 +119,8 @@ class MainActivity :
             // Games
             R.id.drawer_coin_flipper ->
                 switchFragment(homeFragmentContainer.id, CoinFlipperFragment(), "COIN_FLIPPER")
+            R.id.drawer_tic_tac_toe ->
+                switchFragment(homeFragmentContainer.id, TicTacToeFragment(), "TIC_TAC_TOE")
             R.id.drawer_rock_paper_scissors ->
                 switchFragment(homeFragmentContainer.id, RockPaperScissorsFragment(), "RPCK_PAPER_SCISSORS")
 

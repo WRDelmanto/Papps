@@ -36,6 +36,11 @@
                     android:title="@string/app_name_coin_flipper"
                     android:icon="@drawable/coin_flipper_logo"/>
                 <item
+                    android:id="@+id/drawer_tic_tac_toe"
+                    android:visible="false"
+                    android:title="@string/app_name_tic_tac_toe"
+                    android:icon="@drawable/tic_tac_toe_logo"/>
+                <item
                     android:id="@+id/drawer_rock_paper_scissors"
                     android:title="@string/app_name_rock_paper_scissors"
                     android:icon="@drawable/rock_paper_scissors_logo"/>
