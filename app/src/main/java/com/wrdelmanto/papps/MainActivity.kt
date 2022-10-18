@@ -62,7 +62,7 @@ class MainActivity :
         // Drawer
         activityMain = findViewById(R.id.activity_main)
         homeFragmentContainer = findViewById(R.id.home_fragment_container)
-        drawer = findViewById(R.id.drawer)
+        drawer = findViewById(R.id.drawer_nav_view)
 
         // Drawer Bottom
         drawerBottom = findViewById(R.id.drawer_bottom)
