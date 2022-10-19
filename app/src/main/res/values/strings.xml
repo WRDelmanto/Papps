@@ -19,9 +19,6 @@
 
     <!-- Drawer Bottom Items -->
     <string name="privacy_policy">Política de Privacidade</string>
--
-    <!-- Bottom Nav -->
-    <string name="fragment_already_open">Fragment already open: %1$s</string>
 
     <!-- Home -->
     <string name="home_click_here">Clique aqui\npara começar\na aventura!</string>

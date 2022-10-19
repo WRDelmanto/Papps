@@ -1,15 +1,15 @@
 package com.wrdelmanto.papps
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity.LEFT
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -29,20 +29,24 @@ import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 
 class MainActivity :
     AppCompatActivity(),
-    NavigationView.OnNavigationItemSelectedListener,
-    NavigationBarView.OnItemReselectedListener
+    NavigationView.OnNavigationItemSelectedListener
 {
-    // App Bar
+    private lateinit var activityMain: DrawerLayout
+    private lateinit var homeFragmentContainer: FragmentContainerView
+
+    // App bar
     private lateinit var drawerIcon: ImageView
     private lateinit var appBarTitle: TextView
 
-    // Drawer
-    private lateinit var activityMain: DrawerLayout
-    private lateinit var homeFragmentContainer: FragmentContainerView
-    private lateinit var drawer: NavigationView
+    // Drawer header
+    private lateinit var drawerHeader: ConstraintLayout
+    private var clicksHomeFragment = 0
 
-    // Drawer Bottom
-    private lateinit var drawerBottom: NavigationView
+    // Drawer
+    private lateinit var drawerItemsNavView: NavigationView
+
+    // Drawer bottom
+    private lateinit var drawerBottomNavView: NavigationView
 
     // Random bottom nav view
     private lateinit var randomBottomNavMenu: NavigationBarView
@@ -51,47 +55,54 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        // Disable Dark Theme
+        setContentView(R.layout.main_fragment)
+
+        // Disable dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        // App Bar
-        drawerIcon = findViewById(R.id.app_bar_main_drawer)
+        activityMain = findViewById(R.id.main_fragment)
+        homeFragmentContainer = findViewById(R.id.home_fragment_container)
+
+        // App bar
+        drawerIcon = findViewById(R.id.app_bar_main_drawer_icon)
         appBarTitle = findViewById(R.id.app_bar_main_title)
 
-        // Drawer
-        activityMain = findViewById(R.id.activity_main)
-        homeFragmentContainer = findViewById(R.id.home_fragment_container)
-        drawer = findViewById(R.id.drawer_nav_view)
+        // Drawer header
+        drawerHeader = findViewById(R.id.drawer_header)
 
-        // Drawer Bottom
-        drawerBottom = findViewById(R.id.drawer_bottom)
+        // Drawer
+        drawerItemsNavView = findViewById(R.id.drawer_items_nav_view)
+
+        // Drawer bottom
+        drawerBottomNavView = findViewById(R.id.drawer_bottom_nav_view)
 
         // Random bottom nav
         randomBottomNavMenu = findViewById(R.id.random_bottom_nav_view)
         randomBottomNavMenuRandomLetter = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_letter)
         randomBottomNavMenuRandomnumber = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
-        switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
         setupNavigationAndStatusBar(applicationContext, window)
+        switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
+
         initiateListeners()
     }
 
-    @SuppressLint("RtlHardcoded")
     private fun initiateListeners() {
-        // App Bar
-        drawerIcon.setOnClickListener { activityMain.openDrawer(LEFT) }
+        // App bar
+        drawerIcon.setOnClickListener { activityMain.openDrawer(GravityCompat.START) }
+
+        // Drawer header
+        drawerHeader.setOnClickListener { goHomeFragment() }
 
         // Drawer
-        drawer.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
+        drawerItemsNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
 
-        // Drawer Bottom
-        drawerBottom.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
+        // Drawer bottom
+        drawerBottomNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
 
-        // Random bottom nav
+        // Random bottom nav menu
         randomBottomNavMenu.apply {
             setOnItemSelectedListener { item -> onNavigationItemSelected(item) }
-            setOnItemReselectedListener { item -> onNavigationItemReselected(item) }
         }
     }
 
@@ -100,7 +111,6 @@ class MainActivity :
         setupNavigationAndStatusBar(applicationContext, window)
     }
 
-    @SuppressLint("RtlHardcoded")
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             // Drawer
@@ -116,45 +126,27 @@ class MainActivity :
                 randomBottomNavMenuRandomnumber.isChecked = true
             }
             R.id.drawer_tip -> switchFragment(homeFragmentContainer.id, TipFragment(), "TIP")
+
             // Games
-            R.id.drawer_coin_flipper ->
-                switchFragment(homeFragmentContainer.id, CoinFlipperFragment(), "COIN_FLIPPER")
-            R.id.drawer_tic_tac_toe ->
-                switchFragment(homeFragmentContainer.id, TicTacToeFragment(), "TIC_TAC_TOE")
+            R.id.drawer_coin_flipper -> switchFragment(homeFragmentContainer.id, CoinFlipperFragment(), "COIN_FLIPPER")
+            R.id.drawer_tic_tac_toe -> switchFragment(homeFragmentContainer.id, TicTacToeFragment(), "TIC_TAC_TOE")
             R.id.drawer_rock_paper_scissors ->
                 switchFragment(homeFragmentContainer.id, RockPaperScissorsFragment(), "RPCK_PAPER_SCISSORS")
 
-            // Drawer Bottom
+            // Drawer bottom
             R.id.drawer_bottom_privacy_policy -> openPrivacyPolicy()
 
-            // Random bottom nav
+            // Random bottom nav menu
             R.id.random_bottom_nav_menu_random_letter ->
                 switchFragment(homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER")
             R.id.random_bottom_nav_menu_random_number ->
                 switchFragment(homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER")
         }
 
-        // Random bottom nav
-        randomBottomNavMenu.isVisible =
-            menuItem.itemId == R.id.drawer_random_letter ||
-            menuItem.itemId == R.id.drawer_random_number ||
-            menuItem.itemId == R.id.random_bottom_nav_menu_random_letter ||
-            menuItem.itemId == R.id.random_bottom_nav_menu_random_number
-
         updateAppBarTitle(menuItem)
 
-        activityMain.closeDrawer(LEFT)
+        activityMain.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    override fun onNavigationItemReselected(menuItem: MenuItem) {
-        when (menuItem.itemId) {
-            // Random bottom nav
-            R.id.random_bottom_nav_menu_random_letter ->
-                logD { getString(R.string.fragment_already_open, "RANDOM_LETTER") }
-            R.id.random_bottom_nav_menu_random_number ->
-                logD { getString(R.string.fragment_already_open, "RANDOM_NUMBER") }
-        }
     }
 
     private fun switchFragment(fragmentId: Int, newFragment: Fragment, fragmentName: String) {
@@ -169,6 +161,11 @@ class MainActivity :
             ft.addToBackStack(null)
             ft.commit()
         } catch (e: Exception) { e.printStackTrace() }
+        shouldShowRandomBottomNavMenu(fragmentName)
+    }
+
+    private fun shouldShowRandomBottomNavMenu(fragmentName: String) {
+        randomBottomNavMenu.isVisible = fragmentName == "RANDOM_LETTER" || fragmentName == "RANDOM_NUMBER"
     }
 
     private fun updateAppBarTitle(menuItem: MenuItem) {
@@ -191,6 +188,16 @@ class MainActivity :
         }
     }
 
+    private fun goHomeFragment() {
+        clicksHomeFragment++
+        logD { clicksHomeFragment.toString() }
+
+        if (clicksHomeFragment >= CLICKS_HOME_FRAGMENT) {
+            switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
+            activityMain.closeDrawer(GravityCompat.START)
+        }
+    }
+
     /**
      * Show Privacy Policy Screen
      */
@@ -201,5 +208,7 @@ class MainActivity :
          * Privacy Policy URL
          */
         const val PRIVACY_POLICY_URL = "https://docs.google.com/document/d/17-S5qZQoqmxN6jkHTWNhW89zdrjVmwkkGNKwauYqPvY"
+
+        const val CLICKS_HOME_FRAGMENT = 10
     }
 }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="@color/main_background_color"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/main_toolbar_and_fragment_container">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/home_fragment_container"

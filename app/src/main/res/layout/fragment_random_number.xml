@@ -48,7 +48,7 @@
         android:id="@+id/random_number_history_third"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/font_size_normal"
+        android:textSize="@dimen/font_size_normal_above"
         android:ellipsize="end"
         android:alpha="0.5"
         app:layout_constraintStart_toStartOf="@+id/random_number_history_second"

@@ -37,6 +37,7 @@ class HomeFragment : Fragment() {
      */
     private fun activateEasterEgg() {
         clicksEasterEgg++
+
         if (clicksEasterEgg >= CLICKS_TO_ACTIVATE_EASTER_EGG) {
             homeLogo.setOnClickListener(null)
             context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }

@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/main_toolbar"
         android:backgroundTint="@color/main_toolbar_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/app_bar_main_drawer"
+                android:id="@+id/app_bar_main_drawer_icon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:contentDescription="@null"
@@ -35,13 +36,13 @@
                 android:layout_height="match_parent"
                 android:textSize="22sp"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/app_bar_main_drawer"
+                app:layout_constraintStart_toEndOf="@+id/app_bar_main_drawer_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
             </TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/main_fragment_container" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
