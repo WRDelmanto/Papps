@@ -221,7 +221,7 @@ class MainActivity :
             drawerBottomNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
         }
     }
-    
+
     fun activateEasterEgg() {
         val ticTacToe = drawerItemsNavView.menu.findItem(R.id.drawer_tic_tac_toe)
         ticTacToe.isVisible = true
