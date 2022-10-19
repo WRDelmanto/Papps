@@ -24,8 +24,10 @@ import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
 import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
 import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
-import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity :
     AppCompatActivity(),
@@ -52,6 +54,8 @@ class MainActivity :
     private lateinit var randomBottomNavMenu: NavigationBarView
     private lateinit var randomBottomNavMenuRandomLetter: MenuItem
     private lateinit var randomBottomNavMenuRandomnumber: MenuItem
+
+    private lateinit var actualFragmentTag: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,9 +162,11 @@ class MainActivity :
             } else if (supportFragmentManager.fragments[0].tag != fragmentName)
                 ft.replace(fragmentId, newFragment, fragmentName)
 
+            actualFragmentTag = fragmentName
             ft.addToBackStack(null)
             ft.commit()
         } catch (e: Exception) { e.printStackTrace() }
+
         shouldShowRandomBottomNavMenu(fragmentName)
     }
 
@@ -189,12 +195,30 @@ class MainActivity :
     }
 
     private fun goHomeFragment() {
+        if (actualFragmentTag == "HOME") return
+
         clicksHomeFragment++
-        logD { clicksHomeFragment.toString() }
 
         if (clicksHomeFragment >= CLICKS_HOME_FRAGMENT) {
-            switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
+            clicksHomeFragment = 0
+            disableDrawerMomentarily()
             activityMain.closeDrawer(GravityCompat.START)
+            switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
+        }
+    }
+
+    private fun disableDrawerMomentarily() {
+        drawerIcon.setOnClickListener(null)
+        drawerHeader.setOnClickListener(null)
+        drawerItemsNavView.setNavigationItemSelectedListener(null)
+        drawerBottomNavView.setNavigationItemSelectedListener(null)
+
+        MainScope().launch {
+            delay(ONE_SECOND_IN_MILLIS)
+            drawerIcon.setOnClickListener { activityMain.openDrawer(GravityCompat.START) }
+            drawerHeader.setOnClickListener { goHomeFragment() }
+            drawerItemsNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
+            drawerBottomNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
         }
     }
 
@@ -210,5 +234,7 @@ class MainActivity :
         const val PRIVACY_POLICY_URL = "https://docs.google.com/document/d/17-S5qZQoqmxN6jkHTWNhW89zdrjVmwkkGNKwauYqPvY"
 
         const val CLICKS_HOME_FRAGMENT = 10
+
+        const val ONE_SECOND_IN_MILLIS = 1000L
     }
 }
