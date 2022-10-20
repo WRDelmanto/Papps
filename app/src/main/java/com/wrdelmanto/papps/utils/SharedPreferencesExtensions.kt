@@ -39,12 +39,12 @@ fun putSharedPreferences(context: Context, key: String, value: Any) {
 fun getSharedPreferences(context: Context, key: String, valueType: Any): Any? {
     configSharedPreferences(context)
     return when (valueType) {
-        is String -> sharedPreferences.getString(key, "")
-        is Int -> sharedPreferences.getInt(key, -1)
-        is Boolean -> sharedPreferences.getBoolean(key, false)
-        is Long -> sharedPreferences.getLong(key, 0L)
-        is Float -> sharedPreferences.getFloat(key, 0F)
-        else -> error("Only primitive types can be stored in SharedPreferences")
+        String -> sharedPreferences.getString(key, "")
+        Int -> sharedPreferences.getInt(key, 0)
+        Boolean -> sharedPreferences.getBoolean(key, false)
+        Long -> sharedPreferences.getLong(key, 0L)
+        Float -> sharedPreferences.getFloat(key, 0F)
+        else -> error("Only primitive types can be returned from SharedPreferences")
     }
 }
 

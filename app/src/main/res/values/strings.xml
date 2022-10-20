@@ -44,6 +44,7 @@
     <string name="click_anywhere">Clique em qualquer lugar da tela!</string>
     <string name="won">Ganhou</string>
     <string name="lost">Perdeu</string>
+    <string name="highScore">Recorde</string>
 
     <!-- All Apps -->
     <!-- Click Counter -->

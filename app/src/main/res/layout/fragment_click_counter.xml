@@ -13,6 +13,7 @@
             android:text="@string/zero"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_large"
+            android:ellipsize="end"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/click_counter_text_clicks" />
@@ -27,6 +28,33 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/click_counter_high_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_edges"
+            android:layout_marginEnd="@dimen/margin_edges"
+            android:text="@string/highScore"
+            android:textSize="@dimen/font_size_normal_above"
+            android:textColor="@color/color_secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </TextView>
+
+        <TextView
+            android:id="@+id/click_counter_high_score_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_small"
+            android:text="@string/zero"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="@+id/click_counter_high_score"
+            app:layout_constraintEnd_toEndOf="@+id/click_counter_high_score"
+            app:layout_constraintTop_toBottomOf="@+id/click_counter_high_score">
+        </TextView>
 
         <Button
             android:id="@+id/click_counter_addition_button"
