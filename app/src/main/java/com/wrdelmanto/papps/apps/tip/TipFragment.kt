@@ -12,8 +12,10 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.hideKeyboard
 import com.wrdelmanto.papps.utils.logD
+import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.roundTo2Decimals
 import com.wrdelmanto.papps.utils.showNormalToast
 
@@ -42,9 +44,10 @@ class TipFragment : Fragment() {
         tipOutput = view.findViewById(R.id.tip_tip_output)
         totalOutput = view.findViewById(R.id.tip_total_output)
 
-        tipPercentage.text =
-            String.format(getString(R.string.value_with_percentage), tipPercentageSeekBar.progress.toString())
-        percentage = tipPercentageSeekBar.progress
+        val spTipPercentage = context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
+        tipPercentage.text = String.format(getString(R.string.value_with_percentage), spTipPercentage.toString())
+        tipPercentageSeekBar.progress = spTipPercentage
+        percentage = spTipPercentage
 
         initiateListeners()
     }
@@ -65,7 +68,9 @@ class TipFragment : Fragment() {
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) { hideKeyboard() }
-            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                context?.let { putSharedPreferences(it, SP_T_TIP_PERCENTAGE, seekBar.progress) }
+            }
         })
     }
 
@@ -92,5 +97,6 @@ class TipFragment : Fragment() {
 
     companion object {
         const val TRANSFORM_TO_PERCENTAGE = 0.01
+        const val SP_T_TIP_PERCENTAGE = "SHARED_PREFERENCES_TIP_TIP_PERCENTAGE"
     }
 }
