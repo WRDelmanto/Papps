@@ -54,9 +54,20 @@ fun getSharedPreferences(context: Context, key: String, valueType: Any): Any? {
  * @param context
  * @param key
  */
-fun removeKeyFromSharedPreferences(context: Context, key: String) {
+fun removeKeySharedPreferences(context: Context, key: String) {
     configSharedPreferences(context)
     editor.remove(key)
+    editor.commit()
+}
+
+/**
+ * Erase any data from Shared Preferences.
+ *
+ * @param context
+ */
+fun clearSharedPreferences(context: Context) {
+    configSharedPreferences(context)
+    editor.clear()
     editor.commit()
 }
 
