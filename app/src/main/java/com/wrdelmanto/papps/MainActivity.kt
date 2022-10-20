@@ -184,6 +184,7 @@ class MainActivity :
 
             // Games
             R.id.drawer_coin_flipper -> getString(R.string.app_name_coin_flipper)
+            R.id.drawer_tic_tac_toe -> getString(R.string.app_name_tic_tac_toe)
             R.id.drawer_rock_paper_scissors -> getString(R.string.app_name_rock_paper_scissors)
 
             // Random bottom nav

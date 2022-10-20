@@ -33,9 +33,6 @@ class HomeFragment : Fragment() {
 
     private fun initiateListeners() = homeLogo.setOnClickListener { activateEasterEgg() }
 
-    /**
-     * Function created to test features.
-     */
     private fun activateEasterEgg() {
         clicksEasterEgg++
 
@@ -45,7 +42,14 @@ class HomeFragment : Fragment() {
             logD { getString(R.string.easter_egg_activated)}
             (activity as MainActivity?)?.activateEasterEgg()
         }
+
+        test()
     }
+
+    /**
+     * Function created to test features.
+     */
+    private fun test() {}
 
     private companion object {
         const val CLICKS_TO_ACTIVATE_EASTER_EGG = 10
