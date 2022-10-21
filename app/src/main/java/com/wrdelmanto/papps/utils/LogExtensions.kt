@@ -110,7 +110,7 @@ inline fun logW(tag: String = getTag(), desc: () -> String) {
  * @param tag Used to identify the source of the log message
  * @param desc The message to be logged
  */
-inline fun logW(tag: String = getTag(),tr: Throwable , desc: () -> String) {
+inline fun logW(tag: String = getTag(), tr: Throwable , desc: () -> String) {
     if (logLevel <= LEVEL_DEBUG) Log.w(tag, desc(), tr)
 }
 
@@ -128,7 +128,7 @@ inline fun logE(tag: String = getTag(), desc: () -> String) = Log.e(tag, desc())
  * @param tag Used to identify the source of the log message
  * @param desc The message to be logged
  */
-inline fun logE(tag: String = getTag(),tr: Throwable , desc: () -> String) = Log.e(tag, desc(), tr)
+inline fun logE(tag: String = getTag(), tr: Throwable , desc: () -> String) = Log.e(tag, desc(), tr)
 
 /**
  * Inline function for the standard [Log.INFO] message log.
@@ -144,4 +144,4 @@ inline fun logI(tag: String = getTag(), desc: () -> String) = Log.i(tag, desc())
  * @param tag Used to identify the source of the log message
  * @param desc The message to be logged
  */
-inline fun logI(tag: String = getTag(),tr: Throwable , desc: () -> String) = Log.i(tag, desc(), tr)
+inline fun logI(tag: String = getTag(), tr: Throwable , desc: () -> String) = Log.i(tag, desc(), tr)
