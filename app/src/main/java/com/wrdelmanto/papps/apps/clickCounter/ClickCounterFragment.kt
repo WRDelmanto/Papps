@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
@@ -42,7 +43,9 @@ class ClickCounterFragment : Fragment() {
 
         startBlinkingAnimation(clickAnywhere)
 
-        highScore = context?.let { getSharedPreferences(it, SP_CC_HIGH_SCORE, Int) } as Int
+        if (context?.let { checkKeySharedPreferences(it, SP_CC_HIGH_SCORE) } == true) {
+            highScore = context?.let { getSharedPreferences(it, SP_CC_HIGH_SCORE, Int) } as Int
+        }
         highScoreOutput.text = highScore.toString()
 
         initiateListeners()

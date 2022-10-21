@@ -29,7 +29,7 @@
         android:textSize="@dimen/font_size_normal_above"
         android:alpha="1.0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/random_letter_result">
+        app:layout_constraintTop_toTopOf="@+id/random_letter_middle_guide_line">
     </TextView>
 
     <TextView
@@ -89,4 +89,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/random_letter_middle_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
 </androidx.constraintlayout.widget.ConstraintLayout>

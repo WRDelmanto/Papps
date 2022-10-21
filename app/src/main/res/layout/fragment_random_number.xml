@@ -29,7 +29,7 @@
         android:alpha="1.0"
         app:layout_constraintStart_toStartOf="@+id/random_number_result"
         app:layout_constraintEnd_toEndOf="@+id/random_number_result"
-        app:layout_constraintTop_toBottomOf="@+id/random_number_result">
+        app:layout_constraintTop_toTopOf="@+id/random_number_middle_guide_line">
     </TextView>
 
     <TextView
@@ -119,4 +119,11 @@
         app:layout_constraintEnd_toEndOf="@+id/random_number_max"
         app:layout_constraintTop_toBottomOf="@+id/random_number_max">
     </com.google.android.material.textfield.TextInputEditText>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/random_number_middle_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
 </androidx.constraintlayout.widget.ConstraintLayout>

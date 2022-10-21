@@ -49,6 +49,19 @@ fun getSharedPreferences(context: Context, key: String, valueType: Any): Any? {
 }
 
 /**
+ * Check if a key exists at Shared Preferences.
+ *
+ * @param context
+ * @param key
+ *
+ * @return True if a specified Key exists at Shared Preferences.
+ */
+fun checkKeySharedPreferences(context: Context, key: String): Boolean {
+    configSharedPreferences(context)
+    return sharedPreferences.contains(key)
+}
+
+/**
  * Remove a key from Shared Preferences.
  *
  * @param context

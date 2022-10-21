@@ -8,7 +8,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.checkKeySharedPreferences
+import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
+import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.randomString
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
@@ -17,7 +20,7 @@ class RandomLetterFragment : Fragment() {
     private lateinit var result: TextView
     private lateinit var randomizerButton: Button
 
-    private var letterHistoryMultableList = mutableListOf("", "", "", "", "", "")
+    private var letterHistory = "*****"
     private lateinit var firstHistory: TextView
     private lateinit var secondHistory: TextView
     private lateinit var thirdHistory: TextView
@@ -43,6 +46,11 @@ class RandomLetterFragment : Fragment() {
         fourthHistory = view.findViewById(R.id.random_letter_history_fourth)
         fifthHistory = view.findViewById(R.id.random_letter_history_fifth)
 
+        if (context?.let { checkKeySharedPreferences(it, SP_RL_LETTER_HISTORY) } == true) {
+            letterHistory = context?.let { getSharedPreferences(it, SP_RL_LETTER_HISTORY, String) } as String
+            updateLetterHistory()
+        }
+
         startBlinkingAnimation(result)
 
         initiateListeners()
@@ -56,7 +64,6 @@ class RandomLetterFragment : Fragment() {
     @Suppress("DEPRECATION")
     private fun generateRandomLetter() {
         val randomLetter = ('A'..'Z').randomString(1)
-        updateLetterHistory(randomLetter)
 
         result.apply {
             text = randomLetter
@@ -64,17 +71,25 @@ class RandomLetterFragment : Fragment() {
             setTextColor(resources.getColor(R.color.color_secondary))
         }
 
+        if (letterHistory.length >= 5) letterHistory = letterHistory.dropLast(1)
+        letterHistory = randomLetter + letterHistory
+
+        context?.let { putSharedPreferences(it, SP_RL_LETTER_HISTORY, letterHistory) }
+
+        updateLetterHistory()
+
         logD { "randomLetter=$randomLetter" }
     }
 
-    private fun updateLetterHistory(randomLetter: String) {
-        if (letterHistoryMultableList.size >= 5) letterHistoryMultableList.removeLast()
-        letterHistoryMultableList.add(0, randomLetter)
+    private fun updateLetterHistory() {
+        firstHistory.text = if (letterHistory[0].toString() == "*") "" else letterHistory[0].toString()
+        secondHistory.text = if (letterHistory[1].toString() == "*") "" else letterHistory[1].toString()
+        thirdHistory.text = if (letterHistory[2].toString() == "*") "" else letterHistory[2].toString()
+        fourthHistory.text = if (letterHistory[3].toString() == "*") "" else letterHistory[3].toString()
+        fifthHistory.text = if (letterHistory[4].toString() == "*") "" else letterHistory[4].toString()
+    }
 
-        firstHistory.text = letterHistoryMultableList[1]
-        secondHistory.text = letterHistoryMultableList[2]
-        thirdHistory.text = letterHistoryMultableList[3]
-        fourthHistory.text = letterHistoryMultableList[4]
-        fifthHistory.text = letterHistoryMultableList[5]
+    private companion object {
+        const val SP_RL_LETTER_HISTORY = "SHARED_PREFERENCES_RANDOM_LETTER_LETTER_HISTORY"
     }
 }

@@ -12,6 +12,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.hideKeyboard
 import com.wrdelmanto.papps.utils.logD
@@ -44,10 +45,14 @@ class TipFragment : Fragment() {
         tipOutput = view.findViewById(R.id.tip_tip_output)
         totalOutput = view.findViewById(R.id.tip_total_output)
 
-        val spTipPercentage = context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
-        tipPercentage.text = String.format(getString(R.string.value_with_percentage), spTipPercentage.toString())
-        tipPercentageSeekBar.progress = spTipPercentage
-        percentage = spTipPercentage
+        percentage = if (context?.let { checkKeySharedPreferences(it, SP_T_TIP_PERCENTAGE) } == true) {
+            context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
+        } else {
+            tipPercentageSeekBar.progress
+        }
+
+        tipPercentage.text = String.format(getString(R.string.value_with_percentage), percentage.toString())
+        tipPercentageSeekBar.progress = percentage
 
         initiateListeners()
     }

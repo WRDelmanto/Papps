@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.clearSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.showNormalToast
 
@@ -49,7 +50,9 @@ class HomeFragment : Fragment() {
     /**
      * Function created to test features.
      */
-    private fun test() {}
+    private fun test() {
+        context?.let { clearSharedPreferences(it) }
+    }
 
     private companion object {
         const val CLICKS_TO_ACTIVATE_EASTER_EGG = 10
