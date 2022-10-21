@@ -1,7 +1,6 @@
 package com.wrdelmanto.papps.utils
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.widget.Toast.LENGTH_SHORT
 import es.dmoral.toasty.Toasty
 
@@ -14,111 +13,81 @@ import es.dmoral.toasty.Toasty
  * Error Toast
  *
  * @param context
- * @param text
+ * @param value
  * @param duration
  */
-fun showErrorToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT) {
+fun showErrorToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) {
     configToast()
-    Toasty.error(context, text, duration, true).show()
-}
-
-/**
- * Error Toast
- *
- * @param context
- * @param resId
- * @param duration
- */
-fun showErrorToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
-    showErrorToast(context, context.resources.getText(resId), duration)
-
-/**
- * Success Toast
- *
- * @param context
- * @param text
- * @param duration
- */
-fun showSuccessToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT) {
-    configToast()
-    Toasty.success(context, text, duration, true).show()
+    when (value) {
+        is CharSequence -> Toasty.error(context, value, duration, true).show()
+        is Int -> Toasty.error(context, context.resources.getText(value), duration, true).show()
+        else -> error("Only CharSequence and Int can be used at Toasts")
+    }
 }
 
 /**
  * Success Toast
  *
  * @param context
- * @param resId
+ * @param value
  * @param duration
  */
-fun showSuccessToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
-    showSuccessToast(context, context.resources.getText(resId), duration)
-
-/**
- * Info Toast
- *
- * @param context
- * @param text
- * @param duration
- */
-fun showInfoToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT) {
+fun showSuccessToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) {
     configToast()
-    Toasty.info(context, text, duration, true).show()
+    when (value) {
+        is CharSequence -> Toasty.success(context, value, duration, true).show()
+        is Int -> Toasty.success(context, context.resources.getText(value), duration, true).show()
+        else -> error("Only CharSequence and Int can be used at Toasts")
+    }
 }
 
 /**
  * Info Toast
  *
  * @param context
- * @param resId
+ * @param value
  * @param duration
  */
-fun showInfoToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
-    showInfoToast(context, context.resources.getText(resId), duration)
-
-/**
- * Warning Toast
- *
- * @param context
- * @param text
- * @param duration
- */
-fun showWarningToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT) {
+fun showInfoToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) {
     configToast()
-    Toasty.warning(context, text, duration, true).show()
+    when (value) {
+        is CharSequence -> Toasty.info(context, value, duration, true).show()
+        is Int -> Toasty.info(context, context.resources.getText(value), duration, true).show()
+        else -> error("Only CharSequence and Int can be used at Toasts")
+    }
 }
 
 /**
  * Warning Toast
  *
  * @param context
- * @param resId
+ * @param value
  * @param duration
  */
-fun showWarningToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
-    showWarningToast(context, context.resources.getText(resId), duration)
-
-/**
- * Normal Toast w/o icon
- *
- * @param context
- * @param text
- * @param duration
- */
-fun showNormalToast(context: Context, text: CharSequence, duration: Int = LENGTH_SHORT, icon: Drawable? = null) {
+fun showWarningToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) {
     configToast()
-    Toasty.normal(context, text, duration).show()
+    when (value) {
+        is CharSequence -> Toasty.warning(context, value, duration, true).show()
+        is Int -> Toasty.warning(context, context.resources.getText(value), duration, true).show()
+        else -> error("Only CharSequence and Int can be used at Toasts")
+    }
 }
 
 /**
  * Normal Toast w/o icon
  *
  * @param context
- * @param resId
+ * @param value
  * @param duration
  */
-fun showNormalToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) =
-    showNormalToast(context, context.resources.getText(resId), duration)
+fun showNormalToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) {
+    configToast()
+    when (value) {
+        is CharSequence -> Toasty.normal(context, value, duration).show()
+        is Int -> Toasty.normal(context, context.resources.getText(value), duration).show()
+        else -> error("Only CharSequence and Int can be used at Toasts")
+    }
+}
 
 /**
  * Custom Toast
@@ -133,7 +102,7 @@ fun showNormalToast(context: Context, resId: Int, duration: Int = LENGTH_SHORT) 
  */
 fun showCustomToast(
     context: Context,
-    text: CharSequence,
+    value: Any,
     icon: Int,
     tintColor: Int,
     duration: Int = LENGTH_SHORT,
@@ -141,64 +110,44 @@ fun showCustomToast(
     shouldTint: Boolean
 ) {
     configToast()
-    Toasty.custom(
-        context,
-        text,
-        icon,
-        tintColor,
-        duration,
-        withIcon,
-        shouldTint
-    ).show()
+    when (value) {
+        is CharSequence ->
+            Toasty.custom(
+                context,
+                value,
+                icon,
+                tintColor,
+                duration,
+                withIcon,
+                shouldTint
+            ).show()
+        is Int ->
+            Toasty.custom(
+                context,
+                context.resources.getText(value),
+                icon,
+                tintColor,
+                duration,
+                withIcon,
+                shouldTint
+            ).show()
+        else -> error("Only CharSequence and Int can be used at Toasts")
+    }
 }
-
-/**
- * Custom Toast
- *
- * @param context
- * @param resId
- * @param icon
- * @param tintColor
- * @param duration
- * @param withIcon
- * @param shouldTint
- */
-fun showCustomToast(
-    context: Context,
-    resId: Int,
-    icon: Int,
-    tintColor: Int,
-    duration: Int = LENGTH_SHORT,
-    withIcon: Boolean,
-    shouldTint: Boolean
-) =
-    showCustomToast(
-        context,
-        context.resources.getText(resId),
-        icon,
-        tintColor,
-        duration,
-        withIcon,
-        shouldTint
-    )
 
 /**
  * Configure Toast.
  */
-private fun configToast() {
-    Toasty.Config.getInstance()
-        .allowQueue(false)
-        .apply()
+private fun configToast() = Toasty.Config.getInstance().allowQueue(false).apply()
 
-    /**
-    Toasty.Config.getInstance()
-    .tintIcon(boolean tintIcon)                         // optional (apply textColor also to the icon)
-    .setToastTypeface(@NonNull Typeface typeface)       // optional
-    .setTextSize(int sizeInSp)                          // optional
-    .allowQueue(boolean allowQueue)                     // optional (prevents several Toastys from queuing)
-    .setGravity(int gravity, int xOffset, int yOffset)  // optional (set toast gravity, offsets are optional)
-    .supportDarkTheme(boolean supportDarkTheme)         // optional (whether to support dark theme or not)
-    .setRTL(boolean isRTL)                              // optional (icon is on the right)
-    .apply();                                           // required
-     */
-}
+/**
+Toasty.Config.getInstance()
+.tintIcon(boolean tintIcon)                         // optional (apply textColor also to the icon)
+.setToastTypeface(@NonNull Typeface typeface)       // optional
+.setTextSize(int sizeInSp)                          // optional
+.allowQueue(boolean allowQueue)                     // optional (prevents several Toastys from queuing)
+.setGravity(int gravity, int xOffset, int yOffset)  // optional (set toast gravity, offsets are optional)
+.supportDarkTheme(boolean supportDarkTheme)         // optional (whether to support dark theme or not)
+.setRTL(boolean isRTL)                              // optional (icon is on the right)
+.apply();                                           // required
+ */
