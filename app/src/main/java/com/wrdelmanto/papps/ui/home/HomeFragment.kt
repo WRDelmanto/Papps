@@ -8,7 +8,6 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
-import com.wrdelmanto.papps.utils.clearSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.showNormalToast
 
