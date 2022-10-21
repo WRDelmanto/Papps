@@ -50,9 +50,7 @@ class HomeFragment : Fragment() {
     /**
      * Function created to test features.
      */
-    private fun test() {
-        context?.let { clearSharedPreferences(it) }
-    }
+    private fun test() {}
 
     private companion object {
         const val CLICKS_TO_ACTIVATE_EASTER_EGG = 10
