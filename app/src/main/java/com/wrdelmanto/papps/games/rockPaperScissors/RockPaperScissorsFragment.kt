@@ -42,8 +42,18 @@ class RockPaperScissorsFragment : Fragment() {
         selfChoicePaper = view.findViewById(R.id.rock_paper_scissors_choice_paper)
         selfChoiceScissors = view.findViewById(R.id.rock_paper_scissors_choice_scissors)
         resetButton = view.findViewById(R.id.rock_paper_scissors_reset_button)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
+    }
+
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
     }
 
     private fun initiateListeners() {
@@ -51,6 +61,13 @@ class RockPaperScissorsFragment : Fragment() {
         selfChoicePaper.setOnClickListener { onChoice("Paper") }
         selfChoiceScissors.setOnClickListener { onChoice("Scissors") }
         resetButton.setOnClickListener { resetScore() }
+    }
+
+    private fun disableListeners() {
+        selfChoiceRock.setOnClickListener(null)
+        selfChoicePaper.setOnClickListener(null)
+        selfChoiceScissors.setOnClickListener(null)
+        resetButton.setOnClickListener(null)
     }
 
     private fun onChoice(selfChoice: String) {

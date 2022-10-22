@@ -58,8 +58,18 @@ class RandomNumberFragment : Fragment() {
         updateNumberHistory(true)
 
         startBlinkingAnimation(result)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
+    }
+
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
     }
 
     private fun initiateListeners() = randomizerButton.setOnClickListener {
@@ -67,6 +77,8 @@ class RandomNumberFragment : Fragment() {
         stopBlinkingAnimation(result)
         generateRandomNumber()
     }
+
+    private fun disableListeners() = randomizerButton.setOnClickListener(null)
 
     @Suppress("DEPRECATION")
     private fun generateRandomNumber() {

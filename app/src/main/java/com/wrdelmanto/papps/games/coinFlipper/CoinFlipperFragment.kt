@@ -41,14 +41,30 @@ class CoinFlipperFragment : Fragment() {
         heads = view.findViewById(R.id.coin_flipper_heads_image)
         tails = view.findViewById(R.id.coin_flipper_tails_image)
         resetButton = view.findViewById(R.id.coin_flipper_reset_button)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
+    }
+
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
     }
 
     private fun initiateListeners() {
         heads.setOnClickListener { choice(getString(R.string.coin_flipper_heads)) }
         tails.setOnClickListener { choice(getString(R.string.coin_flipper_tails)) }
         resetButton.setOnClickListener { resetScore() }
+    }
+
+    private fun disableListeners() {
+        heads.setOnClickListener(null)
+        tails.setOnClickListener(null)
+        resetButton.setOnClickListener(null)
     }
 
     private fun choice(selfChoice: String) {

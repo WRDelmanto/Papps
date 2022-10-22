@@ -27,11 +27,23 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         homeLogo = view.findViewById(R.id.home_logo)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
     }
 
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
+    }
+
     private fun initiateListeners() = homeLogo.setOnClickListener { activateEasterEgg() }
+
+    private fun disableListeners() = homeLogo.setOnClickListener(null)
 
     private fun activateEasterEgg() {
         clicksEasterEgg++

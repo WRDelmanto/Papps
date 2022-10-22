@@ -53,8 +53,18 @@ class TipFragment : Fragment() {
 
         tipPercentage.text = String.format(getString(R.string.value_with_percentage), percentage.toString())
         tipPercentageSeekBar.progress = percentage
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
+    }
+
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
     }
 
     private fun initiateListeners() {
@@ -77,6 +87,11 @@ class TipFragment : Fragment() {
                 context?.let { putSharedPreferences(it, SP_T_TIP_PERCENTAGE, seekBar.progress) }
             }
         })
+    }
+
+    private fun disableListeners() {
+        value.addTextChangedListener(null)
+        tipPercentageSeekBar.setOnSeekBarChangeListener(null)
     }
 
     private fun calculateTotalOutput() {

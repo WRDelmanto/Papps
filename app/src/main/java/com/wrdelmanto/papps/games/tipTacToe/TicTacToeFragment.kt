@@ -60,8 +60,18 @@ class TicTacToeFragment : Fragment() {
         resetButton = view.findViewById(R.id.tic_tac_toe_reset_button)
 
         switchPlayerMode(pveButton)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
+    }
+
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
     }
 
     private fun initiateListeners() {
@@ -79,6 +89,23 @@ class TicTacToeFragment : Fragment() {
         pvpButton.setOnClickListener { switchPlayerMode(pvpButton) }
 
         resetButton.setOnClickListener { resetScore() }
+    }
+
+    private fun disableListeners() {
+        a11Button.setOnClickListener(null)
+        a12Button.setOnClickListener(null)
+        a13Button.setOnClickListener(null)
+        a21Button.setOnClickListener(null)
+        a22Button.setOnClickListener(null)
+        a23Button.setOnClickListener(null)
+        a31Button.setOnClickListener(null)
+        a32Button.setOnClickListener(null)
+        a33Button.setOnClickListener(null)
+
+        pveButton.setOnClickListener(null)
+        pvpButton.setOnClickListener(null)
+
+        resetButton.setOnClickListener(null)
     }
 
     @Suppress("DEPRECATION")

@@ -52,14 +52,26 @@ class RandomLetterFragment : Fragment() {
         }
 
         startBlinkingAnimation(result)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
+    }
+
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
     }
 
     private fun initiateListeners() = randomizerButton.setOnClickListener {
         stopBlinkingAnimation(result)
         generateRandomLetter()
     }
+
+    private fun disableListeners() = randomizerButton.setOnClickListener(null)
 
     @Suppress("DEPRECATION")
     private fun generateRandomLetter() {

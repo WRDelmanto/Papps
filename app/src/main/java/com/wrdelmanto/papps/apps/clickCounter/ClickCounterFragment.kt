@@ -47,13 +47,28 @@ class ClickCounterFragment : Fragment() {
             highScore = context?.let { getSharedPreferences(it, SP_CC_HIGH_SCORE, Int) } as Int
         }
         highScoreOutput.text = highScore.toString()
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
+    }
+
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
     }
 
     private fun initiateListeners() {
         additionButton.setOnClickListener { stopBlinkingAnimation(clickAnywhere); addition() }
         resetButton.setOnClickListener { startBlinkingAnimation(clickAnywhere); resetCounter() }
+    }
+
+    private fun disableListeners() {
+        additionButton.setOnClickListener(null)
+        resetButton.setOnClickListener(null)
     }
 
     private fun addition() {
