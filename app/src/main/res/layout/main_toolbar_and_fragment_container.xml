@@ -18,13 +18,11 @@
 
             <ImageView
                 android:id="@+id/app_bar_main_drawer_icon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="@dimen/image_size_normal"
+                android:layout_height="@dimen/image_size_normal"
                 android:contentDescription="@null"
-                android:padding="10dp"
+                android:padding="@dimen/padding_elements_small"
                 android:src="@drawable/ic_drawer"
-                android:clickable="true"
-                android:focusable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
@@ -34,7 +32,7 @@
                 android:id="@+id/app_bar_main_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="22sp"
+                android:textSize="@dimen/font_size_normal_above"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@+id/app_bar_main_drawer_icon"
                 app:layout_constraintTop_toTopOf="parent"

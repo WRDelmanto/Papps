@@ -1,7 +1,6 @@
 package com.wrdelmanto.papps
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
@@ -24,6 +23,7 @@ import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
 import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
 import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
+import com.wrdelmanto.papps.ui.settings.SettingsActivity
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -63,6 +63,7 @@ class MainActivity :
 
         // Disable dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        setupNavigationAndStatusBar(applicationContext, window)
 
         activityMain = findViewById(R.id.main_fragment)
         homeFragmentContainer = findViewById(R.id.home_fragment_container)
@@ -85,10 +86,19 @@ class MainActivity :
         randomBottomNavMenuRandomLetter = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_letter)
         randomBottomNavMenuRandomnumber = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
-        setupNavigationAndStatusBar(applicationContext, window)
         switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         initiateListeners()
+    }
+
+    override fun onPause() {
+        disableListeners()
+
+        super.onPause()
     }
 
     private fun initiateListeners() {
@@ -105,9 +115,24 @@ class MainActivity :
         drawerBottomNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
 
         // Random bottom nav menu
-        randomBottomNavMenu.apply {
-            setOnItemSelectedListener { item -> onNavigationItemSelected(item) }
-        }
+        randomBottomNavMenu.setOnItemSelectedListener { item -> onNavigationItemSelected(item) }
+    }
+
+    private fun disableListeners() {
+        // App bar
+        drawerIcon.setOnClickListener(null)
+
+        // Drawer header
+        drawerHeader.setOnClickListener(null)
+
+        // Drawer
+        drawerItemsNavView.setNavigationItemSelectedListener(null)
+
+        // Drawer bottom
+        drawerBottomNavView.setNavigationItemSelectedListener(null)
+
+        // Random bottom nav menu
+        randomBottomNavMenu.setOnItemSelectedListener(null)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -138,7 +163,7 @@ class MainActivity :
                 switchFragment(homeFragmentContainer.id, RockPaperScissorsFragment(), "RPCK_PAPER_SCISSORS")
 
             // Drawer bottom
-            R.id.drawer_bottom_privacy_policy -> openPrivacyPolicy()
+            R.id.drawer_bottom_settings -> openSettingsActivity()
 
             // Random bottom nav menu
             R.id.random_bottom_nav_menu_random_letter ->
@@ -228,19 +253,10 @@ class MainActivity :
         ticTacToe.isVisible = true
     }
 
-    /**
-     * Show Privacy Policy Screen
-     */
-    private fun openPrivacyPolicy() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+    private fun openSettingsActivity() = startActivity(Intent(this, SettingsActivity::class.java))
 
-    companion object {
-        /**
-         * Privacy Policy URL
-         */
-        const val PRIVACY_POLICY_URL = "https://docs.google.com/document/d/17-S5qZQoqmxN6jkHTWNhW89zdrjVmwkkGNKwauYqPvY"
-
+    private companion object {
         const val CLICKS_HOME_FRAGMENT = 10
-
         const val ONE_SECOND_IN_MILLIS = 1000L
     }
 }

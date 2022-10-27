@@ -26,6 +26,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-    </application>
 
+        <activity
+            android:name=".ui.settings.SettingsActivity">
+        </activity>
+    </application>
 </manifest>

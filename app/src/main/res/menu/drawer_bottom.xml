@@ -6,8 +6,8 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/drawer_bottom_privacy_policy"
-            android:title="@string/privacy_policy"
-            android:icon="@drawable/ic_document"/>
+            android:id="@+id/drawer_bottom_settings"
+            android:title="@string/settings"
+            android:icon="@drawable/ic_settings"/>
     </group>
 </menu>

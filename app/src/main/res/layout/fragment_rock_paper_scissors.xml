@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/rock_paper_scissors_app_choice_result"
-        android:layout_width="@dimen/image_size_normal"
-        android:layout_height="@dimen/image_size_normal"
+        android:layout_width="@dimen/image_size_custom"
+        android:layout_height="@dimen/image_size_custom"
         android:layout_marginTop="@dimen/margin_edges"
         android:contentDescription="@null"
         android:src="@drawable/ic_empty"
@@ -43,8 +43,8 @@
 
     <ImageView
         android:id="@+id/rock_paper_scissors_self_choice"
-        android:layout_width="@dimen/image_size_normal"
-        android:layout_height="@dimen/image_size_normal"
+        android:layout_width="@dimen/image_size_custom"
+        android:layout_height="@dimen/image_size_custom"
         android:layout_marginTop="@dimen/margin_edges"
         android:contentDescription="@null"
         android:src="@drawable/ic_empty"
@@ -99,8 +99,8 @@
 
     <ImageView
         android:id="@+id/rock_paper_scissors_choice_rock"
-        android:layout_width="@dimen/image_size_normal"
-        android:layout_height="@dimen/image_size_normal"
+        android:layout_width="@dimen/image_size_custom"
+        android:layout_height="@dimen/image_size_custom"
         android:contentDescription="@null"
         android:src="@drawable/rock_paper_scissors_rock"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,8 +110,8 @@
 
     <ImageView
         android:id="@+id/rock_paper_scissors_choice_paper"
-        android:layout_width="@dimen/image_size_normal"
-        android:layout_height="@dimen/image_size_normal"
+        android:layout_width="@dimen/image_size_custom"
+        android:layout_height="@dimen/image_size_custom"
         android:layout_marginTop="@dimen/margin_edges"
         android:contentDescription="@null"
         android:src="@drawable/rock_paper_scissors_paper"
@@ -121,8 +121,8 @@
 
     <ImageView
         android:id="@+id/rock_paper_scissors_choice_scissors"
-        android:layout_width="@dimen/image_size_normal"
-        android:layout_height="@dimen/image_size_normal"
+        android:layout_width="@dimen/image_size_custom"
+        android:layout_height="@dimen/image_size_custom"
         android:contentDescription="@null"
         android:src="@drawable/rock_paper_scissors_scissors"
         app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_choice_paper"

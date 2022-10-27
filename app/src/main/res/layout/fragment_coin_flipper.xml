@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/coin_flipper_result_image"
-        android:layout_width="@dimen/image_size_normal"
-        android:layout_height="@dimen/image_size_normal"
+        android:layout_width="@dimen/image_size_custom"
+        android:layout_height="@dimen/image_size_custom"
         android:layout_marginBottom="128dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_empty"
@@ -78,8 +78,8 @@
 
     <ImageView
         android:id="@+id/coin_flipper_heads_image"
-        android:layout_width="@dimen/image_size_normal"
-        android:layout_height="@dimen/image_size_normal"
+        android:layout_width="@dimen/image_size_custom"
+        android:layout_height="@dimen/image_size_custom"
         android:contentDescription="@string/coin_flipper_heads"
         android:background="@drawable/coin_flipper_heads"
         android:layout_marginVertical="@dimen/margin_elements_large"
@@ -90,8 +90,8 @@
 
     <ImageView
         android:id="@+id/coin_flipper_tails_image"
-        android:layout_width="@dimen/image_size_normal"
-        android:layout_height="@dimen/image_size_normal"
+        android:layout_width="@dimen/image_size_custom"
+        android:layout_height="@dimen/image_size_custom"
         android:contentDescription="@string/coin_flipper_tails"
         android:background="@drawable/coin_flipper_tails"
         app:layout_constraintStart_toEndOf="@+id/coin_flipper_heads_image"

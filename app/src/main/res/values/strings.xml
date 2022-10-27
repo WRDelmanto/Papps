@@ -6,7 +6,7 @@
 
     <!-- Drawer -->
     <!-- Drawer Header -->
-    <string name="drawer_header_title">Papps</string>
+    <string name="drawer_header_title">@string/app_name</string>
 
     <!-- Drawer Items -->
     <string name="app_name_random_letter">Letra Aleatória</string>
@@ -18,7 +18,16 @@
     <string name="app_name_rock_paper_scissors">Pedra, Papel e Tesoura</string>
 
     <!-- Drawer Bottom Items -->
+    <string name="settings">Configurações</string>
+
+    <!-- Settings -->
     <string name="privacy_policy">Política de Privacidade</string>
+    <string name="clear_all_data">Limpar todos os dados</string>
+    <string name="clear_all_data_description">Essa ação limpará todos os dados relacionados a recordes e histórico dos jogos e apps.</string>
+
+    <!-- Dialogs -->
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
 
     <!-- Home -->
     <string name="home_click_here">Clique aqui\npara começar\na aventura!</string>
