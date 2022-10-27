@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.SP_CC_HIGH_SCORE
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
@@ -91,9 +92,5 @@ class ClickCounterFragment : Fragment() {
         highScore = context?.let { getSharedPreferences(it, SP_CC_HIGH_SCORE, Int) } as Int
 
         logD { "resetCounter" }
-    }
-
-    private companion object {
-        const val SP_CC_HIGH_SCORE = "SHARED_PREFERENCES_CLICK_COUNTER_HIGH_SCORE"
     }
 }

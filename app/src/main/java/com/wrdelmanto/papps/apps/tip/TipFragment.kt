@@ -12,6 +12,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.SP_T_TIP_PERCENTAGE
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.hideKeyboard
@@ -117,6 +118,5 @@ class TipFragment : Fragment() {
 
     companion object {
         const val TRANSFORM_TO_PERCENTAGE = 0.01
-        const val SP_T_TIP_PERCENTAGE = "SHARED_PREFERENCES_TIP_TIP_PERCENTAGE"
     }
 }

@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.SP_RN_NUMBER_HISTORY
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.hideKeyboard
@@ -121,9 +122,5 @@ class RandomNumberFragment : Fragment() {
             secondHistory.text = if (numberHistoryList[2] == "*") "" else numberHistoryList[2]
             thirdHistory.text = if (numberHistoryList[3] == "*") "" else numberHistoryList[3]
         }
-    }
-
-    private companion object {
-        const val SP_RN_NUMBER_HISTORY = "SHARED_PREFERENCES_RANDOM_NUMBER_NUMBER_HISTORY"
     }
 }

@@ -7,6 +7,22 @@ import android.content.SharedPreferences
 private lateinit var editor: SharedPreferences.Editor
 private lateinit var sharedPreferences: SharedPreferences
 
+// Shared preferences variables
+// Click counter
+const val SP_CC_HIGH_SCORE = "SHARED_PREFERENCES_CLICK_COUNTER_HIGH_SCORE"
+
+// Random letter
+const val SP_RL_LETTER_HISTORY = "SHARED_PREFERENCES_RANDOM_LETTER_LETTER_HISTORY"
+
+// Random number
+const val SP_RN_NUMBER_HISTORY = "SHARED_PREFERENCES_RANDOM_NUMBER_NUMBER_HISTORY"
+
+// Tip
+const val SP_T_TIP_PERCENTAGE = "SHARED_PREFERENCES_TIP_TIP_PERCENTAGE"
+
+// Easter egg
+const val SP_EASTER_EGG = "SHARED_PREFERENCES_EASTER_EGG"
+
 /**
  * Put a value at Shared Preferences.
  *

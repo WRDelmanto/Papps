@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.SP_RL_LETTER_HISTORY
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
@@ -99,9 +100,5 @@ class RandomLetterFragment : Fragment() {
         thirdHistory.text = if (letterHistory[2].toString() == "*") "" else letterHistory[2].toString()
         fourthHistory.text = if (letterHistory[3].toString() == "*") "" else letterHistory[3].toString()
         fifthHistory.text = if (letterHistory[4].toString() == "*") "" else letterHistory[4].toString()
-    }
-
-    private companion object {
-        const val SP_RL_LETTER_HISTORY = "SHARED_PREFERENCES_RANDOM_LETTER_LETTER_HISTORY"
     }
 }
