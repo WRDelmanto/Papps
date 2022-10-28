@@ -24,6 +24,9 @@ import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
 import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.ui.settings.SettingsActivity
+import com.wrdelmanto.papps.utils.SP_EASTER_EGG
+import com.wrdelmanto.papps.utils.checkKeySharedPreferences
+import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -138,6 +141,11 @@ class MainActivity :
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         setupNavigationAndStatusBar(applicationContext, window)
+
+        if (checkKeySharedPreferences(applicationContext, SP_EASTER_EGG)) {
+            if (!(getSharedPreferences(applicationContext, SP_EASTER_EGG, Boolean) as Boolean)) resetEasterEgg()
+            else activateEasterEgg()
+        } else resetEasterEgg()
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
@@ -251,6 +259,11 @@ class MainActivity :
     fun activateEasterEgg() {
         val ticTacToe = drawerItemsNavView.menu.findItem(R.id.drawer_tic_tac_toe)
         ticTacToe.isVisible = true
+    }
+
+    private fun resetEasterEgg() {
+        val ticTacToe = drawerItemsNavView.menu.findItem(R.id.drawer_tic_tac_toe)
+        ticTacToe.isVisible = false
     }
 
     private fun openSettingsActivity() = startActivity(Intent(this, SettingsActivity::class.java))

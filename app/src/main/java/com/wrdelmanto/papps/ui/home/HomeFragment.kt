@@ -8,7 +8,11 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.SP_EASTER_EGG
+import com.wrdelmanto.papps.utils.checkKeySharedPreferences
+import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
+import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.showNormalToast
 
 class HomeFragment : Fragment() {
@@ -32,7 +36,10 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        initiateListeners()
+        if (context?.let { checkKeySharedPreferences(it, SP_EASTER_EGG) } == true) {
+            if (!(context?.let { getSharedPreferences(it, SP_EASTER_EGG, Boolean) } as Boolean)) initiateListeners()
+            else disableListeners()
+        } else initiateListeners()
     }
 
     override fun onPause() {
@@ -41,21 +48,27 @@ class HomeFragment : Fragment() {
         super.onPause()
     }
 
-    private fun initiateListeners() = homeLogo.setOnClickListener { activateEasterEgg() }
+    private fun initiateListeners() = homeLogo.setOnClickListener {
+        shouldActivateEasterEgg()
+        test()
+    }
 
-    private fun disableListeners() = homeLogo.setOnClickListener(null)
+    private fun disableListeners() {
+        homeLogo.apply {
+            setOnClickListener(null)
+            setOnClickListener { test() }
+        }
+    }
 
-    private fun activateEasterEgg() {
+    private fun shouldActivateEasterEgg() {
         clicksEasterEgg++
-
         if (clicksEasterEgg >= CLICKS_TO_ACTIVATE_EASTER_EGG) {
-            homeLogo.setOnClickListener(null)
+            disableListeners()
+            (activity as MainActivity?)?.activateEasterEgg()
+            context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
             context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
             logD { getString(R.string.easter_egg_activated)}
-            (activity as MainActivity?)?.activateEasterEgg()
         }
-
-        test()
     }
 
     /**
