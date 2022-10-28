@@ -46,7 +46,6 @@
     <string name="value_with_cipher">R\u0024 %1$s</string>
     <string name="value_with_percentage">%1$s \%%</string>
     <string name="score_separator">X</string>
-    <string name="click_here">Clique Aqui!</string>
     <string name="pve">PvE</string>
     <string name="pvp">PvP</string>
     <string name="clicks">Cliques</string>
@@ -66,7 +65,6 @@
 
     <!-- Tip -->
     <string name="tip_value_hint"><font size="14">Digite o valor da conta ex: R$ 37.50</font></string>
-    <string name="tip_zero_percentage">0 %</string>
     <string name="tip_total">Total</string>
     <string name="tip_no_input_found">Favor Digitar o Valor da Conta</string>
 

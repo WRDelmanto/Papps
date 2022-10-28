@@ -80,6 +80,7 @@ class HomeFragment : Fragment() {
     /**
      * Function created to test features.
      */
+    @Suppress("EmptyMethod")
     private fun test() {}
 
     private companion object {

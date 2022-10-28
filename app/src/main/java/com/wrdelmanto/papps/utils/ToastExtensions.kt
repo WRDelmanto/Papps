@@ -93,7 +93,7 @@ fun showNormalToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) 
  * Custom Toast
  *
  * @param context
- * @param text
+ * @param value
  * @param icon
  * @param tintColor
  * @param duration
