@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.SP_CC_HIGH_SCORE
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
@@ -74,6 +75,7 @@ class ClickCounterFragment : Fragment() {
     }
 
     private fun resetUi() {
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_click_counter))
         counter.text = getString(R.string.zero)
 
         highScore = if (context?.let { checkKeySharedPreferences(it, SP_CC_HIGH_SCORE) } == true) {

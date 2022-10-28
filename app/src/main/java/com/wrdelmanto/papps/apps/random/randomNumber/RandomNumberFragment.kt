@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.SP_RN_NUMBER_HISTORY
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
@@ -75,6 +76,7 @@ class RandomNumberFragment : Fragment() {
 
     @Suppress("DEPRECATION")
     private fun resetUi() {
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_random_number))
         result.apply {
             text = getString(R.string.click_anywhere)
             textSize = 16F

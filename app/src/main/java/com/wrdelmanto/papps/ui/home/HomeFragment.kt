@@ -36,10 +36,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        if (context?.let { checkKeySharedPreferences(it, SP_EASTER_EGG) } == true) {
-            if (!(context?.let { getSharedPreferences(it, SP_EASTER_EGG, Boolean) } as Boolean)) initiateListeners()
-            else disableListeners()
-        } else initiateListeners()
+        resetUi()
     }
 
     override fun onPause() {
@@ -58,6 +55,15 @@ class HomeFragment : Fragment() {
             setOnClickListener(null)
             setOnClickListener { test() }
         }
+    }
+
+    private fun resetUi() {
+        (activity as MainActivity?)?.updateAppBarTitle("")
+
+        if (context?.let { checkKeySharedPreferences(it, SP_EASTER_EGG) } == true) {
+            if (!(context?.let { getSharedPreferences(it, SP_EASTER_EGG, Boolean) } as Boolean)) initiateListeners()
+            else disableListeners()
+        } else initiateListeners()
     }
 
     private fun shouldActivateEasterEgg() {

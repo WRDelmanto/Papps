@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.SP_RL_LETTER_HISTORY
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
@@ -71,6 +72,7 @@ class RandomLetterFragment : Fragment() {
 
     @Suppress("DEPRECATION")
     private fun resetUi() {
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_random_letter))
         result.apply {
             text = getString(R.string.click_anywhere)
             textSize = 16F

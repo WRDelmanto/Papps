@@ -186,8 +186,6 @@ class MainActivity :
                 switchFragment(homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER")
         }
 
-        updateAppBarTitle(menuItem)
-
         activityMain.closeDrawer(GravityCompat.START)
         return true
     }
@@ -213,26 +211,7 @@ class MainActivity :
         randomBottomNavMenu.isVisible = fragmentName == "RANDOM_LETTER" || fragmentName == "RANDOM_NUMBER"
     }
 
-    private fun updateAppBarTitle(menuItem: MenuItem) {
-        appBarTitle.text = when (menuItem.itemId) {
-            // Apps
-            R.id.drawer_click_counter -> getString(R.string.app_name_click_counter)
-            R.id.drawer_random_letter -> getString(R.string.app_name_random_letter)
-            R.id.drawer_random_number -> getString(R.string.app_name_random_number)
-            R.id.drawer_tip -> getString(R.string.app_name_tip)
-
-            // Games
-            R.id.drawer_coin_flipper -> getString(R.string.app_name_coin_flipper)
-            R.id.drawer_tic_tac_toe -> getString(R.string.app_name_tic_tac_toe)
-            R.id.drawer_rock_paper_scissors -> getString(R.string.app_name_rock_paper_scissors)
-
-            // Random bottom nav
-            R.id.random_bottom_nav_menu_random_letter -> getString(R.string.app_name_random_letter)
-            R.id.random_bottom_nav_menu_random_number -> getString(R.string.app_name_random_number)
-
-            else -> ""
-        }
-    }
+    fun updateAppBarTitle(titleName: String) { appBarTitle.text = titleName }
 
     private fun goHomeFragment() {
         if (actualFragmentTag == "HOME") return

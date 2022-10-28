@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.logD
 import java.util.Random
@@ -46,6 +47,7 @@ class CoinFlipperFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        resetUi()
         initiateListeners()
     }
 
@@ -66,6 +68,8 @@ class CoinFlipperFragment : Fragment() {
         tails.setOnClickListener(null)
         resetButton.setOnClickListener(null)
     }
+
+    private fun resetUi() = (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_coin_flipper))
 
     private fun choice(selfChoice: String) {
         val options = arrayOf(getString(R.string.coin_flipper_heads), getString(R.string.coin_flipper_tails))

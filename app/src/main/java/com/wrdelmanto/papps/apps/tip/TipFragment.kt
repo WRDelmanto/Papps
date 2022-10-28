@@ -11,6 +11,7 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.SP_T_TIP_PERCENTAGE
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
@@ -88,6 +89,7 @@ class TipFragment : Fragment() {
     }
 
     private fun resetUi() {
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tip))
         tipPercentageSeekBar.progress = 10
         percentage = if (context?.let { checkKeySharedPreferences(it, SP_T_TIP_PERCENTAGE) } == true) {
             context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
