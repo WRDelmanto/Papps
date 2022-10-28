@@ -138,6 +138,12 @@ class MainActivity :
         randomBottomNavMenu.setOnItemSelectedListener(null)
     }
 
+    @Deprecated("Deprecated in Java")
+    @Suppress("DEPRECATION")
+    override fun onBackPressed() {
+        if (actualFragmentTag != "HOME") super.onBackPressed()
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         setupNavigationAndStatusBar(applicationContext, window)
