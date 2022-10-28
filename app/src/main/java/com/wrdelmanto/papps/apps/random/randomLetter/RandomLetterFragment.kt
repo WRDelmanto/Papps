@@ -21,7 +21,8 @@ class RandomLetterFragment : Fragment() {
     private lateinit var result: TextView
     private lateinit var randomizerButton: Button
 
-    private var letterHistory = "*****"
+    private lateinit var letterHistory: String
+
     private lateinit var firstHistory: TextView
     private lateinit var secondHistory: TextView
     private lateinit var thirdHistory: TextView
@@ -46,18 +47,12 @@ class RandomLetterFragment : Fragment() {
         thirdHistory = view.findViewById(R.id.random_letter_history_third)
         fourthHistory = view.findViewById(R.id.random_letter_history_fourth)
         fifthHistory = view.findViewById(R.id.random_letter_history_fifth)
-
-        if (context?.let { checkKeySharedPreferences(it, SP_RL_LETTER_HISTORY) } == true) {
-            letterHistory = context?.let { getSharedPreferences(it, SP_RL_LETTER_HISTORY, String) } as String
-            updateLetterHistory()
-        }
-
-        startBlinkingAnimation(result)
     }
 
     override fun onResume() {
         super.onResume()
 
+        resetUi()
         initiateListeners()
     }
 
@@ -73,6 +68,23 @@ class RandomLetterFragment : Fragment() {
     }
 
     private fun disableListeners() = randomizerButton.setOnClickListener(null)
+
+    @Suppress("DEPRECATION")
+    private fun resetUi() {
+        result.apply {
+            text = getString(R.string.click_anywhere)
+            textSize = 16F
+            setTextColor(resources.getColor(R.color.defaul_text_color))
+        }
+
+        letterHistory = if (context?.let { checkKeySharedPreferences(it, SP_RL_LETTER_HISTORY) } == true) {
+            context?.let { getSharedPreferences(it, SP_RL_LETTER_HISTORY, String) } as String
+        } else "*****"
+
+        updateLetterHistory()
+
+        startBlinkingAnimation(result)
+    }
 
     @Suppress("DEPRECATION")
     private fun generateRandomLetter() {

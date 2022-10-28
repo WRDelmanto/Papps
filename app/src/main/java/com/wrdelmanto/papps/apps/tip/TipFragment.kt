@@ -45,20 +45,12 @@ class TipFragment : Fragment() {
         tipPercentageSeekBar = view.findViewById(R.id.tip_percentage_seek_bar)
         tipOutput = view.findViewById(R.id.tip_tip_output)
         totalOutput = view.findViewById(R.id.tip_total_output)
-
-        percentage = if (context?.let { checkKeySharedPreferences(it, SP_T_TIP_PERCENTAGE) } == true) {
-            context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
-        } else {
-            tipPercentageSeekBar.progress
-        }
-
-        tipPercentage.text = String.format(getString(R.string.value_with_percentage), percentage.toString())
-        tipPercentageSeekBar.progress = percentage
     }
 
     override fun onResume() {
         super.onResume()
 
+        resetUi()
         initiateListeners()
     }
 
@@ -93,6 +85,18 @@ class TipFragment : Fragment() {
     private fun disableListeners() {
         value.addTextChangedListener(null)
         tipPercentageSeekBar.setOnSeekBarChangeListener(null)
+    }
+
+    private fun resetUi() {
+        tipPercentageSeekBar.progress = 10
+        percentage = if (context?.let { checkKeySharedPreferences(it, SP_T_TIP_PERCENTAGE) } == true) {
+            context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
+        } else {
+            tipPercentageSeekBar.progress
+        }
+
+        tipPercentage.text = String.format(getString(R.string.value_with_percentage), percentage.toString())
+        tipPercentageSeekBar.progress = percentage
     }
 
     private fun calculateTotalOutput() {

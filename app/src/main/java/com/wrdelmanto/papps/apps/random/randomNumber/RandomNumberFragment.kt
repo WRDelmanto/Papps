@@ -25,8 +25,8 @@ class RandomNumberFragment : Fragment() {
     private lateinit var minInput: EditText
     private lateinit var maxInput: EditText
 
-    private var numberHistory = "*.*.*.*"
-    private var numberHistoryList = listOf("*", "*", "*", "*")
+    private lateinit var numberHistory: String
+    private lateinit var numberHistoryList: List<String>
 
     private lateinit var firstHistory: TextView
     private lateinit var secondHistory: TextView
@@ -50,20 +50,12 @@ class RandomNumberFragment : Fragment() {
         firstHistory = view.findViewById(R.id.random_number_history_first)
         secondHistory = view.findViewById(R.id.random_number_history_second)
         thirdHistory = view.findViewById(R.id.random_number_history_third)
-
-        if (context?.let { checkKeySharedPreferences(it, SP_RN_NUMBER_HISTORY) } == true) {
-            numberHistory = context?.let { getSharedPreferences(it, SP_RN_NUMBER_HISTORY, String) } as String
-            numberHistoryList = numberHistory.split(".")
-        }
-
-        updateNumberHistory(true)
-
-        startBlinkingAnimation(result)
     }
 
     override fun onResume() {
         super.onResume()
 
+        resetUi()
         initiateListeners()
     }
 
@@ -80,6 +72,27 @@ class RandomNumberFragment : Fragment() {
     }
 
     private fun disableListeners() = randomizerButton.setOnClickListener(null)
+
+    @Suppress("DEPRECATION")
+    private fun resetUi() {
+        result.apply {
+            text = getString(R.string.click_anywhere)
+            textSize = 16F
+            setTextColor(resources.getColor(R.color.defaul_text_color))
+        }
+
+        if (context?.let { checkKeySharedPreferences(it, SP_RN_NUMBER_HISTORY) } == true) {
+            numberHistory = context?.let { getSharedPreferences(it, SP_RN_NUMBER_HISTORY, String) } as String
+            numberHistoryList = numberHistory.split(".")
+        } else {
+            numberHistory = "*.*.*.*"
+            numberHistoryList = listOf("*", "*", "*", "*")
+        }
+
+        updateNumberHistory(true)
+
+        startBlinkingAnimation(result)
+    }
 
     @Suppress("DEPRECATION")
     private fun generateRandomNumber() {

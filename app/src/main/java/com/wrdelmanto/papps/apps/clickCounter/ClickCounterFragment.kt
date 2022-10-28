@@ -53,6 +53,7 @@ class ClickCounterFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
+        resetUi()
         initiateListeners()
     }
 
@@ -70,6 +71,18 @@ class ClickCounterFragment : Fragment() {
     private fun disableListeners() {
         additionButton.setOnClickListener(null)
         resetButton.setOnClickListener(null)
+    }
+
+    private fun resetUi() {
+        counter.text = getString(R.string.zero)
+
+        highScore = if (context?.let { checkKeySharedPreferences(it, SP_CC_HIGH_SCORE) } == true) {
+            context?.let { getSharedPreferences(it, SP_CC_HIGH_SCORE, Int) } as Int
+        } else 0
+        highScoreOutput.text = highScore.toString()
+
+        clickAnywhere.isVisible = true
+        startBlinkingAnimation(clickAnywhere)
     }
 
     private fun addition() {
