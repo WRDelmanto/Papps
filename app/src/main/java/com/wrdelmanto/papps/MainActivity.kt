@@ -27,6 +27,7 @@ import com.wrdelmanto.papps.ui.settings.SettingsActivity
 import com.wrdelmanto.papps.utils.SP_EASTER_EGG
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
+import com.wrdelmanto.papps.utils.selfAnonymouslyAuthentication
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -90,6 +91,12 @@ class MainActivity :
         randomBottomNavMenuRandomnumber = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
         switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        selfAnonymouslyAuthentication()
     }
 
     override fun onResume() {

@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.clickCounter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,10 +96,12 @@ class ClickCounterFragment : Fragment() {
 
         if (clicks > highScore) {
             context?.let { putSharedPreferences(it, SP_CC_HIGH_SCORE, clicks) }
+            // TODO: putFirebase() + timer
             highScoreOutput.text = clicks.toString()
         }
 
         logD { "clicks=$clicks" }
+        Log.d("addition", "clicks=$clicks")
     }
 
     private fun resetCounter() {

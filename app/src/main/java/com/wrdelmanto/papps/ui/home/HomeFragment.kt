@@ -8,10 +8,13 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.utils.CLICK_COUNTER_REF
 import com.wrdelmanto.papps.utils.SP_EASTER_EGG
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
+import com.wrdelmanto.papps.utils.getFirebase
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
+import com.wrdelmanto.papps.utils.putFirebase
 import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.showNormalToast
 
@@ -81,7 +84,12 @@ class HomeFragment : Fragment() {
      * Function created to test features.
      */
     @Suppress("EmptyMethod")
-    private fun test() {}
+    private fun test() {
+        val score = ("1".toInt().."100".toInt()).random()
+
+//        putFirebase(score.toString(), CLICK_COUNTER_REF)
+        context?.let { showNormalToast(it, getFirebase(CLICK_COUNTER_REF, "Test").toString()) }
+    }
 
     private companion object {
         const val CLICKS_TO_ACTIVATE_EASTER_EGG = 10

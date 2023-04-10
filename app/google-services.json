@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "779038000732",
+    "project_id": "papps-b9053",
+    "storage_bucket": "papps-b9053.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779038000732:android:4ca85e083cd90900ff8899",
+        "android_client_info": {
+          "package_name": "com.wrdelmanto.papps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779038000732-7sa9tuli4pj5fkgvkjnpmf5fk7lgokqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwbKGSSamOjd-GegX7AVRHjdKz_ZAs8n8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779038000732-7sa9tuli4pj5fkgvkjnpmf5fk7lgokqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
