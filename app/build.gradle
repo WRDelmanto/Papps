@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.wrdelmanto.papps'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.wrdelmanto.papps"
         minSdk 22
-        targetSdk 33
+        targetSdk 34
         versionCode 5 // Value that the stores use to identify that there has been an update.
         versionName "1.4.2.$versionCode" // Value that is shown to the user.
 
