@@ -9,11 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:contentDescription="@null"
         android:src="@drawable/tip_coins"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@null" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tip_cipher_value_input"
@@ -24,25 +24,24 @@
         android:text="@string/cipher"
         android:textColor="@color/defaul_text_color"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tip_value_input"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tip_value_input"
-        app:layout_constraintBottom_toBottomOf="@+id/tip_value_input">
-    </TextView>
+        app:layout_constraintTop_toTopOf="@+id/tip_value_input" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/tip_value_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/tip_orange"
         android:hint="@string/tip_value_hint"
         android:inputType="number|numberDecimal"
-        android:textSize="18sp"
         android:textColorLink="@color/tip_orange"
-        android:backgroundTint="@color/tip_orange"
         android:textCursorDrawable="@null"
-        app:layout_constraintStart_toEndOf="@+id/tip_cipher_value_input"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tip_cipher_value_input"
         app:layout_constraintTop_toBottomOf="@+id/tip_coins" />
 
     <TextView
@@ -53,8 +52,8 @@
         android:layout_marginTop="32dp"
         android:text="@string/ten_with_percentage"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tip_tip"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tip_value_input" />
 
     <SeekBar
@@ -62,13 +61,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:max="100"
-        android:thumbTint="@color/tip_orange"
-        android:progressTint="@color/tip_orange"
         android:progress="10"
-        app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
+        android:progressTint="@color/tip_orange"
+        android:thumbTint="@color/tip_orange"
+        app:layout_constraintBottom_toBottomOf="@+id/tip_percentage"
         app:layout_constraintEnd_toEndOf="@+id/tip_tip_output"
-        app:layout_constraintTop_toTopOf="@+id/tip_percentage"
-        app:layout_constraintBottom_toBottomOf="@+id/tip_percentage"/>
+        app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
+        app:layout_constraintTop_toTopOf="@+id/tip_percentage" />
 
     <TextView
         android:id="@+id/tip_tip"
@@ -89,10 +88,10 @@
         android:background="@color/tip_orange"
         android:text="@string/zero_decimal"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tip_tip"
+        app:layout_constraintBottom_toBottomOf="@+id/tip_tip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tip_tip"
-        app:layout_constraintBottom_toBottomOf="@+id/tip_tip"/>
+        app:layout_constraintStart_toEndOf="@+id/tip_tip"
+        app:layout_constraintTop_toTopOf="@+id/tip_tip" />
 
     <TextView
         android:id="@+id/tip_total"
@@ -101,8 +100,8 @@
         android:layout_marginTop="32dp"
         android:text="@string/tip_total"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tip_tip"
         app:layout_constraintEnd_toEndOf="@+id/tip_tip"
+        app:layout_constraintStart_toStartOf="@+id/tip_tip"
         app:layout_constraintTop_toBottomOf="@+id/tip_tip" />
 
     <TextView
@@ -112,8 +111,8 @@
         android:background="@color/tip_orange"
         android:text="@string/zero_decimal"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
+        app:layout_constraintBottom_toBottomOf="@+id/tip_total"
         app:layout_constraintEnd_toEndOf="@+id/tip_tip_output"
-        app:layout_constraintTop_toTopOf="@+id/tip_total"
-        app:layout_constraintBottom_toBottomOf="@+id/tip_total" />
+        app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
+        app:layout_constraintTop_toTopOf="@+id/tip_total" />
 </androidx.constraintlayout.widget.ConstraintLayout>

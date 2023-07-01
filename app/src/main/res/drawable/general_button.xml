@@ -3,20 +3,13 @@
     <item>
         <shape android:shape="rectangle">
             <!-- Background -->
-            <solid
-                android:color="@color/general_button_background_tint">
-            </solid>
+            <solid android:color="@color/general_button_background_tint" />
 
             <!-- Border -->
-            <stroke
-                android:width="2dp"
-                android:color="@color/general_button_border_tint">
-            </stroke>
+            <stroke android:width="2dp" android:color="@color/general_button_border_tint" />
 
             <!-- Corner roundness -->
-            <corners
-                android:radius="10dp">
-            </corners>
+            <corners android:radius="10dp" />
         </shape>
     </item>
 </selector>

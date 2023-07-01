@@ -8,37 +8,34 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_curved_arrow"
         android:contentDescription="@null"
+        android:src="@drawable/ic_curved_arrow"
         app:layout_constraintBottom_toTopOf="@+id/home_logo"
         app:layout_constraintEnd_toStartOf="@+id/home_click_here"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/home_click_here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home_click_here"
-        android:textSize="@dimen/font_size_normal_above"
-        android:textColor="@color/black"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_normal_above"
+        app:layout_constraintBottom_toTopOf="@+id/home_logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/home_logo">
-    </TextView>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/home_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/papps_logo"
-        android:contentDescription="@null"
         android:adjustViewBounds="true"
-        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@null"
+        android:src="@drawable/papps_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </ImageView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

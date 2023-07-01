@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -20,8 +20,7 @@
             android:padding="@dimen/padding_elements_small"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </ImageView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/settings_toolbar_title"
@@ -30,10 +29,9 @@
             android:text="@string/settings"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toBottomOf="@+id/settings_toolbar_arrow_back"
             app:layout_constraintStart_toEndOf="@+id/settings_toolbar_arrow_back"
-            app:layout_constraintTop_toTopOf="@+id/settings_toolbar_arrow_back"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_toolbar_arrow_back">
-        </TextView>
+            app:layout_constraintTop_toTopOf="@+id/settings_toolbar_arrow_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -42,74 +40,70 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="@dimen/padding_elements_normal"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_toolbar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settings_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/privacy_pocily"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_elements_small"
-            android:background="?attr/selectableItemBackground">
+            android:background="?attr/selectableItemBackground"
+            android:padding="@dimen/padding_elements_small">
 
             <ImageView
                 android:id="@+id/privacy_policy_icon"
                 android:layout_width="@dimen/image_size_small_under"
                 android:layout_height="@dimen/image_size_small_under"
-                android:src="@drawable/ic_document"
                 android:contentDescription="@null"
+                android:src="@drawable/ic_document"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
-            </ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_elements_small"
                 android:text="@string/privacy_policy"
-                android:textSize="@dimen/font_size_normal"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/privacy_policy_icon"
+                android:textSize="@dimen/font_size_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
-            </TextView>
+                app:layout_constraintStart_toEndOf="@+id/privacy_policy_icon"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clear_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding_elements_small"
             android:layout_marginTop="@dimen/margin_elements_small"
-            android:background="?attr/selectableItemBackground">
+            android:background="?attr/selectableItemBackground"
+            android:padding="@dimen/padding_elements_small">
 
             <ImageView
                 android:id="@+id/clear_data_icon"
                 android:layout_width="@dimen/image_size_small_under"
                 android:layout_height="@dimen/image_size_small_under"
-                android:src="@drawable/ic_delete"
                 android:contentDescription="@null"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
-            </ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_elements_small"
                 android:text="@string/clear_all_data"
-                android:textSize="@dimen/font_size_normal"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/clear_data_icon"
+                android:textSize="@dimen/font_size_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
-            </TextView>
+                app:layout_constraintStart_toEndOf="@+id/clear_data_icon"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

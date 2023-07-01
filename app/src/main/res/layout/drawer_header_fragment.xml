@@ -10,45 +10,44 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/color_line_primary_secondary"
-        android:gravity="center_horizontal"
         android:contentDescription="@null"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/drawer_header_logo"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/papps_logo"
         android:contentDescription="@null"
         android:paddingHorizontal="6dp"
+        android:src="@drawable/papps_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/drawer_header_app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/drawer_header_title"
-        android:textSize="36sp"
-        android:textColor="@color/color_primary"
         android:layout_marginTop="10dp"
+        android:text="@string/drawer_header_title"
+        android:textColor="@color/color_primary"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@id/drawer_header_logo"
         app:layout_constraintStart_toEndOf="@id/drawer_header_logo"
-        app:layout_constraintTop_toTopOf="@id/drawer_header_logo"
-        app:layout_constraintBottom_toBottomOf="@id/drawer_header_logo"/>
+        app:layout_constraintTop_toTopOf="@id/drawer_header_logo" />
 
     <ImageView
         android:id="@+id/drawer_header_line_bottom"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/color_line_primary_secondary"
-        android:gravity="center_horizontal"
         android:contentDescription="@null"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,5 @@
         android:id="@+id/settings_activity_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout="@layout/settings_fragment">
-    </androidx.fragment.app.FragmentContainerView>
+        tools:layout="@layout/settings_fragment" />
 </merge>

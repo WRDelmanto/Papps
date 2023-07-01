@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/main_background_color"
-    tools:openDrawer="start"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:openDrawer="start">
 
     <include layout="@layout/main_toolbar_and_fragment_container" />
 
@@ -27,34 +27,32 @@
                 android:id="@+id/drawer_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <include layout="@layout/drawer_header_fragment"> </include>
+                <include layout="@layout/drawer_header_fragment" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.navigation.NavigationView
                 android:id="@+id/drawer_items_nav_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:menu="@menu/drawer"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/drawer_bottom_nav_view"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/drawer_header"
-                app:layout_constraintBottom_toTopOf="@+id/drawer_bottom_nav_view">
-            </com.google.android.material.navigation.NavigationView>
+                app:menu="@menu/drawer" />
 
             <com.google.android.material.navigation.NavigationView
                 android:id="@+id/drawer_bottom_nav_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fitsSystemWindows="true"
-                app:menu="@menu/drawer_bottom"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
-            </com.google.android.material.navigation.NavigationView>
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/drawer_bottom" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

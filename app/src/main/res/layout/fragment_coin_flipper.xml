@@ -11,13 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_elements_xlarge"
-        android:textSize="@dimen/font_size_large"
         android:text="@string/coin_flipper_win_or_lose"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="@+id/coin_flipper_result_image"
+        android:textSize="@dimen/font_size_large"
+        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_result_image"
         app:layout_constraintEnd_toEndOf="@+id/coin_flipper_result_image"
-        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_result_image">
-    </TextView>
+        app:layout_constraintStart_toStartOf="@+id/coin_flipper_result_image" />
 
     <ImageView
         android:id="@+id/coin_flipper_result_image"
@@ -26,10 +25,10 @@
         android:layout_marginBottom="128dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_empty"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/coin_flipper_app_score"
@@ -37,9 +36,9 @@
         android:layout_height="wrap_content"
         android:text="@string/zero"
         android:textSize="@dimen/font_size_large"
-        app:layout_constraintStart_toStartOf="@+id/coin_flipper_score_separator"
+        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_score_separator"
         app:layout_constraintEnd_toEndOf="@+id/coin_flipper_score_separator"
-        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_score_separator" />
+        app:layout_constraintStart_toStartOf="@+id/coin_flipper_score_separator" />
 
     <TextView
         android:id="@+id/coin_flipper_score_separator"
@@ -48,10 +47,10 @@
         android:layout_marginVertical="@dimen/margin_elements_small"
         android:text="@string/score_separator"
         android:textSize="@dimen/font_size_large"
-        app:layout_constraintStart_toEndOf="@+id/coin_flipper_result_image"
+        app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_result_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/coin_flipper_result_image"
-        app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_result_image" />
+        app:layout_constraintStart_toEndOf="@+id/coin_flipper_result_image"
+        app:layout_constraintTop_toTopOf="@+id/coin_flipper_result_image" />
 
     <TextView
         android:id="@+id/coin_flipper_self_score"
@@ -59,8 +58,8 @@
         android:layout_height="wrap_content"
         android:text="@string/zero"
         android:textSize="@dimen/font_size_large"
-        app:layout_constraintStart_toStartOf="@+id/coin_flipper_score_separator"
         app:layout_constraintEnd_toEndOf="@+id/coin_flipper_score_separator"
+        app:layout_constraintStart_toStartOf="@+id/coin_flipper_score_separator"
         app:layout_constraintTop_toBottomOf="@+id/coin_flipper_score_separator" />
 
     <TextView
@@ -70,44 +69,44 @@
         android:layout_marginHorizontal="@dimen/margin_edges"
         android:layout_marginTop="@dimen/margin_elements_xlarge"
         android:text="@string/coin_flipper_choice"
-        android:textSize="@dimen/font_size_normal_above"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/font_size_normal_above"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coin_flipper_result_image" />
 
     <ImageView
         android:id="@+id/coin_flipper_heads_image"
         android:layout_width="@dimen/image_size_custom"
         android:layout_height="@dimen/image_size_custom"
-        android:contentDescription="@string/coin_flipper_heads"
-        android:background="@drawable/coin_flipper_heads"
         android:layout_marginVertical="@dimen/margin_elements_large"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/coin_flipper_heads"
+        android:contentDescription="@string/coin_flipper_heads"
+        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_reset_button"
         app:layout_constraintEnd_toStartOf="@+id/coin_flipper_tails_image"
-        app:layout_constraintTop_toBottomOf="@+id/coin_flipper_choice_text"
-        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_reset_button"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coin_flipper_choice_text" />
 
     <ImageView
         android:id="@+id/coin_flipper_tails_image"
         android:layout_width="@dimen/image_size_custom"
         android:layout_height="@dimen/image_size_custom"
-        android:contentDescription="@string/coin_flipper_tails"
         android:background="@drawable/coin_flipper_tails"
-        app:layout_constraintStart_toEndOf="@+id/coin_flipper_heads_image"
+        android:contentDescription="@string/coin_flipper_tails"
+        app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_heads_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/coin_flipper_heads_image"
-        app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_heads_image" />
+        app:layout_constraintStart_toEndOf="@+id/coin_flipper_heads_image"
+        app:layout_constraintTop_toTopOf="@+id/coin_flipper_heads_image" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/coin_flipper_reset_button"
-        android:background="@drawable/general_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_edges"
         android:layout_marginBottom="@dimen/margin_edges"
+        android:background="@drawable/general_button"
         android:text="@string/reset"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

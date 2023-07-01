@@ -2,87 +2,85 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_click_counter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/click_counter_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_edges"
+        android:ellipsize="end"
+        android:text="@string/zero"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_large"
+        app:layout_constraintBottom_toTopOf="@+id/click_counter_text_clicks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/click_counter_text_clicks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clicks"
+        android:textSize="@dimen/font_size_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/click_counter_high_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_edges"
+        android:layout_marginEnd="@dimen/margin_edges"
+        android:text="@string/highScore"
+        android:textColor="@color/color_secondary"
+        android:textSize="@dimen/font_size_normal_above"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/click_counter_high_score_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_elements_small"
+        android:ellipsize="end"
+        android:text="@string/zero"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_normal_above"
+        app:layout_constraintEnd_toEndOf="@+id/click_counter_high_score"
+        app:layout_constraintStart_toStartOf="@+id/click_counter_high_score"
+        app:layout_constraintTop_toBottomOf="@+id/click_counter_high_score" />
+
+    <Button
+        android:id="@+id/click_counter_addition_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:alpha="0" />
 
-        <TextView
-            android:id="@+id/click_counter_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_edges"
-            android:text="@string/zero"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_size_large"
-            android:ellipsize="end"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/click_counter_text_clicks" />
+    <TextView
+        android:id="@+id/click_counter_click_anywhere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_edges"
+        android:text="@string/click_anywhere"
+        android:textAlignment="center"
+        android:textSize="@dimen/font_size_normal"
+        app:layout_constraintBottom_toTopOf="@+id/click_counter_reset_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/click_counter_text_clicks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/clicks"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <TextView
-            android:id="@+id/click_counter_high_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_edges"
-            android:layout_marginEnd="@dimen/margin_edges"
-            android:text="@string/highScore"
-            android:textSize="@dimen/font_size_normal_above"
-            android:textColor="@color/color_secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </TextView>
-
-        <TextView
-            android:id="@+id/click_counter_high_score_output"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small"
-            android:text="@string/zero"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_size_normal_above"
-            android:ellipsize="end"
-            app:layout_constraintStart_toStartOf="@+id/click_counter_high_score"
-            app:layout_constraintEnd_toEndOf="@+id/click_counter_high_score"
-            app:layout_constraintTop_toBottomOf="@+id/click_counter_high_score">
-        </TextView>
-
-        <Button
-            android:id="@+id/click_counter_addition_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0" />
-
-        <TextView
-            android:id="@+id/click_counter_click_anywhere"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_edges"
-            android:text="@string/click_anywhere"
-            android:textSize="@dimen/font_size_normal"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/click_counter_reset_button"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/click_counter_reset_button"
-            android:background="@drawable/general_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_edges"
-            android:layout_marginBottom="@dimen/margin_edges"
-            android:text="@string/reset"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/click_counter_reset_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_edges"
+        android:layout_marginBottom="@dimen/margin_edges"
+        android:background="@drawable/general_button"
+        android:text="@string/reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

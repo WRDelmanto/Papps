@@ -15,8 +15,8 @@
         android:gravity="center"
         android:text="@string/rock_paper_scissors_app_choice"
         android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -26,9 +26,9 @@
         android:layout_marginTop="@dimen/margin_edges"
         android:contentDescription="@null"
         android:src="@drawable/ic_empty"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_app_choice"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_app_choice" />
 
     <TextView
         android:id="@+id/rock_paper_scissors_separator"
@@ -37,8 +37,8 @@
         android:layout_marginVertical="@dimen/margin_edges"
         android:text="@string/score_separator"
         android:textSize="@dimen/font_size_large"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_app_choice_result" />
 
     <ImageView
@@ -48,8 +48,8 @@
         android:layout_marginTop="@dimen/margin_edges"
         android:contentDescription="@null"
         android:src="@drawable/ic_empty"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_separator" />
 
     <TextView
@@ -58,9 +58,9 @@
         android:layout_height="wrap_content"
         android:text="@string/zero"
         android:textSize="@dimen/font_size_large"
-        app:layout_constraintStart_toStartOf="@+id/rock_paper_scissors_score_separator"
+        app:layout_constraintBottom_toTopOf="@+id/rock_paper_scissors_score_separator"
         app:layout_constraintEnd_toEndOf="@+id/rock_paper_scissors_score_separator"
-        app:layout_constraintBottom_toTopOf="@+id/rock_paper_scissors_score_separator" />
+        app:layout_constraintStart_toStartOf="@+id/rock_paper_scissors_score_separator" />
 
     <TextView
         android:id="@+id/rock_paper_scissors_score_separator"
@@ -69,10 +69,10 @@
         android:layout_marginVertical="@dimen/margin_elements_small"
         android:text="@string/score_separator"
         android:textSize="@dimen/font_size_large"
-        app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_app_choice_result"
+        app:layout_constraintBottom_toBottomOf="@id/rock_paper_scissors_separator"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_separator"
-        app:layout_constraintBottom_toBottomOf="@id/rock_paper_scissors_separator" />
+        app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_app_choice_result"
+        app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_separator" />
 
     <TextView
         android:id="@+id/rock_paper_scissors_self_score"
@@ -80,8 +80,8 @@
         android:layout_height="wrap_content"
         android:text="@string/zero"
         android:textSize="@dimen/font_size_large"
-        app:layout_constraintStart_toStartOf="@+id/rock_paper_scissors_score_separator"
         app:layout_constraintEnd_toEndOf="@+id/rock_paper_scissors_score_separator"
+        app:layout_constraintStart_toStartOf="@+id/rock_paper_scissors_score_separator"
         app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_score_separator" />
 
     <TextView
@@ -91,11 +91,11 @@
         android:layout_marginHorizontal="@dimen/margin_edges"
         android:layout_marginTop="@dimen/margin_edges"
         android:text="@string/rock_paper_scissors_self_choice"
-        android:textSize="@dimen/font_size_normal_above"
         android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/font_size_normal_above"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_self_choice"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_self_choice" />
 
     <ImageView
         android:id="@+id/rock_paper_scissors_choice_rock"
@@ -103,10 +103,10 @@
         android:layout_height="@dimen/image_size_custom"
         android:contentDescription="@null"
         android:src="@drawable/rock_paper_scissors_rock"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_choice_paper"
         app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_choice_paper"
-        app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_choice_paper"
-        app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_choice_paper" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_choice_paper" />
 
     <ImageView
         android:id="@+id/rock_paper_scissors_choice_paper"
@@ -115,8 +115,8 @@
         android:layout_marginTop="@dimen/margin_edges"
         android:contentDescription="@null"
         android:src="@drawable/rock_paper_scissors_paper"
-        app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_choice_rock"
         app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_choice_scissors"
+        app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_choice_rock"
         app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_choice" />
 
     <ImageView
@@ -125,20 +125,20 @@
         android:layout_height="@dimen/image_size_custom"
         android:contentDescription="@null"
         android:src="@drawable/rock_paper_scissors_scissors"
-        app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_choice_paper"
+        app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_choice_paper"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_choice_paper"
-        app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_choice_paper" />
+        app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_choice_paper"
+        app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_choice_paper" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/rock_paper_scissors_reset_button"
-        android:background="@drawable/general_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_edges"
         android:layout_marginBottom="@dimen/margin_edges"
+        android:background="@drawable/general_button"
         android:text="@string/reset"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
