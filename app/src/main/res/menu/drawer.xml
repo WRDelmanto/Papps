@@ -5,45 +5,43 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:title="@string/apps">
+        <item android:title="@string/apps">
             <menu>
                 <item
                     android:id="@+id/drawer_click_counter"
-                    android:title="@string/app_name_click_counter"
-                    android:icon="@drawable/click_counter_logo"/>
+                    android:icon="@drawable/click_counter_logo"
+                    android:title="@string/app_name_click_counter" />
                 <item
                     android:id="@+id/drawer_random_letter"
-                    android:title="@string/app_name_random_letter"
-                    android:icon="@drawable/random_letter_logo"/>
+                    android:icon="@drawable/random_letter_logo"
+                    android:title="@string/app_name_random_letter" />
                 <item
                     android:id="@+id/drawer_random_number"
-                    android:title="@string/app_name_random_number"
-                    android:icon="@drawable/random_number_logo"/>
+                    android:icon="@drawable/random_number_logo"
+                    android:title="@string/app_name_random_number" />
                 <item
                     android:id="@+id/drawer_tip"
-                    android:title="@string/app_name_tip"
-                    android:icon="@drawable/tip_logo"/>
+                    android:icon="@drawable/tip_logo"
+                    android:title="@string/app_name_tip" />
             </menu>
         </item>
     </group>
     <group android:checkableBehavior="single">
-        <item
-            android:title="@string/games">
+        <item android:title="@string/games">
             <menu>
                 <item
                     android:id="@+id/drawer_coin_flipper"
-                    android:title="@string/app_name_coin_flipper"
-                    android:icon="@drawable/coin_flipper_logo"/>
+                    android:icon="@drawable/coin_flipper_logo"
+                    android:title="@string/app_name_coin_flipper" />
                 <item
                     android:id="@+id/drawer_tic_tac_toe"
-                    android:visible="false"
+                    android:icon="@drawable/tic_tac_toe_logo"
                     android:title="@string/app_name_tic_tac_toe"
-                    android:icon="@drawable/tic_tac_toe_logo"/>
+                    android:visible="false" />
                 <item
                     android:id="@+id/drawer_rock_paper_scissors"
-                    android:title="@string/app_name_rock_paper_scissors"
-                    android:icon="@drawable/rock_paper_scissors_logo"/>
+                    android:icon="@drawable/rock_paper_scissors_logo"
+                    android:title="@string/app_name_rock_paper_scissors" />
             </menu>
         </item>
     </group>

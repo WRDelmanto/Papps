@@ -3,9 +3,9 @@
     <item
         android:id="@+id/random_bottom_nav_menu_random_letter"
         android:icon="@drawable/random_letter_logo"
-        android:title="@string/app_name_random_letter"/>
+        android:title="@string/app_name_random_letter" />
     <item
         android:id="@+id/random_bottom_nav_menu_random_number"
         android:icon="@drawable/random_number_logo"
-        android:title="@string/app_name_random_number"/>
+        android:title="@string/app_name_random_number" />
 </menu>
