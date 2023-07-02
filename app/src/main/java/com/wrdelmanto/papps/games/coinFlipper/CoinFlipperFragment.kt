@@ -69,10 +69,12 @@ class CoinFlipperFragment : Fragment() {
         resetButton.setOnClickListener(null)
     }
 
-    private fun resetUi() = (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_coin_flipper))
+    private fun resetUi() =
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_coin_flipper))
 
     private fun choice(selfChoice: String) {
-        val options = arrayOf(getString(R.string.coin_flipper_heads), getString(R.string.coin_flipper_tails))
+        val options =
+            arrayOf(getString(R.string.coin_flipper_heads), getString(R.string.coin_flipper_tails))
         val numero = Random().nextInt(2)
         val resultCoinFlip = options[numero]
 

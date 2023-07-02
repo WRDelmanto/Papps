@@ -7,7 +7,7 @@ import androidx.fragment.app.commitNow
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 
-class SettingsActivity: AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.settings_empty_activity)
@@ -17,6 +17,11 @@ class SettingsActivity: AppCompatActivity() {
         setupNavigationAndStatusBar(applicationContext, window)
 
         // Load settings fragment
-        supportFragmentManager.commitNow { replace(R.id.settings_activity_container, SettingsFragment()) }
+        supportFragmentManager.commitNow {
+            replace(
+                R.id.settings_activity_container,
+                SettingsFragment()
+            )
+        }
     }
 }

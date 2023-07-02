@@ -63,7 +63,10 @@ class TipFragment : Fragment() {
 
     private fun initiateListeners() {
         value.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) { calculateTotalOutput() }
+            override fun afterTextChanged(s: Editable) {
+                calculateTotalOutput()
+            }
+
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
@@ -72,11 +75,17 @@ class TipFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 percentage = progress
                 tipPercentage.text =
-                    String.format(getString(R.string.value_with_percentage), tipPercentageSeekBar.progress.toString())
+                    String.format(
+                        getString(R.string.value_with_percentage),
+                        tipPercentageSeekBar.progress.toString()
+                    )
                 calculateTotalOutput()
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) { hideKeyboard() }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                hideKeyboard()
+            }
+
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 context?.let { putSharedPreferences(it, SP_T_TIP_PERCENTAGE, seekBar.progress) }
             }
@@ -91,13 +100,15 @@ class TipFragment : Fragment() {
     private fun resetUi() {
         (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tip))
         tipPercentageSeekBar.progress = 10
-        percentage = if (context?.let { checkKeySharedPreferences(it, SP_T_TIP_PERCENTAGE) } == true) {
-            context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
-        } else {
-            tipPercentageSeekBar.progress
-        }
+        percentage =
+            if (context?.let { checkKeySharedPreferences(it, SP_T_TIP_PERCENTAGE) } == true) {
+                context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
+            } else {
+                tipPercentageSeekBar.progress
+            }
 
-        tipPercentage.text = String.format(getString(R.string.value_with_percentage), percentage.toString())
+        tipPercentage.text =
+            String.format(getString(R.string.value_with_percentage), percentage.toString())
         tipPercentageSeekBar.progress = percentage
     }
 

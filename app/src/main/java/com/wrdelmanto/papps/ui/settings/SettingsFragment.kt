@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.utils.openClearSPDataDialog
 
-class SettingsFragment: Fragment() {
+class SettingsFragment : Fragment() {
     // Toolbar
     private lateinit var settingsArrowBack: ImageView
 
@@ -72,12 +72,14 @@ class SettingsFragment: Fragment() {
     /**
      * Show Privacy Policy Screen
      */
-    private fun openPrivacyPolicy() = startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+    private fun openPrivacyPolicy() =
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
 
     private companion object {
         /**
          * Privacy Policy URL
          */
-        const val PRIVACY_POLICY_URL = "https://docs.google.com/document/d/17-S5qZQoqmxN6jkHTWNhW89zdrjVmwkkGNKwauYqPvY"
+        const val PRIVACY_POLICY_URL =
+            "https://docs.google.com/document/d/17-S5qZQoqmxN6jkHTWNhW89zdrjVmwkkGNKwauYqPvY"
     }
 }

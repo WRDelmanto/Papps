@@ -84,7 +84,8 @@ class RandomNumberFragment : Fragment() {
         }
 
         if (context?.let { checkKeySharedPreferences(it, SP_RN_NUMBER_HISTORY) } == true) {
-            numberHistory = context?.let { getSharedPreferences(it, SP_RN_NUMBER_HISTORY, String) } as String
+            numberHistory =
+                context?.let { getSharedPreferences(it, SP_RN_NUMBER_HISTORY, String) } as String
             numberHistoryList = numberHistory.split(".")
         } else {
             numberHistory = "*.*.*.*"
@@ -101,10 +102,21 @@ class RandomNumberFragment : Fragment() {
         val min = minInput.text.toString()
         val max = maxInput.text.toString()
 
-        if (min == "" || max == "") context?.let { showNormalToast(it, R.string.random_number_no_input_found); return }
+        if (min == "" || max == "") context?.let {
+            showNormalToast(
+                it,
+                R.string.random_number_no_input_found
+            ); return
+        }
 
-        if (min != "0" && min.first() == '0') minInput.setText(min.toInt().toString(), TextView.BufferType.EDITABLE)
-        if (max != "0" && max.first() == '0') maxInput.setText(max.toInt().toString(), TextView.BufferType.EDITABLE)
+        if (min != "0" && min.first() == '0') minInput.setText(
+            min.toInt().toString(),
+            TextView.BufferType.EDITABLE
+        )
+        if (max != "0" && max.first() == '0') maxInput.setText(
+            max.toInt().toString(),
+            TextView.BufferType.EDITABLE
+        )
 
         if (min.toInt() <= max.toInt()) {
             val randomNumber = (min.toInt()..max.toInt()).random()

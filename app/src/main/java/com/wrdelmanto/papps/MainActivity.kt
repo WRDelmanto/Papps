@@ -34,8 +34,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity :
     AppCompatActivity(),
-    NavigationView.OnNavigationItemSelectedListener
-{
+    NavigationView.OnNavigationItemSelectedListener {
     private lateinit var activityMain: DrawerLayout
     private lateinit var homeFragmentContainer: FragmentContainerView
 
@@ -86,8 +85,10 @@ class MainActivity :
 
         // Random bottom nav
         randomBottomNavMenu = findViewById(R.id.random_bottom_nav_view)
-        randomBottomNavMenuRandomLetter = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_letter)
-        randomBottomNavMenuRandomnumber = randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
+        randomBottomNavMenuRandomLetter =
+            randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_letter)
+        randomBottomNavMenuRandomnumber =
+            randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
         switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
     }
@@ -112,10 +113,18 @@ class MainActivity :
         drawerHeader.setOnClickListener { goHomeFragment() }
 
         // Drawer
-        drawerItemsNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
+        drawerItemsNavView.setNavigationItemSelectedListener { menuItem ->
+            onNavigationItemSelected(
+                menuItem
+            )
+        }
 
         // Drawer bottom
-        drawerBottomNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
+        drawerBottomNavView.setNavigationItemSelectedListener { menuItem ->
+            onNavigationItemSelected(
+                menuItem
+            )
+        }
 
         // Random bottom nav menu
         randomBottomNavMenu.setOnItemSelectedListener { item -> onNavigationItemSelected(item) }
@@ -149,7 +158,12 @@ class MainActivity :
         setupNavigationAndStatusBar(applicationContext, window)
 
         if (checkKeySharedPreferences(applicationContext, SP_EASTER_EGG)) {
-            if (!(getSharedPreferences(applicationContext, SP_EASTER_EGG, Boolean) as Boolean)) resetEasterEgg()
+            if (!(getSharedPreferences(
+                    applicationContext,
+                    SP_EASTER_EGG,
+                    Boolean
+                ) as Boolean)
+            ) resetEasterEgg()
             else activateEasterEgg()
         } else resetEasterEgg()
     }
@@ -160,21 +174,38 @@ class MainActivity :
             // Apps
             R.id.drawer_click_counter ->
                 switchFragment(homeFragmentContainer.id, ClickCounterFragment(), "CLICK_COUNTER")
+
             R.id.drawer_random_letter -> {
                 switchFragment(homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER")
                 randomBottomNavMenuRandomLetter.isChecked = true
             }
+
             R.id.drawer_random_number -> {
                 switchFragment(homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER")
                 randomBottomNavMenuRandomnumber.isChecked = true
             }
+
             R.id.drawer_tip -> switchFragment(homeFragmentContainer.id, TipFragment(), "TIP")
 
             // Games
-            R.id.drawer_coin_flipper -> switchFragment(homeFragmentContainer.id, CoinFlipperFragment(), "COIN_FLIPPER")
-            R.id.drawer_tic_tac_toe -> switchFragment(homeFragmentContainer.id, TicTacToeFragment(), "TIC_TAC_TOE")
+            R.id.drawer_coin_flipper -> switchFragment(
+                homeFragmentContainer.id,
+                CoinFlipperFragment(),
+                "COIN_FLIPPER"
+            )
+
+            R.id.drawer_tic_tac_toe -> switchFragment(
+                homeFragmentContainer.id,
+                TicTacToeFragment(),
+                "TIC_TAC_TOE"
+            )
+
             R.id.drawer_rock_paper_scissors ->
-                switchFragment(homeFragmentContainer.id, RockPaperScissorsFragment(), "RPCK_PAPER_SCISSORS")
+                switchFragment(
+                    homeFragmentContainer.id,
+                    RockPaperScissorsFragment(),
+                    "RPCK_PAPER_SCISSORS"
+                )
 
             // Drawer bottom
             R.id.drawer_bottom_settings -> openSettingsActivity()
@@ -182,6 +213,7 @@ class MainActivity :
             // Random bottom nav menu
             R.id.random_bottom_nav_menu_random_letter ->
                 switchFragment(homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER")
+
             R.id.random_bottom_nav_menu_random_number ->
                 switchFragment(homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER")
         }
@@ -202,16 +234,21 @@ class MainActivity :
             actualFragmentTag = fragmentName
             ft.addToBackStack(null)
             ft.commit()
-        } catch (e: Exception) { e.printStackTrace() }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         shouldShowRandomBottomNavMenu(fragmentName)
     }
 
     private fun shouldShowRandomBottomNavMenu(fragmentName: String) {
-        randomBottomNavMenu.isVisible = fragmentName == "RANDOM_LETTER" || fragmentName == "RANDOM_NUMBER"
+        randomBottomNavMenu.isVisible =
+            fragmentName == "RANDOM_LETTER" || fragmentName == "RANDOM_NUMBER"
     }
 
-    fun updateAppBarTitle(titleName: String) { appBarTitle.text = titleName }
+    fun updateAppBarTitle(titleName: String) {
+        appBarTitle.text = titleName
+    }
 
     private fun goHomeFragment() {
         if (actualFragmentTag == "HOME") return
@@ -236,8 +273,16 @@ class MainActivity :
             delay(ONE_SECOND_IN_MILLIS)
             drawerIcon.setOnClickListener { activityMain.openDrawer(GravityCompat.START) }
             drawerHeader.setOnClickListener { goHomeFragment() }
-            drawerItemsNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
-            drawerBottomNavView.setNavigationItemSelectedListener { menuItem -> onNavigationItemSelected(menuItem)}
+            drawerItemsNavView.setNavigationItemSelectedListener { menuItem ->
+                onNavigationItemSelected(
+                    menuItem
+                )
+            }
+            drawerBottomNavView.setNavigationItemSelectedListener { menuItem ->
+                onNavigationItemSelected(
+                    menuItem
+                )
+            }
         }
     }
 

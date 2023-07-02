@@ -110,7 +110,8 @@ class TicTacToeFragment : Fragment() {
         resetButton.setOnClickListener(null)
     }
 
-    private fun resetUi() = (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tic_tac_toe))
+    private fun resetUi() =
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tic_tac_toe))
 
     @Suppress("DEPRECATION")
     private fun switchPlayerMode(playerMode: Button) {
@@ -120,6 +121,7 @@ class TicTacToeFragment : Fragment() {
                 pveButton.setTextColor(resources.getColor(R.color.color_secondary))
                 pvpButton.setTextColor(resources.getColor(R.color.black))
             }
+
             pvpButton -> {
                 this.playerMode = 2
                 pvpButton.setTextColor(resources.getColor(R.color.color_secondary))
@@ -155,8 +157,11 @@ class TicTacToeFragment : Fragment() {
             activePlayer = 2
 
             if (playerMode == 1) {
-                try { autoPlay() }
-                catch (ex:Exception) { context?.let { showNormalToast(it, "Game Over") } }
+                try {
+                    autoPlay()
+                } catch (ex: Exception) {
+                    context?.let { showNormalToast(it, "Game Over") }
+                }
             }
         } else {
             buttonSelected.text = "O"
@@ -206,7 +211,7 @@ class TicTacToeFragment : Fragment() {
 
         if (winner != -1) {
             if (winner == 1) {
-                if(playerMode == 1) context?.let { showNormalToast(it, "Player 1 Wins!!!") }
+                if (playerMode == 1) context?.let { showNormalToast(it, "Player 1 Wins!!!") }
                 else context?.let { showNormalToast(it, "You Won!!!") }
             } else {
                 if (playerMode == 1) context?.let { showNormalToast(it, "Player 2 Wins!!!") }
@@ -244,7 +249,9 @@ class TicTacToeFragment : Fragment() {
     private fun autoPlay() {
         val emptyCells = ArrayList<Int>()
 
-        for (cellId in 1..9) if (!playerOne.contains(cellId) || !playerTwo.contains(cellId)) emptyCells.add(cellId)
+        for (cellId in 1..9) if (!playerOne.contains(cellId) || !playerTwo.contains(cellId)) emptyCells.add(
+            cellId
+        )
 
         val r = Random()
         val randomIndex = r.nextInt(emptyCells.size - 0) + 0

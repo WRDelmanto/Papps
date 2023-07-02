@@ -72,13 +72,14 @@ class RockPaperScissorsFragment : Fragment() {
         resetButton.setOnClickListener(null)
     }
 
-    private fun resetUi() = (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_rock_paper_scissors))
+    private fun resetUi() =
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_rock_paper_scissors))
 
     private fun onChoice(selfChoice: String) {
         when (selfChoice) {
-        "Rock" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_rock)
-        "Paper" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_paper)
-        "Scissors" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_scissors)
+            "Rock" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_rock)
+            "Paper" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_paper)
+            "Scissors" -> selfChoiceResultImage.setImageResource(R.drawable.rock_paper_scissors_scissors)
         }
 
         val appChoice = generetaAppChoice()
@@ -104,15 +105,15 @@ class RockPaperScissorsFragment : Fragment() {
             || selfChoice == "Paper" && appChoice == "Rock"
             || selfChoice == "Rock" && appChoice == "Scissors"
         ) { // User Wins
-                val result = 1 + selfScore.text.toString().toInt()
-                selfScore.text = result.toString()
+            val result = 1 + selfScore.text.toString().toInt()
+            selfScore.text = result.toString()
         } else if (selfChoice === "Scissors" && appChoice === "Rock"
             || selfChoice === "Paper" && appChoice === "Scissors"
             || selfChoice === "Rock" && appChoice === "Paper"
         ) { // App Wins
-                val result = 1 + appScore.text.toString().toInt()
-                appScore.text = result.toString()
-            }
+            val result = 1 + appScore.text.toString().toInt()
+            appScore.text = result.toString()
+        }
 
         logD { "selfChoice=$selfChoice, appChoice=$appChoice" }
     }

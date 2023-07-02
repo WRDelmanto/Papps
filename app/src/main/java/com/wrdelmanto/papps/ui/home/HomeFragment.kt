@@ -61,7 +61,13 @@ class HomeFragment : Fragment() {
         (activity as MainActivity?)?.updateAppBarTitle("")
 
         if (context?.let { checkKeySharedPreferences(it, SP_EASTER_EGG) } == true) {
-            if (!(context?.let { getSharedPreferences(it, SP_EASTER_EGG, Boolean) } as Boolean)) initiateListeners()
+            if (!(context?.let {
+                    getSharedPreferences(
+                        it,
+                        SP_EASTER_EGG,
+                        Boolean
+                    )
+                } as Boolean)) initiateListeners()
             else disableListeners()
         } else initiateListeners()
     }
@@ -73,7 +79,7 @@ class HomeFragment : Fragment() {
             (activity as MainActivity?)?.activateEasterEgg()
             context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
             context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
-            logD { getString(R.string.easter_egg_activated)}
+            logD { getString(R.string.easter_egg_activated) }
         }
     }
 
@@ -81,7 +87,8 @@ class HomeFragment : Fragment() {
      * Function created to test features.
      */
     @Suppress("EmptyMethod")
-    private fun test() {}
+    private fun test() {
+    }
 
     private companion object {
         const val CLICKS_TO_ACTIVATE_EASTER_EGG = 10

@@ -79,9 +79,10 @@ class RandomLetterFragment : Fragment() {
             setTextColor(resources.getColor(R.color.defaul_text_color))
         }
 
-        letterHistory = if (context?.let { checkKeySharedPreferences(it, SP_RL_LETTER_HISTORY) } == true) {
-            context?.let { getSharedPreferences(it, SP_RL_LETTER_HISTORY, String) } as String
-        } else "*****"
+        letterHistory =
+            if (context?.let { checkKeySharedPreferences(it, SP_RL_LETTER_HISTORY) } == true) {
+                context?.let { getSharedPreferences(it, SP_RL_LETTER_HISTORY, String) } as String
+            } else "*****"
 
         updateLetterHistory()
 
@@ -109,10 +110,15 @@ class RandomLetterFragment : Fragment() {
     }
 
     private fun updateLetterHistory() {
-        firstHistory.text = if (letterHistory[0].toString() == "*") "" else letterHistory[0].toString()
-        secondHistory.text = if (letterHistory[1].toString() == "*") "" else letterHistory[1].toString()
-        thirdHistory.text = if (letterHistory[2].toString() == "*") "" else letterHistory[2].toString()
-        fourthHistory.text = if (letterHistory[3].toString() == "*") "" else letterHistory[3].toString()
-        fifthHistory.text = if (letterHistory[4].toString() == "*") "" else letterHistory[4].toString()
+        firstHistory.text =
+            if (letterHistory[0].toString() == "*") "" else letterHistory[0].toString()
+        secondHistory.text =
+            if (letterHistory[1].toString() == "*") "" else letterHistory[1].toString()
+        thirdHistory.text =
+            if (letterHistory[2].toString() == "*") "" else letterHistory[2].toString()
+        fourthHistory.text =
+            if (letterHistory[3].toString() == "*") "" else letterHistory[3].toString()
+        fifthHistory.text =
+            if (letterHistory[4].toString() == "*") "" else letterHistory[4].toString()
     }
 }
