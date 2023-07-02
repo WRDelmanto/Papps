@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentTipBinding
 import com.wrdelmanto.papps.utils.SP_T_TIP_PERCENTAGE
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
@@ -23,6 +24,8 @@ import com.wrdelmanto.papps.utils.roundTo2Decimals
 import com.wrdelmanto.papps.utils.showNormalToast
 
 class TipFragment : Fragment() {
+    private lateinit var binding: FragmentTipBinding
+
     private lateinit var value: EditText
     private lateinit var tipPercentage: TextView
     private lateinit var tipPercentageSeekBar: SeekBar
@@ -33,19 +36,22 @@ class TipFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_tip, container, false)
+        binding = FragmentTipBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        value = view.findViewById(R.id.tip_value_input)
-        tipPercentage = view.findViewById(R.id.tip_percentage)
-        tipPercentageSeekBar = view.findViewById(R.id.tip_percentage_seek_bar)
-        tipOutput = view.findViewById(R.id.tip_tip_output)
-        totalOutput = view.findViewById(R.id.tip_total_output)
+        value = binding.tipValueInput
+        tipPercentage = binding.tipPercentage
+        tipPercentageSeekBar = binding.tipPercentageSeekBar
+        tipOutput = binding.tipTipOutput
+        totalOutput = binding.tipTotalOutput
     }
 
     override fun onResume() {

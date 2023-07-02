@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentRandomLetterBinding
 import com.wrdelmanto.papps.utils.SP_RL_LETTER_HISTORY
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
@@ -19,6 +20,8 @@ import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
 class RandomLetterFragment : Fragment() {
+    private lateinit var binding: FragmentRandomLetterBinding
+
     private lateinit var result: TextView
     private lateinit var randomizerButton: Button
 
@@ -32,22 +35,25 @@ class RandomLetterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_random_letter, container, false)
+        binding = FragmentRandomLetterBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        result = view.findViewById(R.id.random_letter_result)
-        randomizerButton = view.findViewById(R.id.random_letter_click_here)
+        result = binding.randomLetterResult
+        randomizerButton = binding.randomLetterClickHere
 
-        firstHistory = view.findViewById(R.id.random_letter_history_first)
-        secondHistory = view.findViewById(R.id.random_letter_history_second)
-        thirdHistory = view.findViewById(R.id.random_letter_history_third)
-        fourthHistory = view.findViewById(R.id.random_letter_history_fourth)
-        fifthHistory = view.findViewById(R.id.random_letter_history_fifth)
+        firstHistory = binding.randomLetterHistoryFirst
+        secondHistory = binding.randomLetterHistorySecond
+        thirdHistory = binding.randomLetterHistoryThird
+        fourthHistory = binding.randomLetterHistoryFourth
+        fifthHistory = binding.randomLetterHistoryFifth
     }
 
     override fun onResume() {

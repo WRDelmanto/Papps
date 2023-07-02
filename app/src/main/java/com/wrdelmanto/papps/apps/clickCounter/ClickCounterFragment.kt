@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentClickCounterBinding
 import com.wrdelmanto.papps.utils.SP_CC_HIGH_SCORE
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
@@ -19,6 +20,8 @@ import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
 class ClickCounterFragment : Fragment() {
+    private lateinit var binding: FragmentClickCounterBinding
+
     private lateinit var counter: TextView
     private lateinit var highScoreOutput: TextView
     private lateinit var additionButton: Button
@@ -29,19 +32,22 @@ class ClickCounterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_click_counter, container, false)
+        binding = FragmentClickCounterBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        counter = view.findViewById(R.id.click_counter_counter)
-        highScoreOutput = view.findViewById(R.id.click_counter_high_score_output)
-        additionButton = view.findViewById(R.id.click_counter_addition_button)
-        clickAnywhere = view.findViewById(R.id.click_counter_click_anywhere)
-        resetButton = view.findViewById(R.id.click_counter_reset_button)
+        counter = binding.clickCounterCounter
+        highScoreOutput = binding.clickCounterHighScoreOutput
+        additionButton = binding.clickCounterAdditionButton
+        clickAnywhere = binding.clickCounterClickAnywhere
+        resetButton = binding.clickCounterResetButton
 
         startBlinkingAnimation(clickAnywhere)
 

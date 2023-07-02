@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentRandomNumberBinding
 import com.wrdelmanto.papps.utils.SP_RN_NUMBER_HISTORY
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
@@ -21,6 +22,8 @@ import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
 class RandomNumberFragment : Fragment() {
+    private lateinit var binding: FragmentRandomNumberBinding
+
     private lateinit var result: TextView
     private lateinit var randomizerButton: Button
     private lateinit var minInput: EditText
@@ -35,22 +38,25 @@ class RandomNumberFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_random_number, container, false)
+        binding = FragmentRandomNumberBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        result = view.findViewById(R.id.random_number_result)
-        randomizerButton = view.findViewById(R.id.random_number_click_here)
-        minInput = view.findViewById(R.id.random_number_min_input)
-        maxInput = view.findViewById(R.id.random_number_max_input)
+        result = binding.randomNumberResult
+        randomizerButton = binding.randomNumberClickHere
+        minInput = binding.randomNumberMinInput
+        maxInput = binding.randomNumberMaxInput
 
-        firstHistory = view.findViewById(R.id.random_number_history_first)
-        secondHistory = view.findViewById(R.id.random_number_history_second)
-        thirdHistory = view.findViewById(R.id.random_number_history_third)
+        firstHistory = binding.randomNumberHistoryFirst
+        secondHistory = binding.randomNumberHistorySecond
+        thirdHistory = binding.randomNumberHistoryThird
     }
 
     override fun onResume() {

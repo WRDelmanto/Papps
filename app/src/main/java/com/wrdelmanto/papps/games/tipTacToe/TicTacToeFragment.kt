@@ -9,11 +9,14 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentTicTacToeBinding
 import com.wrdelmanto.papps.utils.showNormalToast
 import java.util.Random
 import kotlin.collections.ArrayList
 
 class TicTacToeFragment : Fragment() {
+    private lateinit var binding: FragmentTicTacToeBinding
+
     private lateinit var a11Button: Button
     private lateinit var a12Button: Button
     private lateinit var a13Button: Button
@@ -37,30 +40,33 @@ class TicTacToeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_tic_tac_toe, container, false)
+        binding = FragmentTicTacToeBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        a11Button = view.findViewById(R.id.tic_tac_toe_a11)
-        a12Button = view.findViewById(R.id.tic_tac_toe_a12)
-        a13Button = view.findViewById(R.id.tic_tac_toe_a13)
-        a21Button = view.findViewById(R.id.tic_tac_toe_a21)
-        a22Button = view.findViewById(R.id.tic_tac_toe_a22)
-        a23Button = view.findViewById(R.id.tic_tac_toe_a23)
-        a31Button = view.findViewById(R.id.tic_tac_toe_a31)
-        a32Button = view.findViewById(R.id.tic_tac_toe_a32)
-        a33Button = view.findViewById(R.id.tic_tac_toe_a33)
+        a11Button = binding.ticTacToeA11
+        a12Button = binding.ticTacToeA12
+        a13Button = binding.ticTacToeA13
+        a21Button = binding.ticTacToeA21
+        a22Button = binding.ticTacToeA22
+        a23Button = binding.ticTacToeA23
+        a31Button = binding.ticTacToeA31
+        a32Button = binding.ticTacToeA32
+        a33Button = binding.ticTacToeA33
 
-        pveButton = view.findViewById(R.id.tic_tac_toe_pve_button)
-        pvpButton = view.findViewById(R.id.tic_tac_toe_pvp_button)
+        pveButton = binding.ticTacToePveButton
+        pvpButton = binding.ticTacToePvpButton
 
-        resetButton = view.findViewById(R.id.tic_tac_toe_reset_button)
+        resetButton = binding.ticTacToeResetButton
 
-        switchPlayerMode(pveButton)
+        switchPlayerMode(binding.ticTacToePveButton)
     }
 
     override fun onResume() {

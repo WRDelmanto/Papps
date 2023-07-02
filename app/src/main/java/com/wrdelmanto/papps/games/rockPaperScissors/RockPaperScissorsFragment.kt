@@ -10,10 +10,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentRockPaperScissorsBinding
 import com.wrdelmanto.papps.utils.logD
 import java.util.Random
 
 class RockPaperScissorsFragment : Fragment() {
+    private lateinit var binding: FragmentRockPaperScissorsBinding
+
     private lateinit var appChoiceResultImage: ImageView
     private lateinit var selfChoiceResultImage: ImageView
     private lateinit var appScore: TextView
@@ -26,23 +29,26 @@ class RockPaperScissorsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_rock_paper_scissors, container, false)
+        binding = FragmentRockPaperScissorsBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        appChoiceResultImage = view.findViewById(R.id.rock_paper_scissors_app_choice_result)
-        selfChoiceResultImage = view.findViewById(R.id.rock_paper_scissors_self_choice)
-        appScore = view.findViewById(R.id.rock_paper_scissors_app_score)
-        selfScore = view.findViewById(R.id.rock_paper_scissors_self_score)
-        selfChoiceResult = view.findViewById(R.id.rock_paper_scissors_choice)
-        selfChoiceRock = view.findViewById(R.id.rock_paper_scissors_choice_rock)
-        selfChoicePaper = view.findViewById(R.id.rock_paper_scissors_choice_paper)
-        selfChoiceScissors = view.findViewById(R.id.rock_paper_scissors_choice_scissors)
-        resetButton = view.findViewById(R.id.rock_paper_scissors_reset_button)
+        appChoiceResultImage = binding.rockPaperScissorsAppChoiceResult
+        selfChoiceResultImage = binding.rockPaperScissorsSelfChoice
+        appScore = binding.rockPaperScissorsAppScore
+        selfScore = binding.rockPaperScissorsSelfScore
+        selfChoiceResult = binding.rockPaperScissorsChoice
+        selfChoiceRock = binding.rockPaperScissorsChoiceRock
+        selfChoicePaper = binding.rockPaperScissorsChoicePaper
+        selfChoiceScissors = binding.rockPaperScissorsChoiceScissors
+        resetButton = binding.rockPaperScissorsResetButton
     }
 
     override fun onResume() {

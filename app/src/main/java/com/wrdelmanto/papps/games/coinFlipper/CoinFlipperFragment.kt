@@ -13,10 +13,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentCoinFlipperBinding
 import com.wrdelmanto.papps.utils.logD
 import java.util.Random
 
 class CoinFlipperFragment : Fragment() {
+    private lateinit var binding: FragmentCoinFlipperBinding
+
     private lateinit var resultImage: ImageView
     private lateinit var result: TextView
     private lateinit var appScore: TextView
@@ -27,21 +30,24 @@ class CoinFlipperFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_coin_flipper, container, false)
+        binding = FragmentCoinFlipperBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        resultImage = view.findViewById(R.id.coin_flipper_result_image)
-        result = view.findViewById(R.id.coin_flipper_result)
-        appScore = view.findViewById(R.id.coin_flipper_app_score)
-        selfScore = view.findViewById(R.id.coin_flipper_self_score)
-        heads = view.findViewById(R.id.coin_flipper_heads_image)
-        tails = view.findViewById(R.id.coin_flipper_tails_image)
-        resetButton = view.findViewById(R.id.coin_flipper_reset_button)
+        resultImage = binding.coinFlipperResultImage
+        result = binding.coinFlipperResult
+        appScore = binding.coinFlipperAppScore
+        selfScore = binding.coinFlipperSelfScore
+        heads = binding.coinFlipperHeadsImage
+        tails = binding.coinFlipperTailsImage
+        resetButton = binding.coinFlipperResetButton
     }
 
     override fun onResume() {
