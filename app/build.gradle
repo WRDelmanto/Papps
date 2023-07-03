@@ -12,6 +12,7 @@ android {
         minSdk 22
         targetSdk 34
         versionCode 5 // Value that the stores use to identify that there has been an update.
+        // VersionName = majorUpdate.howManyApps.howManyGames.versionCode
         versionName "1.4.2.$versionCode" // Value that is shown to the user.
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

@@ -7,35 +7,57 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast.LENGTH_LONG
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.wrdelmanto.papps.BuildConfig
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.SettingsFragmentBinding
+import com.wrdelmanto.papps.utils.MAIL_SUBJECT
+import com.wrdelmanto.papps.utils.MAIL_TO
+import com.wrdelmanto.papps.utils.composeEmail
 import com.wrdelmanto.papps.utils.openClearSPDataDialog
+import com.wrdelmanto.papps.utils.showErrorToast
 
 class SettingsFragment : Fragment() {
+    private lateinit var binding: SettingsFragmentBinding
+
     // Toolbar
     private lateinit var settingsArrowBack: ImageView
 
     // Items
     private lateinit var privacyPolicy: ConstraintLayout
+    private lateinit var rateThisApp: ConstraintLayout
+    private lateinit var sendFeedback: ConstraintLayout
     private lateinit var clearSPData: ConstraintLayout
+
+    private lateinit var version: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.settings_fragment, container, false)
+        binding = SettingsFragmentBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Toolbar
-        settingsArrowBack = view.findViewById(R.id.settings_toolbar_arrow_back)
+        settingsArrowBack = binding.settingsFragmentToolbarArrowBack
 
         // Items
-        privacyPolicy = view.findViewById(R.id.privacy_pocily)
-        clearSPData = view.findViewById(R.id.clear_data)
+        privacyPolicy = binding.settingsFragmentPrivacyPocily
+        rateThisApp = binding.settingsFragmentRateThisApp
+        sendFeedback = binding.settingsFragmentPappsGooglePlay
+        clearSPData = binding.settingsFragmentClearData
+
+        version = binding.settingsFragmentVersion
+        version.text = BuildConfig.VERSION_NAME
     }
 
     override fun onResume() {
@@ -50,13 +72,14 @@ class SettingsFragment : Fragment() {
         super.onPause()
     }
 
-    @Suppress("DEPRECATION")
     private fun initiateListeners() {
         // Toolbar
         settingsArrowBack.setOnClickListener { activity?.onBackPressed() }
 
         // Items
         privacyPolicy.setOnClickListener { openPrivacyPolicy() }
+        rateThisApp.setOnClickListener { rateThisApp() }
+        sendFeedback.setOnClickListener { sendFeedback() }
         clearSPData.setOnClickListener { context?.let { openClearSPDataDialog(it) } }
     }
 
@@ -66,14 +89,29 @@ class SettingsFragment : Fragment() {
 
         // Items
         privacyPolicy.setOnClickListener(null)
+        rateThisApp.setOnClickListener(null)
+        sendFeedback.setOnClickListener(null)
         clearSPData.setOnClickListener(null)
     }
 
-    /**
-     * Show Privacy Policy Screen
-     */
     private fun openPrivacyPolicy() =
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+
+    private fun rateThisApp() =
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PAPPS_GOOGLE_PLAY_URL)))
+
+    private fun sendFeedback() {
+        try {
+            startActivity(
+                Intent.createChooser(
+                    composeEmail(MAIL_TO, MAIL_SUBJECT),
+                    getString(R.string.send_feedback_choose_email_client)
+                )
+            )
+        } catch (e: Exception) {
+            context?.let { showErrorToast(it, R.string.send_feedback_error, LENGTH_LONG) }
+        }
+    }
 
     private companion object {
         /**
@@ -81,5 +119,11 @@ class SettingsFragment : Fragment() {
          */
         const val PRIVACY_POLICY_URL =
             "https://docs.google.com/document/d/17-S5qZQoqmxN6jkHTWNhW89zdrjVmwkkGNKwauYqPvY"
+
+        /**
+         * Papps Google Play URL
+         */
+        const val PAPPS_GOOGLE_PLAY_URL =
+            "https://play.google.com/store/apps/details?id=com.wrdelmanto.papps"
     }
 }

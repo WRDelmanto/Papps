@@ -152,7 +152,6 @@ class MainActivity :
     }
 
     @Deprecated("Deprecated in Java")
-    @Suppress("DEPRECATION")
     override fun onBackPressed() {
         if (actualFragmentTag != "HOME") super.onBackPressed()
     }

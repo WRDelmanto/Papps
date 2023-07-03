@@ -13,7 +13,6 @@ import com.wrdelmanto.papps.R
  * @param context
  * @param window
  */
-@Suppress("DEPRECATION")
 fun setupNavigationAndStatusBar(context: Context, window: Window) {
     setupStatusBar(context, window)
     setupNavBar(context, window)
@@ -39,7 +38,6 @@ private fun setupStatusBar(context: Context, window: Window) {
  * @param context
  * @param window
  */
-@Suppress("DEPRECATION")
 private fun setupNavBar(context: Context, window: Window) = changeNavBarColor(context, window)
 
 /**

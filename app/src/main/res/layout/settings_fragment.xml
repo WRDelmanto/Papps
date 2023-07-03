@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_toolbar"
+        android:id="@+id/settings_fragment_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -13,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/settings_toolbar_arrow_back"
+            android:id="@+id/settings_fragment_toolbar_arrow_back"
             android:layout_width="@dimen/image_size_normal"
             android:layout_height="@dimen/image_size_normal"
             android:contentDescription="@null"
@@ -23,19 +24,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/settings_toolbar_title"
+            android:id="@+id/settings_fragment_toolbar_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/settings"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_normal_above"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_toolbar_arrow_back"
-            app:layout_constraintStart_toEndOf="@+id/settings_toolbar_arrow_back"
-            app:layout_constraintTop_toTopOf="@+id/settings_toolbar_arrow_back" />
+            app:layout_constraintBottom_toBottomOf="@+id/settings_fragment_toolbar_arrow_back"
+            app:layout_constraintStart_toEndOf="@+id/settings_fragment_toolbar_arrow_back"
+            app:layout_constraintTop_toTopOf="@+id/settings_fragment_toolbar_arrow_back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:id="@+id/settings_items"
+        android:id="@+id/settings_fragment_items"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -43,17 +44,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/settings_fragment_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/privacy_pocily"
+            android:id="@+id/settings_fragment_privacy_pocily"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/padding_elements_small">
 
             <ImageView
-                android:id="@+id/privacy_policy_icon"
+                android:id="@+id/settings_fragment_privacy_policy_icon"
                 android:layout_width="@dimen/image_size_small_under"
                 android:layout_height="@dimen/image_size_small_under"
                 android:contentDescription="@null"
@@ -63,6 +64,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/settings_fragment_privacy_pocily_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_elements_small"
@@ -71,12 +73,16 @@
                 android:textSize="@dimen/font_size_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/privacy_policy_icon"
+                app:layout_constraintStart_toEndOf="@+id/settings_fragment_privacy_policy_icon"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <View
+            style="@style/Divider"
+            android:layout_marginTop="@dimen/margin_elements_small" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/clear_data"
+            android:id="@+id/settings_fragment_rate_this_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_elements_small"
@@ -84,7 +90,79 @@
             android:padding="@dimen/padding_elements_small">
 
             <ImageView
-                android:id="@+id/clear_data_icon"
+                android:id="@+id/settings_fragment_rate_this_app_icon"
+                android:layout_width="@dimen/image_size_small_under"
+                android:layout_height="@dimen/image_size_small_under"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_rate"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/settings_fragment_rate_this_app_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_elements_small"
+                android:text="@string/rate_this_app"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/settings_fragment_rate_this_app_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            style="@style/Divider"
+            android:layout_marginTop="@dimen/margin_elements_small" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_fragment_papps_google_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_small"
+            android:background="?attr/selectableItemBackground"
+            android:padding="@dimen/padding_elements_small">
+
+            <ImageView
+                android:id="@+id/settings_fragment_papps_google_play_icon"
+                android:layout_width="@dimen/image_size_small_under"
+                android:layout_height="@dimen/image_size_small_under"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_feedback"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/settings_fragment_papps_google_play_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_elements_small"
+                android:text="@string/send_feedback"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/settings_fragment_papps_google_play_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            style="@style/Divider"
+            android:layout_marginTop="@dimen/margin_elements_small" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_fragment_clear_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_small"
+            android:background="?attr/selectableItemBackground"
+            android:padding="@dimen/padding_elements_small">
+
+            <ImageView
+                android:id="@+id/settings_fragment_clear_data_icon"
                 android:layout_width="@dimen/image_size_small_under"
                 android:layout_height="@dimen/image_size_small_under"
                 android:contentDescription="@null"
@@ -94,6 +172,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/settings_fragment_clear_data_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_elements_small"
@@ -102,8 +181,42 @@
                 android:textSize="@dimen/font_size_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/clear_data_icon"
+                app:layout_constraintStart_toEndOf="@+id/settings_fragment_clear_data_icon"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            style="@style/Divider"
+            android:layout_marginTop="@dimen/margin_elements_small" />
     </LinearLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_elements_normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/settings_fragment_rocket_mini_logo"
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            android:layout_marginBottom="@dimen/margin_elements_small"
+            android:contentDescription="@string/rocket_mini_logo_description"
+            android:src="@drawable/ic_rocket" />
+
+        <View
+            style="@style/Divider"
+            android:layout_marginBottom="@dimen/margin_elements_small" />
+
+        <TextView
+            android:id="@+id/settings_fragment_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Versão X.X.X.X" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>
