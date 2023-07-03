@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentHomeBinding
 import com.wrdelmanto.papps.utils.SP_EASTER_EGG
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
@@ -16,21 +17,26 @@ import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.showNormalToast
 
 class HomeFragment : Fragment() {
+    private lateinit var binding: FragmentHomeBinding
+
     private lateinit var homeLogo: ImageView
 
     private var clicksEasterEgg = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
-        container: ViewGroup?, savedInstanceState: Bundle?
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeLogo = view.findViewById(R.id.home_logo)
+        homeLogo = binding.homeLogo
     }
 
     override fun onResume() {

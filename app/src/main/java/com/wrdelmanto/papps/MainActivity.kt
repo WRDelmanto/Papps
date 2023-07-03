@@ -19,6 +19,7 @@ import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
 import com.wrdelmanto.papps.apps.random.randomLetter.RandomLetterFragment
 import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
+import com.wrdelmanto.papps.databinding.MainFragmentBinding
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
 import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
 import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
@@ -35,6 +36,8 @@ import kotlinx.coroutines.launch
 class MainActivity :
     AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var binding: MainFragmentBinding
+
     private lateinit var activityMain: DrawerLayout
     private lateinit var homeFragmentContainer: FragmentContainerView
 
@@ -61,13 +64,14 @@ class MainActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_fragment)
+        binding = MainFragmentBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Disable dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setupNavigationAndStatusBar(applicationContext, window)
 
-        activityMain = findViewById(R.id.main_fragment)
+        activityMain = binding.mainFragment
         homeFragmentContainer = findViewById(R.id.home_fragment_container)
 
         // App bar
@@ -75,13 +79,13 @@ class MainActivity :
         appBarTitle = findViewById(R.id.app_bar_main_title)
 
         // Drawer header
-        drawerHeader = findViewById(R.id.drawer_header)
+        drawerHeader = binding.drawer
 
         // Drawer
-        drawerItemsNavView = findViewById(R.id.drawer_items_nav_view)
+        drawerItemsNavView = binding.drawerItemsNavView
 
         // Drawer bottom
-        drawerBottomNavView = findViewById(R.id.drawer_bottom_nav_view)
+        drawerBottomNavView = binding.drawerBottomNavView
 
         // Random bottom nav
         randomBottomNavMenu = findViewById(R.id.random_bottom_nav_view)
