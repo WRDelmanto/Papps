@@ -1,6 +1,8 @@
 package com.wrdelmanto.papps.apps.random.randomNumber
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,8 @@ import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentRandomNumberBinding
+import com.wrdelmanto.papps.utils.SP_RN_MAX
+import com.wrdelmanto.papps.utils.SP_RN_MIN
 import com.wrdelmanto.papps.utils.SP_RN_NUMBER_HISTORY
 import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
@@ -72,10 +76,30 @@ class RandomNumberFragment : Fragment() {
         super.onPause()
     }
 
-    private fun initiateListeners() = randomizerButton.setOnClickListener {
-        hideKeyboard()
-        stopBlinkingAnimation(result)
-        generateRandomNumber()
+    private fun initiateListeners() {
+        randomizerButton.setOnClickListener {
+            hideKeyboard()
+            stopBlinkingAnimation(result)
+            generateRandomNumber()
+        }
+
+        minInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                context?.let { putSharedPreferences(it, SP_RN_MIN, s.toString()) }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
+
+        maxInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                context?.let { putSharedPreferences(it, SP_RN_MAX, s.toString()) }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        })
     }
 
     private fun disableListeners() = randomizerButton.setOnClickListener(null)
@@ -83,6 +107,7 @@ class RandomNumberFragment : Fragment() {
     @Suppress("DEPRECATION")
     private fun resetUi() {
         (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_random_number))
+
         result.apply {
             text = getString(R.string.click_anywhere)
             textSize = 16F
@@ -99,6 +124,14 @@ class RandomNumberFragment : Fragment() {
         }
 
         updateNumberHistory(true)
+
+        if (context?.let { checkKeySharedPreferences(it, SP_RN_MIN) } == true) {
+            minInput.setText(context?.let { getSharedPreferences(it, SP_RN_MIN, String) } as String)
+        }
+
+        if (context?.let { checkKeySharedPreferences(it, SP_RN_MAX) } == true) {
+            minInput.setText(context?.let { getSharedPreferences(it, SP_RN_MAX, String) } as String)
+        }
 
         startBlinkingAnimation(result)
     }
