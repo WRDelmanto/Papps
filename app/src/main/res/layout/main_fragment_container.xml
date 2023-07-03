@@ -5,7 +5,7 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/main_background_color"
+    android:backgroundTint="@color/background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/main_toolbar_and_fragment_container">
 

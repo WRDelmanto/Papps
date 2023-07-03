@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- System Colors -->
-    <color name="main_background_color">@color/white</color>
-    <color name="main_toolbar_color">@color/main_background_color</color>
-    <color name="navigation_bar_color">@color/main_background_color</color>
-    <color name="status_bar_color">@color/main_background_color</color>
+    <color name="main_toolbar_color">@color/background</color>
+    <color name="navigation_bar_color">@color/background</color>
+    <color name="status_bar_color">@color/background</color>
     <color name="defaul_text_color">@android:color/tab_indicator_text</color>
 
-    <!-- Base Colors -->
-    <color name="color_primary">#004aad</color>
-    <color name="color_primary_variant">#005cd8</color>
-    <color name="color_secondary">#8c52ff</color>
-    <color name="color_secondary_variant">#c4a6ff</color>
+    <!-- Button Colors -->
     <color name="general_button_background_tint">#f0f0f0</color>
     <color name="general_button_border_tint">#a8a8a8</color>
 
@@ -22,15 +17,4 @@
 
     <!-- Tip -->
     <color name="tip_orange">#FFC107</color>
-
-    <!-- Colors -->
-    <color name="red">#FF0000</color>
-    <color name="orange">#FFA500</color>
-    <color name="yellow">#FFFF00</color>
-    <color name="green">#008000</color>
-    <color name="blue">#0000FF</color>
-    <color name="indigo">#4B0082</color>
-    <color name="violet">#EE82EE</color>
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
 </resources>
