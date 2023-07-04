@@ -16,9 +16,15 @@ import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.SettingsFragmentBinding
 import com.wrdelmanto.papps.utils.MAIL_SUBJECT
 import com.wrdelmanto.papps.utils.MAIL_TO
+import com.wrdelmanto.papps.utils.SP_EASTER_EGG
+import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.composeEmail
+import com.wrdelmanto.papps.utils.getSharedPreferences
+import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.openClearSPDataDialog
+import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.showErrorToast
+import com.wrdelmanto.papps.utils.showNormalToast
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: SettingsFragmentBinding
@@ -32,12 +38,13 @@ class SettingsFragment : Fragment() {
     private lateinit var sendFeedback: ConstraintLayout
     private lateinit var clearSPData: ConstraintLayout
 
+    private lateinit var rocket: ImageView
     private lateinit var version: TextView
 
+    private var clicksEasterEgg = 0
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = SettingsFragmentBinding.inflate(layoutInflater)
 
@@ -56,6 +63,7 @@ class SettingsFragment : Fragment() {
         sendFeedback = binding.settingsFragmentPappsGooglePlay
         clearSPData = binding.settingsFragmentClearData
 
+        rocket = binding.settingsFragmentRocketMiniLogo
         version = binding.settingsFragmentVersion
         version.text = BuildConfig.VERSION_NAME
     }
@@ -81,6 +89,8 @@ class SettingsFragment : Fragment() {
         rateThisApp.setOnClickListener { rateThisApp() }
         sendFeedback.setOnClickListener { sendFeedback() }
         clearSPData.setOnClickListener { context?.let { openClearSPDataDialog(it) } }
+
+        rocket.setOnClickListener { shouldActivateEasterEgg() }
     }
 
     private fun disableListeners() {
@@ -92,6 +102,8 @@ class SettingsFragment : Fragment() {
         rateThisApp.setOnClickListener(null)
         sendFeedback.setOnClickListener(null)
         clearSPData.setOnClickListener(null)
+
+        rocket.setOnClickListener(null)
     }
 
     private fun openPrivacyPolicy() =
@@ -113,6 +125,37 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    private fun shouldActivateEasterEgg() {
+        clicksEasterEgg++
+
+        if (clicksEasterEgg >= CLICKS_TO_ACTIVATE_EASTER_EGG) {
+            clicksEasterEgg = 0
+
+            if (context?.let { checkKeySharedPreferences(it, SP_EASTER_EGG) } == true) {
+                if (context?.let {
+                        getSharedPreferences(
+                            it, SP_EASTER_EGG, Boolean
+                        ) as Boolean
+                    } == true) {
+                    context?.let {
+                        showNormalToast(
+                            it, getString(R.string.easter_egg_already_activated)
+                        )
+                    }
+                    logD { getString(R.string.easter_egg_already_activated) }
+                } else {
+                    context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
+                    context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
+                    logD { getString(R.string.easter_egg_activated) }
+                }
+            } else {
+                context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
+                context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
+                logD { getString(R.string.easter_egg_activated) }
+            }
+        }
+    }
+
     private companion object {
         /**
          * Privacy Policy URL
@@ -125,5 +168,7 @@ class SettingsFragment : Fragment() {
          */
         const val PAPPS_GOOGLE_PLAY_URL =
             "https://play.google.com/store/apps/details?id=com.wrdelmanto.papps"
+
+        const val CLICKS_TO_ACTIVATE_EASTER_EGG = 5
     }
 }
