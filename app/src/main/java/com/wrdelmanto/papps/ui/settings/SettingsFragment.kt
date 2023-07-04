@@ -131,27 +131,25 @@ class SettingsFragment : Fragment() {
         if (clicksEasterEgg >= CLICKS_TO_ACTIVATE_EASTER_EGG) {
             clicksEasterEgg = 0
 
-            if (context?.let { checkKeySharedPreferences(it, SP_EASTER_EGG) } == true) {
-                if (context?.let {
-                        getSharedPreferences(
-                            it, SP_EASTER_EGG, Boolean
-                        ) as Boolean
-                    } == true) {
+            val exists = (context?.let { checkKeySharedPreferences(it, SP_EASTER_EGG) } == true)
+            val isAlreadyActivated = (context?.let {
+                getSharedPreferences(
+                    it, SP_EASTER_EGG, Boolean
+                ) as Boolean
+            } == true)
+
+            if ((exists and !isAlreadyActivated) || (!exists)) {
+                if (isAlreadyActivated) {
+                    context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
+                    context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
+                    logD { getString(R.string.easter_egg_activated) }
+                } else {
                     context?.let {
                         showNormalToast(
                             it, getString(R.string.easter_egg_already_activated)
                         )
                     }
-                    logD { getString(R.string.easter_egg_already_activated) }
-                } else {
-                    context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
-                    context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
-                    logD { getString(R.string.easter_egg_activated) }
                 }
-            } else {
-                context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
-                context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
-                logD { getString(R.string.easter_egg_activated) }
             }
         }
     }
