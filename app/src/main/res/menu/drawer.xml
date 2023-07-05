@@ -12,6 +12,10 @@
                     android:icon="@drawable/click_counter_logo"
                     android:title="@string/app_name_click_counter" />
                 <item
+                    android:id="@+id/drawer_dice"
+                    android:icon="@drawable/ic_dice"
+                    android:title="@string/app_name_dice" />
+                <item
                     android:id="@+id/drawer_random_letter"
                     android:icon="@drawable/random_letter_logo"
                     android:title="@string/app_name_random_letter" />

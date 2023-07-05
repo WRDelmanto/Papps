@@ -11,6 +11,9 @@ private lateinit var sharedPreferences: SharedPreferences
 // Click counter
 const val SP_CC_HIGH_SCORE = "SHARED_PREFERENCES_CLICK_COUNTER_HIGH_SCORE"
 
+// Dice
+const val SP_D_DICE_HISTORY = "SHARED_PREFERENCES_DICE_DICE_HISTORY"
+
 // Random letter
 const val SP_RL_LETTER_HISTORY = "SHARED_PREFERENCES_RANDOM_LETTER_LETTER_HISTORY"
 

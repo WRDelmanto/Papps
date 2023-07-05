@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
+import com.wrdelmanto.papps.apps.dice.DiceFragment
 import com.wrdelmanto.papps.apps.random.randomLetter.RandomLetterFragment
 import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
@@ -169,6 +170,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // Apps
             R.id.drawer_click_counter -> switchFragment(
                 homeFragmentContainer.id, ClickCounterFragment(), "CLICK_COUNTER"
+            )
+
+            R.id.drawer_dice -> switchFragment(
+                homeFragmentContainer.id, DiceFragment(), "DICE"
             )
 
             R.id.drawer_random_letter -> {

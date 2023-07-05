@@ -40,9 +40,7 @@ class RandomNumberFragment : Fragment() {
     private lateinit var thirdHistory: TextView
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentRandomNumberBinding.inflate(layoutInflater)
 
@@ -139,20 +137,20 @@ class RandomNumberFragment : Fragment() {
         val min = minInput.text.toString()
         val max = maxInput.text.toString()
 
-        if (min == "" || max == "") context?.let {
-            showNormalToast(
-                it,
-                R.string.random_number_no_input_found
-            ); return
+        if (min == "" || max == "") {
+            context?.let {
+                showNormalToast(
+                    it, R.string.random_number_no_input_found
+                )
+                return
+            }
         }
 
         if (min != "0" && min.first() == '0') minInput.setText(
-            min.toInt().toString(),
-            TextView.BufferType.EDITABLE
+            min.toInt().toString(), TextView.BufferType.EDITABLE
         )
         if (max != "0" && max.first() == '0') maxInput.setText(
-            max.toInt().toString(),
-            TextView.BufferType.EDITABLE
+            max.toInt().toString(), TextView.BufferType.EDITABLE
         )
 
         if (min.toInt() <= max.toInt()) {
