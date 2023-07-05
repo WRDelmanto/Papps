@@ -13,7 +13,7 @@
     <string name="app_name_random_number">Número Aleatório</string>
     <string name="app_name_tip">Gorjeta</string>
     <string name="app_name_click_counter">Contador de Cliques</string>
-    <string name="app_name_dice">Rolagem de Dado</string>
+    <string name="app_name_dices">Rolagem de Dado</string>
     <string name="app_name_coin_flipper">Cara ou Coroa</string>
     <string name="app_name_tic_tac_toe">Jogo da Velha</string>
     <string name="app_name_rock_paper_scissors">Pedra, Papel e Tesoura</string>

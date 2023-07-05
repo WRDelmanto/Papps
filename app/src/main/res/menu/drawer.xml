@@ -14,7 +14,7 @@
                 <item
                     android:id="@+id/drawer_dice"
                     android:icon="@drawable/ic_dice"
-                    android:title="@string/app_name_dice" />
+                    android:title="@string/app_name_dices" />
                 <item
                     android:id="@+id/drawer_random_letter"
                     android:icon="@drawable/random_letter_logo"

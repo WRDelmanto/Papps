@@ -7,14 +7,14 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/dice_click_here"
+        android:id="@+id/dices_click_here"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
         android:elevation="100dp" />
 
     <TextView
-        android:id="@+id/dice_click_anywhere"
+        android:id="@+id/dices_click_anywhere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_edges"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/dice_result"
+        android:id="@+id/dices_result"
         android:layout_width="@dimen/image_size_normal_xlarge"
         android:layout_height="@dimen/image_size_normal_xlarge"
         android:contentDescription="@null"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dice_history_first"
+        android:id="@+id/dices_history_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_edges"
@@ -47,58 +47,58 @@
         android:paddingHorizontal="@dimen/padding_elements_small"
         android:textSize="@dimen/font_size_normal_above"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dice_middle_guide_line" />
+        app:layout_constraintTop_toTopOf="@+id/dices_middle_guide_line" />
 
     <TextView
-        android:id="@+id/dice_history_second"
+        android:id="@+id/dices_history_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_elements_normal"
         android:alpha="0.8"
         android:paddingHorizontal="@dimen/padding_elements_small"
         android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintEnd_toEndOf="@+id/dice_history_first"
-        app:layout_constraintStart_toStartOf="@+id/dice_history_first"
-        app:layout_constraintTop_toBottomOf="@+id/dice_history_first" />
+        app:layout_constraintEnd_toEndOf="@+id/dices_history_first"
+        app:layout_constraintStart_toStartOf="@+id/dices_history_first"
+        app:layout_constraintTop_toBottomOf="@+id/dices_history_first" />
 
     <TextView
-        android:id="@+id/dice_history_third"
+        android:id="@+id/dices_history_third"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_elements_normal"
         android:alpha="0.6"
         android:paddingHorizontal="@dimen/padding_elements_small"
         android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintEnd_toEndOf="@+id/dice_history_second"
-        app:layout_constraintStart_toStartOf="@+id/dice_history_second"
-        app:layout_constraintTop_toBottomOf="@+id/dice_history_second" />
+        app:layout_constraintEnd_toEndOf="@+id/dices_history_second"
+        app:layout_constraintStart_toStartOf="@+id/dices_history_second"
+        app:layout_constraintTop_toBottomOf="@+id/dices_history_second" />
 
     <TextView
-        android:id="@+id/dice_history_fourth"
+        android:id="@+id/dices_history_fourth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_elements_normal"
         android:alpha="0.4"
         android:paddingHorizontal="@dimen/padding_elements_small"
         android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintEnd_toEndOf="@+id/dice_history_third"
-        app:layout_constraintStart_toStartOf="@+id/dice_history_third"
-        app:layout_constraintTop_toBottomOf="@+id/dice_history_third" />
+        app:layout_constraintEnd_toEndOf="@+id/dices_history_third"
+        app:layout_constraintStart_toStartOf="@+id/dices_history_third"
+        app:layout_constraintTop_toBottomOf="@+id/dices_history_third" />
 
     <TextView
-        android:id="@+id/dice_history_fifth"
+        android:id="@+id/dices_history_fifth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_elements_normal"
         android:alpha="0.25"
         android:paddingHorizontal="@dimen/padding_elements_small"
         android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintEnd_toEndOf="@+id/dice_history_fourth"
-        app:layout_constraintStart_toStartOf="@+id/dice_history_fourth"
-        app:layout_constraintTop_toBottomOf="@+id/dice_history_fourth" />
+        app:layout_constraintEnd_toEndOf="@+id/dices_history_fourth"
+        app:layout_constraintStart_toStartOf="@+id/dices_history_fourth"
+        app:layout_constraintTop_toBottomOf="@+id/dices_history_fourth" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/dice_middle_guide_line"
+        android:id="@+id/dices_middle_guide_line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

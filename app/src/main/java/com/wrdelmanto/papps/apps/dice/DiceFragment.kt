@@ -13,7 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
-import com.wrdelmanto.papps.databinding.FragmentDiceBinding
+import com.wrdelmanto.papps.databinding.FragmentDicesBinding
 import com.wrdelmanto.papps.utils.SP_D_DICE_HISTORY
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.putSharedPreferences
@@ -21,7 +21,7 @@ import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
 class DiceFragment : Fragment() {
-    private lateinit var binding: FragmentDiceBinding
+    private lateinit var binding: FragmentDicesBinding
 
     private lateinit var clickAnywhere: TextView
     private lateinit var result: ImageView
@@ -38,7 +38,7 @@ class DiceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDiceBinding.inflate(layoutInflater)
+        binding = FragmentDicesBinding.inflate(layoutInflater)
 
         return binding.root
     }
@@ -46,15 +46,15 @@ class DiceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        clickAnywhere = binding.diceClickAnywhere
-        result = binding.diceResult
-        clickHere = binding.diceClickHere
+        clickAnywhere = binding.dicesClickAnywhere
+        result = binding.dicesResult
+        clickHere = binding.dicesClickHere
 
-        firstHistory = binding.diceHistoryFirst
-        secondHistory = binding.diceHistorySecond
-        thirdHistory = binding.diceHistoryThird
-        fourthHistory = binding.diceHistoryFourth
-        fifthHistory = binding.diceHistoryFifth
+        firstHistory = binding.dicesHistoryFirst
+        secondHistory = binding.dicesHistorySecond
+        thirdHistory = binding.dicesHistoryThird
+        fourthHistory = binding.dicesHistoryFourth
+        fifthHistory = binding.dicesHistoryFifth
     }
 
     override fun onResume() {
@@ -78,7 +78,7 @@ class DiceFragment : Fragment() {
     private fun disableListeners() = clickHere.setOnClickListener(null)
 
     private fun resetUi() {
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_dice))
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_dices))
 
         clickAnywhere.visibility = VISIBLE
         result.visibility = INVISIBLE
