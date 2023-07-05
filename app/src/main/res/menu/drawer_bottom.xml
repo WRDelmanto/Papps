@@ -5,9 +5,13 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/drawer_bottom_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="@string/settings" />
+        <item android:title="">
+            <menu>
+                <item
+                    android:id="@+id/drawer_bottom_settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/settings" />
+            </menu>
+        </item>
     </group>
 </menu>
