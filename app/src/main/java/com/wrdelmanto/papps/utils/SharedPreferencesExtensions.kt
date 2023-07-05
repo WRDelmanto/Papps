@@ -22,7 +22,6 @@ const val SP_RN_MAX = "SHARED_PREFERENCES_RANDOM_NUMBER_MAX"
 // Tip
 const val SP_T_TIP_SWITCH = "SHARED_PREFERENCES_TIP_TIP_SWITCH"
 const val SP_T_TOTAL_SWITCH = "SHARED_PREFERENCES_TIP_TOTAL_SWITCH"
-const val SP_T_VALUE_INPUT = "SHARED_PREFERENCES_TIP_VALUE_INPUT"
 const val SP_T_TIP_PERCENTAGE = "SHARED_PREFERENCES_TIP_TIP_PERCENTAGE"
 
 // Easter egg
@@ -59,14 +58,17 @@ fun putSharedPreferences(context: Context, key: String, value: Any) {
  */
 fun getSharedPreferences(context: Context, key: String, valueType: Any): Any? {
     configSharedPreferences(context)
-    return when (valueType) {
-        String -> sharedPreferences.getString(key, "")
-        Int -> sharedPreferences.getInt(key, 0)
-        Boolean -> sharedPreferences.getBoolean(key, false)
-        Long -> sharedPreferences.getLong(key, 0L)
-        Float -> sharedPreferences.getFloat(key, 0F)
-        else -> error("Only primitive types can be returned from SharedPreferences")
-    }
+
+    return if (checkKeySharedPreferences(context, key)) {
+        when (valueType) {
+            String -> sharedPreferences.getString(key, "")
+            Int -> sharedPreferences.getInt(key, 0)
+            Boolean -> sharedPreferences.getBoolean(key, false)
+            Long -> sharedPreferences.getLong(key, 0L)
+            Float -> sharedPreferences.getFloat(key, 0F)
+            else -> error("Only primitive types can be returned from SharedPreferences")
+        }
+    } else null
 }
 
 /**

@@ -16,7 +16,6 @@ import com.wrdelmanto.papps.databinding.FragmentRandomNumberBinding
 import com.wrdelmanto.papps.utils.SP_RN_MAX
 import com.wrdelmanto.papps.utils.SP_RN_MIN
 import com.wrdelmanto.papps.utils.SP_RN_NUMBER_HISTORY
-import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.hideKeyboard
 import com.wrdelmanto.papps.utils.logD
@@ -114,24 +113,23 @@ class RandomNumberFragment : Fragment() {
             setTextColor(resources.getColor(R.color.defaul_text_color))
         }
 
-        if (context?.let { checkKeySharedPreferences(it, SP_RN_NUMBER_HISTORY) } == true) {
-            numberHistory =
-                context?.let { getSharedPreferences(it, SP_RN_NUMBER_HISTORY, String) } as String
-            numberHistoryList = numberHistory.split(".")
-        } else {
-            numberHistory = "*.*.*.*"
-            numberHistoryList = listOf("*", "*", "*", "*")
-        }
+        numberHistory = context?.let {
+            val nh = getSharedPreferences(it, SP_RN_NUMBER_HISTORY, String)
+            nh ?: "*.*.*.*"
+        } as String
+        numberHistoryList = numberHistory.split(".")
 
         updateNumberHistory(true)
 
-        if (context?.let { checkKeySharedPreferences(it, SP_RN_MIN) } == true) {
-            minInput.setText(context?.let { getSharedPreferences(it, SP_RN_MIN, String) } as String)
-        }
+        minInput.setText(context?.let {
+            val mi = getSharedPreferences(it, SP_RN_MIN, String)
+            mi ?: "1"
+        } as String)
 
-        if (context?.let { checkKeySharedPreferences(it, SP_RN_MAX) } == true) {
-            minInput.setText(context?.let { getSharedPreferences(it, SP_RN_MAX, String) } as String)
-        }
+        maxInput.setText(context?.let {
+            val mi = getSharedPreferences(it, SP_RN_MAX, String)
+            mi ?: "10"
+        } as String)
 
         startBlinkingAnimation(result)
     }

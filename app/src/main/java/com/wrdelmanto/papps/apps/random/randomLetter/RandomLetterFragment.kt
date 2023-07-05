@@ -11,7 +11,6 @@ import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentRandomLetterBinding
 import com.wrdelmanto.papps.utils.SP_RL_LETTER_HISTORY
-import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
@@ -34,9 +33,7 @@ class RandomLetterFragment : Fragment() {
     private lateinit var fifthHistory: TextView
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentRandomLetterBinding.inflate(layoutInflater)
 
@@ -85,10 +82,10 @@ class RandomLetterFragment : Fragment() {
             setTextColor(resources.getColor(R.color.defaul_text_color))
         }
 
-        letterHistory =
-            if (context?.let { checkKeySharedPreferences(it, SP_RL_LETTER_HISTORY) } == true) {
-                context?.let { getSharedPreferences(it, SP_RL_LETTER_HISTORY, String) } as String
-            } else "*****"
+        letterHistory = context?.let {
+            val lh = getSharedPreferences(it, SP_RL_LETTER_HISTORY, String)
+            lh ?: "*****"
+        } as String
 
         updateLetterHistory()
 

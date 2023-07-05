@@ -26,16 +26,13 @@ import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.ui.settings.SettingsActivity
 import com.wrdelmanto.papps.utils.SP_EASTER_EGG
-import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainActivity :
-    AppCompatActivity(),
-    NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: MainFragmentBinding
 
     private lateinit var activityMain: DrawerLayout
@@ -160,23 +157,19 @@ class MainActivity :
         super.onWindowFocusChanged(hasFocus)
         setupNavigationAndStatusBar(applicationContext, window)
 
-        if (checkKeySharedPreferences(applicationContext, SP_EASTER_EGG)) {
-            if (!(getSharedPreferences(
-                    applicationContext,
-                    SP_EASTER_EGG,
-                    Boolean
-                ) as Boolean)
-            ) resetEasterEgg()
-            else activateEasterEgg()
-        } else resetEasterEgg()
+        if (((getSharedPreferences(applicationContext, SP_EASTER_EGG, Boolean))
+                ?: false) as Boolean
+        ) activateEasterEgg()
+        else resetEasterEgg()
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             // Drawer
             // Apps
-            R.id.drawer_click_counter ->
-                switchFragment(homeFragmentContainer.id, ClickCounterFragment(), "CLICK_COUNTER")
+            R.id.drawer_click_counter -> switchFragment(
+                homeFragmentContainer.id, ClickCounterFragment(), "CLICK_COUNTER"
+            )
 
             R.id.drawer_random_letter -> {
                 switchFragment(homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER")
@@ -192,33 +185,28 @@ class MainActivity :
 
             // Games
             R.id.drawer_coin_flipper -> switchFragment(
-                homeFragmentContainer.id,
-                CoinFlipperFragment(),
-                "COIN_FLIPPER"
+                homeFragmentContainer.id, CoinFlipperFragment(), "COIN_FLIPPER"
             )
 
             R.id.drawer_tic_tac_toe -> switchFragment(
-                homeFragmentContainer.id,
-                TicTacToeFragment(),
-                "TIC_TAC_TOE"
+                homeFragmentContainer.id, TicTacToeFragment(), "TIC_TAC_TOE"
             )
 
-            R.id.drawer_rock_paper_scissors ->
-                switchFragment(
-                    homeFragmentContainer.id,
-                    RockPaperScissorsFragment(),
-                    "RPCK_PAPER_SCISSORS"
-                )
+            R.id.drawer_rock_paper_scissors -> switchFragment(
+                homeFragmentContainer.id, RockPaperScissorsFragment(), "RPCK_PAPER_SCISSORS"
+            )
 
             // Drawer bottom
             R.id.drawer_bottom_settings -> openSettingsActivity()
 
             // Random bottom nav menu
-            R.id.random_bottom_nav_menu_random_letter ->
-                switchFragment(homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER")
+            R.id.random_bottom_nav_menu_random_letter -> switchFragment(
+                homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER"
+            )
 
-            R.id.random_bottom_nav_menu_random_number ->
-                switchFragment(homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER")
+            R.id.random_bottom_nav_menu_random_number -> switchFragment(
+                homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER"
+            )
         }
 
         activityMain.closeDrawer(GravityCompat.START)
@@ -231,8 +219,9 @@ class MainActivity :
 
             if (supportFragmentManager.findFragmentById(fragmentId) == null) {
                 ft.add(fragmentId, newFragment, fragmentName)
-            } else if (supportFragmentManager.fragments[0].tag != fragmentName)
-                ft.replace(fragmentId, newFragment, fragmentName)
+            } else if (supportFragmentManager.fragments[0].tag != fragmentName) ft.replace(
+                fragmentId, newFragment, fragmentName
+            )
 
             actualFragmentTag = fragmentName
             ft.addToBackStack(null)
@@ -289,7 +278,7 @@ class MainActivity :
         }
     }
 
-    fun activateEasterEgg() {
+    private fun activateEasterEgg() {
         val ticTacToe = drawerItemsNavView.menu.findItem(R.id.drawer_tic_tac_toe)
         ticTacToe.isVisible = true
     }

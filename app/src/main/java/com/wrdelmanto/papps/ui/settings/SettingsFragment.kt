@@ -17,7 +17,6 @@ import com.wrdelmanto.papps.databinding.SettingsFragmentBinding
 import com.wrdelmanto.papps.utils.MAIL_SUBJECT
 import com.wrdelmanto.papps.utils.MAIL_TO
 import com.wrdelmanto.papps.utils.SP_EASTER_EGG
-import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.composeEmail
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
@@ -131,25 +130,19 @@ class SettingsFragment : Fragment() {
         if (clicksEasterEgg >= CLICKS_TO_ACTIVATE_EASTER_EGG) {
             clicksEasterEgg = 0
 
-            val exists = (context?.let { checkKeySharedPreferences(it, SP_EASTER_EGG) } == true)
-            val isAlreadyActivated = (context?.let {
-                getSharedPreferences(
-                    it, SP_EASTER_EGG, Boolean
-                ) as Boolean
-            } == true)
-
-            if ((exists and !isAlreadyActivated) || (!exists)) {
-                if (isAlreadyActivated) {
-                    context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
-                    context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
-                    logD { getString(R.string.easter_egg_activated) }
-                } else {
-                    context?.let {
-                        showNormalToast(
-                            it, getString(R.string.easter_egg_already_activated)
-                        )
-                    }
+            if (context?.let {
+                    val iaa = getSharedPreferences(it, SP_EASTER_EGG, Boolean)
+                    iaa ?: false
+                } as Boolean) {
+                context?.let {
+                    showNormalToast(
+                        it, getString(R.string.easter_egg_already_activated)
+                    )
                 }
+            } else {
+                context?.let { putSharedPreferences(it, SP_EASTER_EGG, true) }
+                context?.let { showNormalToast(it, getString(R.string.easter_egg_activated)) }
+                logD { getString(R.string.easter_egg_activated) }
             }
         }
     }

@@ -12,7 +12,6 @@ import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentClickCounterBinding
 import com.wrdelmanto.papps.utils.SP_CC_HIGH_SCORE
-import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
@@ -31,9 +30,7 @@ class ClickCounterFragment : Fragment() {
     private var highScore = 0
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentClickCounterBinding.inflate(layoutInflater)
 
@@ -50,11 +47,6 @@ class ClickCounterFragment : Fragment() {
         resetButton = binding.clickCounterResetButton
 
         startBlinkingAnimation(clickAnywhere)
-
-        if (context?.let { checkKeySharedPreferences(it, SP_CC_HIGH_SCORE) } == true) {
-            highScore = context?.let { getSharedPreferences(it, SP_CC_HIGH_SCORE, Int) } as Int
-        }
-        highScoreOutput.text = highScore.toString()
     }
 
     override fun onResume() {
@@ -84,9 +76,10 @@ class ClickCounterFragment : Fragment() {
         (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_click_counter))
         counter.text = getString(R.string.zero)
 
-        highScore = if (context?.let { checkKeySharedPreferences(it, SP_CC_HIGH_SCORE) } == true) {
-            context?.let { getSharedPreferences(it, SP_CC_HIGH_SCORE, Int) } as Int
-        } else 0
+        highScore = context?.let {
+            val hs = getSharedPreferences(it, SP_CC_HIGH_SCORE, Int)
+            hs ?: 0
+        } as Int
         highScoreOutput.text = highScore.toString()
 
         clickAnywhere.isVisible = true

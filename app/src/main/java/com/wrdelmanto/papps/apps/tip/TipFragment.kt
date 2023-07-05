@@ -18,8 +18,6 @@ import com.wrdelmanto.papps.databinding.FragmentTipBinding
 import com.wrdelmanto.papps.utils.SP_T_TIP_PERCENTAGE
 import com.wrdelmanto.papps.utils.SP_T_TIP_SWITCH
 import com.wrdelmanto.papps.utils.SP_T_TOTAL_SWITCH
-import com.wrdelmanto.papps.utils.SP_T_VALUE_INPUT
-import com.wrdelmanto.papps.utils.checkKeySharedPreferences
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.hideKeyboard
 import com.wrdelmanto.papps.utils.logD
@@ -75,12 +73,23 @@ class TipFragment : Fragment() {
     }
 
     private fun initiateListeners() {
-        roundUpTip.setOnCheckedChangeListener { _, _ -> calculateTotalOutput() }
-        roundUpTotal.setOnCheckedChangeListener { _, _ -> calculateTotalOutput() }
+        roundUpTip.setOnCheckedChangeListener { _, _ ->
+            context?.let {
+                putSharedPreferences(
+                    it, SP_T_TIP_SWITCH, roundUpTip.isChecked
+                )
+            }
+            calculateTotalOutput(true)
+        }
+
+        roundUpTotal.setOnCheckedChangeListener { _, _ ->
+            context?.let { putSharedPreferences(it, SP_T_TOTAL_SWITCH, roundUpTotal.isChecked) }
+            calculateTotalOutput(true)
+        }
 
         value.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                calculateTotalOutput()
+                calculateTotalOutput(true)
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -94,14 +103,20 @@ class TipFragment : Fragment() {
                     getString(R.string.value_with_percentage),
                     tipPercentageSeekBar.progress.toString()
                 )
-                calculateTotalOutput()
+                calculateTotalOutput(true)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
                 hideKeyboard()
             }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                context?.let {
+                    putSharedPreferences(
+                        it, SP_T_TIP_PERCENTAGE, tipPercentageSeekBar.progress
+                    )
+                }
+            }
         })
     }
 
@@ -113,43 +128,34 @@ class TipFragment : Fragment() {
     private fun resetUi() {
         (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tip))
 
-        if (context?.let { checkKeySharedPreferences(it, SP_T_TIP_SWITCH) } == true) {
-            roundUpTip.isChecked =
-                context?.let { getSharedPreferences(it, SP_T_TIP_SWITCH, Boolean) } as Boolean
-        }
+        roundUpTip.isChecked = context?.let {
+            val rut = getSharedPreferences(it, SP_T_TIP_SWITCH, Boolean)
+            rut ?: false
+        } as Boolean
 
-        if (context?.let { checkKeySharedPreferences(it, SP_T_TOTAL_SWITCH) } == true) {
-            roundUpTotal.isChecked =
-                context?.let { getSharedPreferences(it, SP_T_TOTAL_SWITCH, Boolean) } as Boolean
-        }
-
-        if (context?.let { checkKeySharedPreferences(it, SP_T_VALUE_INPUT) } == true) {
-            value.setText(context?.let {
-                getSharedPreferences(
-                    it, SP_T_VALUE_INPUT, String
-                )
-            } as String, TextView.BufferType.EDITABLE)
-        }
+        roundUpTotal.isChecked = context?.let {
+            val rut = getSharedPreferences(it, SP_T_TOTAL_SWITCH, Boolean)
+            rut ?: false
+        } as Boolean
 
         tipPercentageSeekBar.progress = 10
-        percentage =
-            if (context?.let { checkKeySharedPreferences(it, SP_T_TIP_PERCENTAGE) } == true) {
-                context?.let { getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int) } as Int
-            } else tipPercentageSeekBar.progress
+
+        percentage = context?.let {
+            val p = getSharedPreferences(it, SP_T_TIP_PERCENTAGE, Int)
+            p ?: 10
+        } as Int
 
         tipPercentage.text =
             String.format(getString(R.string.value_with_percentage), percentage.toString())
         tipPercentageSeekBar.progress = percentage
 
-        calculateTotalOutput()
+        calculateTotalOutput(false)
     }
 
-    private fun calculateTotalOutput() {
+    private fun calculateTotalOutput(shouldCalculateOutput: Boolean) {
         val valueInput = value.text.toString()
 
         if (valueInput.isNotEmpty()) {
-            context?.let { putSharedPreferences(it, SP_T_VALUE_INPUT, value.text.toString()) }
-
             val tip =
                 if (roundUpTip.isChecked) round(valueInput.toDouble() * percentage.toDouble() * TRANSFORM_TO_PERCENTAGE)
                 else valueInput.toDouble() * percentage.toDouble() * TRANSFORM_TO_PERCENTAGE
@@ -161,21 +167,13 @@ class TipFragment : Fragment() {
             totalOutput.text = getString(R.string.value_with_cipher, roundTo2Decimals(total))
 
             logD { "valueInput=$valueInput, tipPercentage=$percentage, tip=${tipOutput.text}, total=${totalOutput.text}" }
-        } else {
+        } else if (shouldCalculateOutput) {
             tipOutput.setText(R.string.zero_decimal)
             totalOutput.setText(R.string.zero_decimal)
 
             context?.let { showNormalToast(it, R.string.tip_no_input_found) }
 
             logD { "valueInput=Empty" }
-        }
-
-        context?.let { putSharedPreferences(it, SP_T_TIP_SWITCH, roundUpTip.isChecked) }
-        context?.let { putSharedPreferences(it, SP_T_TOTAL_SWITCH, roundUpTotal.isChecked) }
-        context?.let {
-            putSharedPreferences(
-                it, SP_T_TIP_PERCENTAGE, tipPercentageSeekBar.progress
-            )
         }
     }
 

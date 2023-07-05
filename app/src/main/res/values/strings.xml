@@ -24,6 +24,7 @@
     <string name="privacy_policy">Política de Privacidade</string>
     <string name="clear_all_data">Limpar todos os dados</string>
     <string name="clear_all_data_description">Essa ação limpará todos os dados relacionados a recordes e histórico dos jogos e apps.</string>
+    <string name="clear_all_data_confirmation">Todos os dados foram deletados</string>
     <string name="papps_google_play">Avaliar este app</string>
     <string name="send_feedback">Enviar feedback</string>
     <string name="send_feedback_choose_email_client">"Escolha o provedor de e-mail…"</string>
