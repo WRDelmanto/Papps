@@ -62,6 +62,7 @@ fun Activity.openKeyboard() = openKeyboard(currentFocus ?: View(this))
  *
  * @return True if soft keyboard is open
  */
+@Suppress("BooleanMethodIsAlwaysInverted")
 fun View.isKeyboardOpen(): Boolean {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
         WindowInsetsCompat.toWindowInsetsCompat(rootWindowInsets).isVisible(WindowInsetsCompat.Type.ime())

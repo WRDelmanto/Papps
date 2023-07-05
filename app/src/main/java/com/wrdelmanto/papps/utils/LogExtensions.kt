@@ -48,6 +48,7 @@ private val ANONYMOUS_CLASS_PATTERN = Pattern.compile("(\\$\\d+)+$")
 /**
  * Get current log level.
  */
+@Suppress("KotlinConstantConditions")
 val logLevel: Int = when {
     isProductBuild -> LEVEL_USER
     BuildConfig.BUILD_TYPE == "release" -> LEVEL_USER
