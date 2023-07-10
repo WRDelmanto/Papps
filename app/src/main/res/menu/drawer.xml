@@ -13,7 +13,7 @@
                     android:title="@string/app_name_click_counter" />
                 <item
                     android:id="@+id/drawer_dice"
-                    android:icon="@drawable/ic_dice"
+                    android:icon="@drawable/dices_logo"
                     android:title="@string/app_name_dices" />
                 <item
                     android:id="@+id/drawer_random_letter"
@@ -46,6 +46,10 @@
                     android:id="@+id/drawer_rock_paper_scissors"
                     android:icon="@drawable/rock_paper_scissors_logo"
                     android:title="@string/app_name_rock_paper_scissors" />
+                <item
+                    android:id="@+id/drawer_unscramble"
+                    android:icon="@drawable/unscramble_logo"
+                    android:title="@string/app_name_unscramble" />
             </menu>
         </item>
     </group>

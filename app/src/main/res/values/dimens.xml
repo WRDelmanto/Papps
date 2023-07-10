@@ -2,6 +2,9 @@
 <resources>
     <!-- All Apps and Games -->
     <dimen name="margin_edges">32dp</dimen>
+    <dimen name="padding_edges">32dp</dimen>
+
+    <dimen name="min_height">48dp</dimen>
 
     <dimen name="margin_elements_small">8dp</dimen>
     <dimen name="margin_elements_normal">16dp</dimen>

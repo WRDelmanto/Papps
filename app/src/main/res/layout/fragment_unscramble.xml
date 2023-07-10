@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="unscrambleViewModel"
+            type="com.wrdelmanto.papps.games.unscramble.UnscrambleViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_edges">
+
+        <TextView
+            android:id="@+id/unscramble_high_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/highScore"
+            android:textColor="@color/color_secondary"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/unscramble_high_score_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_small"
+            android:ellipsize="end"
+            android:text="@{@string/multable_live_data_int(unscrambleViewModel.highScore)}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintEnd_toEndOf="@+id/unscramble_high_score"
+            app:layout_constraintStart_toStartOf="@+id/unscramble_high_score"
+            app:layout_constraintTop_toBottomOf="@+id/unscramble_high_score"
+            tools:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/unscramble_current_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_elements_normal"
+            android:text="@string/current_score"
+            android:textColor="@color/color_secondary"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toTopOf="@+id/unscramble_scramble_word"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/unscramble_current_score_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:ellipsize="end"
+            android:text="@{@string/multable_live_data_int(unscrambleViewModel.currentScore)}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toBottomOf="@+id/unscramble_current_score"
+            app:layout_constraintStart_toEndOf="@+id/unscramble_current_score"
+            app:layout_constraintTop_toTopOf="@+id/unscramble_current_score"
+            tools:text="@string/zero" />
+
+        <TextView
+            android:id="@+id/unscramble_scramble_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{unscrambleViewModel.scrambledWord}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintBottom_toBottomOf="@id/unscramble_middle_guide_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/unscramble_middle_guide_line"
+            tools:text="ABC" />
+
+        <TextView
+            android:id="@+id/unscramble_instruction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_elements_normal"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@string/unscramble_instruction"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/unscramble_input_word"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_elements_large"
+            android:hint="@string/unscramble_hint"
+            android:inputType="textCapCharacters|textNoSuggestions"
+            android:minHeight="@dimen/min_height"
+            android:textColorLink="@color/tip_orange"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintBottom_toTopOf="@+id/unscramble_reset_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/unscramble_instruction" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/unscramble_reset_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/general_button"
+            android:text="@string/reset"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/unscramble_middle_guide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

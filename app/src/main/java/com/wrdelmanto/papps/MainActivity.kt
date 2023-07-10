@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.GravityCompat
+import androidx.core.view.GravityCompat.START
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -24,6 +24,7 @@ import com.wrdelmanto.papps.databinding.MainFragmentBinding
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
 import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
 import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
+import com.wrdelmanto.papps.games.unscramble.UnscrambleFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.ui.settings.SettingsActivity
 import com.wrdelmanto.papps.utils.SP_EASTER_EGG
@@ -109,7 +110,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun initiateListeners() {
         // App bar
-        drawerIcon.setOnClickListener { activityMain.openDrawer(GravityCompat.START) }
+        drawerIcon.setOnClickListener { activityMain.openDrawer(START) }
 
         // Drawer header
         drawerHeader.setOnClickListener { goHomeFragment() }
@@ -198,7 +199,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
 
             R.id.drawer_rock_paper_scissors -> switchFragment(
-                homeFragmentContainer.id, RockPaperScissorsFragment(), "RPCK_PAPER_SCISSORS"
+                homeFragmentContainer.id, RockPaperScissorsFragment(), "ROCK_PAPER_SCISSORS"
+            )
+
+            R.id.drawer_unscramble -> switchFragment(
+                homeFragmentContainer.id, UnscrambleFragment(applicationContext), "UNSCRAMBLE"
             )
 
             // Drawer bottom
@@ -214,7 +219,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
         }
 
-        activityMain.closeDrawer(GravityCompat.START)
+        activityMain.closeDrawer(START)
         return true
     }
 
@@ -255,7 +260,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (clicksHomeFragment >= CLICKS_HOME_FRAGMENT) {
             clicksHomeFragment = 0
             disableDrawerMomentarily()
-            activityMain.closeDrawer(GravityCompat.START)
+            activityMain.closeDrawer(START)
             switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
         }
     }
@@ -268,7 +273,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         MainScope().launch {
             delay(ONE_SECOND_IN_MILLIS)
-            drawerIcon.setOnClickListener { activityMain.openDrawer(GravityCompat.START) }
+            drawerIcon.setOnClickListener { activityMain.openDrawer(START) }
             drawerHeader.setOnClickListener { goHomeFragment() }
             drawerItemsNavView.setNavigationItemSelectedListener { menuItem ->
                 onNavigationItemSelected(
