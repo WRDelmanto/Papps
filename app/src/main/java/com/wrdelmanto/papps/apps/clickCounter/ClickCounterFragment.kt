@@ -7,15 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentClickCounterBinding
-import com.wrdelmanto.papps.utils.SP_CC_HIGH_SCORE
-import com.wrdelmanto.papps.utils.getSharedPreferences
-import com.wrdelmanto.papps.utils.logD
-import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
@@ -24,13 +20,11 @@ class ClickCounterFragment(
 ) : Fragment() {
     private lateinit var binding: FragmentClickCounterBinding
 
-    private lateinit var counter: TextView
-    private lateinit var highScoreOutput: TextView
-    private lateinit var additionButton: Button
-    private lateinit var clickAnywhere: TextView
-    private lateinit var resetButton: Button
+    private val clickCounterViewModel: ClickCounterViewModel by viewModels()
 
-    private var highScore = 0
+    private lateinit var clickAnywhereButton: Button
+    private lateinit var clickAnywhereMessage: TextView
+    private lateinit var resetButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -43,71 +37,46 @@ class ClickCounterFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        counter = binding.clickCounterCounter
-        highScoreOutput = binding.clickCounterHighScoreOutput
-        additionButton = binding.clickCounterAdditionButton
-        clickAnywhere = binding.clickCounterClickAnywhere
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_click_counter))
+
+        binding.clickCounterViewModel = clickCounterViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        clickAnywhereButton = binding.clickCounterClickAnywhereButton
+        clickAnywhereMessage = binding.clickCounterClickAnywhereMessage
         resetButton = binding.clickCounterResetButton
 
-        startBlinkingAnimation(clickAnywhere)
+        initiateListeners()
     }
 
     override fun onResume() {
         super.onResume()
 
-        resetUi()
-        initiateListeners()
+        clickCounterViewModel.resetUi(context)
+
+//        startBlinkingAnimation(clickAnywhereMessage)
     }
 
-    override fun onPause() {
+    override fun onDestroy() {
         disableListeners()
 
-        super.onPause()
+        super.onDestroy()
     }
 
     private fun initiateListeners() {
-        additionButton.setOnClickListener { stopBlinkingAnimation(clickAnywhere); addition() }
-        resetButton.setOnClickListener { startBlinkingAnimation(clickAnywhere); resetCounter() }
+        clickAnywhereButton.setOnClickListener {
+            stopBlinkingAnimation(clickAnywhereMessage)
+            clickCounterViewModel.increaseCounter(context)
+        }
+
+        resetButton.setOnClickListener {
+            startBlinkingAnimation(clickAnywhereMessage)
+            clickCounterViewModel.resetUi(context)
+        }
     }
 
     private fun disableListeners() {
-        additionButton.setOnClickListener(null)
+        clickAnywhereButton.setOnClickListener(null)
         resetButton.setOnClickListener(null)
-    }
-
-    private fun resetUi() {
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_click_counter))
-        counter.text = getString(R.string.zero)
-
-        highScore = SP_CC_HIGH_SCORE.let {
-            val hs = getSharedPreferences(context, it, Int)
-            hs ?: 0
-        } as Int
-        highScoreOutput.text = highScore.toString()
-
-        clickAnywhere.isVisible = true
-        startBlinkingAnimation(clickAnywhere)
-    }
-
-    private fun addition() {
-        clickAnywhere.isVisible = false
-
-        val clicks = 1 + counter.text.toString().toInt()
-        counter.text = clicks.toString()
-
-        if (clicks > highScore) {
-            putSharedPreferences(context, SP_CC_HIGH_SCORE, clicks)
-            highScoreOutput.text = clicks.toString()
-        }
-
-        logD { "clicks=$clicks" }
-    }
-
-    private fun resetCounter() {
-        clickAnywhere.isVisible = true
-        counter.text = getString(R.string.zero)
-        highScore = getSharedPreferences(context, SP_CC_HIGH_SCORE, Int) as Int
-
-        logD { "resetCounter" }
     }
 }

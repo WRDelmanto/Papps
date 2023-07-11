@@ -3,6 +3,7 @@ package com.wrdelmanto.papps.utils
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.TextView
+import androidx.core.view.isVisible
 
 /**
  * Start blinking animation.
@@ -17,6 +18,7 @@ fun startBlinkingAnimation(textview: TextView) {
     anim.repeatMode = Animation.REVERSE
     anim.repeatCount = Animation.INFINITE
 
+    textview.isVisible = true
     textview.startAnimation(anim)
 }
 
@@ -25,4 +27,7 @@ fun startBlinkingAnimation(textview: TextView) {
  *
  * @param textview
  */
-fun stopBlinkingAnimation(textview: TextView) = textview.clearAnimation()
+fun stopBlinkingAnimation(textview: TextView) {
+    textview.clearAnimation()
+    textview.isVisible = false
+}
