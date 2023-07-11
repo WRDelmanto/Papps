@@ -24,7 +24,7 @@ class UnscrambleViewModel : ViewModel() {
     val scrambledWord: LiveData<String>
         get() = _scrambledWord
 
-    private val currentWord = MutableLiveData("")
+    private lateinit var currentWord: String
 
     val isAnswerCorrect = MutableLiveData(false)
 
@@ -36,18 +36,18 @@ class UnscrambleViewModel : ViewModel() {
 
         _currentScore.value = 0
 
-        currentWord.value = SP_U_CURRENT_WORD.let {
+        currentWord = SP_U_CURRENT_WORD.let {
             val hs = getSharedPreferences(context, it, String)
             hs ?: ""
         } as String
 
-        if (currentWord.value.isNullOrBlank()) generateNextWord(context)
+        if (currentWord.isBlank()) generateNextWord(context)
         else _scrambledWord.value =
             getSharedPreferences(context, SP_U_SCRAMBLED_WORD, String) as String
     }
 
     fun checkAnswer(context: Context, answer: String) {
-        if (answer == currentWord.value) {
+        if (answer == currentWord) {
             isAnswerCorrect.value = true
 
             _currentScore.value = _currentScore.value?.plus(1)
@@ -62,12 +62,21 @@ class UnscrambleViewModel : ViewModel() {
     }
 
     private fun generateNextWord(context: Context) {
-        currentWord.value = allWordsList.random().uppercase()
+        currentWord = allWordsList.random().uppercase()
 
-        currentWord.value?.let { putSharedPreferences(context, SP_U_CURRENT_WORD, it) }
-        _scrambledWord.value = currentWord.value?.reversed()
+        val tempWord = currentWord.toCharArray()
+        tempWord.shuffle()
 
-        logD { "currentWord=${currentWord.value}, scrambledWord=${scrambledWord.value}" }
+        while (String(tempWord) == currentWord) {
+            tempWord.shuffle()
+        }
+
+        _scrambledWord.value = String(tempWord)
+
+        putSharedPreferences(context, SP_U_CURRENT_WORD, currentWord)
+        putSharedPreferences(context, SP_U_SCRAMBLED_WORD, _scrambledWord.value.toString())
+
+        logD { "currentWord=${currentWord}, scrambledWord=${scrambledWord.value}" }
     }
 
     fun reset(context: Context) {
