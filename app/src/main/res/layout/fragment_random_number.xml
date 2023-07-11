@@ -1,121 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/random_number_result"
+    <data>
+
+        <variable
+            name="randomNumberViewModel"
+            type="com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:text="@string/click_anywhere"
-        android:textAlignment="center"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/random_number_history_first"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_edges"
-        android:alpha="1.0"
-        android:ellipsize="end"
-        android:textSize="@dimen/font_size_xlarge"
-        app:layout_constraintEnd_toEndOf="@+id/random_number_result"
-        app:layout_constraintStart_toStartOf="@+id/random_number_result"
-        app:layout_constraintTop_toTopOf="@+id/random_number_middle_guide_line" />
+        <TextView
+            android:id="@+id/random_number_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:text="@{randomNumberViewModel.result}"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/click_anywhere" />
 
-    <TextView
-        android:id="@+id/random_number_history_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0.75"
-        android:ellipsize="end"
-        android:textSize="@dimen/font_size_large"
-        app:layout_constraintEnd_toEndOf="@+id/random_number_history_first"
-        app:layout_constraintStart_toStartOf="@+id/random_number_history_first"
-        app:layout_constraintTop_toBottomOf="@+id/random_number_history_first" />
+        <TextView
+            android:id="@+id/random_number_history_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_edges"
+            android:alpha="1.0"
+            android:ellipsize="end"
+            android:text="@{randomNumberViewModel.historyFirst}"
+            android:textSize="@dimen/font_size_xlarge"
+            app:layout_constraintEnd_toEndOf="@+id/random_number_result"
+            app:layout_constraintStart_toStartOf="@+id/random_number_result"
+            app:layout_constraintTop_toTopOf="@+id/random_number_middle_guide_line"
+            tools:text="1" />
 
-    <TextView
-        android:id="@+id/random_number_history_third"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0.5"
-        android:ellipsize="end"
-        android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintEnd_toEndOf="@+id/random_number_history_second"
-        app:layout_constraintStart_toStartOf="@+id/random_number_history_second"
-        app:layout_constraintTop_toBottomOf="@+id/random_number_history_second" />
+        <TextView
+            android:id="@+id/random_number_history_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.75"
+            android:ellipsize="end"
+            android:text="@{randomNumberViewModel.historySecond}"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintEnd_toEndOf="@+id/random_number_history_first"
+            app:layout_constraintStart_toStartOf="@+id/random_number_history_first"
+            app:layout_constraintTop_toBottomOf="@+id/random_number_history_first"
+            tools:text="2" />
 
-    <Button
-        android:id="@+id/random_number_click_here"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0" />
+        <TextView
+            android:id="@+id/random_number_history_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.5"
+            android:ellipsize="end"
+            android:text="@{randomNumberViewModel.historyThird}"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintEnd_toEndOf="@+id/random_number_history_second"
+            app:layout_constraintStart_toStartOf="@+id/random_number_history_second"
+            app:layout_constraintTop_toBottomOf="@+id/random_number_history_second"
+            tools:text="3" />
 
-    <TextView
-        android:id="@+id/random_number_min"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
-        android:text="@string/min"
-        android:textColor="@color/random_number_green"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/random_number_max"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/random_number_click_anywhere_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0" />
 
-    <TextView
-        android:id="@+id/random_number_max"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/max"
-        android:textColor="@color/random_number_red"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintBottom_toBottomOf="@+id/random_number_min"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/random_number_min"
-        app:layout_constraintTop_toTopOf="@+id/random_number_min" />
+        <TextView
+            android:id="@+id/random_number_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="128dp"
+            android:text="@string/min"
+            android:textColor="@color/random_number_green"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/random_number_max"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/random_number_min_input"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:elevation="100dp"
-        android:inputType="number"
-        android:text="@string/one"
-        android:textAlignment="center"
-        android:textColorLink="@color/black"
-        android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintEnd_toEndOf="@+id/random_number_min"
-        app:layout_constraintStart_toStartOf="@+id/random_number_min"
-        app:layout_constraintTop_toBottomOf="@+id/random_number_min" />
+        <TextView
+            android:id="@+id/random_number_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/max"
+            android:textColor="@color/random_number_red"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintBottom_toBottomOf="@+id/random_number_min"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/random_number_min"
+            app:layout_constraintTop_toTopOf="@+id/random_number_min" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/random_number_max_input"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
-        android:elevation="100dp"
-        android:inputType="number"
-        android:text="@string/ten"
-        android:textAlignment="center"
-        android:textColorLink="@color/black"
-        android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintEnd_toEndOf="@+id/random_number_max"
-        app:layout_constraintStart_toStartOf="@+id/random_number_max"
-        app:layout_constraintTop_toBottomOf="@+id/random_number_max" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/random_number_min_input"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:elevation="100dp"
+            android:inputType="number"
+            android:text="@{randomNumberViewModel.minInput}"
+            android:textAlignment="center"
+            android:textColorLink="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintEnd_toEndOf="@+id/random_number_min"
+            app:layout_constraintStart_toStartOf="@+id/random_number_min"
+            app:layout_constraintTop_toBottomOf="@+id/random_number_min"
+            tools:text="@string/zero" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/random_number_middle_guide_line"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/random_number_max_input"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
+            android:elevation="100dp"
+            android:inputType="number"
+            android:text="@{randomNumberViewModel.maxInput}"
+            android:textAlignment="center"
+            android:textColorLink="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintEnd_toEndOf="@+id/random_number_max"
+            app:layout_constraintStart_toStartOf="@+id/random_number_max"
+            app:layout_constraintTop_toBottomOf="@+id/random_number_max"
+            tools:text="@string/ten" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/random_number_middle_guide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
