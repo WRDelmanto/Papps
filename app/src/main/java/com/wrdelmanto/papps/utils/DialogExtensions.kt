@@ -15,5 +15,6 @@ fun openClearSPDataDialog(context: Context) {
                 context
             )
             showNormalToast(context, R.string.clear_all_data_confirmation)
+            logD { context.resources.getString(R.string.clear_all_data_confirmation) }
         }.show()
 }

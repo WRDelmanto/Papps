@@ -205,7 +205,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
 
             R.id.drawer_tic_tac_toe -> switchFragment(
-                homeFragmentContainer.id, TicTacToeFragment(), "TIC_TAC_TOE"
+                homeFragmentContainer.id, TicTacToeFragment(applicationContext), "TIC_TAC_TOE"
             )
 
             R.id.drawer_rock_paper_scissors -> switchFragment(
