@@ -13,7 +13,7 @@ android {
         targetSdk 34
         versionCode 6 // Value that the stores use to identify that there has been an update.
         // VersionName = majorUpdate.howManyApps.howManyGames.versionCode
-        versionName "1.5.2.$versionCode" // Value that is shown to the user.
+        versionName "1.5.3.$versionCode" // Value that is shown to the user.
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
