@@ -27,7 +27,7 @@ fun startBlinkingAnimation(textview: TextView) {
  *
  * @param textview
  */
-fun stopBlinkingAnimation(textview: TextView) {
+fun stopBlinkingAnimation(textview: TextView, shouldBeVisible: Boolean = false) {
     textview.clearAnimation()
-    textview.isVisible = false
+    textview.isVisible = shouldBeVisible
 }
