@@ -1,5 +1,6 @@
 package com.wrdelmanto.papps.apps.random.randomLetter
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,9 @@ import com.wrdelmanto.papps.utils.randomString
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
-class RandomLetterFragment : Fragment() {
+class RandomLetterFragment(
+    private val context: Context
+) : Fragment() {
     private lateinit var binding: FragmentRandomLetterBinding
 
     private lateinit var result: TextView
@@ -82,8 +85,8 @@ class RandomLetterFragment : Fragment() {
             setTextColor(resources.getColor(R.color.defaul_text_color))
         }
 
-        letterHistory = context?.let {
-            val lh = getSharedPreferences(it, SP_RL_LETTER_HISTORY, String)
+        letterHistory = SP_RL_LETTER_HISTORY.let {
+            val lh = getSharedPreferences(context, it, String)
             lh ?: "*****"
         } as String
 
@@ -105,7 +108,7 @@ class RandomLetterFragment : Fragment() {
         if (letterHistory.length >= 5) letterHistory = letterHistory.dropLast(1)
         letterHistory = randomLetter + letterHistory
 
-        context?.let { putSharedPreferences(it, SP_RL_LETTER_HISTORY, letterHistory) }
+        putSharedPreferences(context, SP_RL_LETTER_HISTORY, letterHistory)
 
         updateLetterHistory()
 

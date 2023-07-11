@@ -1,5 +1,6 @@
 package com.wrdelmanto.papps.apps.dice
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,9 @@ import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
-class DiceFragment : Fragment() {
+class DiceFragment(
+    private val context: Context
+) : Fragment() {
     private lateinit var binding: FragmentDicesBinding
 
     private lateinit var clickAnywhere: TextView
@@ -83,8 +86,8 @@ class DiceFragment : Fragment() {
         clickAnywhere.visibility = VISIBLE
         result.visibility = INVISIBLE
 
-        diceHistory = context?.let {
-            val lh = getSharedPreferences(it, SP_D_DICE_HISTORY, String)
+        diceHistory = SP_D_DICE_HISTORY.let {
+            val lh = getSharedPreferences(context, it, String)
             lh ?: "*****"
         } as String
 
@@ -102,7 +105,7 @@ class DiceFragment : Fragment() {
         if (diceHistory.length >= 5) diceHistory = diceHistory.dropLast(1)
         diceHistory = diceResult.toString() + diceHistory
 
-        context?.let { putSharedPreferences(it, SP_D_DICE_HISTORY, diceHistory) }
+        putSharedPreferences(context, SP_D_DICE_HISTORY, diceHistory)
 
         result.background = when (diceResult) {
             1 -> ResourcesCompat.getDrawable(resources, R.drawable.dice_1, null)

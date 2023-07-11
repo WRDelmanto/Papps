@@ -1,5 +1,6 @@
 package com.wrdelmanto.papps.apps.random.randomNumber
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -24,7 +25,9 @@ import com.wrdelmanto.papps.utils.showNormalToast
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
-class RandomNumberFragment : Fragment() {
+class RandomNumberFragment(
+    private val context: Context
+) : Fragment() {
     private lateinit var binding: FragmentRandomNumberBinding
 
     private lateinit var result: TextView
@@ -82,7 +85,7 @@ class RandomNumberFragment : Fragment() {
 
         minInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                context?.let { putSharedPreferences(it, SP_RN_MIN, s.toString()) }
+                putSharedPreferences(context, SP_RN_MIN, s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -91,7 +94,7 @@ class RandomNumberFragment : Fragment() {
 
         maxInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                context?.let { putSharedPreferences(it, SP_RN_MAX, s.toString()) }
+                putSharedPreferences(context, SP_RN_MAX, s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -111,21 +114,21 @@ class RandomNumberFragment : Fragment() {
             setTextColor(resources.getColor(R.color.defaul_text_color))
         }
 
-        numberHistory = context?.let {
-            val nh = getSharedPreferences(it, SP_RN_NUMBER_HISTORY, String)
+        numberHistory = SP_RN_NUMBER_HISTORY.let {
+            val nh = getSharedPreferences(context, it, String)
             nh ?: "*.*.*.*"
         } as String
         numberHistoryList = numberHistory.split(".")
 
         updateNumberHistory(true)
 
-        minInput.setText(context?.let {
-            val mi = getSharedPreferences(it, SP_RN_MIN, String)
+        minInput.setText(SP_RN_MIN.let {
+            val mi = getSharedPreferences(context, it, String)
             mi ?: "1"
         } as String)
 
-        maxInput.setText(context?.let {
-            val mi = getSharedPreferences(it, SP_RN_MAX, String)
+        maxInput.setText(SP_RN_MAX.let {
+            val mi = getSharedPreferences(context, it, String)
             mi ?: "10"
         } as String)
 
@@ -138,12 +141,8 @@ class RandomNumberFragment : Fragment() {
         val max = maxInput.text.toString()
 
         if (min == "" || max == "") {
-            context?.let {
-                showNormalToast(
-                    it, R.string.random_number_no_input_found
-                )
-                return
-            }
+            showNormalToast(context, R.string.random_number_no_input_found)
+            return
         }
 
         if (min != "0" && min.first() == '0') minInput.setText(
@@ -166,12 +165,12 @@ class RandomNumberFragment : Fragment() {
             numberHistory = randomNumber.toString() + "." + numberHistoryList.joinToString(".")
             numberHistoryList = numberHistory.split(".")
 
-            context?.let { putSharedPreferences(it, SP_RN_NUMBER_HISTORY, numberHistory) }
+            putSharedPreferences(context, SP_RN_NUMBER_HISTORY, numberHistory)
 
             updateNumberHistory(false)
 
             logD { "min=$min, max=$max, randomNumber=$randomNumber" }
-        } else context?.let { showNormalToast(it, R.string.random_number_min_higher_than_max) }
+        } else showNormalToast(context, R.string.random_number_min_higher_than_max)
     }
 
     private fun updateNumberHistory(firstTime: Boolean) {

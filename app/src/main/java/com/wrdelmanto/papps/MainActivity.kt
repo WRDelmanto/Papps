@@ -170,24 +170,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // Drawer
             // Apps
             R.id.drawer_click_counter -> switchFragment(
-                homeFragmentContainer.id, ClickCounterFragment(), "CLICK_COUNTER"
+                homeFragmentContainer.id, ClickCounterFragment(applicationContext), "CLICK_COUNTER"
             )
 
             R.id.drawer_dice -> switchFragment(
-                homeFragmentContainer.id, DiceFragment(), "DICE"
+                homeFragmentContainer.id, DiceFragment(applicationContext), "DICE"
             )
 
             R.id.drawer_random_letter -> {
-                switchFragment(homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER")
+                switchFragment(
+                    homeFragmentContainer.id,
+                    RandomLetterFragment(applicationContext),
+                    "RANDOM_LETTER"
+                )
                 randomBottomNavMenuRandomLetter.isChecked = true
             }
 
             R.id.drawer_random_number -> {
-                switchFragment(homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER")
+                switchFragment(
+                    homeFragmentContainer.id,
+                    RandomNumberFragment(applicationContext),
+                    "RANDOM_NUMBER"
+                )
                 randomBottomNavMenuRandomnumber.isChecked = true
             }
 
-            R.id.drawer_tip -> switchFragment(homeFragmentContainer.id, TipFragment(), "TIP")
+            R.id.drawer_tip -> switchFragment(
+                homeFragmentContainer.id, TipFragment(applicationContext), "TIP"
+            )
 
             // Games
             R.id.drawer_coin_flipper -> switchFragment(
@@ -211,11 +221,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             // Random bottom nav menu
             R.id.random_bottom_nav_menu_random_letter -> switchFragment(
-                homeFragmentContainer.id, RandomLetterFragment(), "RANDOM_LETTER"
+                homeFragmentContainer.id, RandomLetterFragment(applicationContext), "RANDOM_LETTER"
             )
 
             R.id.random_bottom_nav_menu_random_number -> switchFragment(
-                homeFragmentContainer.id, RandomNumberFragment(), "RANDOM_NUMBER"
+                homeFragmentContainer.id, RandomNumberFragment(applicationContext), "RANDOM_NUMBER"
             )
         }
 

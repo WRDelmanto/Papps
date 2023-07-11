@@ -1,5 +1,6 @@
 package com.wrdelmanto.papps.games.tipTacToe
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +15,9 @@ import com.wrdelmanto.papps.utils.showNormalToast
 import java.util.Random
 import kotlin.collections.ArrayList
 
-class TicTacToeFragment : Fragment() {
+class TicTacToeFragment(
+    private val context: Context
+) : Fragment() {
     private lateinit var binding: FragmentTicTacToeBinding
 
     private lateinit var a11Button: Button
@@ -39,9 +42,7 @@ class TicTacToeFragment : Fragment() {
     private var playerMode = 1
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentTicTacToeBinding.inflate(layoutInflater)
 
@@ -166,7 +167,7 @@ class TicTacToeFragment : Fragment() {
                 try {
                     autoPlay()
                 } catch (ex: Exception) {
-                    context?.let { showNormalToast(it, "Game Over") }
+                    showNormalToast(context, "Game Over")
                 }
             }
         } else {
@@ -217,11 +218,11 @@ class TicTacToeFragment : Fragment() {
 
         if (winner != -1) {
             if (winner == 1) {
-                if (playerMode == 1) context?.let { showNormalToast(it, "Player 1 Wins!!!") }
-                else context?.let { showNormalToast(it, "You Won!!!") }
+                if (playerMode == 1) showNormalToast(context, "Player 1 Wins!!!")
+                else showNormalToast(context, "You Won!!!")
             } else {
-                if (playerMode == 1) context?.let { showNormalToast(it, "Player 2 Wins!!!") }
-                else context?.let { showNormalToast(it, "CPU Wins!!!") }
+                if (playerMode == 1) showNormalToast(context, "Player 2 Wins!!!")
+                else showNormalToast(context, "CPU Wins!!!")
             }
 
             disableAllButtons()

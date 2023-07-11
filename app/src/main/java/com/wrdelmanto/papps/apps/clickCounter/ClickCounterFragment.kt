@@ -1,5 +1,6 @@
 package com.wrdelmanto.papps.apps.clickCounter
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,9 @@ import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
-class ClickCounterFragment : Fragment() {
+class ClickCounterFragment(
+    private val context: Context
+) : Fragment() {
     private lateinit var binding: FragmentClickCounterBinding
 
     private lateinit var counter: TextView
@@ -76,8 +79,8 @@ class ClickCounterFragment : Fragment() {
         (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_click_counter))
         counter.text = getString(R.string.zero)
 
-        highScore = context?.let {
-            val hs = getSharedPreferences(it, SP_CC_HIGH_SCORE, Int)
+        highScore = SP_CC_HIGH_SCORE.let {
+            val hs = getSharedPreferences(context, it, Int)
             hs ?: 0
         } as Int
         highScoreOutput.text = highScore.toString()
@@ -93,7 +96,7 @@ class ClickCounterFragment : Fragment() {
         counter.text = clicks.toString()
 
         if (clicks > highScore) {
-            context?.let { putSharedPreferences(it, SP_CC_HIGH_SCORE, clicks) }
+            putSharedPreferences(context, SP_CC_HIGH_SCORE, clicks)
             highScoreOutput.text = clicks.toString()
         }
 
@@ -103,7 +106,7 @@ class ClickCounterFragment : Fragment() {
     private fun resetCounter() {
         clickAnywhere.isVisible = true
         counter.text = getString(R.string.zero)
-        highScore = context?.let { getSharedPreferences(it, SP_CC_HIGH_SCORE, Int) } as Int
+        highScore = getSharedPreferences(context, SP_CC_HIGH_SCORE, Int) as Int
 
         logD { "resetCounter" }
     }
