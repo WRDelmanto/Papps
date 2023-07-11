@@ -62,9 +62,7 @@ class UnscrambleViewModel : ViewModel() {
     }
 
     private fun generateNextWord(context: Context) {
-        // https://api.dicionario-aberto.net/random
-        val wordsList = listOf("casa", "arroz", "tampa")
-        currentWord.value = wordsList.random().uppercase()
+        currentWord.value = allWordsList.random().uppercase()
 
         currentWord.value?.let { putSharedPreferences(context, SP_U_CURRENT_WORD, it) }
         _scrambledWord.value = currentWord.value?.reversed()
