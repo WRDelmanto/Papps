@@ -54,7 +54,7 @@ class ClickCounterFragment(
 
         clickCounterViewModel.resetUi(context)
 
-//        startBlinkingAnimation(clickAnywhereMessage)
+        startBlinkingAnimation(clickAnywhereMessage)
     }
 
     override fun onDestroy() {

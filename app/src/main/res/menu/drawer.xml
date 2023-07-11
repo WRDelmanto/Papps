@@ -12,7 +12,7 @@
                     android:icon="@drawable/click_counter_logo"
                     android:title="@string/app_name_click_counter" />
                 <item
-                    android:id="@+id/drawer_dice"
+                    android:id="@+id/drawer_dices"
                     android:icon="@drawable/dices_logo"
                     android:title="@string/app_name_dices" />
                 <item
