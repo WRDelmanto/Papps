@@ -6,6 +6,8 @@
 
     <!-- MultableLiveData -->
     <string name="multable_live_data_int">%d</string>
+    <string name="multable_live_data_int_with_cipher">R\u0024 %1$d</string>
+    <string name="multable_live_data_int_with_percentage">%1$d \%%</string>
 
     <!-- Drawer -->
     <!-- Drawer Header -->
@@ -82,7 +84,6 @@
     <string name="tip_round_up_total_text">Arredondar Total</string>
     <string name="tip_value_hint"><font size="12">Digite o valor da conta ex: R$ 37.50</font></string>
     <string name="tip_total">Total</string>
-    <string name="tip_no_input_found">Favor Digitar o Valor da Conta</string>
 
     <!-- All Games -->
     <!-- Coin Flipper -->

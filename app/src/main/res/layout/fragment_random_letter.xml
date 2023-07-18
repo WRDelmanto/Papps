@@ -18,7 +18,6 @@
             android:id="@+id/random_letter_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_edges"
             android:text="@{randomLetterViewModel.result}"
             android:textAlignment="center"
             android:textSize="@dimen/font_size_normal"
@@ -26,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/click_anywhere"/>
+            tools:text="@string/click_anywhere" />
 
         <TextView
             android:id="@+id/random_letter_history_first"

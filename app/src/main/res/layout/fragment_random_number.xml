@@ -32,7 +32,6 @@
             android:id="@+id/random_number_history_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_edges"
             android:alpha="1.0"
             android:ellipsize="end"
             android:text="@{randomNumberViewModel.historyFirst}"
@@ -78,13 +77,12 @@
             android:id="@+id/random_number_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="128dp"
             android:text="@string/min"
             android:textColor="@color/random_number_green"
             android:textSize="@dimen/font_size_normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/random_number_max"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/random_number_min_input"
+            app:layout_constraintEnd_toEndOf="@+id/random_number_min_input"
+            app:layout_constraintStart_toStartOf="@+id/random_number_min_input" />
 
         <TextView
             android:id="@+id/random_number_max"
@@ -93,15 +91,15 @@
             android:text="@string/max"
             android:textColor="@color/random_number_red"
             android:textSize="@dimen/font_size_normal"
-            app:layout_constraintBottom_toBottomOf="@+id/random_number_min"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/random_number_min"
-            app:layout_constraintTop_toTopOf="@+id/random_number_min" />
+            app:layout_constraintBottom_toTopOf="@+id/random_number_max_input"
+            app:layout_constraintEnd_toEndOf="@+id/random_number_max_input"
+            app:layout_constraintStart_toStartOf="@+id/random_number_max_input" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/random_number_min_input"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_edges"
             android:backgroundTint="@color/black"
             android:elevation="100dp"
             android:inputType="number"
@@ -109,15 +107,16 @@
             android:textAlignment="center"
             android:textColorLink="@color/black"
             android:textSize="@dimen/font_size_normal_above"
-            app:layout_constraintEnd_toEndOf="@+id/random_number_min"
-            app:layout_constraintStart_toStartOf="@+id/random_number_min"
-            app:layout_constraintTop_toBottomOf="@+id/random_number_min"
-            tools:text="@string/zero" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/random_number_max_input"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="@string/one" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/random_number_max_input"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_edges"
             android:backgroundTint="@color/black"
             android:elevation="100dp"
             android:inputType="number"
@@ -125,9 +124,9 @@
             android:textAlignment="center"
             android:textColorLink="@color/black"
             android:textSize="@dimen/font_size_normal_above"
-            app:layout_constraintEnd_toEndOf="@+id/random_number_max"
-            app:layout_constraintStart_toStartOf="@+id/random_number_max"
-            app:layout_constraintTop_toBottomOf="@+id/random_number_max"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/random_number_min_input"
             tools:text="@string/ten" />
 
         <androidx.constraintlayout.widget.Guideline

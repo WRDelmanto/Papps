@@ -10,37 +10,29 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
-import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentTipBinding
 import com.wrdelmanto.papps.utils.SP_T_TIP_PERCENTAGE
 import com.wrdelmanto.papps.utils.SP_T_TIP_SWITCH
 import com.wrdelmanto.papps.utils.SP_T_TOTAL_SWITCH
-import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.hideKeyboard
-import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
-import com.wrdelmanto.papps.utils.roundTo2Decimals
-import com.wrdelmanto.papps.utils.showNormalToast
-import kotlin.math.round
 
 class TipFragment(
     private val context: Context
 ) : Fragment() {
     private lateinit var binding: FragmentTipBinding
 
-    private lateinit var value: EditText
-    private lateinit var tipPercentage: TextView
-    private lateinit var tipPercentageSeekBar: SeekBar
-    private lateinit var tipOutput: TextView
-    private lateinit var totalOutput: TextView
+    private val tipViewModel: TipViewModel by viewModels()
+
     private lateinit var roundUpTip: SwitchCompat
     private lateinit var roundUpTotal: SwitchCompat
-
-    private var percentage = 0
+    private lateinit var value: EditText
+    private lateinit var tipPercentageSeekBar: SeekBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -53,42 +45,65 @@ class TipFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        value = binding.tipValueInput
-        tipPercentage = binding.tipPercentage
-        tipPercentageSeekBar = binding.tipPercentageSeekBar
-        tipOutput = binding.tipTipOutput
-        totalOutput = binding.tipTotalOutput
+        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tip))
+
+        binding.tipViewModel = tipViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         roundUpTip = binding.tipRoundUpTipSwitch
         roundUpTotal = binding.tipRoundUpTotalSwitch
+        value = binding.tipValueInput
+        tipPercentageSeekBar = binding.tipPercentageSeekBar
+
+        initiateListeners()
+        initiateObservers()
     }
 
     override fun onResume() {
         super.onResume()
 
-        resetUi()
-        initiateListeners()
+        tipViewModel.resetUi(context)
     }
 
-    override fun onPause() {
+    override fun onDestroy() {
         disableListeners()
 
-        super.onPause()
+        super.onDestroy()
+    }
+
+    private fun initiateObservers() {
+        tipViewModel.roundUpTip.observe(viewLifecycleOwner) {
+            tipViewModel.calculateTotalOutput(context)
+        }
+
+        tipViewModel.roundUpTotal.observe(viewLifecycleOwner) {
+            tipViewModel.calculateTotalOutput(context)
+        }
+
+        tipViewModel.valueInput.observe(viewLifecycleOwner) {
+            tipViewModel.calculateTotalOutput(context)
+        }
+
+        tipViewModel.tipPercentage.observe(viewLifecycleOwner) {
+            tipViewModel.calculateTotalOutput(context)
+        }
     }
 
     private fun initiateListeners() {
-        roundUpTip.setOnCheckedChangeListener { _, _ ->
+        roundUpTip.setOnCheckedChangeListener { _, isChecked ->
+            tipViewModel.roundUpTip.postValue(isChecked)
             putSharedPreferences(context, SP_T_TIP_SWITCH, roundUpTip.isChecked)
-            calculateTotalOutput(true)
         }
 
-        roundUpTotal.setOnCheckedChangeListener { _, _ ->
+        roundUpTotal.setOnCheckedChangeListener { _, isChecked ->
+            tipViewModel.roundUpTotal.postValue(isChecked)
             putSharedPreferences(context, SP_T_TOTAL_SWITCH, roundUpTotal.isChecked)
-            calculateTotalOutput(true)
         }
 
         value.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                calculateTotalOutput(true)
+                tipViewModel.valueInput.postValue(s.toString())
+
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -97,12 +112,8 @@ class TipFragment(
 
         tipPercentageSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                percentage = progress
-                tipPercentage.text = String.format(
-                    getString(R.string.value_with_percentage),
-                    tipPercentageSeekBar.progress.toString()
-                )
-                calculateTotalOutput(true)
+                tipViewModel.tipPercentage.postValue(progress)
+
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -117,63 +128,9 @@ class TipFragment(
     }
 
     private fun disableListeners() {
+        roundUpTip.addTextChangedListener(null)
+        roundUpTotal.addTextChangedListener(null)
         value.addTextChangedListener(null)
         tipPercentageSeekBar.setOnSeekBarChangeListener(null)
-    }
-
-    private fun resetUi() {
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tip))
-
-        roundUpTip.isChecked = SP_T_TIP_SWITCH.let {
-            val rut = getSharedPreferences(context, it, Boolean)
-            rut ?: false
-        } as Boolean
-
-        roundUpTotal.isChecked = SP_T_TOTAL_SWITCH.let {
-            val rut = getSharedPreferences(context, it, Boolean)
-            rut ?: false
-        } as Boolean
-
-        tipPercentageSeekBar.progress = 10
-
-        percentage = SP_T_TIP_PERCENTAGE.let {
-            val p = getSharedPreferences(context, it, Int)
-            p ?: 10
-        } as Int
-
-        tipPercentage.text =
-            String.format(getString(R.string.value_with_percentage), percentage.toString())
-        tipPercentageSeekBar.progress = percentage
-
-        calculateTotalOutput(false)
-    }
-
-    private fun calculateTotalOutput(shouldCalculateOutput: Boolean) {
-        val valueInput = value.text.toString()
-
-        if (valueInput.isNotEmpty()) {
-            val tip =
-                if (roundUpTip.isChecked) round(valueInput.toDouble() * percentage.toDouble() * TRANSFORM_TO_PERCENTAGE)
-                else valueInput.toDouble() * percentage.toDouble() * TRANSFORM_TO_PERCENTAGE
-
-            val total = if (roundUpTotal.isChecked) round(valueInput.toDouble() + tip)
-            else valueInput.toDouble() + tip
-
-            tipOutput.text = getString(R.string.value_with_cipher, roundTo2Decimals(tip))
-            totalOutput.text = getString(R.string.value_with_cipher, roundTo2Decimals(total))
-
-            logD { "valueInput=$valueInput, tipPercentage=$percentage, tip=${tipOutput.text}, total=${totalOutput.text}" }
-        } else if (shouldCalculateOutput) {
-            tipOutput.setText(R.string.zero_decimal)
-            totalOutput.setText(R.string.zero_decimal)
-
-            showNormalToast(context, R.string.tip_no_input_found)
-
-            logD { "valueInput=Empty" }
-        }
-    }
-
-    companion object {
-        const val TRANSFORM_TO_PERCENTAGE = 0.01
     }
 }

@@ -25,7 +25,6 @@
             android:id="@+id/dices_click_anywhere_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_edges"
             android:text="@string/click_anywhere"
             android:textAlignment="center"
             android:textSize="@dimen/font_size_normal"

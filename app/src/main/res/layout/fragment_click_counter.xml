@@ -63,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="@+id/click_counter_high_score"
             app:layout_constraintStart_toStartOf="@+id/click_counter_high_score"
             app:layout_constraintTop_toBottomOf="@+id/click_counter_high_score"
-            tools:text="0"/>
+            tools:text="0" />
 
         <Button
             android:id="@+id/click_counter_click_anywhere_button"

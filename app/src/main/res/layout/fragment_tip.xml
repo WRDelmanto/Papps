@@ -1,163 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_edges">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/tip_coins"
-        android:layout_width="@dimen/image_size_normal_xlarge"
-        android:layout_height="@dimen/image_size_normal_xlarge"
-        android:contentDescription="@null"
-        android:src="@drawable/tip_coins"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <LinearLayout
-        android:id="@+id/tip_round_up_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_elements_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tip_coins">
+        <variable
+            name="tipViewModel"
+            type="com.wrdelmanto.papps.apps.tip.TipViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_edges">
+
+        <ImageView
+            android:id="@+id/tip_coins"
+            android:layout_width="@dimen/image_size_normal_xlarge"
+            android:layout_height="@dimen/image_size_normal_xlarge"
+            android:contentDescription="@null"
+            android:src="@drawable/tip_coins"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/tip_round_up_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tip_coins">
+
+            <TextView
+                android:id="@+id/tip_round_up_tip_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tip_round_up_tip_text"
+                android:textColor="@color/tip_orange" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/tip_round_up_tip_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{tipViewModel.roundUpTip}"
+                app:thumbTint="@color/tip_orange"
+                app:trackTint="@color/orange_light" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tip_round_up_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tip_round_up_tip">
+
+            <TextView
+                android:id="@+id/tip_round_up_total_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tip_round_up_total_text"
+                android:textColor="@color/tip_orange" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/tip_round_up_total_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{tipViewModel.roundUpTotal}"
+                app:thumbTint="@color/tip_orange"
+                app:trackTint="@color/orange_light" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tip_round_up_tip_text"
+            android:id="@+id/tip_cipher_value_input"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tip_round_up_tip_text"
-            android:textColor="@color/tip_orange" />
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@string/cipher"
+            android:textColor="@color/defaul_text_color"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintBottom_toBottomOf="@+id/tip_value_input"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tip_value_input" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/tip_round_up_tip_switch"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tip_value_input"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:thumbTint="@color/tip_orange"
-            app:trackTint="@color/orange_light" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/tip_round_up_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_elements_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tip_round_up_tip">
+            android:backgroundTint="@color/tip_orange"
+            android:hint="@string/tip_value_hint"
+            android:inputType="number|numberDecimal"
+            android:text="@{tipViewModel.valueInput}"
+            android:textColorLink="@color/tip_orange"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tip_cipher_value_input"
+            app:layout_constraintTop_toBottomOf="@+id/tip_round_up_total" />
 
         <TextView
-            android:id="@+id/tip_round_up_total_text"
+            android:id="@+id/tip_percentage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_large"
+            android:text="@{@string/multable_live_data_int_with_percentage(tipViewModel.tipPercentage)}"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintEnd_toEndOf="@+id/tip_tip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tip_value_input"
+            tools:text="@string/ten_with_percentage" />
+
+        <SeekBar
+            android:id="@+id/tip_percentage_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="@{tipViewModel.tipPercentageSeekBar}"
+            android:progressTint="@color/tip_orange"
+            android:thumbTint="@color/tip_orange"
+            app:layout_constraintBottom_toBottomOf="@+id/tip_percentage"
+            app:layout_constraintEnd_toEndOf="@+id/tip_tip_output"
+            app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
+            app:layout_constraintTop_toTopOf="@+id/tip_percentage"
+            tools:progress="10" />
+
+        <TextView
+            android:id="@+id/tip_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tip_round_up_total_text"
-            android:textColor="@color/tip_orange" />
+            android:layout_marginTop="@dimen/margin_elements_large"
+            android:text="@string/app_name_tip"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintStart_toStartOf="@+id/tip_percentage"
+            app:layout_constraintTop_toBottomOf="@+id/tip_percentage" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/tip_round_up_total_switch"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tip_tip_output"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:thumbTint="@color/tip_orange"
-            app:trackTint="@color/orange_light" />
-    </LinearLayout>
+            android:layout_marginStart="@dimen/margin_elements_normal"
+            android:background="@color/tip_orange"
+            android:text="@{tipViewModel.tipOutput}"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintBottom_toBottomOf="@+id/tip_tip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tip_tip"
+            app:layout_constraintTop_toTopOf="@+id/tip_tip"
+            tools:text="@string/zero_decimal" />
 
-    <TextView
-        android:id="@+id/tip_cipher_value_input"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/margin_elements_large"
-        android:gravity="center"
-        android:text="@string/cipher"
-        android:textColor="@color/defaul_text_color"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintBottom_toBottomOf="@+id/tip_value_input"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tip_value_input" />
+        <TextView
+            android:id="@+id/tip_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_large"
+            android:text="@string/tip_total"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintEnd_toEndOf="@+id/tip_tip"
+            app:layout_constraintStart_toStartOf="@+id/tip_tip"
+            app:layout_constraintTop_toBottomOf="@+id/tip_tip" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/tip_value_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_elements_large"
-        android:backgroundTint="@color/tip_orange"
-        android:hint="@string/tip_value_hint"
-        android:inputType="number|numberDecimal"
-        android:textColorLink="@color/tip_orange"
-        android:textCursorDrawable="@null"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tip_cipher_value_input"
-        app:layout_constraintTop_toBottomOf="@+id/tip_round_up_total" />
-
-    <TextView
-        android:id="@+id/tip_percentage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_elements_large"
-        android:layout_marginTop="@dimen/margin_elements_large"
-        android:text="@string/ten_with_percentage"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintEnd_toEndOf="@+id/tip_tip"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tip_value_input" />
-
-    <SeekBar
-        android:id="@+id/tip_percentage_seek_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:max="100"
-        android:progress="10"
-        android:progressTint="@color/tip_orange"
-        android:thumbTint="@color/tip_orange"
-        app:layout_constraintBottom_toBottomOf="@+id/tip_percentage"
-        app:layout_constraintEnd_toEndOf="@+id/tip_tip_output"
-        app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
-        app:layout_constraintTop_toTopOf="@+id/tip_percentage" />
-
-    <TextView
-        android:id="@+id/tip_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_elements_large"
-        android:text="@string/app_name_tip"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintStart_toStartOf="@+id/tip_percentage"
-        app:layout_constraintTop_toBottomOf="@+id/tip_percentage" />
-
-    <TextView
-        android:id="@+id/tip_tip_output"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_elements_normal"
-        android:layout_marginEnd="@dimen/margin_elements_large"
-        android:background="@color/tip_orange"
-        android:text="@string/zero_decimal"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintBottom_toBottomOf="@+id/tip_tip"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tip_tip"
-        app:layout_constraintTop_toTopOf="@+id/tip_tip" />
-
-    <TextView
-        android:id="@+id/tip_total"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_elements_large"
-        android:text="@string/tip_total"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintEnd_toEndOf="@+id/tip_tip"
-        app:layout_constraintStart_toStartOf="@+id/tip_tip"
-        app:layout_constraintTop_toBottomOf="@+id/tip_tip" />
-
-    <TextView
-        android:id="@+id/tip_total_output"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/tip_orange"
-        android:text="@string/zero_decimal"
-        android:textSize="@dimen/font_size_normal"
-        app:layout_constraintBottom_toBottomOf="@+id/tip_total"
-        app:layout_constraintEnd_toEndOf="@+id/tip_tip_output"
-        app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
-        app:layout_constraintTop_toTopOf="@+id/tip_total" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tip_total_output"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/tip_orange"
+            android:text="@{tipViewModel.totalOutput}"
+            android:textSize="@dimen/font_size_normal"
+            app:layout_constraintBottom_toBottomOf="@+id/tip_total"
+            app:layout_constraintEnd_toEndOf="@+id/tip_tip_output"
+            app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
+            app:layout_constraintTop_toTopOf="@+id/tip_total"
+            tools:text="@string/zero_decimal" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
