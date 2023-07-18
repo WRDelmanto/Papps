@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
 
             R.id.drawer_rock_paper_scissors -> switchFragment(
-                homeFragmentContainer.id, RockPaperScissorsFragment(), "ROCK_PAPER_SCISSORS"
+                homeFragmentContainer.id, RockPaperScissorsFragment(applicationContext), "ROCK_PAPER_SCISSORS"
             )
 
             R.id.drawer_unscramble -> switchFragment(
