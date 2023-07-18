@@ -1,111 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/coin_flipper_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_elements_xlarge"
-        android:text="@string/coin_flipper_win_or_lose"
-        android:textAlignment="center"
-        android:textSize="@dimen/font_size_large"
-        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_result_image"
-        app:layout_constraintEnd_toEndOf="@+id/coin_flipper_result_image"
-        app:layout_constraintStart_toStartOf="@+id/coin_flipper_result_image" />
+    <data>
 
-    <ImageView
-        android:id="@+id/coin_flipper_result_image"
-        android:layout_width="@dimen/image_size_custom"
-        android:layout_height="@dimen/image_size_custom"
-        android:layout_marginBottom="128dp"
-        android:contentDescription="@null"
-        android:src="@drawable/ic_empty"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="coinFlipperViewModel"
+            type="com.wrdelmanto.papps.games.coinFlipper.CoinFlipperViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/coin_flipper_app_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/zero"
-        android:textSize="@dimen/font_size_large"
-        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_score_separator"
-        app:layout_constraintEnd_toEndOf="@+id/coin_flipper_score_separator"
-        app:layout_constraintStart_toStartOf="@+id/coin_flipper_score_separator" />
-
-    <TextView
-        android:id="@+id/coin_flipper_score_separator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/margin_elements_small"
-        android:text="@string/score_separator"
-        android:textSize="@dimen/font_size_large"
-        app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_result_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/coin_flipper_result_image"
-        app:layout_constraintTop_toTopOf="@+id/coin_flipper_result_image" />
-
-    <TextView
-        android:id="@+id/coin_flipper_self_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/zero"
-        android:textSize="@dimen/font_size_large"
-        app:layout_constraintEnd_toEndOf="@+id/coin_flipper_score_separator"
-        app:layout_constraintStart_toStartOf="@+id/coin_flipper_score_separator"
-        app:layout_constraintTop_toBottomOf="@+id/coin_flipper_score_separator" />
-
-    <TextView
-        android:id="@+id/coin_flipper_choice_text"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_edges"
-        android:layout_marginTop="@dimen/margin_elements_xlarge"
-        android:text="@string/coin_flipper_choice"
-        android:textAlignment="center"
-        android:textSize="@dimen/font_size_normal_above"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coin_flipper_result_image" />
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_edges">
 
-    <ImageView
-        android:id="@+id/coin_flipper_heads_image"
-        android:layout_width="@dimen/image_size_custom"
-        android:layout_height="@dimen/image_size_custom"
-        android:layout_marginVertical="@dimen/margin_elements_large"
-        android:background="@drawable/coin_flipper_heads"
-        android:contentDescription="@string/coin_flipper_heads"
-        app:layout_constraintBottom_toTopOf="@+id/coin_flipper_reset_button"
-        app:layout_constraintEnd_toStartOf="@+id/coin_flipper_tails_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coin_flipper_choice_text" />
+        <TextView
+            android:id="@+id/coin_flipper_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_elements_xlarge"
+            android:text="@{coinFlipperViewModel.resultMessage}"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintBottom_toTopOf="@+id/coin_flipper_result_image"
+            app:layout_constraintEnd_toEndOf="@+id/coin_flipper_result_image"
+            app:layout_constraintStart_toStartOf="@+id/coin_flipper_result_image"
+            tools:text="Ganhou ou Perdeu?" />
 
-    <ImageView
-        android:id="@+id/coin_flipper_tails_image"
-        android:layout_width="@dimen/image_size_custom"
-        android:layout_height="@dimen/image_size_custom"
-        android:background="@drawable/coin_flipper_tails"
-        android:contentDescription="@string/coin_flipper_tails"
-        app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_heads_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/coin_flipper_heads_image"
-        app:layout_constraintTop_toTopOf="@+id/coin_flipper_heads_image" />
+        <ImageView
+            android:id="@+id/coin_flipper_result_image"
+            android:layout_width="@dimen/image_size_custom"
+            android:layout_height="@dimen/image_size_custom"
+            android:layout_marginBottom="128dp"
+            android:contentDescription="@null"
+            android:src="@{coinFlipperViewModel.resultImage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_empty" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/coin_flipper_reset_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_edges"
-        android:layout_marginBottom="@dimen/margin_edges"
-        android:background="@drawable/general_button"
-        android:text="@string/reset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/coin_flipper_app_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{coinFlipperViewModel.appScore}"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintBottom_toTopOf="@+id/coin_flipper_score_separator"
+            app:layout_constraintEnd_toEndOf="@+id/coin_flipper_score_separator"
+            app:layout_constraintStart_toStartOf="@+id/coin_flipper_score_separator"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/coin_flipper_score_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/score_separator"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_result_image"
+            app:layout_constraintEnd_toEndOf="@+id/coin_flipper_choice_text"
+            app:layout_constraintTop_toTopOf="@+id/coin_flipper_result_image" />
+
+        <TextView
+            android:id="@+id/coin_flipper_self_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{coinFlipperViewModel.selfScore}"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintEnd_toEndOf="@+id/coin_flipper_score_separator"
+            app:layout_constraintStart_toStartOf="@+id/coin_flipper_score_separator"
+            app:layout_constraintTop_toBottomOf="@+id/coin_flipper_score_separator"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/coin_flipper_choice_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_xlarge"
+            android:text="@string/coin_flipper_choice"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coin_flipper_result_image" />
+
+        <ImageView
+            android:id="@+id/coin_flipper_heads_image"
+            android:layout_width="@dimen/image_size_custom"
+            android:layout_height="@dimen/image_size_custom"
+            android:background="@drawable/coin_flipper_heads"
+            android:contentDescription="@string/coin_flipper_heads"
+            app:layout_constraintBottom_toTopOf="@+id/coin_flipper_reset_button"
+            app:layout_constraintEnd_toStartOf="@+id/coin_flipper_tails_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coin_flipper_choice_text" />
+
+        <ImageView
+            android:id="@+id/coin_flipper_tails_image"
+            android:layout_width="@dimen/image_size_custom"
+            android:layout_height="@dimen/image_size_custom"
+            android:background="@drawable/coin_flipper_tails"
+            android:contentDescription="@string/coin_flipper_tails"
+            app:layout_constraintBottom_toBottomOf="@+id/coin_flipper_heads_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/coin_flipper_heads_image"
+            app:layout_constraintTop_toTopOf="@+id/coin_flipper_heads_image" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/coin_flipper_reset_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/general_button"
+            android:text="@string/reset"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

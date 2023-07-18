@@ -201,7 +201,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             // Games
             R.id.drawer_coin_flipper -> switchFragment(
-                homeFragmentContainer.id, CoinFlipperFragment(), "COIN_FLIPPER"
+                homeFragmentContainer.id, CoinFlipperFragment(applicationContext), "COIN_FLIPPER"
             )
 
             R.id.drawer_tic_tac_toe -> switchFragment(

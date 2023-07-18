@@ -1,8 +1,6 @@
 package com.wrdelmanto.papps.games.coinFlipper
 
-import android.graphics.Color.GREEN
-import android.graphics.Color.RED
-import android.graphics.Color.GRAY
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,27 +9,26 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentCoinFlipperBinding
-import com.wrdelmanto.papps.utils.logD
-import java.util.Random
 
-class CoinFlipperFragment : Fragment() {
+class CoinFlipperFragment(
+    private val context: Context
+) : Fragment() {
     private lateinit var binding: FragmentCoinFlipperBinding
 
-    private lateinit var resultImage: ImageView
-    private lateinit var result: TextView
-    private lateinit var appScore: TextView
-    private lateinit var selfScore: TextView
+    private val coinFlipperViewModel: CoinFlipperViewModel by viewModels()
+
     private lateinit var heads: ImageView
     private lateinit var tails: ImageView
     private lateinit var resetButton: Button
 
+    private lateinit var resultMessage: TextView
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentCoinFlipperBinding.inflate(layoutInflater)
 
@@ -41,13 +38,14 @@ class CoinFlipperFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        resultImage = binding.coinFlipperResultImage
-        result = binding.coinFlipperResult
-        appScore = binding.coinFlipperAppScore
-        selfScore = binding.coinFlipperSelfScore
+        binding.coinFlipperViewModel = coinFlipperViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         heads = binding.coinFlipperHeadsImage
         tails = binding.coinFlipperTailsImage
         resetButton = binding.coinFlipperResetButton
+
+        resultMessage = binding.coinFlipperResult
     }
 
     override fun onResume() {
@@ -64,9 +62,17 @@ class CoinFlipperFragment : Fragment() {
     }
 
     private fun initiateListeners() {
-        heads.setOnClickListener { choice(getString(R.string.coin_flipper_heads)) }
-        tails.setOnClickListener { choice(getString(R.string.coin_flipper_tails)) }
-        resetButton.setOnClickListener { resetScore() }
+        heads.setOnClickListener {
+            coinFlipperViewModel.choice(
+                context, resultMessage, getString(R.string.coin_flipper_heads)
+            )
+        }
+        tails.setOnClickListener {
+            coinFlipperViewModel.choice(
+                context, resultMessage, getString(R.string.coin_flipper_tails)
+            )
+        }
+        resetButton.setOnClickListener { coinFlipperViewModel.resetScore(context, resultMessage) }
     }
 
     private fun disableListeners() {
@@ -75,56 +81,9 @@ class CoinFlipperFragment : Fragment() {
         resetButton.setOnClickListener(null)
     }
 
-    private fun resetUi() =
+    private fun resetUi() {
         (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_coin_flipper))
 
-    private fun choice(selfChoice: String) {
-        val options =
-            arrayOf(getString(R.string.coin_flipper_heads), getString(R.string.coin_flipper_tails))
-        val numero = Random().nextInt(2)
-        val resultCoinFlip = options[numero]
-
-        when (resultCoinFlip) {
-            getString(R.string.coin_flipper_heads) -> resultImage.setImageResource(R.drawable.coin_flipper_heads)
-            getString(R.string.coin_flipper_tails) -> resultImage.setImageResource(R.drawable.coin_flipper_tails)
-        }
-
-        logD { "selfChoice=$selfChoice, resultCoinFlip=$resultCoinFlip" }
-
-        if (selfChoice == getString(R.string.coin_flipper_heads) && resultCoinFlip == getString(R.string.coin_flipper_heads)
-            || selfChoice == getString(R.string.coin_flipper_tails) && resultCoinFlip == getString(R.string.coin_flipper_tails)
-        ) { // User Wins
-            result.apply {
-                text = getString(R.string.won)
-                textSize = 32F
-                setTextColor(GREEN)
-            }
-
-            val result = 1 + selfScore.text.toString().toInt()
-            selfScore.text = result.toString()
-        } else { // App Wins
-            result.apply {
-                text = getString(R.string.lost)
-                textSize = 32F
-                setTextColor(RED)
-            }
-
-            val result = 1 + appScore.text.toString().toInt()
-            appScore.text = result.toString()
-        }
-    }
-
-    private fun resetScore() {
-        result.apply {
-            text = getString(R.string.coin_flipper_win_or_lose)
-            textSize = 20F
-            setTextColor(GRAY)
-        }
-
-        appScore.text = getString(R.string.zero)
-        selfScore.text = getString(R.string.zero)
-        resultImage.setImageResource(R.drawable.ic_empty)
-
-        logD { "resetScore" }
+        coinFlipperViewModel.resetUi(context)
     }
 }
