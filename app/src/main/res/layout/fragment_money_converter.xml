@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="moneyConverterViewModel"
+            type="com.wrdelmanto.papps.apps.moneyConverter.MoneyConverterViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_edges">
+
+        <ImageView
+            android:id="@+id/money_converter_primary_input_country_flag"
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:contentDescription="@null"
+            android:src="@drawable/flag_argentina"
+            app:layout_constraintBottom_toBottomOf="@id/money_converter_primary_input"
+            app:layout_constraintStart_toStartOf="@+id/money_converter_primary_input"
+            app:layout_constraintTop_toTopOf="@id/money_converter_primary_input" />
+
+        <TextView
+            android:id="@+id/money_converter_primary_input_country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:text="ARS"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toBottomOf="@id/money_converter_primary_input_country_flag"
+            app:layout_constraintStart_toEndOf="@+id/money_converter_primary_input_country_flag"
+            app:layout_constraintTop_toTopOf="@id/money_converter_primary_input_country_flag" />
+
+        <ImageView
+            android:id="@+id/money_converter_primary_input_arrow_down"
+            android:layout_width="@dimen/image_size_small_under"
+            android:layout_height="@dimen/image_size_small_under"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arrow_down"
+            app:layout_constraintBottom_toBottomOf="@+id/money_converter_primary_input_country_name"
+            app:layout_constraintStart_toEndOf="@id/money_converter_primary_input_country_name"
+            app:layout_constraintTop_toTopOf="@+id/money_converter_primary_input_country_name" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/money_converter_primary_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_elements_normal"
+            android:background="@drawable/general_input_text"
+            android:inputType="number|numberDecimal"
+            android:padding="@dimen/padding_elements_normal_above"
+            android:text="@{moneyConverterViewModel.primaryInput}"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toTopOf="@+id/money_converter_secondary_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="1.00" />
+
+        <ImageView
+            android:id="@+id/money_converter_switch"
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            android:layout_marginEnd="@dimen/margin_elements_large"
+            android:background="@drawable/general_background"
+            android:contentDescription="@null"
+            android:elevation="1dp"
+            android:src="@drawable/ic_switch_vertically"
+            app:layout_constraintBottom_toTopOf="@id/money_converter_secondary_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/money_converter_primary_input" />
+
+        <ImageView
+            android:id="@+id/money_converter_secondary_input_country_flag"
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:contentDescription="@null"
+            android:src="@drawable/flag_brazil"
+            app:layout_constraintBottom_toBottomOf="@id/money_converter_secondary_input"
+            app:layout_constraintStart_toStartOf="@id/money_converter_secondary_input"
+            app:layout_constraintTop_toTopOf="@id/money_converter_secondary_input" />
+
+        <TextView
+            android:id="@+id/money_converter_secondary_input_country_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:text="BRL"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toBottomOf="@id/money_converter_secondary_input_country_flag"
+            app:layout_constraintStart_toEndOf="@+id/money_converter_secondary_input_country_flag"
+            app:layout_constraintTop_toTopOf="@id/money_converter_secondary_input_country_flag" />
+
+        <ImageView
+            android:id="@+id/money_converter_secondary_input_arrow_down"
+            android:layout_width="@dimen/image_size_small_under"
+            android:layout_height="@dimen/image_size_small_under"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arrow_down"
+            app:layout_constraintBottom_toBottomOf="@+id/money_converter_secondary_input_country_name"
+            app:layout_constraintStart_toEndOf="@id/money_converter_secondary_input_country_name"
+            app:layout_constraintTop_toTopOf="@+id/money_converter_secondary_input_country_name" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/money_converter_secondary_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_normal"
+            android:layout_marginBottom="@dimen/margin_elements_large"
+            android:background="@drawable/general_input_text"
+            android:inputType="number|numberDecimal"
+            android:padding="@dimen/padding_elements_normal_above"
+            android:text="@{moneyConverterViewModel.secondaryInput}"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toTopOf="@+id/money_converter_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="1.00" />
+
+        <View
+            android:id="@+id/money_converter_divider"
+            style="@style/Divider"
+            app:layout_constraintBottom_toBottomOf="@id/money_converter_middle_guide_line"
+            app:layout_constraintEnd_toEndOf="@id/money_converter_middle_guide_line"
+            app:layout_constraintStart_toStartOf="@id/money_converter_middle_guide_line"
+            app:layout_constraintTop_toTopOf="@id/money_converter_middle_guide_line" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/money_converter_conversion_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/money_converter_divider">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/money_converter_conversion_primary_input"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/general_gray_background"
+                android:inputType="number|numberDecimal"
+                android:padding="@dimen/padding_elements_small"
+                android:text="@{moneyConverterViewModel.primaryConversion}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/money_converter_conversion_separator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1.00" />
+
+            <TextView
+                android:id="@+id/money_converter_conversion_primary_input_cipher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ARS"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal"
+                app:layout_constraintBottom_toBottomOf="@+id/money_converter_conversion_primary_input"
+                app:layout_constraintEnd_toEndOf="@+id/money_converter_conversion_primary_input" />
+
+            <TextView
+                android:id="@+id/money_converter_conversion_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_elements_small"
+                android:padding="@dimen/padding_elements_small"
+                android:text="@string/equal_separator"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/money_converter_conversion_secondary_input"
+                app:layout_constraintStart_toEndOf="@+id/money_converter_conversion_primary_input"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/money_converter_conversion_secondary_input"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/general_gray_background"
+                android:inputType="number|numberDecimal"
+                android:padding="@dimen/padding_elements_small"
+                android:text="@{moneyConverterViewModel.secondaryConversion}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/money_converter_conversion_separator"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2.00" />
+
+            <TextView
+                android:id="@+id/money_converter_conversion_secondary_input_cipher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BRL"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal"
+                app:layout_constraintBottom_toBottomOf="@+id/money_converter_conversion_secondary_input"
+                app:layout_constraintEnd_toEndOf="@+id/money_converter_conversion_secondary_input" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/money_converter_middle_guide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

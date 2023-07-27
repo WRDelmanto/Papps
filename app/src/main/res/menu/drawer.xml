@@ -12,6 +12,10 @@
                     android:icon="@drawable/click_counter_logo"
                     android:title="@string/app_name_click_counter" />
                 <item
+                    android:id="@+id/drawer_money_converter"
+                    android:icon="@drawable/money_converter_logo"
+                    android:title="@string/app_name_money_converter" />
+                <item
                     android:id="@+id/drawer_dices"
                     android:icon="@drawable/dices_logo"
                     android:title="@string/app_name_dices" />

@@ -7,12 +7,16 @@
     <dimen name="min_height">48dp</dimen>
 
     <dimen name="margin_elements_small">8dp</dimen>
+    <dimen name="margin_elements_normal_under">12dp</dimen>
     <dimen name="margin_elements_normal">16dp</dimen>
+    <dimen name="margin_elements_normal_above">24dp</dimen>
     <dimen name="margin_elements_large">32dp</dimen>
     <dimen name="margin_elements_xlarge">64dp</dimen>
 
     <dimen name="padding_elements_small">8dp</dimen>
+    <dimen name="padding_elements_normal_under">12dp</dimen>
     <dimen name="padding_elements_normal">16dp</dimen>
+    <dimen name="padding_elements_normal_above">24dp</dimen>
     <dimen name="padding_elements_large">32dp</dimen>
     <dimen name="padding_elements_xlarge">64dp</dimen>
 
@@ -25,6 +29,7 @@
     <dimen name="image_size_custom">100dp</dimen>
 
     <dimen name="font_size_small">8sp</dimen>
+    <dimen name="font_size_normal_under">12sp</dimen>
     <dimen name="font_size_normal">16sp</dimen>
     <dimen name="font_size_normal_above">24sp</dimen>
     <dimen name="font_size_large">36sp</dimen>

@@ -18,6 +18,7 @@
     <string name="app_name_random_number">Número Aleatório</string>
     <string name="app_name_tip">Gorjeta</string>
     <string name="app_name_click_counter">Contador de Cliques</string>
+    <string name="app_name_money_converter">Conversor de Moedas (Beta)</string>
     <string name="app_name_dices">Rolagem de Dado</string>
     <string name="app_name_coin_flipper">Cara ou Coroa</string>
     <string name="app_name_unscramble">Sopa de Letrinhas</string>
@@ -60,7 +61,8 @@
     <string name="cipher">R$ </string>
     <string name="value_with_cipher">R\u0024 %1$s</string>
     <string name="value_with_percentage">%1$s \%%</string>
-    <string name="score_separator">X</string>
+    <string name="x_separator">X</string>
+    <string name="equal_separator">=</string>
     <string name="pve">PvE</string>
     <string name="pvp">PvP</string>
     <string name="clicks">Cliques</string>

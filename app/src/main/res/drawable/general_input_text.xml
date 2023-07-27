@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <!-- Background -->
-    <solid android:color="@color/general_button_background_tint" />
-
     <!-- Border -->
     <stroke
         android:width="2dp"
-        android:color="@color/general_button_border_tint" />
+        android:color="@color/black" />
 
     <!-- Corner roundness -->
     <corners android:radius="10dp" />

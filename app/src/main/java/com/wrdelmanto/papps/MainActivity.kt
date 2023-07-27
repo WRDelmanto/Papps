@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
 import com.wrdelmanto.papps.apps.dice.DicesFragment
+import com.wrdelmanto.papps.apps.moneyConverter.MoneyConverterFragment
 import com.wrdelmanto.papps.apps.random.randomLetter.RandomLetterFragment
 import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
@@ -173,6 +174,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 homeFragmentContainer.id, ClickCounterFragment(applicationContext), "CLICK_COUNTER"
             )
 
+            R.id.drawer_money_converter -> switchFragment(
+                homeFragmentContainer.id, MoneyConverterFragment(applicationContext), "MONEY_CONVERTER"
+            )
+
             R.id.drawer_dices -> switchFragment(
                 homeFragmentContainer.id, DicesFragment(applicationContext), "DICES"
             )
@@ -312,6 +317,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private companion object {
         const val CLICKS_HOME_FRAGMENT = 10
-        const val ONE_SECOND_IN_MILLIS = 1000L
     }
 }
