@@ -64,7 +64,9 @@ fun Activity.openKeyboard() = openKeyboard(currentFocus ?: View(this))
  */
 @Suppress("BooleanMethodIsAlwaysInverted")
 fun View.isKeyboardOpen(): Boolean {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        WindowInsetsCompat.toWindowInsetsCompat(rootWindowInsets).isVisible(WindowInsetsCompat.Type.ime())
-    else true
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        WindowInsetsCompat.toWindowInsetsCompat(
+            rootWindowInsets
+        ).isVisible(WindowInsetsCompat.Type.ime())
+    } else true
 }

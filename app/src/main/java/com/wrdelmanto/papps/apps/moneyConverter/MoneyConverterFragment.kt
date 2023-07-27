@@ -73,15 +73,23 @@ class MoneyConverterFragment(
 
     private fun changeViewState(viewState: MoneyConverterState) {
         when (viewState) {
-            MoneyConverterState.LOADING -> {}
+            MoneyConverterState.LOADING -> {
+                // Do nothing
+            }
+
             MoneyConverterState.LOADED -> {
                 initiateListeners()
                 moneyConverterViewModel.setNormalState()
                 moneyConverterViewModel.calculateExchange("primaryInput")
             }
 
-            MoneyConverterState.NORMAL -> {}
-            MoneyConverterState.CALCULATING -> {}
+            MoneyConverterState.NORMAL -> {
+                // Do nothing
+            }
+
+            MoneyConverterState.CALCULATING -> {
+                // Do nothing
+            }
         }
     }
 
@@ -92,8 +100,13 @@ class MoneyConverterFragment(
                 moneyConverterViewModel.calculateExchange("primaryInput")
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
         })
         secondaryInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
@@ -101,28 +114,43 @@ class MoneyConverterFragment(
                 moneyConverterViewModel.calculateExchange("secondaryInput")
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
         })
         primaryConversion.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 putSharedPreferences(context, SP_MC_PRIMARY_CONVERSION, s.toString())
                 moneyConverterViewModel.primaryConversion.value = s.toString()
-                moneyConverterViewModel.calculateExchange("primaryConversion")
+                moneyConverterViewModel.calculateExchange("conversion")
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
         })
         secondaryConversion.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 putSharedPreferences(context, SP_MC_SECONDARY_CONVERSION, s.toString())
                 moneyConverterViewModel.secondaryConversion.value = s.toString()
-                moneyConverterViewModel.calculateExchange("secondaryConversion")
+                moneyConverterViewModel.calculateExchange("conversion")
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
         })
     }
 

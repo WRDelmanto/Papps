@@ -216,6 +216,10 @@ class TicTacToeFragment(
         if (playerOne.contains(3) && playerOne.contains(5) && playerOne.contains(7)) winner = 1
         if (playerTwo.contains(3) && playerTwo.contains(5) && playerTwo.contains(7)) winner = 2
 
+        checkEndGame(winner)
+    }
+
+    private fun checkEndGame(winner: Int) {
         if (winner != -1) {
             if (winner == 1) {
                 if (playerMode == 1) showNormalToast(context, "Player 1 Wins!!!")

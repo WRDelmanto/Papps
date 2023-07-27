@@ -57,7 +57,7 @@ class RockPaperScissorsViewModel : ViewModel() {
 
         val appChoice = generetaAppChoice(context)
 
-        checkResults(context, selfChoice, appChoice)
+        checkResults(selfChoice, appChoice)
     }
 
     private fun generetaAppChoice(context: Context): String {
@@ -87,7 +87,7 @@ class RockPaperScissorsViewModel : ViewModel() {
         return appChoice
     }
 
-    private fun checkResults(context: Context, selfChoice: String, appChoice: String) {
+    private fun checkResults(selfChoice: String, appChoice: String) {
         if (selfChoice == "Scissors" && appChoice == "Paper" || selfChoice == "Paper" && appChoice == "Rock" || selfChoice == "Rock" && appChoice == "Scissors") {
             // User Wins
             _selfScore.value = (_selfScore.value?.toInt()?.plus(1)).toString()

@@ -84,14 +84,7 @@ class MoneyConverterViewModel : ViewModel() {
                     else return@launch
                 }
 
-                "primaryConversion" -> {
-                    shouldDelay = false
-
-                    if (shouldCalculateExchange()) calculateSecondaryInput()
-                    else return@launch
-                }
-
-                "secondaryConversion" -> {
+                "conversion" -> {
                     shouldDelay = false
 
                     if (shouldCalculateExchange()) calculateSecondaryInput()
@@ -142,12 +135,12 @@ class MoneyConverterViewModel : ViewModel() {
         _primaryConversion.value = SP_MC_PRIMARY_CONVERSION.let {
             val hs = getSharedPreferences(context, it, String)
             hs ?: "1.00"
-        } as String
+        }.toString()
 
         _secondaryConversion.value = SP_MC_SECONDARY_CONVERSION.let {
             val hs = getSharedPreferences(context, it, String)
             hs ?: "2.00"
-        } as String
+        }.toString()
 
         _primaryInput.value = "1000.00"
         _secondaryInput.value = "1.00"

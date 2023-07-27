@@ -52,5 +52,6 @@ class HomeFragment : Fragment() {
      */
     @Suppress("EmptyMethod")
     private fun test() {
+        // This is a test function
     }
 }

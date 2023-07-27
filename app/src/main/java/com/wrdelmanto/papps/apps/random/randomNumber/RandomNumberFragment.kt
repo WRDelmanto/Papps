@@ -98,8 +98,13 @@ class RandomNumberFragment(
                 putSharedPreferences(context, SP_RN_MIN, s.toString())
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
         })
 
         maxInput.addTextChangedListener(object : TextWatcher {
@@ -107,8 +112,13 @@ class RandomNumberFragment(
                 putSharedPreferences(context, SP_RN_MAX, s.toString())
             }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // Do nothing
+            }
         })
     }
 

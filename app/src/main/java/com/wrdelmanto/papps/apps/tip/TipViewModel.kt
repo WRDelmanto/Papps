@@ -45,17 +45,17 @@ class TipViewModel : ViewModel() {
         _roundUpTip.value = SP_T_TIP_SWITCH.let {
             val rut = getSharedPreferences(context, it, Boolean)
             rut ?: false
-        } as Boolean
+        }.toString().toBoolean()
 
         _roundUpTotal.value = SP_T_TOTAL_SWITCH.let {
             val rut = getSharedPreferences(context, it, Boolean)
             rut ?: false
-        } as Boolean
+        }.toString().toBoolean()
 
         _tipPercentage.value = SP_T_TIP_PERCENTAGE.let {
             val p = getSharedPreferences(context, it, Int)
             p ?: 10
-        } as Int
+        }.toString().toInt()
 
         _tipPercentageSeekBar.value = _tipPercentage.value!!.toInt()
     }
@@ -81,13 +81,8 @@ class TipViewModel : ViewModel() {
             )
         }
 
-        if (_roundUpTip.value == true) {
-            _tipOutput.value =
-                String.format(context.resources.getString(R.string.value_with_cipher), tip)
-        } else {
-            _tipOutput.value =
-                String.format(context.resources.getString(R.string.value_with_cipher), tip)
-        }
+        _tipOutput.value =
+            String.format(context.resources.getString(R.string.value_with_cipher), tip)
 
         val total = if (_roundUpTotal.value == true) {
             roundTo2Decimals(
@@ -97,16 +92,10 @@ class TipViewModel : ViewModel() {
             roundTo2Decimals(valueInput.value?.toDouble()?.plus(tip.toDouble())!!)
         }
 
-        if (_roundUpTotal.value == true) {
-            _totalOutput.value =
-                String.format(context.resources.getString(R.string.value_with_cipher), total)
-        } else {
-            _totalOutput.value =
-                String.format(context.resources.getString(R.string.value_with_cipher), total)
-        }
+        _totalOutput.value =
+            String.format(context.resources.getString(R.string.value_with_cipher), total)
 
         logD { "valueInput=${_valueInput.value}, tipPercentage=${_tipPercentage.value}, tip=${_tipOutput.value}, total=${_totalOutput.value}" }
-
     }
 
     companion object {

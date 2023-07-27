@@ -4,6 +4,8 @@ import android.content.Context
 import android.widget.Toast.LENGTH_SHORT
 import es.dmoral.toasty.Toasty
 
+const val TOAST_ERROR_MESSAGE = "Only CharSequence and Int can be used at Toasts"
+
 /**
  * Different types of Toasts
  * More info: https://github.com/GrenderG/Toasty
@@ -21,7 +23,7 @@ fun showErrorToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) {
     when (value) {
         is CharSequence -> Toasty.error(context, value, duration, true).show()
         is Int -> Toasty.error(context, context.resources.getText(value), duration, true).show()
-        else -> error("Only CharSequence and Int can be used at Toasts")
+        else -> error(TOAST_ERROR_MESSAGE)
     }
 }
 
@@ -37,7 +39,7 @@ fun showSuccessToast(context: Context, value: Any, duration: Int = LENGTH_SHORT)
     when (value) {
         is CharSequence -> Toasty.success(context, value, duration, true).show()
         is Int -> Toasty.success(context, context.resources.getText(value), duration, true).show()
-        else -> error("Only CharSequence and Int can be used at Toasts")
+        else -> error(TOAST_ERROR_MESSAGE)
     }
 }
 
@@ -53,7 +55,7 @@ fun showInfoToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) {
     when (value) {
         is CharSequence -> Toasty.info(context, value, duration, true).show()
         is Int -> Toasty.info(context, context.resources.getText(value), duration, true).show()
-        else -> error("Only CharSequence and Int can be used at Toasts")
+        else -> error(TOAST_ERROR_MESSAGE)
     }
 }
 
@@ -69,7 +71,7 @@ fun showWarningToast(context: Context, value: Any, duration: Int = LENGTH_SHORT)
     when (value) {
         is CharSequence -> Toasty.warning(context, value, duration, true).show()
         is Int -> Toasty.warning(context, context.resources.getText(value), duration, true).show()
-        else -> error("Only CharSequence and Int can be used at Toasts")
+        else -> error(TOAST_ERROR_MESSAGE)
     }
 }
 
@@ -85,7 +87,7 @@ fun showNormalToast(context: Context, value: Any, duration: Int = LENGTH_SHORT) 
     when (value) {
         is CharSequence -> Toasty.normal(context, value, duration).show()
         is Int -> Toasty.normal(context, context.resources.getText(value), duration).show()
-        else -> error("Only CharSequence and Int can be used at Toasts")
+        else -> error(TOAST_ERROR_MESSAGE)
     }
 }
 
@@ -131,7 +133,7 @@ fun showCustomToast(
                 withIcon,
                 shouldTint
             ).show()
-        else -> error("Only CharSequence and Int can be used at Toasts")
+        else -> error(TOAST_ERROR_MESSAGE)
     }
 }
 
