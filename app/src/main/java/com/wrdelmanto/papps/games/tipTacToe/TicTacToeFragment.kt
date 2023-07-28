@@ -184,42 +184,10 @@ class TicTacToeFragment(
     private fun checkWinner() {
         var winner = -1
 
-        // Row 1
-        if (playerOne.contains(1) && playerOne.contains(2) && playerOne.contains(3)) winner = 1
-        if (playerTwo.contains(1) && playerTwo.contains(2) && playerTwo.contains(3)) winner = 2
+        if (checkRows() != -1) winner = checkRows()
+        if (checkCollumns() != -1) winner = checkRows()
+        if (checkCrosses() != -1) winner = checkCrosses()
 
-        // Row 2
-        if (playerOne.contains(4) && playerOne.contains(5) && playerOne.contains(6)) winner = 1
-        if (playerTwo.contains(4) && playerTwo.contains(5) && playerTwo.contains(6)) winner = 2
-
-        // Row 3
-        if (playerOne.contains(7) && playerOne.contains(8) && playerOne.contains(9)) winner = 1
-        if (playerTwo.contains(7) && playerTwo.contains(8) && playerTwo.contains(9)) winner = 2
-
-        // Col 1
-        if (playerOne.contains(1) && playerOne.contains(4) && playerOne.contains(7)) winner = 1
-        if (playerTwo.contains(1) && playerTwo.contains(4) && playerTwo.contains(7)) winner = 2
-
-        // Col 2
-        if (playerOne.contains(2) && playerOne.contains(5) && playerOne.contains(8)) winner = 1
-        if (playerTwo.contains(2) && playerTwo.contains(5) && playerTwo.contains(8)) winner = 2
-
-        // Col 3
-        if (playerOne.contains(3) && playerOne.contains(6) && playerOne.contains(9)) winner = 1
-        if (playerTwo.contains(3) && playerTwo.contains(6) && playerTwo.contains(9)) winner = 2
-
-        // Cross 1
-        if (playerOne.contains(1) && playerOne.contains(5) && playerOne.contains(9)) winner = 1
-        if (playerTwo.contains(1) && playerTwo.contains(5) && playerTwo.contains(9)) winner = 2
-
-        // Cross 2
-        if (playerOne.contains(3) && playerOne.contains(5) && playerOne.contains(7)) winner = 1
-        if (playerTwo.contains(3) && playerTwo.contains(5) && playerTwo.contains(7)) winner = 2
-
-        checkEndGame(winner)
-    }
-
-    private fun checkEndGame(winner: Int) {
         if (winner != -1) {
             if (winner == 1) {
                 if (playerMode == 1) showNormalToast(context, "Player 1 Wins!!!")
@@ -231,6 +199,50 @@ class TicTacToeFragment(
 
             disableAllButtons()
         }
+    }
+
+    private fun checkRows(): Int {
+        // Row 1
+        if (playerOne.contains(1) && playerOne.contains(2) && playerOne.contains(3)) return 1
+        if (playerTwo.contains(1) && playerTwo.contains(2) && playerTwo.contains(3)) return 2
+
+        // Row 2
+        if (playerOne.contains(4) && playerOne.contains(5) && playerOne.contains(6)) return 1
+        if (playerTwo.contains(4) && playerTwo.contains(5) && playerTwo.contains(6)) return 2
+
+        // Row 3
+        if (playerOne.contains(7) && playerOne.contains(8) && playerOne.contains(9)) return 1
+        if (playerTwo.contains(7) && playerTwo.contains(8) && playerTwo.contains(9)) return 2
+
+        return -1
+    }
+
+    private fun checkCollumns(): Int {
+        // Collumn 1
+        if (playerOne.contains(1) && playerOne.contains(4) && playerOne.contains(7)) return 1
+        if (playerTwo.contains(1) && playerTwo.contains(4) && playerTwo.contains(7)) return 2
+
+        // Collumn 2
+        if (playerOne.contains(2) && playerOne.contains(5) && playerOne.contains(8)) return 1
+        if (playerTwo.contains(2) && playerTwo.contains(5) && playerTwo.contains(8)) return 2
+
+        // Collumn 3
+        if (playerOne.contains(3) && playerOne.contains(6) && playerOne.contains(9)) return 1
+        if (playerTwo.contains(3) && playerTwo.contains(6) && playerTwo.contains(9)) return 2
+
+        return -1
+    }
+
+    private fun checkCrosses(): Int {
+        // Cross 1
+        if (playerOne.contains(1) && playerOne.contains(5) && playerOne.contains(9)) return 1
+        if (playerTwo.contains(1) && playerTwo.contains(5) && playerTwo.contains(9)) return 2
+
+        // Cross 2
+        if (playerOne.contains(3) && playerOne.contains(5) && playerOne.contains(7)) return 1
+        if (playerTwo.contains(3) && playerTwo.contains(5) && playerTwo.contains(7)) return 2
+
+        return -1
     }
 
     private fun disableAllButtons() {
