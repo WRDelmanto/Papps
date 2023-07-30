@@ -129,9 +129,10 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="1.00" />
 
-        <View
+        <com.google.android.material.divider.MaterialDivider
             android:id="@+id/money_converter_divider"
-            style="@style/Divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@id/money_converter_middle_guide_line"
             app:layout_constraintEnd_toEndOf="@id/money_converter_middle_guide_line"
             app:layout_constraintStart_toStartOf="@id/money_converter_middle_guide_line"

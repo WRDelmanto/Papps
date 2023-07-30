@@ -77,8 +77,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            style="@style/Divider"
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_elements_small" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,8 +114,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            style="@style/Divider"
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_elements_small" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -149,8 +151,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            style="@style/Divider"
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_elements_small" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -185,8 +188,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            style="@style/Divider"
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_elements_small" />
     </LinearLayout>
 
@@ -208,9 +212,10 @@
             android:contentDescription="@string/rocket_mini_logo_description"
             android:src="@drawable/ic_rocket" />
 
-        <View
-            style="@style/Divider"
-            android:layout_marginBottom="@dimen/margin_elements_small" />
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_elements_small" />
 
         <TextView
             android:id="@+id/settings_fragment_version"
