@@ -297,6 +297,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun shouldActivateEasterEgg(isEasterEggActivated: Boolean) {
         val ticTacToeDrawerIcon = drawerItemsNavView.menu.findItem(R.id.drawer_tic_tac_toe)
         ticTacToeDrawerIcon.isVisible = isEasterEggActivated
+
+        val moneyConverterDrawerIcon = drawerItemsNavView.menu.findItem(R.id.drawer_money_converter)
+        moneyConverterDrawerIcon.isVisible = isEasterEggActivated
     }
 
     private fun disableDrawerMomentarily() {
