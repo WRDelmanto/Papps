@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -31,7 +30,6 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        resetUi()
         initiateListeners()
     }
 
@@ -44,8 +42,6 @@ class HomeFragment : Fragment() {
     private fun initiateListeners() = homeLogo.setOnClickListener { test() }
 
     private fun disableListeners() = homeLogo.setOnClickListener(null)
-
-    private fun resetUi() = (activity as MainActivity?)?.updateAppBarTitle("")
 
     /**
      * Function created to test features.

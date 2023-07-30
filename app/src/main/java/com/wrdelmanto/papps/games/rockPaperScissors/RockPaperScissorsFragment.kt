@@ -9,8 +9,6 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.wrdelmanto.papps.MainActivity
-import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentRockPaperScissorsBinding
 
 class RockPaperScissorsFragment(
@@ -76,9 +74,5 @@ class RockPaperScissorsFragment(
         resetButton.setOnClickListener(null)
     }
 
-    private fun resetUi() {
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_rock_paper_scissors))
-
-        rockPaperScissorsViewModel.resetUi(context)
-    }
+    private fun resetUi() = rockPaperScissorsViewModel.resetUi(context)
 }

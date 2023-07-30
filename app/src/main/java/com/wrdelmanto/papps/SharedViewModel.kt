@@ -1,0 +1,56 @@
+package com.wrdelmanto.papps
+
+import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.wrdelmanto.papps.utils.SP_EASTER_EGG
+import com.wrdelmanto.papps.utils.getSharedPreferences
+
+class SharedViewModel : ViewModel() {
+    val easterEggActivated = MutableLiveData(false)
+
+    private lateinit var currentFragmentTag: String
+
+    fun shouldShowRandomBottomNavMenu(): Boolean =
+        currentFragmentTag in listOf(RANDOM_LETTER, RANDOM_NUMBER)
+
+    fun checkEasterEgg(context: Context) {
+        easterEggActivated.value =
+            ((getSharedPreferences(context, SP_EASTER_EGG, Boolean)) ?: false).toString()
+                .toBoolean()
+    }
+
+    fun getCurrentTitle(context: Context, tag: String): String {
+        currentFragmentTag = tag
+
+        return when (currentFragmentTag) {
+            HOME -> EMPTY_STRING
+            CLICK_COUNTER -> context.resources.getString(R.string.app_name_click_counter)
+            MONEY_CONVERTER -> context.resources.getString(R.string.app_name_money_converter)
+            DICES -> context.resources.getString(R.string.app_name_dices)
+            RANDOM_LETTER -> context.resources.getString(R.string.app_name_random_letter)
+            RANDOM_NUMBER -> context.resources.getString(R.string.app_name_random_number)
+            TIP -> context.resources.getString(R.string.app_name_tip)
+            COIN_FLIPPER -> context.resources.getString(R.string.app_name_coin_flipper)
+            TIC_TAC_TOE -> context.resources.getString(R.string.app_name_tic_tac_toe)
+            ROCK_PAPER_SCISSORS -> context.resources.getString(R.string.app_name_rock_paper_scissors)
+            UNSCRAMBLE -> context.resources.getString(R.string.app_name_unscramble)
+            else -> EMPTY_STRING
+        }
+    }
+
+    companion object {
+        const val HOME = "HOME"
+        const val CLICK_COUNTER = "CLICK_COUNTER"
+        const val MONEY_CONVERTER = "MONEY_CONVERTER"
+        const val DICES = "DICES"
+        const val RANDOM_LETTER = "RANDOM_LETTER"
+        const val RANDOM_NUMBER = "RANDOM_NUMBER"
+        const val TIP = "TIP"
+        const val COIN_FLIPPER = "COIN_FLIPPER"
+        const val TIC_TAC_TOE = "TIC_TAC_TOE"
+        const val ROCK_PAPER_SCISSORS = "ROCK_PAPER_SCISSORS"
+        const val UNSCRAMBLE = "UNSCRAMBLE"
+        const val EMPTY_STRING = ""
+    }
+}

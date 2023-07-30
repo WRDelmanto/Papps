@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentRandomLetterBinding
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
@@ -43,8 +42,6 @@ class RandomLetterFragment(
 
         binding.randomLetterViewModel = randomLetterViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_random_letter))
 
         result = binding.randomLetterResult
         clickAnywhereButton = binding.randomLetterClickAnywhereButton

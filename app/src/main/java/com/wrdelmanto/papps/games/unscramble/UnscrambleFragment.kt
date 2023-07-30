@@ -11,8 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.wrdelmanto.papps.MainActivity
-import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentUnscrambleBinding
 
 class UnscrambleFragment(
@@ -35,8 +33,6 @@ class UnscrambleFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_unscramble))
 
         binding.unscrambleViewModel = unscrambleViewModel
         binding.lifecycleOwner = viewLifecycleOwner

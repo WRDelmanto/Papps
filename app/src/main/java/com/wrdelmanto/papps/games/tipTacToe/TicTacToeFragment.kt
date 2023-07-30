@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentTicTacToeBinding
 import com.wrdelmanto.papps.utils.showNormalToast
@@ -73,7 +72,6 @@ class TicTacToeFragment(
     override fun onResume() {
         super.onResume()
 
-        resetUi()
         initiateListeners()
     }
 
@@ -116,9 +114,6 @@ class TicTacToeFragment(
 
         resetButton.setOnClickListener(null)
     }
-
-    private fun resetUi() =
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tic_tac_toe))
 
     @Suppress("DEPRECATION")
     private fun switchPlayerMode(playerMode: Button) {

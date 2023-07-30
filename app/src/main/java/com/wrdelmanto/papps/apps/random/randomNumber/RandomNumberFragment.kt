@@ -12,7 +12,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentRandomNumberBinding
 import com.wrdelmanto.papps.utils.SP_RN_MAX
@@ -44,8 +43,6 @@ class RandomNumberFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_random_number))
 
         binding.randomNumberViewModel = randomNumberViewModel
         binding.lifecycleOwner = viewLifecycleOwner

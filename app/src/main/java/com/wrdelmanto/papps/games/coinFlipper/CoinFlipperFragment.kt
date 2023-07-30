@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentCoinFlipperBinding
 
@@ -81,9 +80,5 @@ class CoinFlipperFragment(
         resetButton.setOnClickListener(null)
     }
 
-    private fun resetUi() {
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_coin_flipper))
-
-        coinFlipperViewModel.resetUi(context)
-    }
+    private fun resetUi() = coinFlipperViewModel.resetUi(context)
 }

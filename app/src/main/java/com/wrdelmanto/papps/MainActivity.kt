@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +16,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import com.wrdelmanto.papps.SharedViewModel.Companion.CLICK_COUNTER
+import com.wrdelmanto.papps.SharedViewModel.Companion.COIN_FLIPPER
+import com.wrdelmanto.papps.SharedViewModel.Companion.DICES
+import com.wrdelmanto.papps.SharedViewModel.Companion.HOME
+import com.wrdelmanto.papps.SharedViewModel.Companion.MONEY_CONVERTER
+import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_LETTER
+import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_NUMBER
+import com.wrdelmanto.papps.SharedViewModel.Companion.ROCK_PAPER_SCISSORS
+import com.wrdelmanto.papps.SharedViewModel.Companion.TIC_TAC_TOE
+import com.wrdelmanto.papps.SharedViewModel.Companion.TIP
+import com.wrdelmanto.papps.SharedViewModel.Companion.UNSCRAMBLE
 import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
 import com.wrdelmanto.papps.apps.dice.DicesFragment
 import com.wrdelmanto.papps.apps.moneyConverter.MoneyConverterFragment
@@ -28,8 +40,6 @@ import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
 import com.wrdelmanto.papps.games.unscramble.UnscrambleFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.ui.settings.SettingsActivity
-import com.wrdelmanto.papps.utils.SP_EASTER_EGG
-import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -37,6 +47,8 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: MainFragmentBinding
+
+    private val sharedViewModel: SharedViewModel by viewModels()
 
     private lateinit var activityMain: DrawerLayout
     private lateinit var homeFragmentContainer: FragmentContainerView
@@ -47,7 +59,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     // Drawer header
     private lateinit var drawerHeader: ConstraintLayout
-    private var clicksHomeFragment = 0
 
     // Drawer
     private lateinit var drawerItemsNavView: NavigationView
@@ -59,8 +70,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var randomBottomNavMenu: NavigationBarView
     private lateinit var randomBottomNavMenuRandomLetter: MenuItem
     private lateinit var randomBottomNavMenuRandomnumber: MenuItem
-
-    private lateinit var actualFragmentTag: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,17 +103,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         randomBottomNavMenuRandomnumber =
             randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
-        switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
+        switchFragment(homeFragmentContainer.id, HomeFragment(), HOME)
     }
 
     override fun onResume() {
         super.onResume()
 
         initiateListeners()
+        initiateObservers()
     }
 
     override fun onPause() {
         disableListeners()
+        disableObservers()
 
         super.onPause()
     }
@@ -134,6 +145,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         randomBottomNavMenu.setOnItemSelectedListener { item -> onNavigationItemSelected(item) }
     }
 
+    private fun initiateObservers() {
+        sharedViewModel.easterEggActivated.observe(this) { easterEggActivated ->
+            shouldActivateEasterEgg(easterEggActivated)
+        }
+    }
+
     private fun disableListeners() {
         // App bar
         drawerIcon.setOnClickListener(null)
@@ -151,19 +168,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         randomBottomNavMenu.setOnItemSelectedListener(null)
     }
 
+    private fun disableObservers() {
+        sharedViewModel.easterEggActivated.removeObserver {}
+    }
+
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (actualFragmentTag != "HOME") super.onBackPressed()
+        // Do nothing
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         setupNavigationAndStatusBar(applicationContext, window)
 
-        if (((getSharedPreferences(applicationContext, SP_EASTER_EGG, Boolean))
-                ?: false) as Boolean
-        ) activateEasterEgg()
-        else resetEasterEgg()
+        sharedViewModel.checkEasterEgg(applicationContext)
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
@@ -171,58 +189,58 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // Drawer
             // Apps
             R.id.drawer_click_counter -> switchFragment(
-                homeFragmentContainer.id, ClickCounterFragment(applicationContext), "CLICK_COUNTER"
+                homeFragmentContainer.id, ClickCounterFragment(applicationContext), CLICK_COUNTER
             )
 
             R.id.drawer_money_converter -> switchFragment(
                 homeFragmentContainer.id,
                 MoneyConverterFragment(applicationContext),
-                "MONEY_CONVERTER"
+                MONEY_CONVERTER
             )
 
             R.id.drawer_dices -> switchFragment(
-                homeFragmentContainer.id, DicesFragment(applicationContext), "DICES"
+                homeFragmentContainer.id, DicesFragment(applicationContext), DICES
             )
 
             R.id.drawer_random_letter -> {
                 switchFragment(
                     homeFragmentContainer.id,
                     RandomLetterFragment(applicationContext),
-                    "RANDOM_LETTER"
+                    RANDOM_LETTER
                 )
-                randomBottomNavMenuRandomLetter.isChecked = true
+                checkRandomLetterAtRandomBottomNavMenu()
             }
 
             R.id.drawer_random_number -> {
                 switchFragment(
                     homeFragmentContainer.id,
                     RandomNumberFragment(applicationContext),
-                    "RANDOM_NUMBER"
+                    RANDOM_NUMBER
                 )
-                randomBottomNavMenuRandomnumber.isChecked = true
+                checkRandomNumberAtRandomBottomNavMenu()
             }
 
             R.id.drawer_tip -> switchFragment(
-                homeFragmentContainer.id, TipFragment(applicationContext), "TIP"
+                homeFragmentContainer.id, TipFragment(applicationContext), TIP
             )
 
             // Games
             R.id.drawer_coin_flipper -> switchFragment(
-                homeFragmentContainer.id, CoinFlipperFragment(applicationContext), "COIN_FLIPPER"
+                homeFragmentContainer.id, CoinFlipperFragment(applicationContext), COIN_FLIPPER
             )
 
             R.id.drawer_tic_tac_toe -> switchFragment(
-                homeFragmentContainer.id, TicTacToeFragment(applicationContext), "TIC_TAC_TOE"
+                homeFragmentContainer.id, TicTacToeFragment(applicationContext), TIC_TAC_TOE
             )
 
             R.id.drawer_rock_paper_scissors -> switchFragment(
                 homeFragmentContainer.id,
                 RockPaperScissorsFragment(applicationContext),
-                "ROCK_PAPER_SCISSORS"
+                ROCK_PAPER_SCISSORS
             )
 
             R.id.drawer_unscramble -> switchFragment(
-                homeFragmentContainer.id, UnscrambleFragment(applicationContext), "UNSCRAMBLE"
+                homeFragmentContainer.id, UnscrambleFragment(applicationContext), UNSCRAMBLE
             )
 
             // Drawer bottom
@@ -230,16 +248,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             // Random bottom nav menu
             R.id.random_bottom_nav_menu_random_letter -> switchFragment(
-                homeFragmentContainer.id, RandomLetterFragment(applicationContext), "RANDOM_LETTER"
+                homeFragmentContainer.id, RandomLetterFragment(applicationContext), RANDOM_LETTER
             )
 
             R.id.random_bottom_nav_menu_random_number -> switchFragment(
-                homeFragmentContainer.id, RandomNumberFragment(applicationContext), "RANDOM_NUMBER"
+                homeFragmentContainer.id, RandomNumberFragment(applicationContext), RANDOM_NUMBER
             )
         }
 
         activityMain.closeDrawer(START)
         return true
+    }
+
+    private fun checkRandomLetterAtRandomBottomNavMenu() {
+        randomBottomNavMenuRandomLetter.isChecked = true
+    }
+
+    private fun checkRandomNumberAtRandomBottomNavMenu() {
+        randomBottomNavMenuRandomnumber.isChecked = true
     }
 
     private fun switchFragment(fragmentId: Int, newFragment: Fragment, fragmentName: String) {
@@ -248,40 +274,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             if (supportFragmentManager.findFragmentById(fragmentId) == null) {
                 ft.add(fragmentId, newFragment, fragmentName)
-            } else if (supportFragmentManager.fragments[0].tag != fragmentName) ft.replace(
-                fragmentId, newFragment, fragmentName
-            )
+            } else if (supportFragmentManager.fragments[0].tag != fragmentName) {
+                ft.replace(fragmentId, newFragment, fragmentName)
+            }
 
-            actualFragmentTag = fragmentName
+            appBarTitle.text = sharedViewModel.getCurrentTitle(applicationContext, fragmentName)
+            randomBottomNavMenu.isVisible = sharedViewModel.shouldShowRandomBottomNavMenu()
+
             ft.addToBackStack(null)
             ft.commit()
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
-        shouldShowRandomBottomNavMenu(fragmentName)
-    }
-
-    private fun shouldShowRandomBottomNavMenu(fragmentName: String) {
-        randomBottomNavMenu.isVisible =
-            fragmentName == "RANDOM_LETTER" || fragmentName == "RANDOM_NUMBER"
-    }
-
-    fun updateAppBarTitle(titleName: String) {
-        appBarTitle.text = titleName
     }
 
     private fun goHomeFragment() {
-        if (actualFragmentTag == "HOME") return
+        disableDrawerMomentarily()
+        activityMain.closeDrawer(START)
+        switchFragment(homeFragmentContainer.id, HomeFragment(), HOME)
+    }
 
-        clicksHomeFragment++
-
-        if (clicksHomeFragment >= CLICKS_HOME_FRAGMENT) {
-            clicksHomeFragment = 0
-            disableDrawerMomentarily()
-            activityMain.closeDrawer(START)
-            switchFragment(homeFragmentContainer.id, HomeFragment(), "HOME")
-        }
+    private fun shouldActivateEasterEgg(isEasterEggActivated: Boolean) {
+        val ticTacToeDrawerIcon = drawerItemsNavView.menu.findItem(R.id.drawer_tic_tac_toe)
+        ticTacToeDrawerIcon.isVisible = isEasterEggActivated
     }
 
     private fun disableDrawerMomentarily() {
@@ -307,19 +322,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun activateEasterEgg() {
-        val ticTacToe = drawerItemsNavView.menu.findItem(R.id.drawer_tic_tac_toe)
-        ticTacToe.isVisible = true
-    }
-
-    private fun resetEasterEgg() {
-        val ticTacToe = drawerItemsNavView.menu.findItem(R.id.drawer_tic_tac_toe)
-        ticTacToe.isVisible = false
-    }
-
     private fun openSettingsActivity() = startActivity(Intent(this, SettingsActivity::class.java))
-
-    private companion object {
-        const val CLICKS_HOME_FRAGMENT = 10
-    }
 }

@@ -13,8 +13,6 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.wrdelmanto.papps.MainActivity
-import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentTipBinding
 import com.wrdelmanto.papps.utils.SP_T_TIP_PERCENTAGE
 import com.wrdelmanto.papps.utils.SP_T_TIP_SWITCH
@@ -44,8 +42,6 @@ class TipFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_tip))
 
         binding.tipViewModel = tipViewModel
         binding.lifecycleOwner = viewLifecycleOwner

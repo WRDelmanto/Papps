@@ -9,8 +9,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.wrdelmanto.papps.MainActivity
-import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentClickCounterBinding
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
@@ -36,8 +34,6 @@ class ClickCounterFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_click_counter))
 
         binding.clickCounterViewModel = clickCounterViewModel
         binding.lifecycleOwner = viewLifecycleOwner

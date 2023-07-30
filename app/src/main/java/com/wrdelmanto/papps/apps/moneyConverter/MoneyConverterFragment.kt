@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.wrdelmanto.papps.MainActivity
-import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentMoneyConverterBinding
 import com.wrdelmanto.papps.utils.SP_MC_PRIMARY_CONVERSION
 import com.wrdelmanto.papps.utils.SP_MC_SECONDARY_CONVERSION
@@ -42,8 +40,6 @@ class MoneyConverterFragment(
 
         binding.moneyConverterViewModel = moneyConverterViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
-        (activity as MainActivity?)?.updateAppBarTitle(getString(R.string.app_name_money_converter))
 
         primaryInput = binding.moneyConverterPrimaryInput
         secondaryInput = binding.moneyConverterSecondaryInput
