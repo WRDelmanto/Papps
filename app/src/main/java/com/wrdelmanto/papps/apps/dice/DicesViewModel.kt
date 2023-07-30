@@ -5,11 +5,15 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.THREE_QUARTERS_SECOND_IN_MILLIS
 import com.wrdelmanto.papps.utils.SP_D_DICE_HISTORY
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class DicesViewModel : ViewModel() {
     private val _diceImage = MutableLiveData<Drawable>()
@@ -38,11 +42,13 @@ class DicesViewModel : ViewModel() {
 
     private lateinit var diceHistory: String
 
+    private var isFirstTime = true
+
     fun resetUi(context: Context) {
         diceHistory = SP_D_DICE_HISTORY.let {
             val lh = getSharedPreferences(context, it, String)
             lh ?: "*****"
-        } as String
+        }.toString()
 
         updateDiceHistory()
     }
@@ -55,13 +61,18 @@ class DicesViewModel : ViewModel() {
 
         putSharedPreferences(context, SP_D_DICE_HISTORY, diceHistory)
 
-        diceImage.value = when (diceResult) {
-            1 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_1, null)
-            2 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_2, null)
-            3 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_3, null)
-            4 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_4, null)
-            5 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_5, null)
-            else -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_6, null)
+        viewModelScope.launch {
+            if (!isFirstTime) delay(THREE_QUARTERS_SECOND_IN_MILLIS)
+            isFirstTime = false
+
+            diceImage.value = when (diceResult) {
+                1 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_1, null)
+                2 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_2, null)
+                3 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_3, null)
+                4 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_4, null)
+                5 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_5, null)
+                else -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_6, null)
+            }
         }
 
         logD { "diceResult=$diceResult" }

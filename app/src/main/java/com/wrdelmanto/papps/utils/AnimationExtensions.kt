@@ -1,33 +1,50 @@
 package com.wrdelmanto.papps.utils
 
+import android.animation.ObjectAnimator
+import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.TextView
 import androidx.core.view.isVisible
 
 /**
  * Start blinking animation.
  *
- * @param textview
+ * @param view
  */
-fun startBlinkingAnimation(textview: TextView) {
-    val anim: Animation = AlphaAnimation(0.0f, 1.0f)
+fun startBlinkingAnimation(view: View) {
+    val animation = AlphaAnimation(0.0f, 1.0f)
 
-    anim.duration = 1000
-    anim.startOffset = 20
-    anim.repeatMode = Animation.REVERSE
-    anim.repeatCount = Animation.INFINITE
+    animation.duration = 1000
+    animation.startOffset = 20
+    animation.repeatMode = Animation.REVERSE
+    animation.repeatCount = Animation.INFINITE
 
-    textview.isVisible = true
-    textview.startAnimation(anim)
+    view.isVisible = true
+    view.startAnimation(animation)
 }
 
 /**
  * Stop blinking animation.
  *
- * @param textview
+ * @param view
+ * @param shouldStillBeVisible
  */
-fun stopBlinkingAnimation(textview: TextView, shouldBeVisible: Boolean = false) {
-    textview.clearAnimation()
-    textview.isVisible = shouldBeVisible
+fun stopBlinkingAnimation(view: View, shouldStillBeVisible: Boolean = false) {
+    view.clearAnimation()
+    view.isVisible = shouldStillBeVisible
+}
+
+/**
+ * Start tilting animation.
+ *
+ * @param view
+ */
+fun startTiltingAnimation(view: View) {
+    val degrees = 10f
+
+    val animation = ObjectAnimator.ofFloat(view, "rotation", 0f, degrees, 0f, -degrees, 0f)
+    animation.duration = 1000
+
+    view.isVisible = true
+    animation.start()
 }

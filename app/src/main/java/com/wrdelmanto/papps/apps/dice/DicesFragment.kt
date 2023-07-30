@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.databinding.FragmentDicesBinding
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
+import com.wrdelmanto.papps.utils.startTiltingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
 
 class DicesFragment(
@@ -66,7 +67,7 @@ class DicesFragment(
 
     private fun initiateListeners() = clickAnywhereButton.setOnClickListener {
         stopBlinkingAnimation(clickAnywhereMessage)
-        resultImage.isVisible = true
+        startTiltingAnimation(resultImage)
         dicesViewModel.rollDice(context)
     }
 
