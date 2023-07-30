@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.wrdelmanto.papps.TEN_MILLIS
+import com.wrdelmanto.papps.ONE_QUARTER_SECOND_IN_MILLIS
 import com.wrdelmanto.papps.utils.SP_MC_PRIMARY_CONVERSION
 import com.wrdelmanto.papps.utils.SP_MC_SECONDARY_CONVERSION
 import com.wrdelmanto.papps.utils.getSharedPreferences
@@ -93,28 +93,32 @@ class MoneyConverterViewModel : ViewModel() {
             }
 
             logD { "primaryInput=${primaryInput.value}, secondaryInput=${secondaryInput.value}, primaryConversion=${primaryConversion.value}, secondaryConversion=${secondaryConversion.value}" }
-            if (shouldDelay) delay(TEN_MILLIS)
+            if (shouldDelay) delay(ONE_QUARTER_SECOND_IN_MILLIS)
 
             setNormalState()
         }
     }
 
     private fun calculatePrimaryInput() {
-        val newPrimaryInput = roundTo2Decimals(
+        var newPrimaryInput = roundTo2Decimals(
             _secondaryInput.value?.toDouble()?.times(
                 _primaryConversion.value!!.toDouble()
             )?.div(_secondaryConversion.value!!.toDouble())!!
         )
 
+        if (!newPrimaryInput.toFloat().isFinite()) newPrimaryInput = "0.00"
+
         if (!_primaryInput.value.equals(newPrimaryInput)) _primaryInput.value = newPrimaryInput
     }
 
     private fun calculateSecondaryInput() {
-        val newSecondaryInput = roundTo2Decimals(
+        var newSecondaryInput = roundTo2Decimals(
             _primaryInput.value?.toDouble()?.times(
                 _secondaryConversion.value!!.toDouble()
             )?.div(_primaryConversion.value!!.toDouble())!!
         )
+
+        if (!newSecondaryInput.toFloat().isFinite()) newSecondaryInput = "0.00"
 
         if (!_secondaryInput.value.equals(newSecondaryInput)) _secondaryInput.value =
             newSecondaryInput
@@ -124,7 +128,7 @@ class MoneyConverterViewModel : ViewModel() {
         if (!isNumeric(_primaryInput.value.toString())) return false
         if (!isNumeric(_secondaryInput.value.toString())) return false
         if (!isNumeric(_primaryConversion.value.toString())) return false
-        if (!isNumeric(_secondaryConversion.value.toString())) return false
+        if (!_secondaryConversion.value!!.toFloat().isFinite()) return false
 
         return true
     }
@@ -139,7 +143,7 @@ class MoneyConverterViewModel : ViewModel() {
 
         _secondaryConversion.value = SP_MC_SECONDARY_CONVERSION.let {
             val hs = getSharedPreferences(context, it, String)
-            hs ?: "2.00"
+            hs ?: "1.00"
         }.toString()
 
         _primaryInput.value = "1000.00"

@@ -7,7 +7,6 @@ package com.wrdelmanto.papps.utils
  */
 fun roundTo2Decimals(number: Double): String = "%.2f".format(number)
 
-
 /**
  * Check if the input is numeric (Int, Float, Double, etc.)
  *
