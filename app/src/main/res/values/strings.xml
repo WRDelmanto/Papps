@@ -71,6 +71,8 @@
     <string name="lost">Perdeu</string>
     <string name="highScore">Recorde</string>
     <string name="current_score">Pontuação atual</string>
+    <string name="one_player_mode">1 Jogador</string>
+    <string name="two_player_mode">2 Jogadores</string>
 
     <!-- All Apps -->
     <!-- Click Counter -->

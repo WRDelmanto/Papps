@@ -4,6 +4,7 @@
     <dimen name="margin_edges">32dp</dimen>
     <dimen name="padding_edges">32dp</dimen>
 
+    <dimen name="min_width">48dp</dimen>
     <dimen name="min_height">48dp</dimen>
 
     <dimen name="margin_elements_small">8dp</dimen>

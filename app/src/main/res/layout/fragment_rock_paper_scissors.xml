@@ -15,138 +15,240 @@
         android:layout_height="match_parent"
         android:padding="@dimen/padding_edges">
 
-        <TextView
-            android:id="@+id/rock_paper_scissors_app_choice"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rock_paper_scissors_secondary_container"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/rock_paper_scissors_app_choice"
-            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toTopOf="@+id/rock_paper_scissors_secondary_choice_result"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rock_paper_scissors_secondary_choice_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/rock_paper_scissors_secondary_choice_scissors"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:contentDescription="@null"
+                    android:scaleX="-1"
+                    android:scaleY="-1"
+                    android:src="@drawable/rock_paper_scissors_scissors"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_secondary_choice_paper"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/rock_paper_scissors_secondary_choice_paper"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:contentDescription="@null"
+                    android:scaleX="-1"
+                    android:scaleY="-1"
+                    android:src="@drawable/rock_paper_scissors_paper"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_secondary_choice_rock"
+                    app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_secondary_choice_scissors"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/rock_paper_scissors_secondary_choice_rock"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:contentDescription="@null"
+                    android:scaleX="-1"
+                    android:scaleY="-1"
+                    android:src="@drawable/rock_paper_scissors_rock"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_secondary_choice_paper"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/rock_paper_scissors_app_choice_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/rock_paper_scissors_app_choice"
+                android:textSize="@dimen/font_size_normal_above"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/rock_paper_scissors_one_player_mode_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="rock_paper_scissors_app_choice_message" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/rock_paper_scissors_two_players_mode_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="rock_paper_scissors_secondary_choice_container" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
-            android:id="@+id/rock_paper_scissors_app_choice_result"
+            android:id="@+id/rock_paper_scissors_secondary_choice_result"
             android:layout_width="@dimen/image_size_custom"
             android:layout_height="@dimen/image_size_custom"
-            android:layout_marginTop="@dimen/margin_edges"
             android:contentDescription="@null"
-            android:src="@{rockPaperScissorsViewModel.appChoice}"
+            android:src="@{rockPaperScissorsViewModel.secondaryChoice}"
+            app:layout_constraintBottom_toTopOf="@+id/rock_paper_scissors_separator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_app_choice"
+            app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_secondary_container"
             tools:src="@drawable/ic_empty" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rock_paper_scissors_mode_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_elements_normal_above"
+            android:background="@drawable/general_button"
+            android:paddingHorizontal="@dimen/padding_elements_small"
+            android:text="@{rockPaperScissorsViewModel.modeButton}"
+            app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_separator"
+            app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_separator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_separator"
+            tools:text="@string/one_player_mode" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/rock_paper_scissors_separator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/rock_paper_scissors_separator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/margin_edges"
             android:text="@string/x_separator"
             android:textSize="@dimen/font_size_large"
+            app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_middle_guide_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_app_choice_result" />
+            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_middle_guide_line" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rock_paper_scissors_reset_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_elements_normal_above"
+            android:background="@drawable/general_button"
+            android:text="@string/reset"
+            app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_separator"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_separator"
+            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_separator" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_separator" />
 
         <ImageView
-            android:id="@+id/rock_paper_scissors_self_choice"
+            android:id="@+id/rock_paper_scissors_primary_choice_result"
             android:layout_width="@dimen/image_size_custom"
             android:layout_height="@dimen/image_size_custom"
-            android:layout_marginTop="@dimen/margin_edges"
             android:contentDescription="@null"
-            android:src="@{rockPaperScissorsViewModel.selfChoice}"
+            android:src="@{rockPaperScissorsViewModel.primaryChoice}"
+            app:layout_constraintBottom_toTopOf="@+id/rock_paper_scissors_primary_choice_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_separator"
             tools:src="@drawable/ic_empty" />
 
         <TextView
-            android:id="@+id/rock_paper_scissors_app_score"
+            android:id="@+id/rock_paper_scissors_primary_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{rockPaperScissorsViewModel.appScore}"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintBottom_toTopOf="@+id/rock_paper_scissors_score_separator"
-            app:layout_constraintEnd_toEndOf="@+id/rock_paper_scissors_score_separator"
-            app:layout_constraintStart_toStartOf="@+id/rock_paper_scissors_score_separator"
-            tools:text="@string/zero" />
-
-        <TextView
-            android:id="@+id/rock_paper_scissors_score_separator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/x_separator"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintBottom_toBottomOf="@id/rock_paper_scissors_separator"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_app_choice_result"
-            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_separator" />
-
-        <TextView
-            android:id="@+id/rock_paper_scissors_self_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{rockPaperScissorsViewModel.selfScore}"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintEnd_toEndOf="@+id/rock_paper_scissors_score_separator"
-            app:layout_constraintStart_toStartOf="@+id/rock_paper_scissors_score_separator"
-            app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_score_separator"
-            tools:text="@string/zero" />
-
-        <TextView
-            android:id="@+id/rock_paper_scissors_choice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_edges"
-            android:text="@string/rock_paper_scissors_self_choice"
+            android:text="@{rockPaperScissorsViewModel.primaryScore}"
             android:textAlignment="center"
-            android:textSize="@dimen/font_size_normal_above"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_self_choice" />
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_primary_choice_result"
+            app:layout_constraintEnd_toEndOf="@+id/rock_paper_scissors_primary_choice_container"
+            app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_primary_choice_result"
+            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_primary_choice_result"
+            tools:text="@string/zero" />
 
-        <ImageView
-            android:id="@+id/rock_paper_scissors_choice_rock"
-            android:layout_width="@dimen/image_size_custom"
-            android:layout_height="@dimen/image_size_custom"
-            android:contentDescription="@null"
-            android:src="@drawable/rock_paper_scissors_rock"
-            app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_choice_paper"
-            app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_choice_paper"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_choice_paper" />
+        <TextView
+            android:id="@+id/rock_paper_scissors_secondary_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{rockPaperScissorsViewModel.secondaryScore}"
+            android:textAlignment="center"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_secondary_choice_result"
+            app:layout_constraintEnd_toEndOf="@+id/rock_paper_scissors_primary_choice_container"
+            app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_secondary_choice_result"
+            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_secondary_choice_result"
+            tools:text="@string/zero" />
 
-        <ImageView
-            android:id="@+id/rock_paper_scissors_choice_paper"
-            android:layout_width="@dimen/image_size_custom"
-            android:layout_height="@dimen/image_size_custom"
-            android:layout_marginTop="@dimen/margin_edges"
-            android:contentDescription="@null"
-            android:src="@drawable/rock_paper_scissors_paper"
-            app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_choice_scissors"
-            app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_choice_rock"
-            app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_choice" />
-
-        <ImageView
-            android:id="@+id/rock_paper_scissors_choice_scissors"
-            android:layout_width="@dimen/image_size_custom"
-            android:layout_height="@dimen/image_size_custom"
-            android:contentDescription="@null"
-            android:src="@drawable/rock_paper_scissors_scissors"
-            app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_choice_paper"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_choice_paper"
-            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_choice_paper" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/rock_paper_scissors_reset_button"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rock_paper_scissors_primary_choice_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/general_button"
-            android:text="@string/reset"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_primary_choice_result">
+
+            <ImageView
+                android:id="@+id/rock_paper_scissors_primary_choice_rock"
+                android:layout_width="@dimen/image_size_custom"
+                android:layout_height="@dimen/image_size_custom"
+                android:contentDescription="@null"
+                android:src="@drawable/rock_paper_scissors_rock"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_primary_choice_paper"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/rock_paper_scissors_primary_choice_paper"
+                android:layout_width="@dimen/image_size_custom"
+                android:layout_height="@dimen/image_size_custom"
+                android:contentDescription="@null"
+                android:src="@drawable/rock_paper_scissors_paper"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_primary_choice_scissors"
+                app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_primary_choice_rock"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/rock_paper_scissors_primary_choice_scissors"
+                android:layout_width="@dimen/image_size_custom"
+                android:layout_height="@dimen/image_size_custom"
+                android:contentDescription="@null"
+                android:src="@drawable/rock_paper_scissors_scissors"
+                app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_primary_choice_paper"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_primary_choice_paper"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rock_paper_scissors_middle_guide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

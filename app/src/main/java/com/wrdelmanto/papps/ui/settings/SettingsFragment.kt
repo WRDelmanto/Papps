@@ -133,7 +133,7 @@ class SettingsFragment : Fragment() {
             if (context?.let {
                     val iaa = getSharedPreferences(it, SP_EASTER_EGG, Boolean)
                     iaa ?: false
-                } as Boolean) {
+                }.toString().toBoolean()) {
                 context?.let {
                     showNormalToast(
                         it, getString(R.string.easter_egg_already_activated)

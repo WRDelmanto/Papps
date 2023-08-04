@@ -10,61 +10,169 @@ import com.wrdelmanto.papps.utils.logD
 import java.util.Random
 
 class RockPaperScissorsViewModel : ViewModel() {
-    private val _appChoice = MutableLiveData<Drawable>()
-    val appChoice: MutableLiveData<Drawable>
-        get() = _appChoice
+    private val _primaryChoice = MutableLiveData<Drawable>()
+    val primaryChoice: MutableLiveData<Drawable>
+        get() = _primaryChoice
 
-    private val _selfChoice = MutableLiveData<Drawable>()
-    val selfChoice: MutableLiveData<Drawable>
-        get() = _selfChoice
+    private val _secondaryChoice = MutableLiveData<Drawable>()
+    val secondaryChoice: MutableLiveData<Drawable>
+        get() = _secondaryChoice
 
-    private val _selfScore = MutableLiveData("0")
-    val selfScore: MutableLiveData<String>
-        get() = _selfScore
+    private val _primaryScore = MutableLiveData("0")
+    val primaryScore: MutableLiveData<String>
+        get() = _primaryScore
 
-    private val _appScore = MutableLiveData("0")
-    val appScore: MutableLiveData<String>
-        get() = _appScore
+    private val _secondaryScore = MutableLiveData("0")
+    val secondaryScore: MutableLiveData<String>
+        get() = _secondaryScore
+
+    private val _modeButton = MutableLiveData<String>()
+    val modeButton: MutableLiveData<String>
+        get() = _modeButton
+
+    private var primaryChoiceTemp = ""
+    private var secondaryChoiceTemp = ""
+
+    var isTwoPlayersModeEnabled = false
 
     fun resetUi(context: Context) {
-        _appChoice.value = ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
-        _selfChoice.value =
+        _primaryChoice.value =
             ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
-        _selfScore.value = "0"
-        _appScore.value = "0"
+        _secondaryChoice.value =
+            ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
+        _primaryScore.value = "0"
+        _secondaryScore.value = "0"
+
+        clearTempVariable()
+
+        updateGameMode(context, true)
     }
 
-    fun onChoice(context: Context, selfChoice: String) {
-        _selfChoice.value = when (selfChoice) {
-            "Rock" -> ResourcesCompat.getDrawable(
-                context.resources, R.drawable.rock_paper_scissors_rock, null
-            )
+    fun updateGameMode(context: Context, isFirstTime: Boolean = false) {
+        if (!isFirstTime) isTwoPlayersModeEnabled = !isTwoPlayersModeEnabled
 
-            "Paper" -> ResourcesCompat.getDrawable(
-                context.resources, R.drawable.rock_paper_scissors_paper, null
-            )
+        if (!isTwoPlayersModeEnabled) {
+            _modeButton.value = context.resources.getString(R.string.one_player_mode)
+        } else {
+            _modeButton.value = context.resources.getString(R.string.two_player_mode)
+        }
+    }
 
-            "Scissors" -> ResourcesCompat.getDrawable(
-                context.resources, R.drawable.rock_paper_scissors_scissors, null
-            )
-
-            else -> {
-                ResourcesCompat.getDrawable(
+    fun primaryChoice(context: Context, selfChoice: String) {
+        if (!isTwoPlayersModeEnabled) {
+            _primaryChoice.value = when (selfChoice) {
+                "Rock" -> ResourcesCompat.getDrawable(
                     context.resources, R.drawable.rock_paper_scissors_rock, null
                 )
+
+                "Paper" -> ResourcesCompat.getDrawable(
+                    context.resources, R.drawable.rock_paper_scissors_paper, null
+                )
+
+                "Scissors" -> ResourcesCompat.getDrawable(
+                    context.resources, R.drawable.rock_paper_scissors_scissors, null
+                )
+
+                else -> {
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
+                }
+            }
+
+            checkResults(selfChoice, generateSecondaryChoice(context))
+        } else {
+            if (secondaryChoiceTemp != "") {
+                _primaryChoice.value = when (selfChoice) {
+                    "Rock" -> ResourcesCompat.getDrawable(
+                        context.resources, R.drawable.rock_paper_scissors_rock, null
+                    )
+
+                    "Paper" -> ResourcesCompat.getDrawable(
+                        context.resources, R.drawable.rock_paper_scissors_paper, null
+                    )
+
+                    "Scissors" -> ResourcesCompat.getDrawable(
+                        context.resources, R.drawable.rock_paper_scissors_scissors, null
+                    )
+
+                    else -> {
+                        ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
+                    }
+                }
+
+                _secondaryChoice.value = when (secondaryChoiceTemp) {
+                    "Rock" -> ResourcesCompat.getDrawable(
+                        context.resources, R.drawable.rock_paper_scissors_rock, null
+                    )
+
+                    "Paper" -> ResourcesCompat.getDrawable(
+                        context.resources, R.drawable.rock_paper_scissors_paper, null
+                    )
+
+                    "Scissors" -> ResourcesCompat.getDrawable(
+                        context.resources, R.drawable.rock_paper_scissors_scissors, null
+                    )
+
+                    else -> {
+                        ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
+                    }
+                }
+
+                checkResults(selfChoice, secondaryChoiceTemp)
+            } else {
+                primaryChoiceTemp = selfChoice
             }
         }
-
-        val appChoice = generetaAppChoice(context)
-
-        checkResults(selfChoice, appChoice)
     }
 
-    private fun generetaAppChoice(context: Context): String {
-        val options = arrayOf("Rock", "Paper", "Scissors")
-        val appChoice = options[Random().nextInt(3)]
+    fun secondaryChoice(context: Context, selfChoice: String) {
+        if (primaryChoiceTemp != "") {
+            _primaryChoice.value = when (primaryChoiceTemp) {
+                "Rock" -> ResourcesCompat.getDrawable(
+                    context.resources, R.drawable.rock_paper_scissors_rock, null
+                )
 
-        _appChoice.value = when (appChoice) {
+                "Paper" -> ResourcesCompat.getDrawable(
+                    context.resources, R.drawable.rock_paper_scissors_paper, null
+                )
+
+                "Scissors" -> ResourcesCompat.getDrawable(
+                    context.resources, R.drawable.rock_paper_scissors_scissors, null
+                )
+
+                else -> {
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
+                }
+            }
+
+            _secondaryChoice.value = when (selfChoice) {
+                "Rock" -> ResourcesCompat.getDrawable(
+                    context.resources, R.drawable.rock_paper_scissors_rock, null
+                )
+
+                "Paper" -> ResourcesCompat.getDrawable(
+                    context.resources, R.drawable.rock_paper_scissors_paper, null
+                )
+
+                "Scissors" -> ResourcesCompat.getDrawable(
+                    context.resources, R.drawable.rock_paper_scissors_scissors, null
+                )
+
+                else -> {
+                    ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
+                }
+            }
+
+            checkResults(primaryChoiceTemp, selfChoice)
+        } else {
+            secondaryChoiceTemp = selfChoice
+        }
+    }
+
+    private fun generateSecondaryChoice(context: Context): String {
+        val options = arrayOf("Rock", "Paper", "Scissors")
+        val appChoice = options[Random().nextInt(options.size)]
+
+        _secondaryChoice.value = when (appChoice) {
             "Rock" -> ResourcesCompat.getDrawable(
                 context.resources, R.drawable.rock_paper_scissors_rock, null
             )
@@ -78,24 +186,29 @@ class RockPaperScissorsViewModel : ViewModel() {
             )
 
             else -> {
-                ResourcesCompat.getDrawable(
-                    context.resources, R.drawable.rock_paper_scissors_rock, null
-                )
+                ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
             }
         }
 
         return appChoice
     }
 
-    private fun checkResults(selfChoice: String, appChoice: String) {
-        if (selfChoice == "Scissors" && appChoice == "Paper" || selfChoice == "Paper" && appChoice == "Rock" || selfChoice == "Rock" && appChoice == "Scissors") {
-            // User Wins
-            _selfScore.value = (_selfScore.value?.toInt()?.plus(1)).toString()
-        } else if (selfChoice === "Scissors" && appChoice === "Rock" || selfChoice === "Paper" && appChoice === "Scissors" || selfChoice === "Rock" && appChoice === "Paper") {
-            // App Wins
-            _appScore.value = (_appScore.value?.toInt()?.plus(1)).toString()
+    private fun checkResults(primaryChoice: String, secondaryChoice: String) {
+        if (primaryChoice == "Scissors" && secondaryChoice == "Paper" || primaryChoice == "Paper" && secondaryChoice == "Rock" || primaryChoice == "Rock" && secondaryChoice == "Scissors") {
+            // User 1 Wins
+            _primaryScore.value = (_primaryScore.value?.toInt()?.plus(1)).toString()
+        } else if (primaryChoice === "Scissors" && secondaryChoice === "Rock" || primaryChoice === "Paper" && secondaryChoice === "Scissors" || primaryChoice === "Rock" && secondaryChoice === "Paper") {
+            // App/User 2 Wins
+            _secondaryScore.value = (_secondaryScore.value?.toInt()?.plus(1)).toString()
         }
 
-        logD { "selfChoice=$selfChoice, appChoice=$appChoice" }
+        clearTempVariable()
+
+        logD { "primaryChoice=$primaryChoice, secondaryChoice=$secondaryChoice" }
+    }
+
+    private fun clearTempVariable() {
+        primaryChoiceTemp = ""
+        secondaryChoiceTemp = ""
     }
 }

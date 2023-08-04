@@ -46,7 +46,7 @@ class RandomNumberViewModel : ViewModel() {
         numberHistory = SP_RN_NUMBER_HISTORY.let {
             val nh = getSharedPreferences(context, it, String)
             nh ?: "*.*.*.*"
-        } as String
+        }.toString()
         numberHistoryList = numberHistory.split(".")
 
         updateNumberHistory(true)
@@ -54,12 +54,12 @@ class RandomNumberViewModel : ViewModel() {
         minInput.value = SP_RN_MIN.let {
             val mi = getSharedPreferences(context, it, String)
             mi ?: "1"
-        } as String
+        }.toString()
 
         maxInput.value = SP_RN_MAX.let {
             val mi = getSharedPreferences(context, it, String)
             mi ?: "10"
-        } as String
+        }.toString()
     }
 
     fun generateRandomNumber(context: Context) {

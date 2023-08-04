@@ -32,18 +32,18 @@ class UnscrambleViewModel : ViewModel() {
         _highScore.value = SP_U_HIGH_SCORE.let {
             val hs = getSharedPreferences(context, it, Int)
             hs ?: 0
-        } as Int
+        }.toString().toInt()
 
         _currentScore.value = 0
 
         currentWord = SP_U_CURRENT_WORD.let {
             val hs = getSharedPreferences(context, it, String)
             hs ?: ""
-        } as String
+        }.toString()
 
         if (currentWord.isBlank()) generateNextWord(context)
         else _scrambledWord.value =
-            getSharedPreferences(context, SP_U_SCRAMBLED_WORD, String) as String
+            getSharedPreferences(context, SP_U_SCRAMBLED_WORD, String).toString()
     }
 
     fun checkAnswer(context: Context, answer: String) {

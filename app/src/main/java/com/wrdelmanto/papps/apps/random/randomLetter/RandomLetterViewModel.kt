@@ -43,7 +43,7 @@ class RandomLetterViewModel : ViewModel() {
         letterHistory = SP_RL_LETTER_HISTORY.let {
             val lh = getSharedPreferences(context, it, String)
             lh ?: "*****"
-        } as String
+        }.toString()
 
         updateLetterHistory()
     }

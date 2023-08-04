@@ -4,9 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.databinding.FragmentRockPaperScissorsBinding
@@ -18,10 +21,21 @@ class RockPaperScissorsFragment(
 
     private val rockPaperScissorsViewModel: RockPaperScissorsViewModel by viewModels()
 
-    private lateinit var selfChoiceRock: ImageView
-    private lateinit var selfChoicePaper: ImageView
-    private lateinit var selfChoiceScissors: ImageView
+    private lateinit var primaryChoiceRock: ImageView
+    private lateinit var primaryChoicePaper: ImageView
+    private lateinit var primaryChoiceScissors: ImageView
+
+    private lateinit var modeButton: Button
     private lateinit var resetButton: Button
+
+    private lateinit var secondaryChoiceResult: ImageView
+
+    private lateinit var secondaryChoiceRock: ImageView
+    private lateinit var secondaryChoicePaper: ImageView
+    private lateinit var secondaryChoiceScissors: ImageView
+
+    private lateinit var onePlayerModeGroup: Group
+    private lateinit var twoPlayersModeGroup: Group
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,10 +51,21 @@ class RockPaperScissorsFragment(
         binding.rockPaperScissorsViewModel = rockPaperScissorsViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        selfChoiceRock = binding.rockPaperScissorsChoiceRock
-        selfChoicePaper = binding.rockPaperScissorsChoicePaper
-        selfChoiceScissors = binding.rockPaperScissorsChoiceScissors
+        primaryChoiceRock = binding.rockPaperScissorsPrimaryChoiceRock
+        primaryChoicePaper = binding.rockPaperScissorsPrimaryChoicePaper
+        primaryChoiceScissors = binding.rockPaperScissorsPrimaryChoiceScissors
+
         resetButton = binding.rockPaperScissorsResetButton
+        modeButton = binding.rockPaperScissorsModeButton
+
+        secondaryChoiceResult = binding.rockPaperScissorsSecondaryChoiceResult
+
+        secondaryChoiceRock = binding.rockPaperScissorsSecondaryChoiceRock
+        secondaryChoicePaper = binding.rockPaperScissorsSecondaryChoicePaper
+        secondaryChoiceScissors = binding.rockPaperScissorsSecondaryChoiceScissors
+
+        onePlayerModeGroup = binding.rockPaperScissorsOnePlayerModeGroup
+        twoPlayersModeGroup = binding.rockPaperScissorsTwoPlayersModeGroup
     }
 
     override fun onResume() {
@@ -48,6 +73,7 @@ class RockPaperScissorsFragment(
 
         resetUi()
         initiateListeners()
+        initiateObservers()
     }
 
     override fun onPause() {
@@ -57,22 +83,77 @@ class RockPaperScissorsFragment(
     }
 
     private fun initiateListeners() {
-        selfChoiceRock.setOnClickListener { rockPaperScissorsViewModel.onChoice(context, "Rock") }
-        selfChoicePaper.setOnClickListener { rockPaperScissorsViewModel.onChoice(context, "Paper") }
-        selfChoiceScissors.setOnClickListener {
-            rockPaperScissorsViewModel.onChoice(
+        primaryChoiceRock.setOnClickListener {
+            rockPaperScissorsViewModel.primaryChoice(
+                context, "Rock"
+            )
+        }
+        primaryChoicePaper.setOnClickListener {
+            rockPaperScissorsViewModel.primaryChoice(
+                context, "Paper"
+            )
+        }
+        primaryChoiceScissors.setOnClickListener {
+            rockPaperScissorsViewModel.primaryChoice(
                 context, "Scissors"
             )
         }
-        resetButton.setOnClickListener { rockPaperScissorsViewModel.resetUi(context) }
+        resetButton.setOnClickListener {
+            rockPaperScissorsViewModel.resetUi(
+                context
+            )
+        }
+
+        modeButton.setOnClickListener { rockPaperScissorsViewModel.updateGameMode(context) }
+
+        secondaryChoiceRock.setOnClickListener {
+            rockPaperScissorsViewModel.secondaryChoice(
+                context, "Rock"
+            )
+        }
+        secondaryChoicePaper.setOnClickListener {
+            rockPaperScissorsViewModel.secondaryChoice(
+                context, "Paper"
+            )
+        }
+        secondaryChoiceScissors.setOnClickListener {
+            rockPaperScissorsViewModel.secondaryChoice(
+                context, "Scissors"
+            )
+        }
+    }
+
+    private fun initiateObservers() {
+        rockPaperScissorsViewModel.modeButton.observe(viewLifecycleOwner) {
+            updateMode()
+        }
     }
 
     private fun disableListeners() {
-        selfChoiceRock.setOnClickListener(null)
-        selfChoicePaper.setOnClickListener(null)
-        selfChoiceScissors.setOnClickListener(null)
+        primaryChoiceRock.setOnClickListener(null)
+        primaryChoicePaper.setOnClickListener(null)
+        primaryChoiceScissors.setOnClickListener(null)
         resetButton.setOnClickListener(null)
+        modeButton.setOnClickListener(null)
     }
 
     private fun resetUi() = rockPaperScissorsViewModel.resetUi(context)
+
+    private fun updateMode() {
+        if (!rockPaperScissorsViewModel.isTwoPlayersModeEnabled) {
+            onePlayerModeGroup.visibility = VISIBLE
+            twoPlayersModeGroup.visibility = INVISIBLE
+            secondaryChoiceResult.run {
+                scaleX = 1F
+                scaleY = 1F
+            }
+        } else {
+            onePlayerModeGroup.visibility = INVISIBLE
+            twoPlayersModeGroup.visibility = VISIBLE
+            secondaryChoiceResult.run {
+                scaleX = -1F
+                scaleY = -1F
+            }
+        }
+    }
 }

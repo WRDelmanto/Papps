@@ -172,7 +172,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         sharedViewModel.easterEggActivated.removeObserver {}
     }
 
-    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         // Do nothing
     }

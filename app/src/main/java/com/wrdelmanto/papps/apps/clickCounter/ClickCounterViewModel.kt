@@ -23,12 +23,10 @@ class ClickCounterViewModel: ViewModel() {
         _highScore.value = SP_CC_HIGH_SCORE.let {
             val hs = getSharedPreferences(context, it, Int)
             hs ?: 0
-        } as Int
+        }.toString().toInt()
     }
 
     fun increaseCounter(context: Context) {
-//        clickAnywhere.isVisible = false
-
         _counter.value = _counter.value?.plus(1)
 
         if (_counter.value!! > _highScore.value!!) {
