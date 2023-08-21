@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bodyMassIndexViewModel"
+            type="com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_edges">
+
+        <ImageView
+            android:id="@+id/body_mass_index_height_icon"
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_height"
+            app:layout_constraintBottom_toBottomOf="@id/body_mass_index_height_input"
+            app:layout_constraintStart_toStartOf="@id/body_mass_index_height_input"
+            app:layout_constraintTop_toTopOf="@id/body_mass_index_height_input" />
+
+        <TextView
+            android:id="@+id/body_mass_index_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:text="@string/height"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toBottomOf="@id/body_mass_index_height_icon"
+            app:layout_constraintStart_toEndOf="@+id/body_mass_index_height_icon"
+            app:layout_constraintTop_toTopOf="@id/body_mass_index_height_icon" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/body_mass_index_height_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/general_input_text"
+            android:inputType="number|numberDecimal"
+            android:padding="@dimen/padding_elements_normal_above"
+            android:text="@{bodyMassIndexViewModel.height}"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toTopOf="@+id/body_mass_index_weight_input"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1.75" />
+
+        <ImageView
+            android:id="@+id/body_mass_index_weight_icon"
+            android:layout_width="@dimen/image_size_small"
+            android:layout_height="@dimen/image_size_small"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_scale"
+            app:layout_constraintBottom_toBottomOf="@id/body_mass_index_weight_input"
+            app:layout_constraintStart_toStartOf="@id/body_mass_index_weight_input"
+            app:layout_constraintTop_toTopOf="@id/body_mass_index_weight_input" />
+
+        <TextView
+            android:id="@+id/body_mass_index_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_elements_small"
+            android:text="@string/weight"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toBottomOf="@id/body_mass_index_weight_icon"
+            app:layout_constraintStart_toEndOf="@+id/body_mass_index_weight_icon"
+            app:layout_constraintTop_toTopOf="@id/body_mass_index_weight_icon" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/body_mass_index_weight_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/general_input_text"
+            android:inputType="number|numberDecimal"
+            android:padding="@dimen/padding_elements_normal_above"
+            android:text="@{bodyMassIndexViewModel.weight}"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toTopOf="@+id/body_mass_index_divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/body_mass_index_height_input"
+            tools:text="75" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/body_mass_index_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/body_mass_index_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/body_mass_index_weight_input" />
+
+        <TextView
+            android:id="@+id/body_mass_index_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cmi_result"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toTopOf="@+id/body_mass_index_result"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/body_mass_index_divider" />
+
+        <TextView
+            android:id="@+id/body_mass_index_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{bodyMassIndexViewModel.bmi}"
+            android:textSize="@dimen/font_size_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="24.49"
+            tools:textColor="@color/green" />
+
+        <ImageView
+            android:id="@+id/body_mass_index_result_line_indicator"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/line_height"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:scaleType="center"
+            android:src="@drawable/body_mass_index_result_line_indicator"
+            app:layout_constraintBottom_toTopOf="@+id/body_mass_index_description_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/body_mass_index_result" />
+
+        <TableLayout
+            android:id="@id/body_mass_index_description_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:stretchColumns="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/underweight_bmi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_above" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@string/underweight"
+                    android:textColor="@color/light_blue"
+                    android:textSize="@dimen/font_size_normal_above" />
+            </TableRow>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/normal_bmi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_above" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@string/normal"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/font_size_normal_above" />
+            </TableRow>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/overweight_bmi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_above" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@string/overweight"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/font_size_normal_above" />
+            </TableRow>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/obese_bmi"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_above" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="@string/obese"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/font_size_normal_above" />
+            </TableRow>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

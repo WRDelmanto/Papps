@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Papps</string>
+    <string name="app_name" translatable="false">Papps</string>
     <string name="apps">Apps</string>
     <string name="games">Jogos</string>
 
@@ -8,6 +8,7 @@
     <string name="multable_live_data_int">%d</string>
     <string name="multable_live_data_int_with_cipher">R\u0024 %1$d</string>
     <string name="multable_live_data_int_with_percentage">%1$d \%%</string>
+    <string name="multable_live_data_int_with_kilograms">%1$d Kg</string>
 
     <!-- Drawer -->
     <!-- Drawer Header -->
@@ -18,12 +19,13 @@
     <string name="app_name_random_number">Número Aleatório</string>
     <string name="app_name_tip">Gorjeta</string>
     <string name="app_name_click_counter">Contador de Cliques</string>
-    <string name="app_name_money_converter">Conversor de Moedas (Beta)</string>
+    <string name="app_name_money_converter">Conversor de Moedas</string>
     <string name="app_name_dices">Rolagem de Dado</string>
     <string name="app_name_coin_flipper">Cara ou Coroa</string>
     <string name="app_name_unscramble">Sopa de Letrinhas</string>
-    <string name="app_name_tic_tac_toe">Jogo da Velha (Beta)</string>
+    <string name="app_name_tic_tac_toe">Jogo da Velha</string>
     <string name="app_name_rock_paper_scissors">Pedra, Papel e Tesoura</string>
+    <string name="app_name_body_mass_index">IMC - Índice de massa corporal</string>
 
     <!-- Drawer Bottom Items -->
     <string name="settings">Configurações</string>
@@ -73,9 +75,22 @@
     <string name="current_score">Pontuação atual</string>
     <string name="one_player_mode">1 Jogador</string>
     <string name="two_player_mode">2 Jogadores</string>
+    <string name="height">Altura</string>
+    <string name="weight">Peso</string>
 
     <!-- All Apps -->
     <!-- Click Counter -->
+
+    <!-- Body mass index -->
+    <string name="underweight_bmi">\u003C 18.5</string>
+    <string name="normal_bmi">18.5 a 24.9</string>
+    <string name="overweight_bmi">24.9 a 30</string>
+    <string name="obese_bmi">\u003E 30</string>
+    <string name="underweight">Magreza</string>
+    <string name="normal">Normal</string>
+    <string name="overweight">Sobrepeso</string>
+    <string name="obese">Obeso</string>
+    <string name="cmi_result">Seu IMC É</string>
 
     <!-- Random Letter -->
 

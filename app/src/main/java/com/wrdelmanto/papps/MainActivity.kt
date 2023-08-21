@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import com.wrdelmanto.papps.SharedViewModel.Companion.BODY_MASS_INDEX
 import com.wrdelmanto.papps.SharedViewModel.Companion.CLICK_COUNTER
 import com.wrdelmanto.papps.SharedViewModel.Companion.COIN_FLIPPER
 import com.wrdelmanto.papps.SharedViewModel.Companion.DICES
@@ -27,6 +28,7 @@ import com.wrdelmanto.papps.SharedViewModel.Companion.ROCK_PAPER_SCISSORS
 import com.wrdelmanto.papps.SharedViewModel.Companion.TIC_TAC_TOE
 import com.wrdelmanto.papps.SharedViewModel.Companion.TIP
 import com.wrdelmanto.papps.SharedViewModel.Companion.UNSCRAMBLE
+import com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexFragment
 import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
 import com.wrdelmanto.papps.apps.dice.DicesFragment
 import com.wrdelmanto.papps.apps.moneyConverter.MoneyConverterFragment
@@ -197,6 +199,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 MONEY_CONVERTER
             )
 
+            R.id.drawer_body_mass_index -> switchFragment(
+                homeFragmentContainer.id, BodyMassIndexFragment(applicationContext), BODY_MASS_INDEX
+            )
+
             R.id.drawer_dices -> switchFragment(
                 homeFragmentContainer.id, DicesFragment(applicationContext), DICES
             )
@@ -299,6 +305,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val moneyConverterDrawerIcon = drawerItemsNavView.menu.findItem(R.id.drawer_money_converter)
         moneyConverterDrawerIcon.isVisible = isEasterEggActivated
+
+        val bodyMassIndexIcon = drawerItemsNavView.menu.findItem(R.id.drawer_body_mass_index)
+        bodyMassIndexIcon.isVisible = isEasterEggActivated
     }
 
     private fun disableDrawerMomentarily() {

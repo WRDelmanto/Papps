@@ -27,6 +27,7 @@ class SharedViewModel : ViewModel() {
             HOME -> EMPTY_STRING
             CLICK_COUNTER -> context.resources.getString(R.string.app_name_click_counter)
             MONEY_CONVERTER -> context.resources.getString(R.string.app_name_money_converter)
+            BODY_MASS_INDEX -> context.resources.getString(R.string.app_name_body_mass_index)
             DICES -> context.resources.getString(R.string.app_name_dices)
             RANDOM_LETTER -> context.resources.getString(R.string.app_name_random_letter)
             RANDOM_NUMBER -> context.resources.getString(R.string.app_name_random_number)
@@ -44,6 +45,7 @@ class SharedViewModel : ViewModel() {
         const val CLICK_COUNTER = "CLICK_COUNTER"
         const val MONEY_CONVERTER = "MONEY_CONVERTER"
         const val DICES = "DICES"
+        const val BODY_MASS_INDEX = "BODY_MASS_INDEX"
         const val RANDOM_LETTER = "RANDOM_LETTER"
         const val RANDOM_NUMBER = "RANDOM_NUMBER"
         const val TIP = "TIP"
