@@ -16,9 +16,7 @@ import androidx.core.view.isVisible
  * @param view
  */
 fun startBlinkingAnimation(view: View) {
-    val animation = AlphaAnimation(0.0f, 1.0f)
-
-    animation.apply {
+    val animation = AlphaAnimation(0.0f, 1.0f).apply {
         duration = 1000
         startOffset = 20
         repeatMode = REVERSE
@@ -50,12 +48,12 @@ fun stopBlinkingAnimation(view: View, shouldStillBeVisible: Boolean = false) {
  * @param view
  */
 fun startTiltingAnimation(view: View) {
-    view.isVisible = true
-
     ObjectAnimator.ofFloat(view, "rotation", 0f, 10f, 0f, -10f, 0f).apply {
         duration = 1000
         start()
     }
+
+    view.isVisible = true
 }
 
 /**
@@ -73,5 +71,5 @@ fun startRotatingAnimation(view: View) {
         start()
     }
 
-    // TODO: view.startAnimation() test
+    view.isVisible = true
 }
