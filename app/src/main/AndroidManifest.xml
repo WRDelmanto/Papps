@@ -3,16 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Papps"
-        tools:targetApi="31">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="tiramisu">
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -20,7 +26,6 @@
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -33,5 +38,10 @@
             android:name=".ui.settings.SettingsActivity"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".apps.nasaPictureOfTheDay.NasaPictureOfTheDayHdurlActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="fullSensor" />
     </application>
 </manifest>

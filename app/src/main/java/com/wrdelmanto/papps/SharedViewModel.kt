@@ -30,6 +30,7 @@ class SharedViewModel : ViewModel() {
             BODY_MASS_INDEX -> context.resources.getString(R.string.app_name_body_mass_index)
             DICES -> context.resources.getString(R.string.app_name_dices)
             RANDOM_LETTER -> context.resources.getString(R.string.app_name_random_letter)
+            NASA_PICTURE_OF_THE_DAY -> context.resources.getString(R.string.app_name_nasa_picture_of_the_day)
             RANDOM_NUMBER -> context.resources.getString(R.string.app_name_random_number)
             TIP -> context.resources.getString(R.string.app_name_tip)
             COIN_FLIPPER -> context.resources.getString(R.string.app_name_coin_flipper)
@@ -47,6 +48,7 @@ class SharedViewModel : ViewModel() {
         const val DICES = "DICES"
         const val BODY_MASS_INDEX = "BODY_MASS_INDEX"
         const val RANDOM_LETTER = "RANDOM_LETTER"
+        const val NASA_PICTURE_OF_THE_DAY = "NASA_PICTURE_OF_THE_DAY"
         const val RANDOM_NUMBER = "RANDOM_NUMBER"
         const val TIP = "TIP"
         const val COIN_FLIPPER = "COIN_FLIPPER"

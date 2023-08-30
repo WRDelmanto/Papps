@@ -1,0 +1,196 @@
+package com.wrdelmanto.papps.apps.nasaPictureOfTheDay
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.View.GONE
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.Group
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.squareup.picasso.Picasso
+import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.databinding.FragmentNasaPictureOfTheDayBinding
+import com.wrdelmanto.papps.utils.logD
+import com.wrdelmanto.papps.utils.showNormalToast
+import com.wrdelmanto.papps.utils.startRotatingAnimation
+
+class NasaPictureOfTheDayFragment(
+    private val context: Context
+) : Fragment() {
+    private lateinit var binding: FragmentNasaPictureOfTheDayBinding
+
+    private val nasaPictureOfTheDayViewModel: NasaPictureOfTheDayViewModel by viewModels()
+
+    private lateinit var picture: ImageView
+    private lateinit var pictureLoading: ProgressBar
+    private lateinit var downloadButton: ConstraintLayout
+    private lateinit var downloadIcon: ImageView
+    private lateinit var downloadIconDone: ImageView
+
+    private lateinit var loadingGroup: Group
+    private lateinit var loadedGroup: Group
+
+    private lateinit var internetError: ImageView
+    private lateinit var pictureInternetError: ImageView
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentNasaPictureOfTheDayBinding.inflate(layoutInflater)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.nasaPictureOfTheDayViewModel = nasaPictureOfTheDayViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        picture = binding.nasaPictureOfTheDayPicture
+        pictureLoading = binding.nasaPictureOfTheDayPictureLoading
+        downloadButton = binding.nasaPictureOfTheDayPictureDownloadContainer
+        downloadIcon = binding.nasaPictureOfTheDayPictureDownload
+        downloadIconDone = binding.nasaPictureOfTheDayPictureDownloadDone
+
+        loadingGroup = binding.nasaPictureOfTheDayGroupLoading
+        loadedGroup = binding.nasaPictureOfTheDayGroupLoaded
+
+        internetError = binding.nasaPictureOfTheDayInternetError
+        pictureInternetError = binding.nasaPictureOfTheDayPictureInternetError
+
+        initiateListeners()
+        initiateViewModelObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        nasaPictureOfTheDayViewModel.getNasaData()
+    }
+
+    override fun onDestroy() {
+        disableListeners()
+
+        super.onDestroy()
+    }
+
+    private fun initiateViewModelObservers() {
+        nasaPictureOfTheDayViewModel.state.observe(viewLifecycleOwner) {
+            changeViewState(it.nasaPictureOfTheDayState)
+        }
+    }
+
+    private fun changeViewState(viewState: NasaPictureOfTheDayState) {
+        when (viewState) {
+            NasaPictureOfTheDayState.LOADING -> {
+                internetError.visibility = GONE
+                loadingGroup.visibility = VISIBLE
+                loadedGroup.visibility = GONE
+            }
+
+            NasaPictureOfTheDayState.LOADED -> {
+                internetError.visibility = GONE
+                loadingGroup.visibility = GONE
+                loadedGroup.visibility = VISIBLE
+                displayPicture()
+            }
+
+            NasaPictureOfTheDayState.ERROR -> {
+                internetError.visibility = VISIBLE
+                loadingGroup.visibility = GONE
+                picture.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.general_gray_background, null)
+                showNormalToast(
+                    context, context.resources.getString(R.string.no_internet_connection_warning)
+                )
+            }
+        }
+    }
+
+    private fun initiateListeners() {
+        picture.setOnClickListener { openFullScreen() }
+        downloadButton.setOnClickListener { downloadPicture() }
+        internetError.setOnClickListener { nasaPictureOfTheDayViewModel.getNasaData() }
+        pictureInternetError.setOnClickListener { displayPicture() }
+    }
+
+    private fun disableListeners() {
+        picture.setOnClickListener(null)
+        downloadButton.setOnClickListener(null)
+        internetError.setOnClickListener(null)
+        pictureInternetError.setOnClickListener(null)
+    }
+
+    private fun displayPicture() {
+        Picasso.get().load(nasaPictureOfTheDayViewModel.url.value)
+            .placeholder(R.drawable.general_gray_background)
+            .into(picture, object : com.squareup.picasso.Callback {
+                override fun onSuccess() {
+                    pictureLoading.visibility = GONE
+                    pictureInternetError.visibility = GONE
+                    // TODO: Change downloadButton to VISIBLE
+                    downloadButton.visibility = GONE
+                }
+
+                override fun onError(e: java.lang.Exception?) {
+                    pictureLoading.visibility = GONE
+                    downloadButton.visibility = GONE
+                    pictureInternetError.visibility = VISIBLE
+                    showNormalToast(
+                        context,
+                        context.resources.getString(R.string.no_internet_connection_warning)
+                    )
+                }
+            })
+    }
+
+    private fun openFullScreen() {
+        startActivity(
+            Intent(
+                context, NasaPictureOfTheDayHdurlActivity::class.java
+            ).putExtra("hdurl", nasaPictureOfTheDayViewModel.hdurl.value)
+        )
+    }
+
+    private fun downloadPicture() {
+        if (nasaPictureOfTheDayViewModel.shouldDownloadPicture.value == true) {
+            downloadIcon.background =
+                ResourcesCompat.getDrawable(resources, R.drawable.ic_rotate_right, null)
+
+            startRotatingAnimation(downloadIcon)
+
+            logD {
+                String.format(
+                    context.resources.getString(R.string.downloading_image),
+                    nasaPictureOfTheDayViewModel.title.value
+                )
+            }
+            showNormalToast(
+                context, String.format(
+                    context.resources.getString(R.string.downloading_image),
+                    nasaPictureOfTheDayViewModel.title.value
+                )
+            )
+
+            // TODO: Download image
+            // TODO: When error nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = false
+        } else {
+            downloadIcon.visibility = INVISIBLE
+            downloadIconDone.visibility = VISIBLE
+
+            showNormalToast(
+                context, context.resources.getString(R.string.no_internet_connection_warning)
+            )
+        }
+    }
+}

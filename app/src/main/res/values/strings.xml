@@ -17,6 +17,7 @@
     <!-- Drawer Items -->
     <string name="app_name_random_letter">Letra Aleatória</string>
     <string name="app_name_random_number">Número Aleatório</string>
+    <string name="app_name_nasa_picture_of_the_day">Nasa - Foto do dia</string>
     <string name="app_name_tip">Gorjeta</string>
     <string name="app_name_click_counter">Contador de Cliques</string>
     <string name="app_name_money_converter">Conversor de Moedas</string>
@@ -45,6 +46,9 @@
     <!-- Dialogs -->
     <string name="confirm">Confirmar</string>
     <string name="cancel">Cancelar</string>
+
+    <!-- Warnings -->
+    <string name="no_internet_connection_warning">Não há conexão com a Internet</string>
 
     <!-- Home -->
     <string name="home_click_here">Clique aqui\npara começar\na aventura!</string>
@@ -91,6 +95,9 @@
     <string name="overweight">Sobrepeso</string>
     <string name="obese">Obeso</string>
     <string name="cmi_result">Seu IMC É</string>
+
+    <!-- Nasa Picture Of The Day -->
+    <string name="downloading_image">Downloading %1$s</string>
 
     <!-- Random Letter -->
 

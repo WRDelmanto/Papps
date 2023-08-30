@@ -15,12 +15,14 @@
                     android:id="@+id/drawer_money_converter"
                     android:icon="@drawable/money_converter_logo"
                     android:title="@string/app_name_money_converter"
-                    android:visible="false" />
+                    android:visible="false"
+                    tools:visible="true" />
                 <item
                     android:id="@+id/drawer_body_mass_index"
                     android:icon="@drawable/body_mass_index_logo"
                     android:title="@string/app_name_body_mass_index"
-                    android:visible="false" />
+                    android:visible="false"
+                    tools:visible="true" />
                 <item
                     android:id="@+id/drawer_dices"
                     android:icon="@drawable/dices_logo"
@@ -29,6 +31,10 @@
                     android:id="@+id/drawer_random_letter"
                     android:icon="@drawable/random_letter_logo"
                     android:title="@string/app_name_random_letter" />
+                <item
+                    android:id="@+id/drawer_nasa_picture_of_the_day"
+                    android:icon="@drawable/nasa_picture_of_the_day_logo"
+                    android:title="@string/app_name_nasa_picture_of_the_day" />
                 <item
                     android:id="@+id/drawer_random_number"
                     android:icon="@drawable/random_number_logo"
@@ -51,7 +57,8 @@
                     android:id="@+id/drawer_tic_tac_toe"
                     android:icon="@drawable/tic_tac_toe_logo"
                     android:title="@string/app_name_tic_tac_toe"
-                    android:visible="false" />
+                    android:visible="false"
+                    tools:visible="true" />
                 <item
                     android:id="@+id/drawer_rock_paper_scissors"
                     android:icon="@drawable/rock_paper_scissors_logo"

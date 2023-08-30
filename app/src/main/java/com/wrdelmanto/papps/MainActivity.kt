@@ -22,6 +22,7 @@ import com.wrdelmanto.papps.SharedViewModel.Companion.COIN_FLIPPER
 import com.wrdelmanto.papps.SharedViewModel.Companion.DICES
 import com.wrdelmanto.papps.SharedViewModel.Companion.HOME
 import com.wrdelmanto.papps.SharedViewModel.Companion.MONEY_CONVERTER
+import com.wrdelmanto.papps.SharedViewModel.Companion.NASA_PICTURE_OF_THE_DAY
 import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_LETTER
 import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_NUMBER
 import com.wrdelmanto.papps.SharedViewModel.Companion.ROCK_PAPER_SCISSORS
@@ -32,6 +33,7 @@ import com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexFragment
 import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
 import com.wrdelmanto.papps.apps.dice.DicesFragment
 import com.wrdelmanto.papps.apps.moneyConverter.MoneyConverterFragment
+import com.wrdelmanto.papps.apps.nasaPictureOfTheDay.NasaPictureOfTheDayFragment
 import com.wrdelmanto.papps.apps.random.randomLetter.RandomLetterFragment
 import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
@@ -78,10 +80,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = MainFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Disable dark theme
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        setupNavigationAndStatusBar(applicationContext, window)
-
         activityMain = binding.mainFragment
         homeFragmentContainer = findViewById(R.id.home_fragment_container)
 
@@ -110,6 +108,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onResume() {
         super.onResume()
+
+        // Disable dark theme
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        // Adjust navigation and status bar
+        setupNavigationAndStatusBar(applicationContext, window)
 
         initiateListeners()
         initiateObservers()
@@ -214,6 +218,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     RANDOM_LETTER
                 )
                 checkRandomLetterAtRandomBottomNavMenu()
+            }
+
+            R.id.drawer_nasa_picture_of_the_day -> {
+                switchFragment(
+                    homeFragmentContainer.id,
+                    NasaPictureOfTheDayFragment(applicationContext),
+                    NASA_PICTURE_OF_THE_DAY
+                )
             }
 
             R.id.drawer_random_number -> {

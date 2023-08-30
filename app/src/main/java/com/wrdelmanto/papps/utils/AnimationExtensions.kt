@@ -1,9 +1,13 @@
 package com.wrdelmanto.papps.utils
 
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
+import android.animation.ValueAnimator.INFINITE
+import android.animation.ValueAnimator.RESTART
+import android.animation.ValueAnimator.REVERSE
 import android.view.View
 import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
 import androidx.core.view.isVisible
 
 /**
@@ -14,13 +18,17 @@ import androidx.core.view.isVisible
 fun startBlinkingAnimation(view: View) {
     val animation = AlphaAnimation(0.0f, 1.0f)
 
-    animation.duration = 1000
-    animation.startOffset = 20
-    animation.repeatMode = Animation.REVERSE
-    animation.repeatCount = Animation.INFINITE
+    animation.apply {
+        duration = 1000
+        startOffset = 20
+        repeatMode = REVERSE
+        repeatCount = INFINITE
+    }
 
-    view.isVisible = true
-    view.startAnimation(animation)
+    view.apply {
+        isVisible = true
+        startAnimation(animation)
+    }
 }
 
 /**
@@ -30,8 +38,10 @@ fun startBlinkingAnimation(view: View) {
  * @param shouldStillBeVisible
  */
 fun stopBlinkingAnimation(view: View, shouldStillBeVisible: Boolean = false) {
-    view.clearAnimation()
-    view.isVisible = shouldStillBeVisible
+    view.apply {
+        clearAnimation()
+        isVisible = shouldStillBeVisible
+    }
 }
 
 /**
@@ -40,11 +50,28 @@ fun stopBlinkingAnimation(view: View, shouldStillBeVisible: Boolean = false) {
  * @param view
  */
 fun startTiltingAnimation(view: View) {
-    val degrees = 10f
-
-    val animation = ObjectAnimator.ofFloat(view, "rotation", 0f, degrees, 0f, -degrees, 0f)
-    animation.duration = 1000
-
     view.isVisible = true
-    animation.start()
+
+    ObjectAnimator.ofFloat(view, "rotation", 0f, 10f, 0f, -10f, 0f).apply {
+        duration = 1000
+        start()
+    }
+}
+
+/**
+ * Start rotating animation.
+ *
+ * @param view
+ */
+fun startRotatingAnimation(view: View) {
+    ValueAnimator.ofFloat(0f, 360f).apply {
+        addUpdateListener { view.rotation = it.animatedValue as Float }
+        interpolator = LinearInterpolator()
+        duration = 2000
+        repeatMode = RESTART
+        repeatCount = INFINITE
+        start()
+    }
+
+    // TODO: view.startAnimation() test
 }
