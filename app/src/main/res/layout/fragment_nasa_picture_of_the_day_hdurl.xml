@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/general_black_background">
 
-    <ImageView
+    <com.ortiz.touchview.TouchImageView
         android:id="@+id/nasa_picture_of_the_day_hdurl_picture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
