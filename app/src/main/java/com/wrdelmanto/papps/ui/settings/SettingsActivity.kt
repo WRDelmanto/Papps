@@ -14,6 +14,8 @@ class SettingsActivity : AppCompatActivity() {
 
         // Disable dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        // Adjust navigation and status bar
         setupNavigationAndStatusBar(applicationContext, window)
 
         // Load settings fragment
