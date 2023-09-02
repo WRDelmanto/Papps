@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.utils.SP_BMI_HEIGHT
+import com.wrdelmanto.papps.utils.SP_BMI_WEIGHT
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.isNumeric
 import com.wrdelmanto.papps.utils.logD
@@ -28,7 +29,7 @@ class BodyMassIndexViewModel : ViewModel() {
             hs ?: "1.75"
         }.toString()
 
-        _weight.value = SP_BMI_HEIGHT.let {
+        _weight.value = SP_BMI_WEIGHT.let {
             val hs = getSharedPreferences(context, it, Int)
             hs ?: "75"
         }.toString()
