@@ -2,15 +2,16 @@ package com.wrdelmanto.papps.apps.nasaPictureOfTheDay
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
-import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.res.ResourcesCompat
@@ -19,6 +20,8 @@ import androidx.fragment.app.viewModels
 import com.squareup.picasso.Picasso
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentNasaPictureOfTheDayBinding
+import com.wrdelmanto.papps.utils.downloadExtension.AndroidDownloader
+import com.wrdelmanto.papps.utils.downloadExtension.DownloadState
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.showNormalToast
 import com.wrdelmanto.papps.utils.startRotatingAnimation
@@ -29,6 +32,8 @@ class NasaPictureOfTheDayFragment(
     private lateinit var binding: FragmentNasaPictureOfTheDayBinding
 
     private val nasaPictureOfTheDayViewModel: NasaPictureOfTheDayViewModel by viewModels()
+
+    private val androidDownloader = AndroidDownloader(context)
 
     private lateinit var picture: ImageView
     private lateinit var pictureLoading: ProgressBar
@@ -50,6 +55,7 @@ class NasaPictureOfTheDayFragment(
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -69,6 +75,7 @@ class NasaPictureOfTheDayFragment(
         pictureInternetError = binding.nasaPictureOfTheDayPictureInternetError
 
         initiateListeners()
+        initiateObservers()
         initiateViewModelObservers()
     }
 
@@ -96,6 +103,7 @@ class NasaPictureOfTheDayFragment(
                 internetError.visibility = GONE
                 loadingGroup.visibility = VISIBLE
                 loadedGroup.visibility = GONE
+                downloadButton.visibility = GONE
             }
 
             NasaPictureOfTheDayState.LOADED -> {
@@ -117,11 +125,61 @@ class NasaPictureOfTheDayFragment(
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun initiateListeners() {
         picture.setOnClickListener { openFullScreen() }
         downloadButton.setOnClickListener { downloadPicture() }
         internetError.setOnClickListener { nasaPictureOfTheDayViewModel.getNasaData() }
         pictureInternetError.setOnClickListener { displayPicture() }
+    }
+
+    private fun initiateObservers() {
+        androidDownloader.state.observe(viewLifecycleOwner) {
+            changeDownloadState(it.downloadState)
+        }
+    }
+
+    private fun changeDownloadState(downloadState: DownloadState) {
+        when (downloadState) {
+            DownloadState.DOWNLOADING -> {
+                downloadIconDone.visibility = GONE
+                downloadIcon.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.ic_rotate_right, null)
+
+                startRotatingAnimation(downloadIcon)
+
+                logD {
+                    String.format(
+                        context.resources.getString(R.string.image_downloading),
+                        nasaPictureOfTheDayViewModel.title.value
+                    )
+                }
+                showNormalToast(
+                    context, String.format(
+                        context.resources.getString(R.string.image_downloading),
+                        nasaPictureOfTheDayViewModel.title.value
+                    )
+                )
+            }
+
+            DownloadState.DOWNLOADED -> {
+                downloadIcon.visibility = GONE
+                downloadIconDone.visibility = VISIBLE
+
+                logD {
+                    String.format(
+                        context.resources.getString(R.string.image_downloaded),
+                        nasaPictureOfTheDayViewModel.title.value
+                    )
+                }
+                showNormalToast(
+                    context, String.format(
+                        context.resources.getString(R.string.image_downloaded),
+                        nasaPictureOfTheDayViewModel.title.value
+                    )
+                )
+            }
+        }
     }
 
     private fun disableListeners() {
@@ -138,8 +196,7 @@ class NasaPictureOfTheDayFragment(
                 override fun onSuccess() {
                     pictureLoading.visibility = GONE
                     pictureInternetError.visibility = GONE
-                    // TODO: Change downloadButton to VISIBLE
-                    downloadButton.visibility = GONE
+                    downloadButton.visibility = VISIBLE
                 }
 
                 override fun onError(e: java.lang.Exception?) {
@@ -162,35 +219,20 @@ class NasaPictureOfTheDayFragment(
         )
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun downloadPicture() {
         if (nasaPictureOfTheDayViewModel.shouldDownloadPicture.value == true) {
-            downloadIcon.background =
-                ResourcesCompat.getDrawable(resources, R.drawable.ic_rotate_right, null)
+            nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = false
 
-            startRotatingAnimation(downloadIcon)
-
-            logD {
-                String.format(
-                    context.resources.getString(R.string.downloading_image),
-                    nasaPictureOfTheDayViewModel.title.value
+            androidDownloader.run {
+                updateDownloadInfo(
+                    nasaPictureOfTheDayViewModel.title.value.toString(),
+                    nasaPictureOfTheDayViewModel.description.value.toString()
                 )
+                downloadFile(nasaPictureOfTheDayViewModel.hdurl.value.toString())
             }
-            showNormalToast(
-                context, String.format(
-                    context.resources.getString(R.string.downloading_image),
-                    nasaPictureOfTheDayViewModel.title.value
-                )
-            )
-
-            // TODO: Download image
-            // TODO: When error nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = false
-        } else {
-            downloadIcon.visibility = INVISIBLE
-            downloadIconDone.visibility = VISIBLE
-
-            showNormalToast(
-                context, context.resources.getString(R.string.no_internet_connection_warning)
-            )
         }
     }
+
+    // TODO: Automatic hdurl picture download
 }

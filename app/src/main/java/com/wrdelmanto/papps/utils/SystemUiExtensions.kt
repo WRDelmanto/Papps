@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Build
 import android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
 import android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+import android.view.View.SYSTEM_UI_FLAG_IMMERSIVE
 import android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 import android.view.Window
 import androidx.core.content.ContextCompat
@@ -75,7 +76,8 @@ private fun setupNavBar(context: Context, window: Window) = changeNavBarColor(co
 @Suppress("DEPRECATION")
 private fun setupNavBarFullScreen(window: Window) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) window.decorView.systemUiVisibility =
-        SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        (SYSTEM_UI_FLAG_HIDE_NAVIGATION or SYSTEM_UI_FLAG_IMMERSIVE)
+
 }
 
 /**

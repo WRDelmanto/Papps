@@ -57,10 +57,7 @@ class MoneyConverterViewModel : ViewModel() {
         postState()
     }
 
-    private fun postState() {
-        val newState = MoneyConverterViewModelState(moneyConverterState)
-        _state.postValue(newState)
-    }
+    private fun postState() = _state.postValue(MoneyConverterViewModelState(moneyConverterState))
 
     fun calculateExchange(whatChanged: String) {
         if (moneyConverterState != MoneyConverterState.NORMAL) return

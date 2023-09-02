@@ -58,10 +58,8 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
         postState()
     }
 
-    private fun postState() {
-        val newState = NasaPictureOfTheDayViewModelState(nasaPictureOfTheDayState)
-        _state.postValue(newState)
-    }
+    private fun postState() =
+        _state.postValue(NasaPictureOfTheDayViewModelState(nasaPictureOfTheDayState))
 
     fun getNasaData() {
         setLoadingState()
