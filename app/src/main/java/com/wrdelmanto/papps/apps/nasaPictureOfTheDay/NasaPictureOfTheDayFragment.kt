@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.core.content.res.ResourcesCompat
@@ -20,9 +21,11 @@ import androidx.fragment.app.viewModels
 import com.squareup.picasso.Picasso
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentNasaPictureOfTheDayBinding
+import com.wrdelmanto.papps.utils.SP_NPOTD_AUTOMATIC_DOWNLOAD
 import com.wrdelmanto.papps.utils.downloadExtension.AndroidDownloader
 import com.wrdelmanto.papps.utils.downloadExtension.DownloadState
 import com.wrdelmanto.papps.utils.logD
+import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.showNormalToast
 import com.wrdelmanto.papps.utils.startRotatingAnimation
 
@@ -40,12 +43,15 @@ class NasaPictureOfTheDayFragment(
     private lateinit var downloadButton: ConstraintLayout
     private lateinit var downloadIcon: ImageView
     private lateinit var downloadIconDone: ImageView
+    private lateinit var automaticDownloadSwitch: SwitchCompat
 
     private lateinit var loadingGroup: Group
     private lateinit var loadedGroup: Group
 
     private lateinit var internetError: ImageView
     private lateinit var pictureInternetError: ImageView
+
+    var pictureLoaded = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -67,6 +73,7 @@ class NasaPictureOfTheDayFragment(
         downloadButton = binding.nasaPictureOfTheDayPictureDownloadContainer
         downloadIcon = binding.nasaPictureOfTheDayPictureDownload
         downloadIconDone = binding.nasaPictureOfTheDayPictureDownloadDone
+        automaticDownloadSwitch = binding.nasaPictureOfTheDayPictureAutomaticDownloadSwitch
 
         loadingGroup = binding.nasaPictureOfTheDayGroupLoading
         loadedGroup = binding.nasaPictureOfTheDayGroupLoaded
@@ -75,14 +82,14 @@ class NasaPictureOfTheDayFragment(
         pictureInternetError = binding.nasaPictureOfTheDayPictureInternetError
 
         initiateListeners()
-        initiateObservers()
+        initiateDownloadObservers()
         initiateViewModelObservers()
     }
 
     override fun onResume() {
         super.onResume()
 
-        nasaPictureOfTheDayViewModel.getNasaData()
+        nasaPictureOfTheDayViewModel.resetUi(context)
     }
 
     override fun onDestroy() {
@@ -91,15 +98,21 @@ class NasaPictureOfTheDayFragment(
         super.onDestroy()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun initiateViewModelObservers() {
         nasaPictureOfTheDayViewModel.state.observe(viewLifecycleOwner) {
             changeViewState(it.nasaPictureOfTheDayState)
+        }
+        nasaPictureOfTheDayViewModel.automaticDownload.observe(viewLifecycleOwner) {
+            if (it == true && pictureLoaded) downloadPicture()
         }
     }
 
     private fun changeViewState(viewState: NasaPictureOfTheDayState) {
         when (viewState) {
             NasaPictureOfTheDayState.LOADING -> {
+                pictureLoaded = false
+                nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = false
                 internetError.visibility = GONE
                 loadingGroup.visibility = VISIBLE
                 loadedGroup.visibility = GONE
@@ -107,6 +120,7 @@ class NasaPictureOfTheDayFragment(
             }
 
             NasaPictureOfTheDayState.LOADED -> {
+                nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = true
                 internetError.visibility = GONE
                 loadingGroup.visibility = GONE
                 loadedGroup.visibility = VISIBLE
@@ -129,11 +143,17 @@ class NasaPictureOfTheDayFragment(
     private fun initiateListeners() {
         picture.setOnClickListener { openFullScreen() }
         downloadButton.setOnClickListener { downloadPicture() }
+        automaticDownloadSwitch.setOnCheckedChangeListener { _, isChecked ->
+            nasaPictureOfTheDayViewModel.automaticDownload.postValue(isChecked)
+            putSharedPreferences(
+                context, SP_NPOTD_AUTOMATIC_DOWNLOAD, automaticDownloadSwitch.isChecked
+            )
+        }
         internetError.setOnClickListener { nasaPictureOfTheDayViewModel.getNasaData() }
         pictureInternetError.setOnClickListener { displayPicture() }
     }
 
-    private fun initiateObservers() {
+    private fun initiateDownloadObservers() {
         androidDownloader.state.observe(viewLifecycleOwner) {
             changeDownloadState(it.downloadState)
         }
@@ -185,6 +205,7 @@ class NasaPictureOfTheDayFragment(
     private fun disableListeners() {
         picture.setOnClickListener(null)
         downloadButton.setOnClickListener(null)
+        automaticDownloadSwitch.addTextChangedListener(null)
         internetError.setOnClickListener(null)
         pictureInternetError.setOnClickListener(null)
     }
@@ -193,10 +214,13 @@ class NasaPictureOfTheDayFragment(
         Picasso.get().load(nasaPictureOfTheDayViewModel.url.value)
             .placeholder(R.drawable.general_gray_background)
             .into(picture, object : com.squareup.picasso.Callback {
+                @RequiresApi(Build.VERSION_CODES.M)
                 override fun onSuccess() {
+                    pictureLoaded = true
                     pictureLoading.visibility = GONE
                     pictureInternetError.visibility = GONE
                     downloadButton.visibility = VISIBLE
+                    if (nasaPictureOfTheDayViewModel.automaticDownload.value == true) downloadPicture()
                 }
 
                 override fun onError(e: java.lang.Exception?) {
@@ -209,14 +233,6 @@ class NasaPictureOfTheDayFragment(
                     )
                 }
             })
-    }
-
-    private fun openFullScreen() {
-        startActivity(
-            Intent(
-                context, NasaPictureOfTheDayHdurlActivity::class.java
-            ).putExtra("hdurl", nasaPictureOfTheDayViewModel.hdurl.value)
-        )
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -234,5 +250,11 @@ class NasaPictureOfTheDayFragment(
         }
     }
 
-    // TODO: Automatic hdurl picture download
+    private fun openFullScreen() {
+        startActivity(
+            Intent(
+                context, NasaPictureOfTheDayHdurlActivity::class.java
+            ).putExtra("hdurl", nasaPictureOfTheDayViewModel.hdurl.value)
+        )
+    }
 }

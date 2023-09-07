@@ -5,6 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
+// https://api.nasa.gov/planetary/apod?api_key=sdV5nVTPFuigmh7gySTWgg4IiLCRl95gjbdzGiGZ
+
 private const val NASA_PICTURE_OF_THE_DAY_BASE_URL = "https://api.nasa.gov/planetary/"
 const val NASA_PICTURE_OF_THE_DAY_API_KEY = "sdV5nVTPFuigmh7gySTWgg4IiLCRl95gjbdzGiGZ"
 

@@ -1,7 +1,10 @@
 package com.wrdelmanto.papps.apps.nasaPictureOfTheDay
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.wrdelmanto.papps.utils.SP_NPOTD_AUTOMATIC_DOWNLOAD
+import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -35,6 +38,10 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
     val state: MutableLiveData<NasaPictureOfTheDayViewModelState>
         get() = _state
 
+    private val _automaticDownload = MutableLiveData(false)
+    val automaticDownload: MutableLiveData<Boolean>
+        get() = _automaticDownload
+
     private val _shouldDownloadPicture = MutableLiveData(true)
     val shouldDownloadPicture: MutableLiveData<Boolean>
         get() = _shouldDownloadPicture
@@ -60,6 +67,14 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
 
     private fun postState() =
         _state.postValue(NasaPictureOfTheDayViewModelState(nasaPictureOfTheDayState))
+
+    fun resetUi(context: Context) {
+        _automaticDownload.value = SP_NPOTD_AUTOMATIC_DOWNLOAD.let {
+            getSharedPreferences(context, it, Boolean) ?: false
+        }.toString().toBoolean()
+
+        getNasaData()
+    }
 
     fun getNasaData() {
         setLoadingState()

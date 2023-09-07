@@ -41,11 +41,10 @@
             android:id="@+id/nasa_picture_of_the_day_picture"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/margin_elements_large"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/nasa_picture_of_the_day_middle_guide_line"
+            app:layout_constraintBottom_toTopOf="@+id/nasa_picture_of_the_day_picture_automatic_download_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -117,6 +116,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/nasa_picture_of_the_day_picture_automatic_download_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_elements_small"
+            app:layout_constraintBottom_toBottomOf="@id/nasa_picture_of_the_day_middle_guide_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nasa_picture_of_the_day_picture">
+
+            <TextView
+                android:id="@+id/nasa_picture_of_the_day_picture_automatic_download_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nasa_picture_of_the_day_picture_automatic_download_message" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/nasa_picture_of_the_day_picture_automatic_download_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{nasaPictureOfTheDayViewModel.automaticDownload}"
+                app:thumbTint="@color/dark_gray"
+                app:trackTint="@color/light_gray"/>
+        </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/nasa_picture_of_the_day_middle_line"
@@ -217,7 +240,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="nasa_picture_of_the_day_picture, nasa_picture_of_the_day_picture_loading, nasa_picture_of_the_day_middle_line, nasa_picture_of_the_day_title, nasa_picture_of_the_day_body"
+            app:constraint_referenced_ids="nasa_picture_of_the_day_picture, nasa_picture_of_the_day_picture_loading, nasa_picture_of_the_day_picture_automatic_download_container, nasa_picture_of_the_day_middle_line, nasa_picture_of_the_day_title, nasa_picture_of_the_day_body"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

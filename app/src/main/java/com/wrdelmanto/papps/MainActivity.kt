@@ -44,6 +44,7 @@ import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
 import com.wrdelmanto.papps.games.unscramble.UnscrambleFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.ui.settings.SettingsActivity
+import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -103,7 +104,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         randomBottomNavMenuRandomnumber =
             randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
-        switchFragment(homeFragmentContainer.id, HomeFragment(), HOME)
+        switchFragment(homeFragmentContainer.id, HomeFragment(applicationContext), HOME)
     }
 
     override fun onResume() {
@@ -291,8 +292,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             if (supportFragmentManager.findFragmentById(fragmentId) == null) {
                 ft.add(fragmentId, newFragment, fragmentName)
+                logD { "Fragment added: $fragmentName" }
             } else if (supportFragmentManager.fragments[0].tag != fragmentName) {
                 ft.replace(fragmentId, newFragment, fragmentName)
+                logD { "Fragment replaced: $fragmentName" }
             }
 
             appBarTitle.text = sharedViewModel.getCurrentTitle(applicationContext, fragmentName)
@@ -308,7 +311,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun goHomeFragment() {
         disableDrawerMomentarily()
         activityMain.closeDrawer(START)
-        switchFragment(homeFragmentContainer.id, HomeFragment(), HOME)
+        switchFragment(homeFragmentContainer.id, HomeFragment(applicationContext), HOME)
     }
 
     private fun shouldActivateEasterEgg(isEasterEggActivated: Boolean) {

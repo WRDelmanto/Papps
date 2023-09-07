@@ -99,6 +99,8 @@
     <string name="cmi_result">Seu IMC É</string>
 
     <!-- Nasa Picture Of The Day -->
+    <string name="nasa_picture_of_the_day_picture_automatic_download_message">Download Automático</string>
+
     <!-- Random Letter -->
 
     <!-- Random Number -->

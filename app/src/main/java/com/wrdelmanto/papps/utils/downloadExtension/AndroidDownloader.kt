@@ -8,9 +8,12 @@ import android.app.DownloadManager.Request.NETWORK_WIFI
 import android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.RECEIVER_EXPORTED
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
+import android.os.Build.VERSION_CODES.TIRAMISU
 import android.os.Environment.DIRECTORY_DOWNLOADS
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
@@ -52,11 +55,9 @@ class AndroidDownloader(private val context: Context) : Downloader {
 
         setDownloadingState()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            context.registerReceiver(
-                downloadReceiver, IntentFilter(ACTION_DOWNLOAD_COMPLETE), Context.RECEIVER_EXPORTED
-            )
-        }
+        if (SDK_INT >= TIRAMISU) context.registerReceiver(
+            downloadReceiver, IntentFilter(ACTION_DOWNLOAD_COMPLETE), RECEIVER_EXPORTED
+        )
 
         return downloadId
     }
