@@ -2,6 +2,7 @@ package com.wrdelmanto.papps.apps.nasaPictureOfTheDay
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +11,9 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.MediaController
 import android.widget.ProgressBar
+import android.widget.VideoView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +42,8 @@ class NasaPictureOfTheDayFragment(
     private val androidDownloader = AndroidDownloader(context)
 
     private lateinit var picture: ImageView
+    private lateinit var video: VideoView
+    private lateinit var videoControllers: MediaController
     private lateinit var pictureLoading: ProgressBar
     private lateinit var downloadButton: ConstraintLayout
     private lateinit var downloadIcon: ImageView
@@ -51,7 +56,7 @@ class NasaPictureOfTheDayFragment(
     private lateinit var internetError: ImageView
     private lateinit var pictureInternetError: ImageView
 
-    var pictureLoaded = false
+    var contentLoaded = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -69,6 +74,7 @@ class NasaPictureOfTheDayFragment(
         binding.lifecycleOwner = viewLifecycleOwner
 
         picture = binding.nasaPictureOfTheDayPicture
+        video = binding.nasaPictureOfTheDayVideo
         pictureLoading = binding.nasaPictureOfTheDayPictureLoading
         downloadButton = binding.nasaPictureOfTheDayPictureDownloadContainer
         downloadIcon = binding.nasaPictureOfTheDayPictureDownload
@@ -104,14 +110,20 @@ class NasaPictureOfTheDayFragment(
             changeViewState(it.nasaPictureOfTheDayState)
         }
         nasaPictureOfTheDayViewModel.automaticDownload.observe(viewLifecycleOwner) {
-            if (it == true && pictureLoaded) downloadPicture()
+            if (it == true && contentLoaded) {
+                if (nasaPictureOfTheDayViewModel.mediaType.value == "image") downloadPicture()
+                else showNormalToast(
+                    context, context.resources.getString(R.string.downloading_video)
+                )
+            }
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun changeViewState(viewState: NasaPictureOfTheDayState) {
         when (viewState) {
             NasaPictureOfTheDayState.LOADING -> {
-                pictureLoaded = false
+                contentLoaded = false
                 nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = false
                 internetError.visibility = GONE
                 loadingGroup.visibility = VISIBLE
@@ -124,12 +136,21 @@ class NasaPictureOfTheDayFragment(
                 internetError.visibility = GONE
                 loadingGroup.visibility = GONE
                 loadedGroup.visibility = VISIBLE
-                displayPicture()
+                if (nasaPictureOfTheDayViewModel.mediaType.value == "image") {
+                    picture.visibility = VISIBLE
+                    video.visibility = GONE
+                    displayPicture()
+                } else {
+                    picture.visibility = GONE
+                    video.visibility = VISIBLE
+                    displayVideo()
+                }
             }
 
             NasaPictureOfTheDayState.ERROR -> {
                 internetError.visibility = VISIBLE
                 loadingGroup.visibility = GONE
+                video.visibility = GONE
                 picture.background =
                     ResourcesCompat.getDrawable(resources, R.drawable.general_gray_background, null)
                 showNormalToast(
@@ -142,6 +163,7 @@ class NasaPictureOfTheDayFragment(
     @RequiresApi(Build.VERSION_CODES.M)
     private fun initiateListeners() {
         picture.setOnClickListener { openFullScreen() }
+        // TODO: video.setOnClickListener { openFullScreen() }
         downloadButton.setOnClickListener { downloadPicture() }
         automaticDownloadSwitch.setOnCheckedChangeListener { _, isChecked ->
             nasaPictureOfTheDayViewModel.automaticDownload.postValue(isChecked)
@@ -150,7 +172,10 @@ class NasaPictureOfTheDayFragment(
             )
         }
         internetError.setOnClickListener { nasaPictureOfTheDayViewModel.getNasaData() }
-        pictureInternetError.setOnClickListener { displayPicture() }
+        pictureInternetError.setOnClickListener {
+            if (nasaPictureOfTheDayViewModel.mediaType.value == "image") displayPicture()
+            else displayVideo()
+        }
     }
 
     private fun initiateDownloadObservers() {
@@ -204,6 +229,7 @@ class NasaPictureOfTheDayFragment(
 
     private fun disableListeners() {
         picture.setOnClickListener(null)
+        // TODO: video.setOnClickListener(null)
         downloadButton.setOnClickListener(null)
         automaticDownloadSwitch.addTextChangedListener(null)
         internetError.setOnClickListener(null)
@@ -216,7 +242,7 @@ class NasaPictureOfTheDayFragment(
             .into(picture, object : com.squareup.picasso.Callback {
                 @RequiresApi(Build.VERSION_CODES.M)
                 override fun onSuccess() {
-                    pictureLoaded = true
+                    contentLoaded = true
                     pictureLoading.visibility = GONE
                     pictureInternetError.visibility = GONE
                     downloadButton.visibility = VISIBLE
@@ -236,14 +262,43 @@ class NasaPictureOfTheDayFragment(
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
+    private fun displayVideo() {
+        videoControllers.apply {
+            MediaController(context)
+            setAnchorView(this@NasaPictureOfTheDayFragment.video)
+        }
+        video.apply {
+            setMediaController(videoControllers)
+            setVideoURI(Uri.parse(nasaPictureOfTheDayViewModel.url.value))
+            requestFocus()
+            start()
+            setOnCompletionListener {
+                contentLoaded = true
+                pictureLoading.visibility = GONE
+                pictureInternetError.visibility = GONE
+                downloadButton.visibility = GONE
+            }
+            setOnErrorListener { _, _, _ ->
+                pictureLoading.visibility = GONE
+                downloadButton.visibility = GONE
+                pictureInternetError.visibility = VISIBLE
+                showNormalToast(
+                    context, context.resources.getString(R.string.no_internet_connection_warning)
+                )
+
+                false
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun downloadPicture() {
         if (nasaPictureOfTheDayViewModel.shouldDownloadPicture.value == true) {
             nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = false
 
             androidDownloader.run {
                 updateDownloadInfo(
-                    nasaPictureOfTheDayViewModel.title.value.toString(),
-                    nasaPictureOfTheDayViewModel.description.value.toString()
+                    nasaPictureOfTheDayViewModel.title.value.toString()
                 )
                 downloadFile(nasaPictureOfTheDayViewModel.hdurl.value.toString())
             }
@@ -257,4 +312,6 @@ class NasaPictureOfTheDayFragment(
             ).putExtra("hdurl", nasaPictureOfTheDayViewModel.hdurl.value)
         )
     }
+
+    // TODO: Display video
 }

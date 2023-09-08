@@ -34,6 +34,10 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
     val hdurl: MutableLiveData<String>
         get() = _hdurl
 
+    private val _mediaType = MutableLiveData("")
+    val mediaType: MutableLiveData<String>
+        get() = _mediaType
+
     private val _state = MutableLiveData<NasaPictureOfTheDayViewModelState>()
     val state: MutableLiveData<NasaPictureOfTheDayViewModelState>
         get() = _state
@@ -92,6 +96,11 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
                 _date.value = nasaPictureOfTheDayData.date
                 _url.value = nasaPictureOfTheDayData.url
                 _hdurl.value = nasaPictureOfTheDayData.hdUrl
+                _mediaType.value = nasaPictureOfTheDayData.mediaType
+
+                logD {
+                    "title=${_title.value}, description=${_description.value}, copyright=${_copyright.value}, date=${_date.value}, url=${_url.value}, hdurl=${_hdurl.value}, mediaType=${mediaType.value}"
+                }
 
                 setLoadedState()
             } catch (e: Exception) {

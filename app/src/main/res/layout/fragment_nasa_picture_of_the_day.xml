@@ -50,6 +50,15 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:background="@color/light_gray" />
 
+        <VideoView
+            android:id="@+id/nasa_picture_of_the_day_video"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/nasa_picture_of_the_day_picture_automatic_download_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ProgressBar
             android:id="@+id/nasa_picture_of_the_day_picture_loading"
             android:layout_width="@dimen/image_size_normal_large"
@@ -138,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:checked="@{nasaPictureOfTheDayViewModel.automaticDownload}"
                 app:thumbTint="@color/dark_gray"
-                app:trackTint="@color/light_gray"/>
+                app:trackTint="@color/light_gray" />
         </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider

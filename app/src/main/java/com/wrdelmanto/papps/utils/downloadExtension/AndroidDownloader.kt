@@ -18,6 +18,7 @@ import android.os.Environment.DIRECTORY_DOWNLOADS
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
+import com.wrdelmanto.papps.R
 
 class AndroidDownloader(private val context: Context) : Downloader {
     private val _state = MutableLiveData<DownloadViewModelState>()
@@ -25,7 +26,6 @@ class AndroidDownloader(private val context: Context) : Downloader {
         get() = _state
 
     private lateinit var title: String
-    private lateinit var description: String
 
     private lateinit var downloadState: DownloadState
     private var downloadId: Long = -1
@@ -34,22 +34,23 @@ class AndroidDownloader(private val context: Context) : Downloader {
     private val downloadManager: DownloadManager =
         context.getSystemService(DownloadManager::class.java) as DownloadManager
 
-    fun updateDownloadInfo(tempTitle: String, desc: String) {
-        title = tempTitle
-        description = desc
+    fun updateDownloadInfo(contentTitle: String) {
+        title = contentTitle
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun downloadFile(url: String): Long {
-        val request =
-            DownloadManager.Request(url.toUri()).setTitle(title).setDescription(description)
-                .setMimeType("image/jpeg").setAllowedOverRoaming(false)
-                .setAllowedNetworkTypes(NETWORK_WIFI or NETWORK_MOBILE)
-                .setNotificationVisibility(VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .addRequestHeader("Authorization", "Bearer <token>")
-                .setDestinationInExternalPublicDir(
-                    DIRECTORY_DOWNLOADS, title
-                )
+
+        val request = DownloadManager.Request(url.toUri()).setTitle(title).setDescription(
+            context.resources.getString(
+                R.string.downloading
+            )
+        ).setMimeType("image/jpeg").setAllowedOverRoaming(false).setAllowedOverMetered(true)
+            .setAllowedNetworkTypes(NETWORK_WIFI or NETWORK_MOBILE)
+            .setNotificationVisibility(VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            .addRequestHeader("Authorization", "Bearer <token>").setDestinationInExternalPublicDir(
+                DIRECTORY_DOWNLOADS, title
+            )
 
         downloadId = downloadManager.enqueue(request)
 

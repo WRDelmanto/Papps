@@ -81,6 +81,8 @@
     <string name="two_player_mode">2 Jogadores</string>
     <string name="height">Altura</string>
     <string name="weight">Peso</string>
+    <string name="downloading">Downloading …</string>
+    <string name="downloading_video">Download de videos foi desativado</string>
     <string name="image_downloading">Downloading %1$s</string>
     <string name="image_downloaded">%1$s Downloaded</string>
 
