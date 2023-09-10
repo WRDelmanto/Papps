@@ -26,6 +26,7 @@ import com.wrdelmanto.papps.SharedViewModel.Companion.NASA_PICTURE_OF_THE_DAY
 import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_LETTER
 import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_NUMBER
 import com.wrdelmanto.papps.SharedViewModel.Companion.ROCK_PAPER_SCISSORS
+import com.wrdelmanto.papps.SharedViewModel.Companion.SPEED_TEST
 import com.wrdelmanto.papps.SharedViewModel.Companion.TIC_TAC_TOE
 import com.wrdelmanto.papps.SharedViewModel.Companion.TIP
 import com.wrdelmanto.papps.SharedViewModel.Companion.UNSCRAMBLE
@@ -36,6 +37,7 @@ import com.wrdelmanto.papps.apps.moneyConverter.MoneyConverterFragment
 import com.wrdelmanto.papps.apps.nasaPictureOfTheDay.NasaPictureOfTheDayFragment
 import com.wrdelmanto.papps.apps.random.randomLetter.RandomLetterFragment
 import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
+import com.wrdelmanto.papps.apps.speedTest.SpeedTestFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
 import com.wrdelmanto.papps.databinding.MainFragmentBinding
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
@@ -240,6 +242,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             R.id.drawer_tip -> switchFragment(
                 homeFragmentContainer.id, TipFragment(applicationContext), TIP
+            )
+
+            R.id.drawer_speed_test -> switchFragment(
+                homeFragmentContainer.id, SpeedTestFragment(applicationContext), SPEED_TEST
             )
 
             // Games

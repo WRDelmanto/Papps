@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentNasaPictureOfTheDayBinding
 import com.wrdelmanto.papps.utils.SP_NPOTD_AUTOMATIC_DOWNLOAD
+import com.wrdelmanto.papps.utils.checkInternetConnection
 import com.wrdelmanto.papps.utils.downloadExtension.AndroidDownloader
 import com.wrdelmanto.papps.utils.downloadExtension.DownloadState
 import com.wrdelmanto.papps.utils.logD
@@ -153,8 +154,8 @@ class NasaPictureOfTheDayFragment(
                 video.visibility = GONE
                 picture.background =
                     ResourcesCompat.getDrawable(resources, R.drawable.general_gray_background, null)
-                showNormalToast(
-                    context, context.resources.getString(R.string.no_internet_connection_warning)
+                if (checkInternetConnection(context)) showNormalToast(
+                    context, context.resources.getString(R.string.unexpected_error)
                 )
             }
         }
@@ -253,9 +254,8 @@ class NasaPictureOfTheDayFragment(
                     pictureLoading.visibility = GONE
                     downloadButton.visibility = GONE
                     pictureInternetError.visibility = VISIBLE
-                    showNormalToast(
-                        context,
-                        context.resources.getString(R.string.no_internet_connection_warning)
+                    if (checkInternetConnection(context)) showNormalToast(
+                        context, context.resources.getString(R.string.unexpected_error)
                     )
                 }
             })
@@ -282,8 +282,8 @@ class NasaPictureOfTheDayFragment(
                 pictureLoading.visibility = GONE
                 downloadButton.visibility = GONE
                 pictureInternetError.visibility = VISIBLE
-                showNormalToast(
-                    context, context.resources.getString(R.string.no_internet_connection_warning)
+                if (checkInternetConnection(context)) showNormalToast(
+                    context, context.resources.getString(R.string.unexpected_error)
                 )
 
                 false

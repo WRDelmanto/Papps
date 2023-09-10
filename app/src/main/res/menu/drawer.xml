@@ -24,9 +24,9 @@
                     android:visible="false"
                     tools:visible="true" />
                 <item
-                    android:id="@+id/drawer_dices"
-                    android:icon="@drawable/dices_logo"
-                    android:title="@string/app_name_dices" />
+                    android:id="@+id/drawer_tip"
+                    android:icon="@drawable/tip_logo"
+                    android:title="@string/app_name_tip" />
                 <item
                     android:id="@+id/drawer_random_letter"
                     android:icon="@drawable/random_letter_logo"
@@ -40,9 +40,13 @@
                     android:icon="@drawable/random_number_logo"
                     android:title="@string/app_name_random_number" />
                 <item
-                    android:id="@+id/drawer_tip"
-                    android:icon="@drawable/tip_logo"
-                    android:title="@string/app_name_tip" />
+                    android:id="@+id/drawer_dices"
+                    android:icon="@drawable/dices_logo"
+                    android:title="@string/app_name_dices" />
+                <item
+                    android:id="@+id/drawer_speed_test"
+                    android:icon="@drawable/speed_test_logo"
+                    android:title="@string/app_name_speed_test" />
             </menu>
         </item>
     </group>

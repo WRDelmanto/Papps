@@ -24,7 +24,7 @@ class SharedViewModel : ViewModel() {
         currentFragmentTag = tag
 
         return when (currentFragmentTag) {
-            HOME -> EMPTY_STRING
+            HOME -> HOME
             CLICK_COUNTER -> context.resources.getString(R.string.app_name_click_counter)
             MONEY_CONVERTER -> context.resources.getString(R.string.app_name_money_converter)
             BODY_MASS_INDEX -> context.resources.getString(R.string.app_name_body_mass_index)
@@ -37,12 +37,13 @@ class SharedViewModel : ViewModel() {
             TIC_TAC_TOE -> context.resources.getString(R.string.app_name_tic_tac_toe)
             ROCK_PAPER_SCISSORS -> context.resources.getString(R.string.app_name_rock_paper_scissors)
             UNSCRAMBLE -> context.resources.getString(R.string.app_name_unscramble)
+            SPEED_TEST -> context.resources.getString(R.string.app_name_speed_test)
             else -> EMPTY_STRING
         }
     }
 
     companion object {
-        const val HOME = "HOME"
+        const val HOME = ""
         const val CLICK_COUNTER = "CLICK_COUNTER"
         const val MONEY_CONVERTER = "MONEY_CONVERTER"
         const val DICES = "DICES"
@@ -55,6 +56,7 @@ class SharedViewModel : ViewModel() {
         const val TIC_TAC_TOE = "TIC_TAC_TOE"
         const val ROCK_PAPER_SCISSORS = "ROCK_PAPER_SCISSORS"
         const val UNSCRAMBLE = "UNSCRAMBLE"
+        const val SPEED_TEST = "SPEED_TEST"
         const val EMPTY_STRING = ""
     }
 }

@@ -27,6 +27,7 @@
     <string name="app_name_tic_tac_toe">Jogo da Velha</string>
     <string name="app_name_rock_paper_scissors">Pedra, Papel e Tesoura</string>
     <string name="app_name_body_mass_index">IMC - Índice de massa corporal</string>
+    <string name="app_name_speed_test">Teste de internet</string>
 
     <!-- Drawer Bottom Items -->
     <string name="settings">Configurações</string>
@@ -49,6 +50,8 @@
 
     <!-- Warnings -->
     <string name="no_internet_connection_warning">Não há conexão com a Internet</string>
+    <string name="internet_connection_found">Conectado a internet</string>
+    <string name="unexpected_error">Ocorreu um erro inesperado</string>
 
     <!-- Home -->
     <string name="home_click_here">Clique aqui\npara começar\na aventura!</string>
@@ -85,6 +88,7 @@
     <string name="downloading_video">Download de videos foi desativado</string>
     <string name="image_downloading">Downloading %1$s</string>
     <string name="image_downloaded">%1$s Downloaded</string>
+    <string name="mbps">Mbps</string>
 
     <!-- All Apps -->
     <!-- Click Counter -->
@@ -114,6 +118,13 @@
     <string name="tip_round_up_total_text">Arredondar Total</string>
     <string name="tip_value_hint"><font size="12">Digite o valor da conta ex: R$ 37.50</font></string>
     <string name="tip_total">Total</string>
+
+    <!-- Speed Test -->
+    <string name="download">Download</string>
+    <string name="upload">Upload</string>
+    <string name="network_type">Tipo:</string>
+    <string name="public_ip">IP Publico:</string>
+    <string name="region">Região:</string>
 
     <!-- All Games -->
     <!-- Coin Flipper -->
