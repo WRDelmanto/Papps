@@ -62,7 +62,6 @@ class RandomQuoteViewModel : ViewModel() {
     private fun generateNextQuote(context: Context) {
         // TODO: Check the authors with no quotes and fix them
         // TODO: Do not let quotes with more than X characters (It will break the layout)
-        // TODO: Add drawer icon
 
         if (checkInternetConnection(context) && pensadorQuoteState == PensadorQuoteState.LOADED) {
             MainScope().launch {

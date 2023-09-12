@@ -19,6 +19,7 @@
                     tools:visible="true" />
                 <item
                     android:id="@+id/drawer_random_quote"
+                    android:icon="@drawable/random_quote_logo"
                     android:title="@string/app_name_random_quote" />
                 <item
                     android:id="@+id/drawer_body_mass_index"
