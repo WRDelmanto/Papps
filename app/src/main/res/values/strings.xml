@@ -28,6 +28,7 @@
     <string name="app_name_rock_paper_scissors">Pedra, Papel e Tesoura</string>
     <string name="app_name_body_mass_index">IMC - Índice de massa corporal</string>
     <string name="app_name_speed_test">Teste de internet</string>
+    <string name="app_name_random_quote">Frase Aleatória</string>
 
     <!-- Drawer Bottom Items -->
     <string name="settings">Configurações</string>

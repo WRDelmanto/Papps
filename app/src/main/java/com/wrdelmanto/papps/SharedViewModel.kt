@@ -38,6 +38,7 @@ class SharedViewModel : ViewModel() {
             ROCK_PAPER_SCISSORS -> context.resources.getString(R.string.app_name_rock_paper_scissors)
             UNSCRAMBLE -> context.resources.getString(R.string.app_name_unscramble)
             SPEED_TEST -> context.resources.getString(R.string.app_name_speed_test)
+            RANDOM_QUOTE -> context.resources.getString(R.string.app_name_random_quote)
             else -> EMPTY_STRING
         }
     }
@@ -51,6 +52,7 @@ class SharedViewModel : ViewModel() {
         const val RANDOM_LETTER = "RANDOM_LETTER"
         const val NASA_PICTURE_OF_THE_DAY = "NASA_PICTURE_OF_THE_DAY"
         const val RANDOM_NUMBER = "RANDOM_NUMBER"
+        const val RANDOM_QUOTE = "RANDOM_QUOTE"
         const val TIP = "TIP"
         const val COIN_FLIPPER = "COIN_FLIPPER"
         const val TIC_TAC_TOE = "TIC_TAC_TOE"

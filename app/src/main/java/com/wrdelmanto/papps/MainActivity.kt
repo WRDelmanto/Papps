@@ -25,6 +25,7 @@ import com.wrdelmanto.papps.SharedViewModel.Companion.MONEY_CONVERTER
 import com.wrdelmanto.papps.SharedViewModel.Companion.NASA_PICTURE_OF_THE_DAY
 import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_LETTER
 import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_NUMBER
+import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_QUOTE
 import com.wrdelmanto.papps.SharedViewModel.Companion.ROCK_PAPER_SCISSORS
 import com.wrdelmanto.papps.SharedViewModel.Companion.SPEED_TEST
 import com.wrdelmanto.papps.SharedViewModel.Companion.TIC_TAC_TOE
@@ -37,6 +38,7 @@ import com.wrdelmanto.papps.apps.moneyConverter.MoneyConverterFragment
 import com.wrdelmanto.papps.apps.nasaPictureOfTheDay.NasaPictureOfTheDayFragment
 import com.wrdelmanto.papps.apps.random.randomLetter.RandomLetterFragment
 import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
+import com.wrdelmanto.papps.apps.random.randomQuote.RandomQuoteFragment
 import com.wrdelmanto.papps.apps.speedTest.SpeedTestFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
 import com.wrdelmanto.papps.databinding.MainFragmentBinding
@@ -246,6 +248,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             R.id.drawer_speed_test -> switchFragment(
                 homeFragmentContainer.id, SpeedTestFragment(applicationContext), SPEED_TEST
+            )
+
+            R.id.drawer_random_quote -> switchFragment(
+                homeFragmentContainer.id, RandomQuoteFragment(applicationContext), RANDOM_QUOTE
             )
 
             // Games

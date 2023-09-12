@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="randomQuoteViewModel"
+            type="com.wrdelmanto.papps.apps.random.randomQuote.RandomQuoteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_edges">
+
+        <ProgressBar
+            android:id="@+id/random_quotes_loading"
+            android:layout_width="@dimen/image_size_normal_large"
+            android:layout_height="@dimen/image_size_normal_large"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_elements_normal"
+            app:layout_constraintBottom_toTopOf="@+id/random_quotes_current_author"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/random_quotes_current_quote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{randomQuoteViewModel.currentQuote}"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/font_size_normal_above"
+                tools:text="Quote" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/random_quotes_current_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_elements_normal"
+            android:ellipsize="end"
+            android:text="@{randomQuoteViewModel.currentAuthor}"
+            android:textSize="@dimen/font_size_normal_above"
+            app:layout_constraintBottom_toTopOf="@+id/random_quotes_reset_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Author" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/random_quotes_reset_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/general_button"
+            android:text="@string/reset"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
