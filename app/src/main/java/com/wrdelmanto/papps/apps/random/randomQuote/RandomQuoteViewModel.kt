@@ -11,6 +11,7 @@ import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import java.util.Locale
 
@@ -29,6 +30,8 @@ class RandomQuoteViewModel : ViewModel() {
 
     private lateinit var pensadorQuoteState: PensadorQuoteState
 
+    private lateinit var pensadorData: PensadorData
+
     private fun setLoadingState() {
         pensadorQuoteState = PensadorQuoteState.LOADING
         postState()
@@ -36,6 +39,11 @@ class RandomQuoteViewModel : ViewModel() {
 
     private fun setLoadedState() {
         pensadorQuoteState = PensadorQuoteState.LOADED
+        postState()
+    }
+
+    private fun setErrorState() {
+        pensadorQuoteState = PensadorQuoteState.ERROR
         postState()
     }
 
@@ -60,32 +68,31 @@ class RandomQuoteViewModel : ViewModel() {
     }
 
     private fun generateNextQuote(context: Context) {
-        // TODO: Check the authors with no quotes and fix them
-        // TODO: Do not let quotes with more than X characters (It will break the layout)
-
         if (checkInternetConnection(context) && pensadorQuoteState == PensadorQuoteState.LOADED) {
             MainScope().launch {
                 setLoadingState()
 
+                val generateNextAuthor = launch {
                     var tempAuthor: String
 
                     do tempAuthor = allAuthorsList.random()
                     while (tempAuthor == _currentAuthor.value)
 
                     _currentAuthor.value = tempAuthor
+                }
+                val generateNextQuote = launch {
+                    do {
+                        val numberOfRequestedQuotes = (1..20).random()
 
-//            val numberOfRequestedQuotes = (1..100).random()
-                    val numberOfRequestedQuotes = 1
+                        pensadorData = PensadorAPI.retrofitService.getPensadorData(
+                            _currentAuthor.value.toString().replace(" ", "_")
+                                .lowercase(Locale.ROOT), numberOfRequestedQuotes
+                        )
 
-                    val response = PensadorAPI.retrofitService.getPensadorData(
-                        _currentAuthor.value.toString().replace(" ", "_").lowercase(Locale.ROOT),
-                        numberOfRequestedQuotes
-                    ).toString()
-
-                    val total = 1
-                    val currentQuoteId = (1..total).random()
-
-                    _currentQuote.value = response
+                        _currentQuote.value = pensadorData.frases[numberOfRequestedQuotes - 1].texto
+                    } while (pensadorData.frases[numberOfRequestedQuotes - 1].texto.length >= 500)
+                }
+                joinAll(generateNextAuthor, generateNextQuote)
 
                 putSharedPreferences(context, SP_RQ_QUOTE, _currentQuote.value.toString())
                 putSharedPreferences(context, SP_RQ_AUTHOR, _currentAuthor.value.toString())
@@ -94,6 +101,6 @@ class RandomQuoteViewModel : ViewModel() {
 
                 setLoadedState()
             }
-        }
+        } else setErrorState()
     }
 }

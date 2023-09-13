@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -27,6 +28,7 @@ class RandomQuoteFragment(
     private lateinit var author: TextView
 
     private lateinit var loading: ProgressBar
+    private lateinit var internetError: ImageView
     private lateinit var resetButton: AppCompatButton
 
     override fun onCreateView(
@@ -44,11 +46,12 @@ class RandomQuoteFragment(
         binding.randomQuoteViewModel = randomQuoteViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        quote = binding.randomQuotesCurrentQuote
-        author = binding.randomQuotesCurrentAuthor
+        quote = binding.randomQuoteCurrentQuote
+        author = binding.randomQuoteCurrentAuthor
 
-        loading = binding.randomQuotesLoading
-        resetButton = binding.randomQuotesResetButton
+        loading = binding.randomQuoteLoading
+        internetError = binding.randomQuoteInternetError
+        resetButton = binding.randomQuoteResetButton
 
         initiateListeners()
         initiateDownloadObservers()
@@ -84,6 +87,7 @@ class RandomQuoteFragment(
                 author.visibility = GONE
 
                 loading.visibility = VISIBLE
+                internetError.visibility = GONE
                 resetButton.isClickable = false
             }
 
@@ -92,6 +96,16 @@ class RandomQuoteFragment(
                 author.visibility = VISIBLE
 
                 loading.visibility = GONE
+                internetError.visibility = GONE
+                resetButton.isClickable = true
+            }
+
+            PensadorQuoteState.ERROR -> {
+                quote.visibility = GONE
+                author.visibility = GONE
+
+                loading.visibility = GONE
+                internetError.visibility = VISIBLE
                 resetButton.isClickable = true
             }
         }

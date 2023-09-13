@@ -25,9 +25,6 @@ data class QuoteData(
     val autor: String, val texto: String
 ) : Parcelable
 
-/**
- * Retrofit service object for creating api calls
- */
 interface PensadorApiService {
     @GET(PENSADOR_API_VERCEL_URL)
     suspend fun getPensadorData(
@@ -35,9 +32,6 @@ interface PensadorApiService {
     ): PensadorData
 }
 
-/**
- * A public Api object that exposes the lazy-initialized Retrofit service
- */
 object PensadorAPI {
     private val retrofit: Retrofit = Retrofit.Builder().baseUrl(PENSADOR_API_VERCEL_URL)
         .addConverterFactory(GsonConverterFactory.create()).build()

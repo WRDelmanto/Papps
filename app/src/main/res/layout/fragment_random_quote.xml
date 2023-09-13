@@ -16,10 +16,23 @@
         android:padding="@dimen/padding_edges">
 
         <ProgressBar
-            android:id="@+id/random_quotes_loading"
+            android:id="@+id/random_quote_loading"
             android:layout_width="@dimen/image_size_normal_large"
             android:layout_height="@dimen/image_size_normal_large"
             android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/random_quote_internet_error"
+            android:layout_width="@dimen/image_size_normal_large"
+            android:layout_height="@dimen/image_size_normal_large"
+            android:background="@drawable/ic_connection_error"
+            android:contentDescription="@null"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,13 +42,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/margin_elements_normal"
-            app:layout_constraintBottom_toTopOf="@+id/random_quotes_current_author"
+            app:layout_constraintBottom_toTopOf="@+id/random_quote_current_author"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/random_quotes_current_quote"
+                android:id="@+id/random_quote_current_quote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -46,19 +59,19 @@
         </ScrollView>
 
         <TextView
-            android:id="@+id/random_quotes_current_author"
+            android:id="@+id/random_quote_current_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_elements_normal"
             android:ellipsize="end"
             android:text="@{randomQuoteViewModel.currentAuthor}"
             android:textSize="@dimen/font_size_normal_above"
-            app:layout_constraintBottom_toTopOf="@+id/random_quotes_reset_button"
+            app:layout_constraintBottom_toTopOf="@+id/random_quote_reset_button"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Author" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/random_quotes_reset_button"
+            android:id="@+id/random_quote_reset_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/general_button"
