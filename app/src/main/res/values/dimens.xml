@@ -6,6 +6,10 @@
 
     <dimen name="line_height">6dp</dimen>
 
+    <dimen name="max_width_textInputEditText">488dp</dimen>
+    <dimen name="max_height_textInputEditText">488dp</dimen>
+    <dimen name="max_width_appCompatButton">320dp</dimen>
+    <dimen name="max_height_appCompatButton">320p</dimen>
     <dimen name="min_width">48dp</dimen>
     <dimen name="min_height">48dp</dimen>
 

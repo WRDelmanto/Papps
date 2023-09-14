@@ -26,6 +26,7 @@
             app:layout_constraintBottom_toTopOf="@+id/click_counter_text_clicks"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="VisualLintOverlap"
             tools:text="0" />
 
         <TextView
@@ -37,7 +38,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintOverlap" />
 
         <TextView
             android:id="@+id/click_counter_high_score"
@@ -49,7 +51,8 @@
             android:textColor="@color/color_secondary"
             android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintOverlap" />
 
         <TextView
             android:id="@+id/click_counter_high_score_output"
@@ -63,13 +66,15 @@
             app:layout_constraintEnd_toEndOf="@+id/click_counter_high_score"
             app:layout_constraintStart_toStartOf="@+id/click_counter_high_score"
             app:layout_constraintTop_toBottomOf="@+id/click_counter_high_score"
+            tools:ignore="VisualLintOverlap"
             tools:text="0" />
 
         <Button
             android:id="@+id/click_counter_click_anywhere_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0" />
+            android:alpha="0"
+            tools:ignore="VisualLintButtonSize" />
 
         <TextView
             android:id="@+id/click_counter_click_anywhere_message"
@@ -85,7 +90,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/click_counter_reset_button"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_edges"
             android:layout_marginBottom="@dimen/margin_edges"
@@ -93,6 +98,7 @@
             android:text="@string/reset"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_max="@dimen/max_width_appCompatButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

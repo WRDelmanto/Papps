@@ -31,12 +31,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_elements_small"
-            android:text="ARS"
+            android:text="@string/ars_cypher"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintBottom_toBottomOf="@id/money_converter_primary_input_country_flag"
             app:layout_constraintStart_toEndOf="@+id/money_converter_primary_input_country_flag"
-            app:layout_constraintTop_toTopOf="@id/money_converter_primary_input_country_flag" />
+            app:layout_constraintTop_toTopOf="@id/money_converter_primary_input_country_flag"
+            tools:ignore="VisualLintOverlap" />
 
         <ImageView
             android:id="@+id/money_converter_primary_input_arrow_down"
@@ -51,7 +52,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/money_converter_primary_input"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_elements_normal"
             android:background="@drawable/general_input_text"
@@ -63,7 +64,8 @@
             app:layout_constraintBottom_toTopOf="@+id/money_converter_secondary_input"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="1.00" />
+            app:layout_constraintWidth_max="@dimen/max_width_textInputEditText"
+            tools:text="10.00" />
 
         <ImageView
             android:id="@+id/money_converter_switch"
@@ -87,19 +89,21 @@
             android:src="@drawable/flag_brazil"
             app:layout_constraintBottom_toBottomOf="@id/money_converter_secondary_input"
             app:layout_constraintStart_toStartOf="@id/money_converter_secondary_input"
-            app:layout_constraintTop_toTopOf="@id/money_converter_secondary_input" />
+            app:layout_constraintTop_toTopOf="@id/money_converter_secondary_input"
+            tools:ignore="ImageContrastCheck" />
 
         <TextView
             android:id="@+id/money_converter_secondary_input_country_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_elements_small"
-            android:text="BRL"
+            android:text="@string/brl_cypher"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintBottom_toBottomOf="@id/money_converter_secondary_input_country_flag"
             app:layout_constraintStart_toEndOf="@+id/money_converter_secondary_input_country_flag"
-            app:layout_constraintTop_toTopOf="@id/money_converter_secondary_input_country_flag" />
+            app:layout_constraintTop_toTopOf="@id/money_converter_secondary_input_country_flag"
+            tools:ignore="VisualLintOverlap" />
 
         <ImageView
             android:id="@+id/money_converter_secondary_input_arrow_down"
@@ -114,7 +118,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/money_converter_secondary_input"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_elements_normal"
             android:layout_marginBottom="@dimen/margin_elements_large"
@@ -127,7 +131,8 @@
             app:layout_constraintBottom_toTopOf="@+id/money_converter_divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="1.00" />
+            app:layout_constraintWidth_max="@dimen/max_width_textInputEditText"
+            tools:text="20.00" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/money_converter_divider"
@@ -162,13 +167,14 @@
                 app:layout_constraintEnd_toStartOf="@+id/money_converter_conversion_separator"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/max_width_textInputEditText"
                 tools:text="1.00" />
 
             <TextView
                 android:id="@+id/money_converter_conversion_primary_input_cipher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ARS"
+                android:text="@string/ars_cypher"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_size_normal"
                 app:layout_constraintBottom_toBottomOf="@+id/money_converter_conversion_primary_input"
@@ -203,13 +209,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/money_converter_conversion_separator"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_max="@dimen/max_width_textInputEditText"
                 tools:text="2.00" />
 
             <TextView
                 android:id="@+id/money_converter_conversion_secondary_input_cipher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BRL"
+                android:text="@string/brl_cypher"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_size_normal"
                 app:layout_constraintBottom_toBottomOf="@+id/money_converter_conversion_secondary_input"

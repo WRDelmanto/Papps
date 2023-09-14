@@ -23,7 +23,8 @@
             android:src="@drawable/tip_coins"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck" />
 
         <LinearLayout
             android:id="@+id/tip_round_up_tip"
@@ -37,7 +38,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tip_round_up_tip_text"
-                android:textColor="@color/tip_orange" />
+                android:textColor="@color/tip_orange"
+                tools:ignore="TextContrastCheck" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/tip_round_up_tip_switch"
@@ -60,7 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tip_round_up_total_text"
-                android:textColor="@color/tip_orange" />
+                android:textColor="@color/tip_orange"
+                tools:ignore="TextContrastCheck" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/tip_round_up_total_switch"
@@ -68,7 +71,8 @@
                 android:layout_height="wrap_content"
                 android:checked="@{tipViewModel.roundUpTotal}"
                 app:thumbTint="@color/tip_orange"
-                app:trackTint="@color/orange_light" />
+                app:trackTint="@color/orange_light"
+                tools:checked="true" />
         </LinearLayout>
 
         <TextView
@@ -81,7 +85,8 @@
             android:textSize="@dimen/font_size_normal"
             app:layout_constraintBottom_toBottomOf="@+id/tip_value_input"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tip_value_input" />
+            app:layout_constraintTop_toTopOf="@+id/tip_value_input"
+            tools:ignore="TextContrastCheck" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tip_value_input"
@@ -93,10 +98,11 @@
             android:text="@{tipViewModel.valueInput}"
             android:textColorLink="@color/tip_orange"
             android:textCursorDrawable="@null"
-            android:textSize="@dimen/font_size_normal"
+            android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tip_cipher_value_input"
-            app:layout_constraintTop_toBottomOf="@+id/tip_round_up_total" />
+            app:layout_constraintTop_toBottomOf="@+id/tip_round_up_total"
+            app:layout_constraintWidth_max="@dimen/max_width_textInputEditText" />
 
         <TextView
             android:id="@+id/tip_percentage"
@@ -146,6 +152,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tip_tip"
             app:layout_constraintTop_toTopOf="@+id/tip_tip"
+            tools:ignore="TextContrastCheck"
             tools:text="@string/zero_decimal" />
 
         <TextView
@@ -170,6 +177,7 @@
             app:layout_constraintEnd_toEndOf="@+id/tip_tip_output"
             app:layout_constraintStart_toStartOf="@+id/tip_tip_output"
             app:layout_constraintTop_toTopOf="@+id/tip_total"
+            tools:ignore="TextContrastCheck"
             tools:text="@string/zero_decimal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -25,6 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintOverlap"
             tools:text="@string/click_anywhere" />
 
         <TextView
@@ -39,6 +40,7 @@
             android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/random_letter_middle_guide_line"
+            tools:ignore="VisualLintOverlap"
             tools:text="1" />
 
         <TextView
@@ -53,6 +55,7 @@
             app:layout_constraintEnd_toEndOf="@+id/random_letter_history_first"
             app:layout_constraintStart_toStartOf="@+id/random_letter_history_first"
             app:layout_constraintTop_toBottomOf="@+id/random_letter_history_first"
+            tools:ignore="VisualLintOverlap"
             tools:text="2" />
 
         <TextView
@@ -67,6 +70,7 @@
             app:layout_constraintEnd_toEndOf="@+id/random_letter_history_second"
             app:layout_constraintStart_toStartOf="@+id/random_letter_history_second"
             app:layout_constraintTop_toBottomOf="@+id/random_letter_history_second"
+            tools:ignore="VisualLintOverlap,TextContrastCheck"
             tools:text="3" />
 
         <TextView
@@ -81,6 +85,7 @@
             app:layout_constraintEnd_toEndOf="@+id/random_letter_history_third"
             app:layout_constraintStart_toStartOf="@+id/random_letter_history_third"
             app:layout_constraintTop_toBottomOf="@+id/random_letter_history_third"
+            tools:ignore="VisualLintOverlap,TextContrastCheck"
             tools:text="4" />
 
         <TextView
@@ -95,13 +100,15 @@
             app:layout_constraintEnd_toEndOf="@+id/random_letter_history_fourth"
             app:layout_constraintStart_toStartOf="@+id/random_letter_history_fourth"
             app:layout_constraintTop_toBottomOf="@+id/random_letter_history_fourth"
+            tools:ignore="VisualLintOverlap,TextContrastCheck"
             tools:text="5" />
 
         <Button
             android:id="@+id/random_letter_click_anywhere_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0" />
+            android:alpha="0"
+            tools:ignore="VisualLintButtonSize" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/random_letter_middle_guide_line"

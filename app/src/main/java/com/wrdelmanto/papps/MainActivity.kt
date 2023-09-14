@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -84,6 +85,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         activityMain = binding.mainFragment
         homeFragmentContainer = findViewById(R.id.home_fragment_container)
+
+        // Handle onBackPressed
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Do nothing
+                logD { "onBackPressed" }
+            }
+        })
 
         // App bar
         drawerIcon = findViewById(R.id.app_bar_main_drawer_icon)
@@ -178,10 +187,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun disableObservers() {
         sharedViewModel.easterEggActivated.removeObserver {}
-    }
-
-    override fun onBackPressed() {
-        // Do nothing
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

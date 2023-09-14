@@ -22,7 +22,8 @@
             android:background="@drawable/general_button"
             android:textSize="@dimen/font_size_large"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_a12"
@@ -33,7 +34,8 @@
             android:textSize="@dimen/font_size_large"
             app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_a13"
             app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_a11"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_a13"
@@ -42,7 +44,8 @@
             android:background="@drawable/general_button"
             android:textSize="@dimen/font_size_large"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_a21"
@@ -52,7 +55,8 @@
             android:textSize="@dimen/font_size_large"
             app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a22"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a22" />
+            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a22"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_a22"
@@ -64,7 +68,8 @@
             android:textSize="@dimen/font_size_large"
             app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_a12"
             app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_a12"
-            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_a12" />
+            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_a12"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_a23"
@@ -74,7 +79,8 @@
             android:textSize="@dimen/font_size_large"
             app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a22"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a22" />
+            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a22"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_a31"
@@ -83,7 +89,8 @@
             android:background="@drawable/general_button"
             android:textSize="@dimen/font_size_large"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_a32"
@@ -95,7 +102,8 @@
             android:textSize="@dimen/font_size_large"
             app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_a22"
             app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_a22"
-            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_a22" />
+            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_a22"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_a33"
@@ -105,7 +113,8 @@
             android:textSize="@dimen/font_size_large"
             app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a32"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a32" />
+            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a32"
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -128,7 +137,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_pvp_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="@dimen/max_width_appCompatButton" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_pvp_button"
@@ -145,7 +155,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tic_tac_toe_reset_button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_edges"
         android:layout_marginBottom="@dimen/margin_edges"
@@ -153,5 +163,6 @@
         android:text="@string/reset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_max="@dimen/max_width_appCompatButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

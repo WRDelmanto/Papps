@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.random.randomNumber
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.R
@@ -41,6 +43,7 @@ class RandomNumberFragment(
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -55,7 +58,7 @@ class RandomNumberFragment(
         initiateListeners()
     }
 
-    @Suppress("Deprecation")
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
         super.onResume()
 
@@ -63,7 +66,7 @@ class RandomNumberFragment(
 
         result.apply {
             textSize = 16F
-            setTextColor(resources.getColor(R.color.defaul_text_color))
+            setTextColor(resources.getColor(R.color.defaul_text_color, null))
         }
 
         startBlinkingAnimation(result)
@@ -75,7 +78,7 @@ class RandomNumberFragment(
         super.onDestroy()
     }
 
-    @Suppress("Deprecation")
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun initiateListeners() {
         randomizerButton.setOnClickListener {
             hideKeyboard()
@@ -84,7 +87,7 @@ class RandomNumberFragment(
 
             result.apply {
                 textSize = 128F
-                setTextColor(resources.getColor(R.color.color_secondary))
+                setTextColor(resources.getColor(R.color.color_secondary, null))
             }
 
             randomNumberViewModel.generateRandomNumber(context)

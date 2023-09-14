@@ -26,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintOverlap"
             tools:text="@string/click_anywhere" />
 
         <TextView
@@ -39,7 +40,8 @@
             app:layout_constraintEnd_toEndOf="@+id/random_number_result"
             app:layout_constraintStart_toStartOf="@+id/random_number_result"
             app:layout_constraintTop_toTopOf="@+id/random_number_middle_guide_line"
-            tools:text="1" />
+            tools:ignore="VisualLintOverlap"
+            tools:text="4" />
 
         <TextView
             android:id="@+id/random_number_history_second"
@@ -52,7 +54,8 @@
             app:layout_constraintEnd_toEndOf="@+id/random_number_history_first"
             app:layout_constraintStart_toStartOf="@+id/random_number_history_first"
             app:layout_constraintTop_toBottomOf="@+id/random_number_history_first"
-            tools:text="2" />
+            tools:ignore="VisualLintOverlap,TextContrastCheck"
+            tools:text="5" />
 
         <TextView
             android:id="@+id/random_number_history_third"
@@ -65,13 +68,15 @@
             app:layout_constraintEnd_toEndOf="@+id/random_number_history_second"
             app:layout_constraintStart_toStartOf="@+id/random_number_history_second"
             app:layout_constraintTop_toBottomOf="@+id/random_number_history_second"
-            tools:text="3" />
+            tools:ignore="VisualLintOverlap,TextContrastCheck"
+            tools:text="6" />
 
         <Button
             android:id="@+id/random_number_click_anywhere_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0" />
+            android:alpha="0"
+            tools:ignore="VisualLintButtonSize" />
 
         <TextView
             android:id="@+id/random_number_min"
@@ -93,7 +98,8 @@
             android:textSize="@dimen/font_size_normal"
             app:layout_constraintBottom_toTopOf="@+id/random_number_max_input"
             app:layout_constraintEnd_toEndOf="@+id/random_number_max_input"
-            app:layout_constraintStart_toStartOf="@+id/random_number_max_input" />
+            app:layout_constraintStart_toStartOf="@+id/random_number_max_input"
+            tools:ignore="TextContrastCheck" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/random_number_min_input"
@@ -110,7 +116,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/random_number_max_input"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="@string/one" />
+            tools:text="1" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/random_number_max_input"

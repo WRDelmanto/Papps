@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.bodyMassIndex
 
 import android.content.Context
+import android.os.Build.VERSION_CODES.M
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.R
@@ -34,6 +36,7 @@ class BodyMassIndexFragment(
         return binding.root
     }
 
+    @RequiresApi(M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -93,15 +96,35 @@ class BodyMassIndexFragment(
         })
     }
 
-    @Suppress("Deprecation")
+    @RequiresApi(M)
     private fun initiateObservers() {
         bodyMassIndexViewModel.bmi.observe(viewLifecycleOwner) {
             when {
-                it.toDouble() < 18.50 -> bmiOutput.setTextColor(resources.getColor(R.color.light_blue))
-                it.toDouble() in 18.50..24.90 -> bmiOutput.setTextColor(resources.getColor(R.color.green))
-                it.toDouble() in 24.90..30.00 -> bmiOutput.setTextColor(resources.getColor(R.color.orange))
-                it.toDouble() > 30.00 -> bmiOutput.setTextColor(resources.getColor(R.color.red))
-                else -> bmiOutput.setTextColor(resources.getColor(R.color.black))
+                it.toDouble() < 18.50 -> bmiOutput.setTextColor(
+                    resources.getColor(
+                        R.color.light_blue, null
+                    )
+                )
+
+                it.toDouble() in 18.50..24.90 -> bmiOutput.setTextColor(
+                    resources.getColor(
+                        R.color.green, null
+                    )
+                )
+
+                it.toDouble() in 24.90..30.00 -> bmiOutput.setTextColor(
+                    resources.getColor(
+                        R.color.orange, null
+                    )
+                )
+
+                it.toDouble() > 30.00 -> bmiOutput.setTextColor(
+                    resources.getColor(
+                        R.color.red, null
+                    )
+                )
+
+                else -> bmiOutput.setTextColor(resources.getColor(R.color.black, null))
             }
         }
     }

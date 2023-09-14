@@ -43,7 +43,7 @@ private const val CLASS_STACK_INDEX = 3
 /**
  * Regex to match anonymous class
  */
-private val ANONYMOUS_CLASS_PATTERN = Pattern.compile("(\\$\\d+)+$")
+private val anonymousClassPattern = Pattern.compile("(\\$\\d+)+$")
 
 /**
  * Get current log level.
@@ -66,7 +66,7 @@ val logLevel: Int = when {
 fun getTag(): String {
     return if (logLevel <= LEVEL_DEBUG) {
         var tag = Thread.currentThread().stackTrace[CLASS_STACK_INDEX].className
-        val matcher = ANONYMOUS_CLASS_PATTERN.matcher(tag)
+        val matcher = anonymousClassPattern.matcher(tag)
 
         if (matcher.find()) tag = matcher.replaceAll("")
 

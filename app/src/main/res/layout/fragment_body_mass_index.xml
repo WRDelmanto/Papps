@@ -36,11 +36,12 @@
             android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintBottom_toBottomOf="@id/body_mass_index_height_icon"
             app:layout_constraintStart_toEndOf="@+id/body_mass_index_height_icon"
-            app:layout_constraintTop_toTopOf="@id/body_mass_index_height_icon" />
+            app:layout_constraintTop_toTopOf="@id/body_mass_index_height_icon"
+            tools:ignore="VisualLintOverlap" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/body_mass_index_height_input"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/general_input_text"
             android:inputType="number|numberDecimal"
@@ -52,6 +53,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="@dimen/max_width_textInputEditText"
             tools:text="1.75" />
 
         <ImageView
@@ -75,11 +77,12 @@
             android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintBottom_toBottomOf="@id/body_mass_index_weight_icon"
             app:layout_constraintStart_toEndOf="@+id/body_mass_index_weight_icon"
-            app:layout_constraintTop_toTopOf="@id/body_mass_index_weight_icon" />
+            app:layout_constraintTop_toTopOf="@id/body_mass_index_weight_icon"
+            tools:ignore="VisualLintOverlap" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/body_mass_index_weight_input"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/general_input_text"
             android:inputType="number|numberDecimal"
@@ -91,6 +94,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/body_mass_index_height_input"
+            app:layout_constraintWidth_max="@dimen/max_width_textInputEditText"
             tools:text="75" />
 
         <com.google.android.material.divider.MaterialDivider
@@ -138,7 +142,8 @@
             app:layout_constraintBottom_toTopOf="@+id/body_mass_index_description_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/body_mass_index_result" />
+            app:layout_constraintTop_toBottomOf="@id/body_mass_index_result"
+            tools:ignore="ImageContrastCheck" />
 
         <TableLayout
             android:id="@id/body_mass_index_description_container"
@@ -169,7 +174,8 @@
                     android:gravity="end"
                     android:text="@string/underweight"
                     android:textColor="@color/light_blue"
-                    android:textSize="@dimen/font_size_normal_above" />
+                    android:textSize="@dimen/font_size_normal_above"
+                    tools:ignore="TextContrastCheck" />
             </TableRow>
 
             <com.google.android.material.divider.MaterialDivider
@@ -213,7 +219,8 @@
                     android:gravity="end"
                     android:text="@string/overweight"
                     android:textColor="@color/orange"
-                    android:textSize="@dimen/font_size_normal_above" />
+                    android:textSize="@dimen/font_size_normal_above"
+                    tools:ignore="TextContrastCheck" />
             </TableRow>
 
             <com.google.android.material.divider.MaterialDivider

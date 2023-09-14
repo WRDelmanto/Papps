@@ -6,9 +6,7 @@
 
     <!-- MultableLiveData -->
     <string name="multable_live_data_int">%d</string>
-    <string name="multable_live_data_int_with_cipher">R\u0024 %1$d</string>
     <string name="multable_live_data_int_with_percentage">%1$d \%%</string>
-    <string name="multable_live_data_int_with_kilograms">%1$d Kg</string>
 
     <!-- Drawer -->
     <!-- Drawer Header -->
@@ -38,7 +36,6 @@
     <string name="clear_all_data">Limpar todos os dados</string>
     <string name="clear_all_data_description">Essa ação limpará todos os dados relacionados a recordes e histórico dos jogos e apps.</string>
     <string name="clear_all_data_confirmation">Todos os dados foram deletados</string>
-    <string name="papps_google_play">Avaliar este app</string>
     <string name="send_feedback">Enviar feedback</string>
     <string name="send_feedback_choose_email_client">"Escolha o provedor de e-mail…"</string>
     <string name="send_feedback_error">Ocorreu um erro ao tentar abrir seu aplicativo padrão de e-mails</string>
@@ -70,7 +67,6 @@
     <string name="reset">Reset</string>
     <string name="cipher">R$ </string>
     <string name="value_with_cipher">R\u0024 %1$s</string>
-    <string name="value_with_percentage">%1$s \%%</string>
     <string name="x_separator">X</string>
     <string name="equal_separator">=</string>
     <string name="pve">PvE</string>
@@ -92,8 +88,6 @@
     <string name="mbps">Mbps</string>
 
     <!-- All Apps -->
-    <!-- Click Counter -->
-
     <!-- Body mass index -->
     <string name="underweight_bmi">\u003C 18.5</string>
     <string name="normal_bmi">18.5 a 24.9</string>
@@ -105,20 +99,23 @@
     <string name="obese">Obeso</string>
     <string name="cmi_result">Seu IMC É</string>
 
+    <!-- Click Counter -->
+    <!-- Dice -->
+
+    <!-- Money Converter -->
+    <string name="ars_cypher">ARS</string>
+    <string name="brl_cypher">BRL</string>
+
     <!-- Nasa Picture Of The Day -->
     <string name="nasa_picture_of_the_day_picture_automatic_download_message">Download Automático</string>
+    <string name="nasa_picture_of_the_day_hdurl_picture_contentDescription">Imagem em Full HD</string>
 
+    <!-- Random Quote -->
     <!-- Random Letter -->
 
     <!-- Random Number -->
     <string name="random_number_min_higher_than_max">Max must be higher than Min</string>
     <string name="random_number_no_input_found">Min and Max cannot be empty</string>
-
-    <!-- Tip -->
-    <string name="tip_round_up_tip_text">Arredondar Gorjeta</string>
-    <string name="tip_round_up_total_text">Arredondar Total</string>
-    <string name="tip_value_hint"><font size="12">Digite o valor da conta ex: R$ 37.50</font></string>
-    <string name="tip_total">Total</string>
 
     <!-- Speed Test -->
     <string name="download">Download</string>
@@ -127,6 +124,12 @@
     <string name="public_ip">IP Publico:</string>
     <string name="region">Região:</string>
 
+    <!-- Tip -->
+    <string name="tip_round_up_tip_text">Arredondar Gorjeta</string>
+    <string name="tip_round_up_total_text">Arredondar Total</string>
+    <string name="tip_value_hint"><font size="12">Digite o valor da conta ex: R$ 37.50</font></string>
+    <string name="tip_total">Total</string>
+
     <!-- All Games -->
     <!-- Coin Flipper -->
     <string name="coin_flipper_win_or_lose">Ganhou ou Perdeu?</string>
@@ -134,11 +137,10 @@
     <string name="coin_flipper_heads">Heads</string>
     <string name="coin_flipper_tails">Tails</string>
 
-    <!-- Tic Tac Toe -->
-
     <!-- Rock Paper Scissors -->
     <string name="rock_paper_scissors_app_choice">Escolha do App</string>
-    <string name="rock_paper_scissors_self_choice">Escolha Uma Opção Abaixo</string>
+
+    <!-- Tic Tac Toe -->
 
     <!-- Unscramble -->
     <string name="unscramble_instruction">Desembaralhe as letras acima para formar uma palavra</string>

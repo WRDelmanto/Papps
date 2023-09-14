@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0"
-            android:elevation="100dp" />
+            android:elevation="100dp"
+            tools:ignore="VisualLintButtonSize" />
 
         <TextView
             android:id="@+id/dices_click_anywhere_message"
@@ -31,7 +32,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="VisualLintOverlap" />
 
         <ImageView
             android:id="@+id/dices_result"
@@ -57,7 +59,8 @@
             android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/dices_middle_guide_line"
-            tools:text="1" />
+            tools:text="1"
+            tools:ignore="VisualLintOverlap" />
 
         <TextView
             android:id="@+id/dices_history_second"
@@ -71,7 +74,8 @@
             app:layout_constraintEnd_toEndOf="@+id/dices_history_first"
             app:layout_constraintStart_toStartOf="@+id/dices_history_first"
             app:layout_constraintTop_toBottomOf="@+id/dices_history_first"
-            tools:text="2" />
+            tools:text="2"
+            tools:ignore="VisualLintOverlap" />
 
         <TextView
             android:id="@+id/dices_history_third"
@@ -85,6 +89,7 @@
             app:layout_constraintEnd_toEndOf="@+id/dices_history_second"
             app:layout_constraintStart_toStartOf="@+id/dices_history_second"
             app:layout_constraintTop_toBottomOf="@+id/dices_history_second"
+            tools:ignore="TextContrastCheck,VisualLintOverlap"
             tools:text="3" />
 
         <TextView
@@ -99,6 +104,7 @@
             app:layout_constraintEnd_toEndOf="@+id/dices_history_third"
             app:layout_constraintStart_toStartOf="@+id/dices_history_third"
             app:layout_constraintTop_toBottomOf="@+id/dices_history_third"
+            tools:ignore="TextContrastCheck,VisualLintOverlap"
             tools:text="4" />
 
         <TextView
@@ -113,6 +119,7 @@
             app:layout_constraintEnd_toEndOf="@+id/dices_history_fourth"
             app:layout_constraintStart_toStartOf="@+id/dices_history_fourth"
             app:layout_constraintTop_toBottomOf="@+id/dices_history_fourth"
+            tools:ignore="TextContrastCheck,VisualLintOverlap"
             tools:text="5" />
 
         <androidx.constraintlayout.widget.Guideline

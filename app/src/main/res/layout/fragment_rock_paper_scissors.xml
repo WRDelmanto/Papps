@@ -110,6 +110,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_secondary_container"
+            tools:ignore="ImageContrastCheck"
             tools:src="@drawable/ic_empty" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -124,6 +125,7 @@
             app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_separator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_separator"
+            app:layout_constraintWidth_max="@dimen/max_width_appCompatButton"
             tools:text="@string/one_player_mode" />
 
         <com.google.android.material.divider.MaterialDivider
@@ -154,7 +156,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_separator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_separator"
-            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_separator" />
+            app:layout_constraintTop_toTopOf="@+id/rock_paper_scissors_separator"
+            app:layout_constraintWidth_max="@dimen/max_width_appCompatButton" />
 
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="wrap_content"
@@ -173,6 +176,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rock_paper_scissors_separator"
+            tools:ignore="ImageContrastCheck"
             tools:src="@drawable/ic_empty" />
 
         <TextView
@@ -219,7 +223,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_primary_choice_paper"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck" />
 
             <ImageView
                 android:id="@+id/rock_paper_scissors_primary_choice_paper"
@@ -230,7 +235,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rock_paper_scissors_primary_choice_scissors"
                 app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_primary_choice_rock"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck" />
 
             <ImageView
                 android:id="@+id/rock_paper_scissors_primary_choice_scissors"
@@ -241,7 +247,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/rock_paper_scissors_primary_choice_paper"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/rock_paper_scissors_primary_choice_paper"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.Guideline
