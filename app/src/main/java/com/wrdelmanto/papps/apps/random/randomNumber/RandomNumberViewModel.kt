@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.random.randomNumber
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.R
@@ -14,28 +15,22 @@ import com.wrdelmanto.papps.utils.showNormalToast
 
 class RandomNumberViewModel : ViewModel() {
     private val _result = MutableLiveData<String>()
-    val result: MutableLiveData<String>
-        get() = _result
+    val result: LiveData<String> = _result
 
     private val _historyFirst = MutableLiveData("")
-    val historyFirst: MutableLiveData<String>
-        get() = _historyFirst
+    val historyFirst: LiveData<String> = _historyFirst
 
     private val _historySecond = MutableLiveData("")
-    val historySecond: MutableLiveData<String>
-        get() = _historySecond
+    val historySecond: LiveData<String> = _historySecond
 
     private val _historyThird = MutableLiveData("")
-    val historyThird: MutableLiveData<String>
-        get() = _historyThird
+    val historyThird: LiveData<String> = _historyThird
 
     private val _minInput = MutableLiveData<String>()
-    val minInput: MutableLiveData<String>
-        get() = _minInput
+    val minInput: LiveData<String> = _minInput
 
     private val _maxInput = MutableLiveData<String>()
-    val maxInput: MutableLiveData<String>
-        get() = _maxInput
+    val maxInput: LiveData<String> = _maxInput
 
     private lateinit var numberHistory: String
     private lateinit var numberHistoryList: List<String>
@@ -51,12 +46,12 @@ class RandomNumberViewModel : ViewModel() {
 
         updateNumberHistory(true)
 
-        minInput.value = SP_RN_MIN.let {
+        _minInput.value = SP_RN_MIN.let {
             val mi = getSharedPreferences(context, it, String)
             mi ?: "1"
         }.toString()
 
-        maxInput.value = SP_RN_MAX.let {
+        _maxInput.value = SP_RN_MAX.let {
             val mi = getSharedPreferences(context, it, String)
             mi ?: "10"
         }.toString()
@@ -73,9 +68,9 @@ class RandomNumberViewModel : ViewModel() {
             return
         }
 
-        if (min != "0" && min.first() == '0') minInput.value = min.toInt().toString()
+        if (min != "0" && min.first() == '0') _minInput.value = min.toInt().toString()
 
-        if (max != "0" && max.first() == '0') maxInput.value = max.toInt().toString()
+        if (max != "0" && max.first() == '0') _maxInput.value = max.toInt().toString()
 
         if (min.toInt() <= max.toInt()) {
             val randomNumber = (min.toInt()..max.toInt()).random()

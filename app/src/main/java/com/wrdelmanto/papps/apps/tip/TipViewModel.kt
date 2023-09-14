@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.tip
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.R
@@ -14,32 +15,25 @@ import kotlin.math.roundToInt
 
 class TipViewModel : ViewModel() {
     private val _roundUpTip = MutableLiveData(false)
-    val roundUpTip: MutableLiveData<Boolean>
-        get() = _roundUpTip
+    val roundUpTip: LiveData<Boolean> = _roundUpTip
 
     private val _roundUpTotal = MutableLiveData(false)
-    val roundUpTotal: MutableLiveData<Boolean>
-        get() = _roundUpTotal
+    val roundUpTotal: LiveData<Boolean> = _roundUpTotal
 
     private val _tipPercentage = MutableLiveData(10)
-    val tipPercentage: MutableLiveData<Int>
-        get() = _tipPercentage
+    val tipPercentage: LiveData<Int> = _tipPercentage
 
     private val _tipPercentageSeekBar = MutableLiveData(10)
-    val tipPercentageSeekBar: MutableLiveData<Int>
-        get() = _tipPercentageSeekBar
+    val tipPercentageSeekBar: LiveData<Int> = _tipPercentageSeekBar
 
     private val _valueInput = MutableLiveData<String>()
-    val valueInput: MutableLiveData<String>
-        get() = _valueInput
+    val valueInput: LiveData<String> = _valueInput
 
     private val _tipOutput = MutableLiveData<String>()
-    val tipOutput: MutableLiveData<String>
-        get() = _tipOutput
+    val tipOutput: LiveData<String> = _tipOutput
 
     private val _totalOutput = MutableLiveData<String>()
-    val totalOutput: MutableLiveData<String>
-        get() = _totalOutput
+    val totalOutput: LiveData<String> = _totalOutput
 
     fun resetUi(context: Context) {
         _roundUpTip.value = SP_T_TIP_SWITCH.let {
@@ -62,10 +56,26 @@ class TipViewModel : ViewModel() {
         logD { "resetUi" }
     }
 
+    fun updateroundUpTip(newRoundUpTip: Boolean) {
+        _roundUpTip.value = newRoundUpTip
+    }
+
+    fun updateroundUpTotal(newRoundUpTotal: Boolean) {
+        _roundUpTotal.value = newRoundUpTotal
+    }
+
+    fun updateValueInput(newValueInput: String) {
+        _valueInput.value = newValueInput
+    }
+
+    fun updateTipPercentageSeekBar(newTipPercentageSeekBar: Int) {
+        _tipPercentageSeekBar.value = newTipPercentageSeekBar
+    }
+
     fun calculateTotalOutput(context: Context) {
         if (_valueInput.value.isNullOrBlank()) {
-            tipOutput.value = context.resources.getString(R.string.zero_decimal)
-            totalOutput.value = context.resources.getString(R.string.zero_decimal)
+            _tipOutput.value = context.resources.getString(R.string.zero_decimal)
+            _totalOutput.value = context.resources.getString(R.string.zero_decimal)
 
             logD { "valueInput=Empty" }
             return

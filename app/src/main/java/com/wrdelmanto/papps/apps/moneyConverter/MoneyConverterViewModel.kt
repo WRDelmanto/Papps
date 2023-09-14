@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.moneyConverter
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,24 +17,19 @@ import kotlinx.coroutines.launch
 
 class MoneyConverterViewModel : ViewModel() {
     private val _primaryInput = MutableLiveData<String>()
-    val primaryInput: MutableLiveData<String>
-        get() = _primaryInput
+    val primaryInput: LiveData<String> = _primaryInput
 
     private val _secondaryInput = MutableLiveData<String>()
-    val secondaryInput: MutableLiveData<String>
-        get() = _secondaryInput
+    val secondaryInput: LiveData<String> = _secondaryInput
 
     private val _primaryConversion = MutableLiveData<String>()
-    val primaryConversion: MutableLiveData<String>
-        get() = _primaryConversion
+    val primaryConversion: LiveData<String> = _primaryConversion
 
     private val _secondaryConversion = MutableLiveData<String>()
-    val secondaryConversion: MutableLiveData<String>
-        get() = _secondaryConversion
+    val secondaryConversion: LiveData<String> = _secondaryConversion
 
     private val _state = MutableLiveData<MoneyConverterViewModelState>()
-    val state: MutableLiveData<MoneyConverterViewModelState>
-        get() = _state
+    val state: LiveData<MoneyConverterViewModelState> = _state
 
     private lateinit var moneyConverterState: MoneyConverterState
 
@@ -58,6 +54,22 @@ class MoneyConverterViewModel : ViewModel() {
     }
 
     private fun postState() = _state.postValue(MoneyConverterViewModelState(moneyConverterState))
+
+    fun updatePrimaryInput(newPrimaryInput: String) {
+        _primaryInput.value = newPrimaryInput
+    }
+
+    fun updateSecondaryInput(newSecondaryInput: String) {
+        _secondaryInput.value = newSecondaryInput
+    }
+
+    fun updatePrimaryConversion(newPrimaryConversion: String) {
+        _primaryConversion.value = newPrimaryConversion
+    }
+
+    fun updateSecondaryConversion(newSecondaryConversion: String) {
+        _secondaryConversion.value = newSecondaryConversion
+    }
 
     fun calculateExchange(whatChanged: String) {
         if (moneyConverterState != MoneyConverterState.NORMAL) return

@@ -7,6 +7,7 @@ import android.graphics.Color.RED
 import android.graphics.drawable.Drawable
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.R
@@ -15,20 +16,16 @@ import java.util.Random
 
 class CoinFlipperViewModel : ViewModel() {
     private val _resultImage = MutableLiveData<Drawable>()
-    val resultImage: MutableLiveData<Drawable>
-        get() = _resultImage
+    val resultImage: LiveData<Drawable> = _resultImage
 
     private val _selfScore = MutableLiveData("0")
-    val selfScore: MutableLiveData<String>
-        get() = _selfScore
+    val selfScore: LiveData<String> = _selfScore
 
     private val _appScore = MutableLiveData("0")
-    val appScore: MutableLiveData<String>
-        get() = _appScore
+    val appScore: LiveData<String> = _appScore
 
     private val _resultMessage = MutableLiveData("Ganhou ou Perdeu?")
-    val resultMessage: MutableLiveData<String>
-        get() = _resultMessage
+    val resultMessage: LiveData<String> = _resultMessage
 
     fun resetUi(context: Context) {
         _resultImage.value =

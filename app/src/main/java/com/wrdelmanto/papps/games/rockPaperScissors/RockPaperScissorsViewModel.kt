@@ -3,6 +3,7 @@ package com.wrdelmanto.papps.games.rockPaperScissors
 import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.R
@@ -11,24 +12,19 @@ import java.util.Random
 
 class RockPaperScissorsViewModel : ViewModel() {
     private val _primaryChoice = MutableLiveData<Drawable>()
-    val primaryChoice: MutableLiveData<Drawable>
-        get() = _primaryChoice
+    val primaryChoice: LiveData<Drawable> = _primaryChoice
 
     private val _secondaryChoice = MutableLiveData<Drawable>()
-    val secondaryChoice: MutableLiveData<Drawable>
-        get() = _secondaryChoice
+    val secondaryChoice: LiveData<Drawable> = _secondaryChoice
 
     private val _primaryScore = MutableLiveData("0")
-    val primaryScore: MutableLiveData<String>
-        get() = _primaryScore
+    val primaryScore: LiveData<String> = _primaryScore
 
     private val _secondaryScore = MutableLiveData("0")
-    val secondaryScore: MutableLiveData<String>
-        get() = _secondaryScore
+    val secondaryScore: LiveData<String> = _secondaryScore
 
     private val _modeButton = MutableLiveData<String>()
-    val modeButton: MutableLiveData<String>
-        get() = _modeButton
+    val modeButton: LiveData<String> = _modeButton
 
     private var primaryChoiceTemp = ""
     private var secondaryChoiceTemp = ""

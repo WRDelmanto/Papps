@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.nasaPictureOfTheDay
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.utils.SP_NPOTD_AUTOMATIC_DOWNLOAD
@@ -11,44 +12,34 @@ import kotlinx.coroutines.launch
 
 class NasaPictureOfTheDayViewModel : ViewModel() {
     private val _title = MutableLiveData("")
-    val title: MutableLiveData<String>
-        get() = _title
+    val title: LiveData<String> = _title
 
     private val _description = MutableLiveData("")
-    val description: MutableLiveData<String>
-        get() = _description
+    val description: LiveData<String> = _description
 
     private val _copyright = MutableLiveData("")
-    val copyright: MutableLiveData<String>
-        get() = _copyright
+    val copyright: LiveData<String> = _copyright
 
     private val _date = MutableLiveData("")
-    val date: MutableLiveData<String>
-        get() = _date
+    val date: LiveData<String> = _date
 
     private val _url = MutableLiveData("")
-    val url: MutableLiveData<String>
-        get() = _url
+    val url: LiveData<String> = _url
 
     private val _hdurl = MutableLiveData("")
-    val hdurl: MutableLiveData<String>
-        get() = _hdurl
+    val hdurl: LiveData<String> = _hdurl
 
     private val _mediaType = MutableLiveData("")
-    val mediaType: MutableLiveData<String>
-        get() = _mediaType
+    val mediaType: LiveData<String> = _mediaType
 
     private val _state = MutableLiveData<NasaPictureOfTheDayViewModelState>()
-    val state: MutableLiveData<NasaPictureOfTheDayViewModelState>
-        get() = _state
+    val state: LiveData<NasaPictureOfTheDayViewModelState> = _state
 
     private val _automaticDownload = MutableLiveData(false)
-    val automaticDownload: MutableLiveData<Boolean>
-        get() = _automaticDownload
+    val automaticDownload: LiveData<Boolean> = _automaticDownload
 
     private val _shouldDownloadPicture = MutableLiveData(true)
-    val shouldDownloadPicture: MutableLiveData<Boolean>
-        get() = _shouldDownloadPicture
+    val shouldDownloadPicture: LiveData<Boolean> = _shouldDownloadPicture
 
     private lateinit var nasaPictureOfTheDayState: NasaPictureOfTheDayState
 
@@ -78,6 +69,14 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
         }.toString().toBoolean()
 
         getNasaData()
+    }
+
+    fun updateShouldDownloadPicture(newShouldDownloadPicture: Boolean) {
+        _shouldDownloadPicture.value = newShouldDownloadPicture
+    }
+
+    fun updateAutomaticDownload(newautomaticDownload: Boolean) {
+        _automaticDownload.value = newautomaticDownload
     }
 
     fun getNasaData() {

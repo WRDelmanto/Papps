@@ -3,6 +3,7 @@ package com.wrdelmanto.papps.apps.dice
 import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,28 +18,22 @@ import kotlinx.coroutines.launch
 
 class DicesViewModel : ViewModel() {
     private val _diceImage = MutableLiveData<Drawable>()
-    val diceImage: MutableLiveData<Drawable>
-        get() = _diceImage
+    val diceImage: LiveData<Drawable> = _diceImage
 
     private val _historyFirst = MutableLiveData("")
-    val historyFirst: MutableLiveData<String>
-        get() = _historyFirst
+    val historyFirst: LiveData<String> = _historyFirst
 
     private val _historySecond = MutableLiveData("")
-    val historySecond: MutableLiveData<String>
-        get() = _historySecond
+    val historySecond: LiveData<String> = _historySecond
 
     private val _historyThird = MutableLiveData("")
-    val historyThird: MutableLiveData<String>
-        get() = _historyThird
+    val historyThird: LiveData<String> = _historyThird
 
     private val _historyFourth = MutableLiveData("")
-    val historyFourth: MutableLiveData<String>
-        get() = _historyFourth
+    val historyFourth: LiveData<String> = _historyFourth
 
     private val _historyFifth = MutableLiveData("")
-    val historyFifth: MutableLiveData<String>
-        get() = _historyFifth
+    val historyFifth: LiveData<String> = _historyFifth
 
     private lateinit var diceHistory: String
 
@@ -67,7 +62,7 @@ class DicesViewModel : ViewModel() {
             if (!isFirstTime) delay(THREE_QUARTERS_SECOND_IN_MILLIS)
             isFirstTime = false
 
-            diceImage.value = when (diceResult) {
+            _diceImage.value = when (diceResult) {
                 1 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_1, null)
                 2 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_2, null)
                 3 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_3, null)

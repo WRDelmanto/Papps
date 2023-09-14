@@ -87,19 +87,18 @@ class TipFragment(
 
     private fun initiateListeners() {
         roundUpTip.setOnCheckedChangeListener { _, isChecked ->
-            tipViewModel.roundUpTip.postValue(isChecked)
+            tipViewModel.updateroundUpTip(isChecked)
             putSharedPreferences(context, SP_T_TIP_SWITCH, roundUpTip.isChecked)
         }
 
         roundUpTotal.setOnCheckedChangeListener { _, isChecked ->
-            tipViewModel.roundUpTotal.postValue(isChecked)
+            tipViewModel.updateroundUpTotal(isChecked)
             putSharedPreferences(context, SP_T_TOTAL_SWITCH, roundUpTotal.isChecked)
         }
 
         value.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                tipViewModel.valueInput.postValue(s.toString())
-
+                tipViewModel.updateValueInput(s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
@@ -113,8 +112,7 @@ class TipFragment(
 
         tipPercentageSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                tipViewModel.tipPercentage.postValue(progress)
-
+                tipViewModel.updateTipPercentageSeekBar(progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {

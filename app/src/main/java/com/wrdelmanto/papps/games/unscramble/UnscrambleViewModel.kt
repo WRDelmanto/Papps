@@ -13,16 +13,13 @@ import com.wrdelmanto.papps.utils.putSharedPreferences
 
 class UnscrambleViewModel : ViewModel() {
     private val _highScore = MutableLiveData(0)
-    val highScore: MutableLiveData<Int>
-        get() = _highScore
+    val highScore: LiveData<Int> = _highScore
 
     private val _currentScore = MutableLiveData(0)
-    val currentScore: LiveData<Int>
-        get() = _currentScore
+    val currentScore: LiveData<Int> = _currentScore
 
     private val _scrambledWord = MutableLiveData("")
-    val scrambledWord: LiveData<String>
-        get() = _scrambledWord
+    val scrambledWord: LiveData<String> = _scrambledWord
 
     private lateinit var currentWord: String
 

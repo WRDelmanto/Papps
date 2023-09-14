@@ -64,8 +64,8 @@ class BodyMassIndexFragment(
     private fun initiateListeners() {
         heightInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                bodyMassIndexViewModel.height.value = s.toString()
-                bodyMassIndexViewModel.calculateBMI()
+                bodyMassIndexViewModel.updateHeight(s.toString())
+                bodyMassIndexViewModel.calculateBMI(context)
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
@@ -79,8 +79,8 @@ class BodyMassIndexFragment(
 
         weightInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                bodyMassIndexViewModel.weight.value = s.toString()
-                bodyMassIndexViewModel.calculateBMI()
+                bodyMassIndexViewModel.updateWeight(s.toString())
+                bodyMassIndexViewModel.calculateBMI(context)
             }
 
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {

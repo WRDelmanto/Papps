@@ -125,7 +125,7 @@ class NasaPictureOfTheDayFragment(
         when (viewState) {
             NasaPictureOfTheDayState.LOADING -> {
                 contentLoaded = false
-                nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = false
+                nasaPictureOfTheDayViewModel.updateShouldDownloadPicture(false)
                 internetError.visibility = GONE
                 loadingGroup.visibility = VISIBLE
                 loadedGroup.visibility = GONE
@@ -133,7 +133,7 @@ class NasaPictureOfTheDayFragment(
             }
 
             NasaPictureOfTheDayState.LOADED -> {
-                nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = true
+                nasaPictureOfTheDayViewModel.updateShouldDownloadPicture(true)
                 internetError.visibility = GONE
                 loadingGroup.visibility = GONE
                 loadedGroup.visibility = VISIBLE
@@ -164,10 +164,10 @@ class NasaPictureOfTheDayFragment(
     @RequiresApi(Build.VERSION_CODES.M)
     private fun initiateListeners() {
         picture.setOnClickListener { openFullScreen() }
-        // TODO: video.setOnClickListener { openFullScreen() }
+        // TODO: video.setOnClickListener { openYoutube() }
         downloadButton.setOnClickListener { downloadPicture() }
         automaticDownloadSwitch.setOnCheckedChangeListener { _, isChecked ->
-            nasaPictureOfTheDayViewModel.automaticDownload.postValue(isChecked)
+            nasaPictureOfTheDayViewModel.updateAutomaticDownload(isChecked)
             putSharedPreferences(
                 context, SP_NPOTD_AUTOMATIC_DOWNLOAD, automaticDownloadSwitch.isChecked
             )
@@ -294,7 +294,7 @@ class NasaPictureOfTheDayFragment(
     @RequiresApi(Build.VERSION_CODES.M)
     private fun downloadPicture() {
         if (nasaPictureOfTheDayViewModel.shouldDownloadPicture.value == true) {
-            nasaPictureOfTheDayViewModel.shouldDownloadPicture.value = false
+            nasaPictureOfTheDayViewModel.updateShouldDownloadPicture(false)
 
             androidDownloader.run {
                 updateDownloadInfo(

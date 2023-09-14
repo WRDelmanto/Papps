@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.speedTest
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.utils.checkInternetConnection
@@ -12,24 +13,19 @@ import kotlinx.coroutines.launch
 
 class SpeedTestViewModel : ViewModel() {
     private val _download = MutableLiveData<String>()
-    val download: MutableLiveData<String>
-        get() = _download
+    val download: LiveData<String> = _download
 
     private val _upload = MutableLiveData<String>()
-    val upload: MutableLiveData<String>
-        get() = _upload
+    val upload: LiveData<String> = _upload
 
     private val _networkTypeName = MutableLiveData<String>()
-    val networkTypeName: MutableLiveData<String>
-        get() = _networkTypeName
+    val networkTypeName: LiveData<String> = _networkTypeName
 
     private val _publicIpAddress = MutableLiveData<String>()
-    val publicIpAddress: MutableLiveData<String>
-        get() = _publicIpAddress
+    val publicIpAddress: LiveData<String> = _publicIpAddress
 
     private val _networkRegion = MutableLiveData<String>()
-    val networkRegion: MutableLiveData<String>
-        get() = _networkRegion
+    val networkRegion: LiveData<String> = _networkRegion
 
     fun resetUi(context: Context) {
         if (checkInternetConnection(context)) {

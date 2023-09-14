@@ -17,16 +17,13 @@ import java.util.Locale
 
 class RandomQuoteViewModel : ViewModel() {
     private val _currentQuote = MutableLiveData<String>()
-    val currentQuote: LiveData<String>
-        get() = _currentQuote
+    val currentQuote: LiveData<String> = _currentQuote
 
     private val _currentAuthor = MutableLiveData<String>()
-    val currentAuthor: LiveData<String>
-        get() = _currentAuthor
+    val currentAuthor: LiveData<String> = _currentAuthor
 
     private val _state = MutableLiveData<PensadorQuoteViewModelState>()
-    val state: MutableLiveData<PensadorQuoteViewModelState>
-        get() = _state
+    val state: LiveData<PensadorQuoteViewModelState> = _state
 
     private lateinit var pensadorQuoteState: PensadorQuoteState
 

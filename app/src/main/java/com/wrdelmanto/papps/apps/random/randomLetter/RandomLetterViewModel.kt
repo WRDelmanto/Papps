@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.random.randomLetter
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.R
@@ -12,28 +13,22 @@ import com.wrdelmanto.papps.utils.randomString
 
 class RandomLetterViewModel : ViewModel() {
     private val _result = MutableLiveData<String>()
-    val result: MutableLiveData<String>
-        get() = _result
+    val result: LiveData<String> = _result
 
     private val _historyFirst = MutableLiveData("")
-    val historyFirst: MutableLiveData<String>
-        get() = _historyFirst
+    val historyFirst: LiveData<String> = _historyFirst
 
     private val _historySecond = MutableLiveData("")
-    val historySecond: MutableLiveData<String>
-        get() = _historySecond
+    val historySecond: LiveData<String> = _historySecond
 
     private val _historyThird = MutableLiveData("")
-    val historyThird: MutableLiveData<String>
-        get() = _historyThird
+    val historyThird: LiveData<String> = _historyThird
 
     private val _historyFourth = MutableLiveData("")
-    val historyFourth: MutableLiveData<String>
-        get() = _historyFourth
+    val historyFourth: LiveData<String> = _historyFourth
 
     private val _historyFifth = MutableLiveData("")
-    val historyFifth: MutableLiveData<String>
-        get() = _historyFifth
+    val historyFifth: LiveData<String> = _historyFifth
 
     private lateinit var letterHistory: String
 

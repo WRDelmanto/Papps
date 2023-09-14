@@ -1,6 +1,7 @@
 package com.wrdelmanto.papps.apps.clickCounter
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.utils.SP_CC_HIGH_SCORE
@@ -10,12 +11,10 @@ import com.wrdelmanto.papps.utils.putSharedPreferences
 
 class ClickCounterViewModel : ViewModel() {
     private val _counter = MutableLiveData(0)
-    val counter: MutableLiveData<Int>
-        get() = _counter
+    val counter: LiveData<Int> = _counter
 
     private val _highScore = MutableLiveData(0)
-    val highScore: MutableLiveData<Int>
-        get() = _highScore
+    val highScore: LiveData<Int> = _highScore
 
     fun resetUi(context: Context) {
         _counter.value = 0

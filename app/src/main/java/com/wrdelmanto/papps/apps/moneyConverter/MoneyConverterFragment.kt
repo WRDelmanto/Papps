@@ -92,7 +92,7 @@ class MoneyConverterFragment(
     private fun initiateListeners() {
         primaryInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                moneyConverterViewModel.primaryInput.value = s.toString()
+                moneyConverterViewModel.updatePrimaryInput(s.toString())
                 moneyConverterViewModel.calculateExchange("primaryInput")
             }
 
@@ -106,7 +106,7 @@ class MoneyConverterFragment(
         })
         secondaryInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
-                moneyConverterViewModel.secondaryInput.value = s.toString()
+                moneyConverterViewModel.updateSecondaryInput(s.toString())
                 moneyConverterViewModel.calculateExchange("secondaryInput")
             }
 
@@ -121,7 +121,7 @@ class MoneyConverterFragment(
         primaryConversion.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 putSharedPreferences(context, SP_MC_PRIMARY_CONVERSION, s.toString())
-                moneyConverterViewModel.primaryConversion.value = s.toString()
+                moneyConverterViewModel.updatePrimaryConversion(s.toString())
                 moneyConverterViewModel.calculateExchange("conversion")
             }
 
@@ -136,7 +136,7 @@ class MoneyConverterFragment(
         secondaryConversion.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {
                 putSharedPreferences(context, SP_MC_SECONDARY_CONVERSION, s.toString())
-                moneyConverterViewModel.secondaryConversion.value = s.toString()
+                moneyConverterViewModel.updateSecondaryConversion(s.toString())
                 moneyConverterViewModel.calculateExchange("conversion")
             }
 
