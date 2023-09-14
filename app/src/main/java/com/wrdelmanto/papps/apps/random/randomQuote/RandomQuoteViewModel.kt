@@ -97,7 +97,7 @@ class RandomQuoteViewModel : ViewModel() {
                 putSharedPreferences(context, SP_RQ_QUOTE, _currentQuote.value.toString())
                 putSharedPreferences(context, SP_RQ_AUTHOR, _currentAuthor.value.toString())
 
-                logD { "Author=${_currentAuthor.value}, Quote=${_currentQuote.value}" }
+                logD { "Author=${_currentAuthor.value}, termoDePesquisa=${pensadorData.termoDePesquisa}, total=${pensadorData.total}, Quote=${_currentQuote.value}" }
 
                 setLoadedState()
             }

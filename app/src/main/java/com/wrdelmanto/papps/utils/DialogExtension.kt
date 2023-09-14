@@ -5,6 +5,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.wrdelmanto.papps.R
 
 fun openClearSPDataDialog(context: Context) {
+    logD { "openClearSPDataDialog" }
+
     MaterialAlertDialogBuilder(
         context, R.style.AlertDialogRoundedTheme
     ).setTitle(context.resources.getString(R.string.clear_all_data))

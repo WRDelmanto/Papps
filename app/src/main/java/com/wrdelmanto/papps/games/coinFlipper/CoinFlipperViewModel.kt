@@ -33,6 +33,8 @@ class CoinFlipperViewModel : ViewModel() {
     fun resetUi(context: Context) {
         _resultImage.value =
             ResourcesCompat.getDrawable(context.resources, R.drawable.ic_empty, null)
+
+        logD { "resetUi" }
     }
 
     fun choice(context: Context, resultMessage: TextView, selfChoice: String) {
@@ -57,8 +59,6 @@ class CoinFlipperViewModel : ViewModel() {
             }
         }
 
-        logD { "selfChoice=$selfChoice, resultCoinFlip=$resultCoinFlip" }
-
         if (selfChoice == context.resources.getString(R.string.coin_flipper_heads) && resultCoinFlip == context.resources.getString(
                 R.string.coin_flipper_heads
             ) || selfChoice == context.resources.getString(
@@ -81,6 +81,8 @@ class CoinFlipperViewModel : ViewModel() {
                 setTextColor(RED)
             }
         }
+
+        logD { "selfChoice=$selfChoice, resultCoinFlip=$resultCoinFlip, selfScore=${_selfScore.value}, appScore=${_appScore.value}" }
     }
 
     fun resetScore(context: Context, resultMessage: TextView) {

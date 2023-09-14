@@ -46,6 +46,8 @@ class RandomLetterViewModel : ViewModel() {
         }.toString()
 
         updateLetterHistory()
+
+        logD { "resetUi" }
     }
 
     fun generateRandomLetter(context: Context) {
@@ -60,7 +62,7 @@ class RandomLetterViewModel : ViewModel() {
 
         updateLetterHistory()
 
-        logD { "randomLetter=$randomLetter" }
+        logD { "randomLetter=$randomLetter, letterHistory=$letterHistory" }
     }
 
     private fun updateLetterHistory() {

@@ -146,6 +146,8 @@ class MoneyConverterViewModel : ViewModel() {
         _primaryInput.value = "1000.00"
         _secondaryInput.value = "1.00"
 
+        logD { "resetUi" }
+
         setLoadedState()
     }
 }

@@ -51,6 +51,8 @@ class DicesViewModel : ViewModel() {
         }.toString()
 
         updateDiceHistory()
+
+        logD { "resetUi" }
     }
 
     fun rollDice(context: Context) {
@@ -75,7 +77,7 @@ class DicesViewModel : ViewModel() {
             }
         }
 
-        logD { "diceResult=$diceResult" }
+        logD { "diceResult=$diceResult, diceHistory=$diceHistory" }
 
         updateDiceHistory()
     }

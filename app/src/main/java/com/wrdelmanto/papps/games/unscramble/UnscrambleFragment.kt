@@ -73,7 +73,7 @@ class UnscrambleFragment(
 
         resetButton.setOnClickListener {
             clearInputText()
-            unscrambleViewModel.reset(context)
+            unscrambleViewModel.resetUi(context, true)
         }
     }
 

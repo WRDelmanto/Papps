@@ -58,6 +58,8 @@ class TipViewModel : ViewModel() {
         }.toString().toInt()
 
         _tipPercentageSeekBar.value = _tipPercentage.value!!.toInt()
+
+        logD { "resetUi" }
     }
 
     fun calculateTotalOutput(context: Context) {
@@ -95,7 +97,7 @@ class TipViewModel : ViewModel() {
         _totalOutput.value =
             String.format(context.resources.getString(R.string.value_with_cipher), total)
 
-        logD { "valueInput=${_valueInput.value}, tipPercentage=${_tipPercentage.value}, tip=${_tipOutput.value}, total=${_totalOutput.value}" }
+        logD { "valueInput=${_valueInput.value}, tipPercentage=${_tipPercentage.value}, roundUpTip=${_roundUpTip.value}, roundUpTotal=${_roundUpTotal.value}, tip=${_tipOutput.value}, total=${_totalOutput.value}" }
     }
 
     companion object {

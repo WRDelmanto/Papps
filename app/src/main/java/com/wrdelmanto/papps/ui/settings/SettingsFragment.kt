@@ -65,18 +65,20 @@ class SettingsFragment : Fragment() {
         rocket = binding.settingsFragmentRocketMiniLogo
         version = binding.settingsFragmentVersion
         version.text = BuildConfig.VERSION_NAME
+
+        initiateListeners()
     }
 
     override fun onResume() {
         super.onResume()
 
-        initiateListeners()
+        resetUI()
     }
 
-    override fun onPause() {
+    override fun onDestroyView() {
         disableListeners()
 
-        super.onPause()
+        super.onDestroyView()
     }
 
     private fun initiateListeners() {
@@ -105,11 +107,17 @@ class SettingsFragment : Fragment() {
         rocket.setOnClickListener(null)
     }
 
-    private fun openPrivacyPolicy() =
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+    private fun resetUI() = logD { "resetUI" }
 
-    private fun rateThisApp() =
+    private fun openPrivacyPolicy() {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PRIVACY_POLICY_URL)))
+        logD { "openPrivacyPolicy" }
+    }
+
+    private fun rateThisApp() {
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(PAPPS_GOOGLE_PLAY_URL)))
+        logD { "rateThisApp" }
+    }
 
     private fun sendFeedback() {
         try {
@@ -122,6 +130,8 @@ class SettingsFragment : Fragment() {
         } catch (e: Exception) {
             context?.let { showErrorToast(it, R.string.send_feedback_error, LENGTH_LONG) }
         }
+
+        logD { "sendFeedback" }
     }
 
     private fun shouldActivateEasterEgg() {
@@ -134,6 +144,7 @@ class SettingsFragment : Fragment() {
                     val iaa = getSharedPreferences(it, SP_EASTER_EGG, Boolean)
                     iaa ?: false
                 }.toString().toBoolean()) {
+
                 context?.let {
                     showNormalToast(
                         it, getString(R.string.easter_egg_already_activated)

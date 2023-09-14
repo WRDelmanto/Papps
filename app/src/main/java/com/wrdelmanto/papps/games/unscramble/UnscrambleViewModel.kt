@@ -28,25 +28,32 @@ class UnscrambleViewModel : ViewModel() {
 
     val isAnswerCorrect = MutableLiveData(false)
 
-    fun resetUi(context: Context) {
+    fun resetUi(context: Context, shouldResetCurrentWord: Boolean = false) {
         _highScore.value = SP_U_HIGH_SCORE.let {
             val hs = getSharedPreferences(context, it, Int)
             hs ?: 0
         }.toString().toInt()
 
-        _currentScore.value = 0
+        if (shouldResetCurrentWord) generateNextWord(context)
+        else {
+            currentWord = SP_U_CURRENT_WORD.let {
+                val hs = getSharedPreferences(context, it, String)
+                hs ?: ""
+            }.toString()
 
-        currentWord = SP_U_CURRENT_WORD.let {
-            val hs = getSharedPreferences(context, it, String)
-            hs ?: ""
-        }.toString()
+            if (currentWord.isBlank()) generateNextWord(context)
+            else _scrambledWord.value =
+                getSharedPreferences(context, SP_U_SCRAMBLED_WORD, String).toString()
 
-        if (currentWord.isBlank()) generateNextWord(context)
-        else _scrambledWord.value =
-            getSharedPreferences(context, SP_U_SCRAMBLED_WORD, String).toString()
+            logD { "currentWord=${currentWord}, scrambledWord=${scrambledWord.value}" }
+        }
+
+        logD { "resetUi" }
     }
 
     fun checkAnswer(context: Context, answer: String) {
+        logD { "currentWord=${currentWord}, scrambledWord=${scrambledWord.value}, answer=$answer" }
+
         if (answer == currentWord) {
             isAnswerCorrect.value = true
 
@@ -76,11 +83,6 @@ class UnscrambleViewModel : ViewModel() {
         putSharedPreferences(context, SP_U_CURRENT_WORD, currentWord)
         putSharedPreferences(context, SP_U_SCRAMBLED_WORD, _scrambledWord.value.toString())
 
-        logD { "currentWord=${currentWord}, scrambledWord=${scrambledWord.value}" }
-    }
-
-    fun reset(context: Context) {
-        _currentScore.value = 0
-        generateNextWord(context)
+        logD { "nextWord=${currentWord}, scrambledWord=${scrambledWord.value}" }
     }
 }

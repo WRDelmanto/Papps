@@ -99,7 +99,7 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
                 _mediaType.value = nasaPictureOfTheDayData.mediaType
 
                 logD {
-                    "title=${_title.value}, description=${_description.value}, copyright=${_copyright.value}, date=${_date.value}, url=${_url.value}, hdurl=${_hdurl.value}, mediaType=${mediaType.value}"
+                    "title=${_title.value}, description=${_description.value}, copyright=${_copyright.value}, date=${_date.value}, url=${_url.value}, hdurl=${_hdurl.value}, mediaType=${mediaType.value}, serviceVersion=${nasaPictureOfTheDayData.version}, thumbnail_url=${nasaPictureOfTheDayData.thumbnailUrl}"
                 }
 
                 setLoadedState()

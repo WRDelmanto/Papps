@@ -60,6 +60,8 @@ class RandomNumberViewModel : ViewModel() {
             val mi = getSharedPreferences(context, it, String)
             mi ?: "10"
         }.toString()
+
+        logD { "resetUi" }
     }
 
     fun generateRandomNumber(context: Context) {
@@ -71,11 +73,9 @@ class RandomNumberViewModel : ViewModel() {
             return
         }
 
-        if (min != "0" && min.first() == '0')
-            minInput.value = min.toInt().toString()
+        if (min != "0" && min.first() == '0') minInput.value = min.toInt().toString()
 
-        if (max != "0" && max.first() == '0')
-            maxInput.value = max.toInt().toString()
+        if (max != "0" && max.first() == '0') maxInput.value = max.toInt().toString()
 
         if (min.toInt() <= max.toInt()) {
             val randomNumber = (min.toInt()..max.toInt()).random()
@@ -91,7 +91,7 @@ class RandomNumberViewModel : ViewModel() {
 
             updateNumberHistory(false)
 
-            logD { "min=$min, max=$max, randomNumber=$randomNumber" }
+            logD { "min=$min, max=$max, randomNumber=$randomNumber, numberHistory=$numberHistory" }
         } else showNormalToast(context, R.string.random_number_min_higher_than_max)
     }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.utils.checkInternetConnection
 import com.wrdelmanto.papps.utils.getInternetInformation
 import com.wrdelmanto.papps.utils.getInternetStatus
+import com.wrdelmanto.papps.utils.logD
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -41,6 +42,8 @@ class SpeedTestViewModel : ViewModel() {
                 _networkTypeName.value = internetStatus[2] + " - " + internetInformation[10]
                 _publicIpAddress.value = internetInformation[13]
                 _networkRegion.value = internetInformation[1] + " - " + internetInformation[4]
+
+                logD { "Download=${_download.value}, Upload=${_upload.value}, networkType=${_networkTypeName.value}, publicIpAddress=${_publicIpAddress.value}, networkRegion=${_networkRegion.value}" }
             }
         } else {
             _download.value = "?"
@@ -49,5 +52,7 @@ class SpeedTestViewModel : ViewModel() {
             _publicIpAddress.value = "?"
             _networkRegion.value = "? - ?"
         }
+
+        logD { "resetUi" }
     }
 }

@@ -8,7 +8,7 @@ import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
 
-class ClickCounterViewModel: ViewModel() {
+class ClickCounterViewModel : ViewModel() {
     private val _counter = MutableLiveData(0)
     val counter: MutableLiveData<Int>
         get() = _counter
@@ -24,6 +24,8 @@ class ClickCounterViewModel: ViewModel() {
             val hs = getSharedPreferences(context, it, Int)
             hs ?: 0
         }.toString().toInt()
+
+        logD { "resetUi" }
     }
 
     fun increaseCounter(context: Context) {
@@ -31,9 +33,8 @@ class ClickCounterViewModel: ViewModel() {
 
         if (_counter.value!! > _highScore.value!!) {
             _highScore.value = _counter.value
+            logD { "New Highscore=${_highScore.value}" }
             putSharedPreferences(context, SP_CC_HIGH_SCORE, _counter.value!!)
-        }
-
-        logD { "clicks=${_counter.value}" }
+        } else logD { "Highscore=${_highScore.value}, clicks=${_counter.value}" }
     }
 }

@@ -46,6 +46,8 @@ class RockPaperScissorsViewModel : ViewModel() {
         clearTempVariable()
 
         updateGameMode(context, true)
+
+        logD { "resetUi" }
     }
 
     fun updateGameMode(context: Context, isFirstTime: Boolean = false) {
@@ -56,6 +58,8 @@ class RockPaperScissorsViewModel : ViewModel() {
         } else {
             _modeButton.value = context.resources.getString(R.string.two_player_mode)
         }
+
+        logD { "updateGameMode: isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
     }
 
     fun primaryChoice(context: Context, selfChoice: String) {
@@ -204,7 +208,7 @@ class RockPaperScissorsViewModel : ViewModel() {
 
         clearTempVariable()
 
-        logD { "primaryChoice=$primaryChoice, secondaryChoice=$secondaryChoice" }
+        logD { "primaryChoice=$primaryChoice, secondaryChoice=$secondaryChoice, primaryScore=${_primaryScore.value}, secondaryScore=${_secondaryScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
     }
 
     private fun clearTempVariable() {
