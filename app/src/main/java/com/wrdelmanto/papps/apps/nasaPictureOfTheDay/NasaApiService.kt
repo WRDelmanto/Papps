@@ -27,17 +27,11 @@ data class NasaPictureOfTheDayData(
     @SerializedName("thumbnail_url") @Expose val thumbnailUrl: String
 ) : Parcelable
 
-/**
- * Retrofit service object for creating api calls
- */
 interface NasaApiService {
     @GET("apod")
     suspend fun getNasaPictureOfTheDayData(@Query("api_key") apiKey: String): NasaPictureOfTheDayData
 }
 
-/**
- * A public Api object that exposes the lazy-initialized Retrofit service
- */
 object NasaPictureOfTheDayApi {
     private val retrofit: Retrofit = Retrofit.Builder().baseUrl(NASA_PICTURE_OF_THE_DAY_BASE_URL)
         .addConverterFactory(GsonConverterFactory.create()).build()
