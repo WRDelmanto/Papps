@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.wrdelmanto.papps.utils.SP_NPOTD_AUTOMATIC_DOWNLOAD
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class NasaPictureOfTheDayViewModel : ViewModel() {
@@ -40,6 +41,8 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
 
     private val _shouldDownloadPicture = MutableLiveData(true)
     val shouldDownloadPicture: LiveData<Boolean> = _shouldDownloadPicture
+
+    private var getNasaDataJob: Job? = null
 
     private lateinit var nasaPictureOfTheDayState: NasaPictureOfTheDayState
 
@@ -82,7 +85,8 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
     fun getNasaData() {
         setLoadingState()
 
-        MainScope().launch {
+        getNasaDataJob?.cancel()
+        getNasaDataJob = viewModelScope.launch {
             try {
                 nasaPictureOfTheDayData =
                     NasaPictureOfTheDayApi.retrofitService.getNasaPictureOfTheDayData(

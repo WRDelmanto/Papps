@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.wrdelmanto.papps.utils.checkInternetConnection
 import com.wrdelmanto.papps.utils.getInternetInformation
 import com.wrdelmanto.papps.utils.getInternetStatus
 import com.wrdelmanto.papps.utils.logD
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class SpeedTestViewModel : ViewModel() {
@@ -27,9 +28,12 @@ class SpeedTestViewModel : ViewModel() {
     private val _networkRegion = MutableLiveData<String>()
     val networkRegion: LiveData<String> = _networkRegion
 
+    private var resetUiJob: Job? = null
+
     fun resetUi(context: Context) {
         if (checkInternetConnection(context)) {
-            MainScope().launch {
+            resetUiJob?.cancel()
+            resetUiJob = viewModelScope.launch {
                 val internetStatus = getInternetStatus(context)
                 val internetInformation = getInternetInformation()
 

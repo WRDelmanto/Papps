@@ -4,13 +4,14 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.wrdelmanto.papps.utils.SP_RQ_AUTHOR
 import com.wrdelmanto.papps.utils.SP_RQ_QUOTE
 import com.wrdelmanto.papps.utils.checkInternetConnection
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
-import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -28,6 +29,8 @@ class RandomQuoteViewModel : ViewModel() {
     private lateinit var pensadorQuoteState: PensadorQuoteState
 
     private lateinit var pensadorData: PensadorData
+
+    private var generateNextQuoteJob: Job? = null
 
     private fun setLoadingState() {
         pensadorQuoteState = PensadorQuoteState.LOADING
@@ -66,7 +69,8 @@ class RandomQuoteViewModel : ViewModel() {
 
     private fun generateNextQuote(context: Context) {
         if (checkInternetConnection(context) && pensadorQuoteState == PensadorQuoteState.LOADED) {
-            MainScope().launch {
+            generateNextQuoteJob?.cancel()
+            generateNextQuoteJob = viewModelScope.launch {
                 setLoadingState()
 
                 val generateNextAuthor = launch {

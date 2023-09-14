@@ -50,9 +50,6 @@ import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.ui.settings.SettingsActivity
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: MainFragmentBinding
@@ -321,9 +318,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun goHomeFragment() {
-        disableDrawerMomentarily()
-        activityMain.closeDrawer(START)
         switchFragment(homeFragmentContainer.id, HomeFragment(applicationContext), HOME)
+        activityMain.closeDrawer(START)
     }
 
     private fun shouldActivateEasterEgg(isEasterEggActivated: Boolean) {
@@ -335,29 +331,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val bodyMassIndexIcon = drawerItemsNavView.menu.findItem(R.id.drawer_body_mass_index)
         bodyMassIndexIcon.isVisible = isEasterEggActivated
-    }
-
-    private fun disableDrawerMomentarily() {
-        drawerIcon.setOnClickListener(null)
-        drawerHeader.setOnClickListener(null)
-        drawerItemsNavView.setNavigationItemSelectedListener(null)
-        drawerBottomNavView.setNavigationItemSelectedListener(null)
-
-        MainScope().launch {
-            delay(ONE_SECOND_IN_MILLIS)
-            drawerIcon.setOnClickListener { activityMain.openDrawer(START) }
-            drawerHeader.setOnClickListener { goHomeFragment() }
-            drawerItemsNavView.setNavigationItemSelectedListener { menuItem ->
-                onNavigationItemSelected(
-                    menuItem
-                )
-            }
-            drawerBottomNavView.setNavigationItemSelectedListener { menuItem ->
-                onNavigationItemSelected(
-                    menuItem
-                )
-            }
-        }
     }
 
     private fun openSettingsActivity() = startActivity(Intent(this, SettingsActivity::class.java))
