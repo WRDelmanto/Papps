@@ -27,7 +27,7 @@ data class NasaPictureOfTheDayData(
     @SerializedName("thumbnail_url") @Expose val thumbnailUrl: String
 ) : Parcelable
 
-interface NasaApiService {
+fun interface NasaApiService {
     @GET("apod")
     suspend fun getNasaPictureOfTheDayData(@Query("api_key") apiKey: String): NasaPictureOfTheDayData
 }

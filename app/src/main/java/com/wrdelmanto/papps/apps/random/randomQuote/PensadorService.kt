@@ -25,7 +25,7 @@ data class QuoteData(
     val autor: String, val texto: String
 ) : Parcelable
 
-interface PensadorApiService {
+fun interface PensadorApiService {
     @GET(PENSADOR_API_VERCEL_URL)
     suspend fun getPensadorData(
         @Query("term") term: String, @Query("max") max: Int
