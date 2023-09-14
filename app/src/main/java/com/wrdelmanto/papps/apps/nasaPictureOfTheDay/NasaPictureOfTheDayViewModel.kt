@@ -78,8 +78,8 @@ class NasaPictureOfTheDayViewModel : ViewModel() {
         _shouldDownloadPicture.value = newShouldDownloadPicture
     }
 
-    fun updateAutomaticDownload(newautomaticDownload: Boolean) {
-        _automaticDownload.value = newautomaticDownload
+    fun updateAutomaticDownload(newAutomaticDownload: Boolean) {
+        _automaticDownload.value = newAutomaticDownload
     }
 
     fun getNasaData() {
