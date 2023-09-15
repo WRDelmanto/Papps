@@ -54,7 +54,6 @@
     <!-- Home -->
     <string name="home_click_here">Clique aqui\npara começar\na aventura!</string>
     <string name="easter_egg_activated">Easter Egg Activated</string>
-    <string name="easter_egg_already_activated">Easter Egg is already activated</string>
 
     <!-- All Apps and Games -->
     <string name="zero">0</string>
