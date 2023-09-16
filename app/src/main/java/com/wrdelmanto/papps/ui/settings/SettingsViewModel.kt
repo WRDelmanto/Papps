@@ -29,14 +29,19 @@ class SettingsViewModel : ViewModel() {
     fun shouldActivateEasterEgg(context: Context) {
         easterEggCounter++
 
-        if (easterEggCounter >= CLICKS_TO_ACTIVATE_EASTER_EGG && _easterEggActivated.value == false) {
-            easterEggCounter = 0
+        if (_easterEggActivated.value == false) {
+            if (easterEggCounter >= CLICKS_TO_ACTIVATE_EASTER_EGG) {
+                easterEggCounter = 0
 
-            _easterEggActivated.value = true
+                _easterEggActivated.value = true
 
-            putSharedPreferences(context, SP_EASTER_EGG, true)
-            showNormalToast(context, context.resources.getString(R.string.easter_egg_activated))
-            logD { context.resources.getString(R.string.easter_egg_activated) }
+                putSharedPreferences(context, SP_EASTER_EGG, true)
+                showNormalToast(context, context.resources.getString(R.string.easter_egg_activated))
+                logD { context.resources.getString(R.string.easter_egg_activated) }
+            } else {
+                val clickLeft = CLICKS_TO_ACTIVATE_EASTER_EGG - easterEggCounter
+                logD { "Clicks to activate easter egg=$clickLeft" }
+            }
         }
     }
 
