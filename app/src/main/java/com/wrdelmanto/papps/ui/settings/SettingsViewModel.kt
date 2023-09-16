@@ -42,6 +42,8 @@ class SettingsViewModel : ViewModel() {
                 val clickLeft = CLICKS_TO_ACTIVATE_EASTER_EGG - easterEggCounter
                 logD { "Clicks to activate easter egg=$clickLeft" }
             }
+        } else {
+            logD { context.resources.getString(R.string.easter_egg_already_activated) }
         }
     }
 
