@@ -1,227 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="settingsViewModel"
+            type="com.wrdelmanto.papps.ui.settings.SettingsViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_activity_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/settings_activity_toolbar_arrow_back"
-            android:layout_width="@dimen/image_size_normal"
-            android:layout_height="@dimen/image_size_normal"
-            android:contentDescription="@null"
-            android:padding="@dimen/padding_elements_small"
-            android:src="@drawable/ic_arrow_back"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/settings_activity_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/settings_activity_toolbar_title"
-            android:layout_width="0dp"
+            <ImageView
+                android:id="@+id/settings_activity_toolbar_arrow_back"
+                android:layout_width="@dimen/image_size_normal"
+                android:layout_height="@dimen/image_size_normal"
+                android:contentDescription="@null"
+                android:padding="@dimen/padding_elements_small"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/settings_activity_toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/settings"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_above"
+                app:layout_constraintBottom_toBottomOf="@+id/settings_activity_toolbar_arrow_back"
+                app:layout_constraintStart_toEndOf="@+id/settings_activity_toolbar_arrow_back"
+                app:layout_constraintTop_toTopOf="@+id/settings_activity_toolbar_arrow_back" />
+
+            <ImageView
+                android:id="@+id/settings_activity_toolbar_country_flag"
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:layout_margin="@dimen/margin_elements_normal"
+                android:contentDescription="@null"
+                android:src="@{settingsViewModel.contryFlag}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck"
+                tools:src="@drawable/flag_united_states" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/settings_activity_items"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_elements_normal"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_activity_toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_activity_privacy_pocily"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:padding="@dimen/padding_elements_small">
+
+                <ImageView
+                    android:id="@+id/settings_activity_privacy_policy_icon"
+                    android:layout_width="@dimen/image_size_small_under"
+                    android:layout_height="@dimen/image_size_small_under"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_document"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/settings_activity_privacy_pocily_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_elements_small"
+                    android:text="@string/privacy_policy"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/settings_activity_privacy_policy_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_elements_small" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_activity_rate_this_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_elements_small"
+                android:background="?attr/selectableItemBackground"
+                android:padding="@dimen/padding_elements_small">
+
+                <ImageView
+                    android:id="@+id/settings_activity_rate_this_app_icon"
+                    android:layout_width="@dimen/image_size_small_under"
+                    android:layout_height="@dimen/image_size_small_under"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_rate"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/settings_activity_rate_this_app_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_elements_small"
+                    android:text="@string/rate_this_app"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/settings_activity_rate_this_app_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_elements_small" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_activity_papps_google_play"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_elements_small"
+                android:background="?attr/selectableItemBackground"
+                android:padding="@dimen/padding_elements_small">
+
+                <ImageView
+                    android:id="@+id/settings_activity_papps_google_play_icon"
+                    android:layout_width="@dimen/image_size_small_under"
+                    android:layout_height="@dimen/image_size_small_under"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_feedback"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/settings_activity_papps_google_play_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_elements_small"
+                    android:text="@string/send_feedback"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/settings_activity_papps_google_play_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_elements_small" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_activity_clear_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_elements_small"
+                android:background="?attr/selectableItemBackground"
+                android:padding="@dimen/padding_elements_small">
+
+                <ImageView
+                    android:id="@+id/settings_activity_clear_data_icon"
+                    android:layout_width="@dimen/image_size_small_under"
+                    android:layout_height="@dimen/image_size_small_under"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_delete"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/settings_activity_clear_data_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_elements_small"
+                    android:text="@string/clear_all_data"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/settings_activity_clear_data_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_elements_small" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_size_normal_above"
-            app:layout_constraintBottom_toBottomOf="@+id/settings_activity_toolbar_arrow_back"
-            app:layout_constraintStart_toEndOf="@+id/settings_activity_toolbar_arrow_back"
-            app:layout_constraintTop_toTopOf="@+id/settings_activity_toolbar_arrow_back" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_elements_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/settings_activity_rocket_mini_logo"
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:layout_marginBottom="@dimen/margin_elements_small"
+                android:contentDescription="@string/rocket_mini_logo_description"
+                android:src="@drawable/ic_rocket" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_elements_small" />
+
+            <TextView
+                android:id="@+id/settings_activity_version"
+                android:layout_width="wrap_content"
+                android:text="@{settingsViewModel.version}"
+                android:layout_height="wrap_content"
+                tools:text="X.X.X.X" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/settings_activity_items"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_elements_normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_activity_toolbar">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_activity_privacy_pocily"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:padding="@dimen/padding_elements_small">
-
-            <ImageView
-                android:id="@+id/settings_activity_privacy_policy_icon"
-                android:layout_width="@dimen/image_size_small_under"
-                android:layout_height="@dimen/image_size_small_under"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_document"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/settings_activity_privacy_pocily_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_elements_small"
-                android:text="@string/privacy_policy"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/settings_activity_privacy_policy_icon"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_activity_rate_this_app"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small"
-            android:background="?attr/selectableItemBackground"
-            android:padding="@dimen/padding_elements_small">
-
-            <ImageView
-                android:id="@+id/settings_activity_rate_this_app_icon"
-                android:layout_width="@dimen/image_size_small_under"
-                android:layout_height="@dimen/image_size_small_under"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_rate"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/settings_activity_rate_this_app_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_elements_small"
-                android:text="@string/rate_this_app"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/settings_activity_rate_this_app_icon"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_activity_papps_google_play"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small"
-            android:background="?attr/selectableItemBackground"
-            android:padding="@dimen/padding_elements_small">
-
-            <ImageView
-                android:id="@+id/settings_activity_papps_google_play_icon"
-                android:layout_width="@dimen/image_size_small_under"
-                android:layout_height="@dimen/image_size_small_under"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_feedback"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/settings_activity_papps_google_play_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_elements_small"
-                android:text="@string/send_feedback"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/settings_activity_papps_google_play_icon"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/settings_activity_clear_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small"
-            android:background="?attr/selectableItemBackground"
-            android:padding="@dimen/padding_elements_small">
-
-            <ImageView
-                android:id="@+id/settings_activity_clear_data_icon"
-                android:layout_width="@dimen/image_size_small_under"
-                android:layout_height="@dimen/image_size_small_under"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_delete"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/settings_activity_clear_data_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_elements_small"
-                android:text="@string/clear_all_data"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_size_normal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/settings_activity_clear_data_icon"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small" />
-    </LinearLayout>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_elements_normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/settings_activity_rocket_mini_logo"
-            android:layout_width="@dimen/image_size_small"
-            android:layout_height="@dimen/image_size_small"
-            android:layout_marginBottom="@dimen/margin_elements_small"
-            android:contentDescription="@string/rocket_mini_logo_description"
-            android:src="@drawable/ic_rocket" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_elements_small" />
-
-        <TextView
-            android:id="@+id/settings_activity_version"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Versão X.X.X.X" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -10,6 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.wrdelmanto.papps"
+        resourceConfigurations += ["en", "pt"]
         minSdk 22
         targetSdk 34
         versionCode 6 // Value that the stores use to identify that there has been an update.

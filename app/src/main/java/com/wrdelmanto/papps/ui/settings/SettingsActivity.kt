@@ -1,16 +1,19 @@
 package com.wrdelmanto.papps.ui.settings
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.wrdelmanto.papps.BuildConfig
+import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.SettingsActivityBinding
 import com.wrdelmanto.papps.utils.MAIL_SUBJECT
@@ -28,6 +31,7 @@ class SettingsActivity : AppCompatActivity() {
 
     // Toolbar
     private lateinit var settingsArrowBack: ImageView
+    private lateinit var countryFlag: ImageView
 
     // Items
     private lateinit var privacyPolicy: ConstraintLayout
@@ -36,12 +40,25 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var clearSPData: ConstraintLayout
 
     private lateinit var rocket: ImageView
-    private lateinit var version: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = SettingsActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Handle onBackPressed
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                logD { "onBackPressed" }
+
+                val intent = Intent(applicationContext, MainActivity::class.java)
+
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TOP or FLAG_ACTIVITY_CLEAR_TASK)
+
+                startActivity(intent)
+                finish()
+            }
+        })
 
         // Disable dark theme
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -49,8 +66,12 @@ class SettingsActivity : AppCompatActivity() {
         // Adjust navigation and status bar
         setupNavigationAndStatusBar(this, window)
 
+        binding.settingsViewModel = settingsViewModel
+        binding.lifecycleOwner = this
+
         // Toolbar
         settingsArrowBack = binding.settingsActivityToolbarArrowBack
+        countryFlag = binding.settingsActivityToolbarCountryFlag
 
         // Items
         privacyPolicy = binding.settingsActivityPrivacyPocily
@@ -59,8 +80,6 @@ class SettingsActivity : AppCompatActivity() {
         clearSPData = binding.settingsActivityClearData
 
         rocket = binding.settingsActivityRocketMiniLogo
-        version = binding.settingsActivityVersion
-        version.text = BuildConfig.VERSION_NAME
 
         initiateListeners()
         initiateObservers()
@@ -81,6 +100,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun initiateListeners() {
         // Toolbar
         settingsArrowBack.setOnClickListener { onBackPressed() }
+        countryFlag.setOnClickListener { settingsViewModel.switchLanguage(this) }
 
         // Items
         privacyPolicy.setOnClickListener { openPrivacyPolicy() }
