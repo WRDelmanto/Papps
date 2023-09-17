@@ -302,21 +302,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun switchFragment(fragmentId: Int, newFragment: Fragment, fragmentName: String) {
         try {
-            val ft = supportFragmentManager.beginTransaction()
+            val fragmentManager = supportFragmentManager.beginTransaction()
 
             if (supportFragmentManager.findFragmentById(fragmentId) == null) {
-                ft.add(fragmentId, newFragment, fragmentName)
+                fragmentManager.add(fragmentId, newFragment, fragmentName)
                 logD { "Fragment added: $fragmentName" }
             } else if (supportFragmentManager.fragments[0].tag != fragmentName) {
-                ft.replace(fragmentId, newFragment, fragmentName)
+                fragmentManager.replace(fragmentId, newFragment, fragmentName)
                 logD { "Fragment replaced: $fragmentName" }
             }
 
             appBarTitle.text = sharedViewModel.getCurrentTitle(applicationContext, fragmentName)
             randomBottomNavMenu.isVisible = sharedViewModel.shouldShowRandomBottomNavMenu()
 
-            ft.addToBackStack(null)
-            ft.commit()
+            fragmentManager.addToBackStack(null)
+            fragmentManager.commit()
         } catch (e: Exception) {
             e.printStackTrace()
         }
