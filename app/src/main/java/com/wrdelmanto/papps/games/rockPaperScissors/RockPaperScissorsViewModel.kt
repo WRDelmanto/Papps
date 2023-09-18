@@ -49,11 +49,8 @@ class RockPaperScissorsViewModel : ViewModel() {
     fun updateGameMode(context: Context, isFirstTime: Boolean = false) {
         if (!isFirstTime) isTwoPlayersModeEnabled = !isTwoPlayersModeEnabled
 
-        if (!isTwoPlayersModeEnabled) {
-            _modeButton.value = context.resources.getString(R.string.one_player_mode)
-        } else {
-            _modeButton.value = context.resources.getString(R.string.two_player_mode)
-        }
+        if (!isTwoPlayersModeEnabled) _modeButton.value = context.resources.getString(R.string.one_player_mode)
+        else _modeButton.value = context.resources.getString(R.string.two_player_mode)
 
         logD { "updateGameMode: isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
     }
