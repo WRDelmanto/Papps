@@ -1,168 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ticTacToeViewModel"
+            type="com.wrdelmanto.papps.games.tipTacToe.TicTacToeViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tic_tac_toe_rows_and_columns"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_edges"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a11"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a12"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginHorizontal="@dimen/margin_elements_small"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_a13"
-            app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_a11"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a13"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a21"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a22"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a22"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a22"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginHorizontal="@dimen/margin_elements_small"
-            android:layout_marginTop="@dimen/margin_elements_small"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_a12"
-            app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_a12"
-            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_a12"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a23"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a22"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a22"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a31"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a32"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginHorizontal="@dimen/margin_elements_small"
-            android:layout_marginTop="@dimen/margin_elements_small"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_a22"
-            app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_a22"
-            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_a22"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_a33"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/general_button"
-            android:textSize="@dimen/font_size_large"
-            app:layout_constraintBottom_toBottomOf="@+id/tic_tac_toe_a32"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tic_tac_toe_a32"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tic_tac_toe_game_modes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_edges"
-        android:layout_marginTop="@dimen/margin_elements_large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_rows_and_columns">
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding_edges">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_pve_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/general_button"
-            android:text="@string/pve"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_pvp_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_max="@dimen/max_width_appCompatButton" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tic_tac_toe_pvp_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/general_button"
-            android:text="@string/pvp"
-            android:textAllCaps="false"
+        <TableLayout
+            android:id="@+id/tic_tac_toe_main_container"
+            android:layout_width="@dimen/tic_tac_toe_main_container_width"
+            android:layout_height="@dimen/tic_tac_toe_main_container_height"
+            android:background="@color/black"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_pve_button"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/tic_tac_toe_reset_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_edges"
-        android:layout_marginBottom="@dimen/margin_edges"
-        android:background="@drawable/general_button"
-        android:text="@string/reset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_max="@dimen/max_width_appCompatButton" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a11"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:background="@{ticTacToeViewModel.a11BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a11}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="X" />
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a12"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:layout_marginHorizontal="@dimen/margin_elements_normal"
+                    android:background="@{ticTacToeViewModel.a12BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a12}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="X" />
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a13"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:background="@{ticTacToeViewModel.a13BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a13}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="X" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="@dimen/margin_elements_normal">
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a21"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:background="@{ticTacToeViewModel.a21BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a21}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="X" />
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a22"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:layout_marginHorizontal="@dimen/margin_elements_normal"
+                    android:background="@{ticTacToeViewModel.a22BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a22}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="O" />
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a23"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:background="@{ticTacToeViewModel.a23BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a23}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="X" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="@dimen/margin_elements_normal">
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a31"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:background="@{ticTacToeViewModel.a31BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a31}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="X" />
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a32"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:layout_marginHorizontal="@dimen/margin_elements_normal"
+                    android:background="@{ticTacToeViewModel.a32BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a32}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="X" />
+
+                <TextView
+                    android:id="@+id/tic_tac_toe_a33"
+                    android:layout_width="@dimen/image_size_custom"
+                    android:layout_height="@dimen/image_size_custom"
+                    android:background="@{ticTacToeViewModel.a33BackgroundColor}"
+                    android:contentDescription="@null"
+                    android:gravity="center"
+                    android:text="@{ticTacToeViewModel.a33}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_xlarge"
+                    tools:background="@color/white"
+                    tools:text="X" />
+            </TableRow>
+
+        </TableLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_mode_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_elements_xlarge"
+            android:background="@drawable/general_button"
+            android:paddingHorizontal="@dimen/padding_elements_small"
+            android:text="@{ticTacToeViewModel.modeButton}"
+            app:layout_constraintBottom_toTopOf="@id/tic_tac_toe_reset_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tic_tac_toe_main_container"
+            tools:text="@string/one_player_mode" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/tic_tac_toe_reset_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/general_button"
+            android:text="@string/reset"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_max="@dimen/max_width_appCompatButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

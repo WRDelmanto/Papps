@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/tip_coins"
-            android:layout_width="@dimen/image_size_normal_xlarge"
-            android:layout_height="@dimen/image_size_normal_xlarge"
+            android:layout_width="@dimen/image_size_xlarge"
+            android:layout_height="@dimen/image_size_xlarge"
             android:contentDescription="@null"
             android:src="@drawable/tip_coins"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +114,7 @@
             app:layout_constraintEnd_toEndOf="@+id/tip_tip"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_value_input"
-            tools:text="@string/ten_with_percentage" />
+            tools:text="@string/ten_percent" />
 
         <SeekBar
             android:id="@+id/tip_percentage_seek_bar"

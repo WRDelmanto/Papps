@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/nasa_picture_of_the_day_internet_error"
-            android:layout_width="@dimen/image_size_normal_large"
-            android:layout_height="@dimen/image_size_normal_large"
+            android:layout_width="@dimen/image_size_large"
+            android:layout_height="@dimen/image_size_large"
             android:background="@drawable/ic_connection_error"
             android:contentDescription="@null"
             android:visibility="gone"
@@ -29,8 +29,8 @@
 
         <ProgressBar
             android:id="@+id/nasa_picture_of_the_day_loading"
-            android:layout_width="@dimen/image_size_normal_large"
-            android:layout_height="@dimen/image_size_normal_large"
+            android:layout_width="@dimen/image_size_large"
+            android:layout_height="@dimen/image_size_large"
             android:layout_centerHorizontal="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +61,8 @@
 
         <ProgressBar
             android:id="@+id/nasa_picture_of_the_day_picture_loading"
-            android:layout_width="@dimen/image_size_normal_large"
-            android:layout_height="@dimen/image_size_normal_large"
+            android:layout_width="@dimen/image_size_large"
+            android:layout_height="@dimen/image_size_large"
             android:layout_centerHorizontal="true"
             app:layout_constraintBottom_toBottomOf="@+id/nasa_picture_of_the_day_picture"
             app:layout_constraintEnd_toEndOf="@+id/nasa_picture_of_the_day_picture"
@@ -72,8 +72,8 @@
 
         <ImageView
             android:id="@+id/nasa_picture_of_the_day_picture_internet_error"
-            android:layout_width="@dimen/image_size_normal_large"
-            android:layout_height="@dimen/image_size_normal_large"
+            android:layout_width="@dimen/image_size_large"
+            android:layout_height="@dimen/image_size_large"
             android:background="@drawable/ic_connection_error"
             android:contentDescription="@null"
             android:visibility="gone"

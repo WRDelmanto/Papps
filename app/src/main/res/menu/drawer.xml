@@ -64,9 +64,7 @@
                 <item
                     android:id="@+id/drawer_tic_tac_toe"
                     android:icon="@drawable/tic_tac_toe_logo"
-                    android:title="@string/app_name_tic_tac_toe"
-                    android:visible="false"
-                    tools:visible="true" />
+                    android:title="@string/app_name_tic_tac_toe" />
                 <item
                     android:id="@+id/drawer_rock_paper_scissors"
                     android:icon="@drawable/rock_paper_scissors_logo"

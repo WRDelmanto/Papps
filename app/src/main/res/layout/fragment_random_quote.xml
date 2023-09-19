@@ -17,8 +17,8 @@
 
         <ProgressBar
             android:id="@+id/random_quote_loading"
-            android:layout_width="@dimen/image_size_normal_large"
-            android:layout_height="@dimen/image_size_normal_large"
+            android:layout_width="@dimen/image_size_large"
+            android:layout_height="@dimen/image_size_large"
             android:layout_centerHorizontal="true"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,8 +28,8 @@
 
         <ImageView
             android:id="@+id/random_quote_internet_error"
-            android:layout_width="@dimen/image_size_normal_large"
-            android:layout_height="@dimen/image_size_normal_large"
+            android:layout_width="@dimen/image_size_large"
+            android:layout_height="@dimen/image_size_large"
             android:background="@drawable/ic_connection_error"
             android:contentDescription="@null"
             android:visibility="gone"

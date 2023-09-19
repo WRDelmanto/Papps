@@ -28,8 +28,8 @@
     <dimen name="image_size_small">32dp</dimen>
     <dimen name="image_size_small_above">48dp</dimen>
     <dimen name="image_size_normal">64dp</dimen>
-    <dimen name="image_size_normal_large">128dp</dimen>
-    <dimen name="image_size_normal_xlarge">248dp</dimen>
+    <dimen name="image_size_large">128dp</dimen>
+    <dimen name="image_size_xlarge">248dp</dimen>
     <dimen name="image_size_custom">100dp</dimen>
 
     <dimen name="font_size_small">8sp</dimen>
@@ -38,4 +38,8 @@
     <dimen name="font_size_normal_above">24sp</dimen>
     <dimen name="font_size_large">36sp</dimen>
     <dimen name="font_size_xlarge">64sp</dimen>
+
+    <!-- Tic Tac Toe -->
+    <dimen name="tic_tac_toe_main_container_width">330dp</dimen>
+    <dimen name="tic_tac_toe_main_container_height">330dp</dimen>
 </resources>
