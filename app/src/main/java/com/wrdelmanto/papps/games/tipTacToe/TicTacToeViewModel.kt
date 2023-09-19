@@ -1,12 +1,12 @@
 package com.wrdelmanto.papps.games.tipTacToe
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -70,6 +70,9 @@ class TicTacToeViewModel : ViewModel() {
     private val _a33BackgroundColor = MutableLiveData<Drawable>()
     val a33BackgroundColor: LiveData<Drawable> = _a33BackgroundColor
 
+    private val _winner = MutableLiveData<Int>()
+    val winner: LiveData<Int> = _winner
+
     private val _playerOneScore = MutableLiveData<String>()
     val playerOneScore: LiveData<String> = _playerOneScore
 
@@ -83,43 +86,47 @@ class TicTacToeViewModel : ViewModel() {
     private var activePlayer = 1
     private var isTwoPlayersModeEnabled = false
 
-    private val _winner = MutableLiveData<Int>()
-    val winner: LiveData<Int> = _winner
+    private lateinit var initialColor: ColorDrawable
+    private lateinit var highlightedColor: ColorDrawable
 
     private var viewModelScopeJob: Job? = null
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun resetUi(
         context: Context,
         isFirstTime: Boolean = false,
         shouldResetScores: Boolean = true,
         shouldResetModeButton: Boolean = true
     ) {
+        initialColor = context.resources.getColor(R.color.white, null).toDrawable()
+        highlightedColor = context.resources.getColor(R.color.green, null).toDrawable()
+
         _a11.value = ""
-        _a11BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a11BackgroundColor.value = initialColor
 
         _a12.value = ""
-        _a12BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a12BackgroundColor.value = initialColor
 
         _a13.value = ""
-        _a13BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a13BackgroundColor.value = initialColor
 
         _a21.value = ""
-        _a21BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a21BackgroundColor.value = initialColor
 
         _a22.value = ""
-        _a22BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a22BackgroundColor.value = initialColor
 
         _a23.value = ""
-        _a23BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a23BackgroundColor.value = initialColor
 
         _a31.value = ""
-        _a31BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a31BackgroundColor.value = initialColor
 
         _a32.value = ""
-        _a32BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a32BackgroundColor.value = initialColor
 
         _a33.value = ""
-        _a33BackgroundColor.value = ContextCompat.getDrawable(context, R.color.white)
+        _a33BackgroundColor.value = initialColor
 
         _winner.value = -1
 
@@ -139,6 +146,7 @@ class TicTacToeViewModel : ViewModel() {
         logD { "resetUi" }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     fun updateGameMode(context: Context) {
         isTwoPlayersModeEnabled = !isTwoPlayersModeEnabled
 
@@ -298,11 +306,11 @@ class TicTacToeViewModel : ViewModel() {
 
         // Cross 2
         if (playerOne.containsAll(listOf(3, 5, 7))) {
-            winnerButtons = listOf(3, 5, 7) as ArrayList<Int>
+            winnerButtons = listOf(3, 5, 7)
             return 1
         }
         if (playerTwo.containsAll(listOf(3, 5, 7))) {
-            winnerButtons = listOf(3, 5, 7) as ArrayList<Int>
+            winnerButtons = listOf(3, 5, 7)
             return 2
         }
 
@@ -314,22 +322,19 @@ class TicTacToeViewModel : ViewModel() {
         viewModelScopeJob?.cancel()
         viewModelScopeJob = viewModelScope.launch {
             delay(ONE_QUARTER_SECOND_IN_MILLIS)
+
             changeColorGraduallyAndRollback(
-                context.resources.getColor(R.color.white, null).toDrawable(),
-                context.resources.getColor(R.color.green, null).toDrawable(),
-                convertCellIdIntoTextView(view, winnerButtons[0])
+                initialColor, highlightedColor, convertCellIdIntoTextView(view, winnerButtons[0])
             )
             changeColorGraduallyAndRollback(
-                context.resources.getColor(R.color.white, null).toDrawable(),
-                context.resources.getColor(R.color.green, null).toDrawable(),
-                convertCellIdIntoTextView(view, winnerButtons[1])
+                initialColor, highlightedColor, convertCellIdIntoTextView(view, winnerButtons[1])
             )
             changeColorGraduallyAndRollback(
-                context.resources.getColor(R.color.white, null).toDrawable(),
-                context.resources.getColor(R.color.green, null).toDrawable(),
-                convertCellIdIntoTextView(view, winnerButtons[2])
+                initialColor, highlightedColor, convertCellIdIntoTextView(view, winnerButtons[2])
             )
+
             delay(ONE_SECOND_IN_MILLIS)
+
             resetUi(context, shouldResetScores = false, shouldResetModeButton = false)
         }
     }
