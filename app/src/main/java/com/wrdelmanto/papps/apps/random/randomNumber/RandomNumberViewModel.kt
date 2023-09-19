@@ -69,7 +69,6 @@ class RandomNumberViewModel : ViewModel() {
         }
 
         if (min != "0" && min.first() == '0') _minInput.value = min.toInt().toString()
-
         if (max != "0" && max.first() == '0') _maxInput.value = max.toInt().toString()
 
         if (min.toInt() <= max.toInt()) {

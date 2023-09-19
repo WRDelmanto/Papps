@@ -45,13 +45,14 @@ class CoinFlipperFragment(
         resetButton = binding.coinFlipperResetButton
 
         resultMessage = binding.coinFlipperResult
+
+        initiateListeners()
     }
 
     override fun onResume() {
         super.onResume()
 
-        resetUi()
-        initiateListeners()
+        coinFlipperViewModel.resetUi(context)
     }
 
     override fun onPause() {
@@ -79,6 +80,4 @@ class CoinFlipperFragment(
         tails.setOnClickListener(null)
         resetButton.setOnClickListener(null)
     }
-
-    private fun resetUi() = coinFlipperViewModel.resetUi(context)
 }

@@ -66,20 +66,21 @@ class RockPaperScissorsFragment(
 
         onePlayerModeGroup = binding.rockPaperScissorsOnePlayerModeGroup
         twoPlayersModeGroup = binding.rockPaperScissorsTwoPlayersModeGroup
+
+        initiateListeners()
+        initiateObservers()
     }
 
     override fun onResume() {
         super.onResume()
 
-        resetUi()
-        initiateListeners()
-        initiateObservers()
+        rockPaperScissorsViewModel.resetUi(context)
     }
 
-    override fun onPause() {
+    override fun onDestroy() {
         disableListeners()
 
-        super.onPause()
+        super.onDestroy()
     }
 
     private fun initiateListeners() {
@@ -136,8 +137,6 @@ class RockPaperScissorsFragment(
         resetButton.setOnClickListener(null)
         modeButton.setOnClickListener(null)
     }
-
-    private fun resetUi() = rockPaperScissorsViewModel.resetUi(context)
 
     private fun updateMode() {
         if (!rockPaperScissorsViewModel.isTwoPlayersModeEnabled) {

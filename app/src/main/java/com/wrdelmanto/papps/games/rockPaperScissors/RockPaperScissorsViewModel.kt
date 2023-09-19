@@ -39,7 +39,8 @@ class RockPaperScissorsViewModel : ViewModel() {
         _primaryScore.value = "0"
         _secondaryScore.value = "0"
 
-        clearTempVariable()
+        primaryChoiceTemp = ""
+        secondaryChoiceTemp = ""
 
         updateGameMode(context, true)
 
@@ -49,7 +50,8 @@ class RockPaperScissorsViewModel : ViewModel() {
     fun updateGameMode(context: Context, isFirstTime: Boolean = false) {
         if (!isFirstTime) isTwoPlayersModeEnabled = !isTwoPlayersModeEnabled
 
-        if (!isTwoPlayersModeEnabled) _modeButton.value = context.resources.getString(R.string.one_player_mode)
+        if (!isTwoPlayersModeEnabled) _modeButton.value =
+            context.resources.getString(R.string.one_player_mode)
         else _modeButton.value = context.resources.getString(R.string.two_player_mode)
 
         logD { "updateGameMode: isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
@@ -75,7 +77,7 @@ class RockPaperScissorsViewModel : ViewModel() {
                 }
             }
 
-            checkResults(selfChoice, generateSecondaryChoice(context))
+            checkWinner(selfChoice, autoPlay(context))
         } else {
             if (secondaryChoiceTemp != "") {
                 _primaryChoice.value = when (selfChoice) {
@@ -114,7 +116,7 @@ class RockPaperScissorsViewModel : ViewModel() {
                     }
                 }
 
-                checkResults(selfChoice, secondaryChoiceTemp)
+                checkWinner(selfChoice, secondaryChoiceTemp)
             } else {
                 primaryChoiceTemp = selfChoice
             }
@@ -159,13 +161,13 @@ class RockPaperScissorsViewModel : ViewModel() {
                 }
             }
 
-            checkResults(primaryChoiceTemp, selfChoice)
+            checkWinner(primaryChoiceTemp, selfChoice)
         } else {
             secondaryChoiceTemp = selfChoice
         }
     }
 
-    private fun generateSecondaryChoice(context: Context): String {
+    private fun autoPlay(context: Context): String {
         val options = arrayOf("Rock", "Paper", "Scissors")
         val appChoice = options[Random().nextInt(options.size)]
 
@@ -190,7 +192,7 @@ class RockPaperScissorsViewModel : ViewModel() {
         return appChoice
     }
 
-    private fun checkResults(primaryChoice: String, secondaryChoice: String) {
+    private fun checkWinner(primaryChoice: String, secondaryChoice: String) {
         if (primaryChoice == "Scissors" && secondaryChoice == "Paper" || primaryChoice == "Paper" && secondaryChoice == "Rock" || primaryChoice == "Rock" && secondaryChoice == "Scissors") {
             // User 1 Wins
             _primaryScore.value = (_primaryScore.value?.toInt()?.plus(1)).toString()
@@ -199,13 +201,9 @@ class RockPaperScissorsViewModel : ViewModel() {
             _secondaryScore.value = (_secondaryScore.value?.toInt()?.plus(1)).toString()
         }
 
-        clearTempVariable()
-
-        logD { "primaryChoice=$primaryChoice, secondaryChoice=$secondaryChoice, primaryScore=${_primaryScore.value}, secondaryScore=${_secondaryScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
-    }
-
-    private fun clearTempVariable() {
         primaryChoiceTemp = ""
         secondaryChoiceTemp = ""
+
+        logD { "primaryChoice=$primaryChoice, secondaryChoice=$secondaryChoice, primaryScore=${_primaryScore.value}, secondaryScore=${_secondaryScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
     }
 }
