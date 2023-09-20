@@ -65,10 +65,11 @@ class TicTacToeFragment(
         initiateObservers()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onResume() {
         super.onResume()
 
-        ticTacToeViewModel.resetUi(context, isFirstTime = true)
+        ticTacToeViewModel.resetUi(context, requireView(), isFirstTime = true)
     }
 
     override fun onDestroy() {
@@ -125,10 +126,10 @@ class TicTacToeFragment(
             )
         }
 
-        modeButton.setOnClickListener { ticTacToeViewModel.updateGameMode(context) }
+        modeButton.setOnClickListener { ticTacToeViewModel.updateGameMode(context, requireView()) }
         resetButton.setOnClickListener {
             ticTacToeViewModel.resetUi(
-                context, shouldResetModeButton = false
+                context, requireView(), shouldResetModeButton = false
             )
         }
     }

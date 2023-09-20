@@ -42,4 +42,5 @@
     <!-- Tic Tac Toe -->
     <dimen name="tic_tac_toe_main_container_width">330dp</dimen>
     <dimen name="tic_tac_toe_main_container_height">330dp</dimen>
+    <dimen name="player_mode_button_width">128dp</dimen>
 </resources>

@@ -15,6 +15,83 @@
         android:layout_height="match_parent"
         android:padding="@dimen/padding_edges">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tic_tac_toe_main_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tic_tac_toe_score_separator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/x_separator"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tic_tac_toe_primary_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{ticTacToeViewModel.playerOneScore}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tic_tac_toe_score_separator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/zero" />
+
+            <TextView
+                android:id="@+id/tic_tac_toe_primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_one"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_large"
+                app:layout_constraintBottom_toTopOf="@+id/tic_tac_toe_primary_score"
+                app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_primary_score"
+                app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_primary_score"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tic_tac_toe_secondary_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{ticTacToeViewModel.playerTwoScore}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tic_tac_toe_score_separator"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/zero" />
+
+            <TextView
+                android:id="@+id/tic_tac_toe_secondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_two"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_large"
+                app:layout_constraintBottom_toTopOf="@+id/tic_tac_toe_secondary_score"
+                app:layout_constraintEnd_toEndOf="@+id/tic_tac_toe_secondary_score"
+                app:layout_constraintStart_toStartOf="@+id/tic_tac_toe_secondary_score"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TableLayout
             android:id="@+id/tic_tac_toe_main_container"
             android:layout_width="@dimen/tic_tac_toe_main_container_width"
@@ -40,6 +117,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="TextSizeCheck"
                     tools:text="X" />
 
                 <TextView
@@ -55,6 +133,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="TextSizeCheck"
                     tools:text="X" />
 
                 <TextView
@@ -69,6 +148,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="VisualLintBounds,TextSizeCheck"
                     tools:text="X" />
             </TableRow>
 
@@ -86,6 +166,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="TextSizeCheck"
                     tools:text="X" />
 
                 <TextView
@@ -101,6 +182,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="TextSizeCheck"
                     tools:text="O" />
 
                 <TextView
@@ -115,6 +197,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="VisualLintBounds,TextSizeCheck"
                     tools:text="X" />
             </TableRow>
 
@@ -132,6 +215,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="VisualLintBounds,TextSizeCheck"
                     tools:text="X" />
 
                 <TextView
@@ -147,6 +231,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="VisualLintBounds,TextSizeCheck"
                     tools:text="X" />
 
                 <TextView
@@ -161,6 +246,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_xlarge"
                     tools:background="@color/white"
+                    tools:ignore="VisualLintBounds,TextSizeCheck"
                     tools:text="X" />
             </TableRow>
 
@@ -168,11 +254,9 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tic_tac_toe_mode_button"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/player_mode_button_width"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_elements_xlarge"
             android:background="@drawable/general_button"
-            android:paddingHorizontal="@dimen/padding_elements_small"
             android:text="@{ticTacToeViewModel.modeButton}"
             app:layout_constraintBottom_toTopOf="@id/tic_tac_toe_reset_button"
             app:layout_constraintEnd_toEndOf="parent"

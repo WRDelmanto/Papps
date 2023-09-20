@@ -94,6 +94,7 @@ class TicTacToeViewModel : ViewModel() {
     @RequiresApi(Build.VERSION_CODES.M)
     fun resetUi(
         context: Context,
+        view: View,
         isFirstTime: Boolean = false,
         shouldResetScores: Boolean = true,
         shouldResetModeButton: Boolean = true
@@ -128,12 +129,17 @@ class TicTacToeViewModel : ViewModel() {
         _a33.value = ""
         _a33BackgroundColor.value = initialColor
 
-        _winner.value = -1
-
         playerOne.clear()
         playerTwo.clear()
 
-        activePlayer = 1
+        if (isTwoPlayersModeEnabled && _winner.value == 2) {
+            _winner.value = -1
+            activePlayer = 2
+            autoPlay(context, view)
+        } else {
+            _winner.value = -1
+            activePlayer = 1
+        }
 
         if (isFirstTime || shouldResetScores) {
             _playerOneScore.value = "0"
@@ -147,14 +153,14 @@ class TicTacToeViewModel : ViewModel() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun updateGameMode(context: Context) {
+    fun updateGameMode(context: Context, view: View) {
         isTwoPlayersModeEnabled = !isTwoPlayersModeEnabled
 
         if (!isTwoPlayersModeEnabled) _modeButton.value =
             context.resources.getString(R.string.one_player_mode)
         else _modeButton.value = context.resources.getString(R.string.two_player_mode)
 
-        resetUi(context, shouldResetScores = true, shouldResetModeButton = false)
+        resetUi(context, view, shouldResetScores = true, shouldResetModeButton = false)
 
         logD { "updateGameMode: isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
     }
@@ -180,6 +186,7 @@ class TicTacToeViewModel : ViewModel() {
     private fun autoPlay(context: Context, view: View) {
         var cellId: Int
 
+        // TODO: Better AI
         do cellId = (1..9).random()
         while (playerOne.contains(cellId) || playerTwo.contains(cellId))
 
@@ -190,11 +197,10 @@ class TicTacToeViewModel : ViewModel() {
                 text = O_ANSWER
                 isEnabled = false
             }
+
+            playerTwo.add(cellId)
+            checkWinner(context, view)
         }
-
-        playerTwo.add(cellId)
-
-        checkWinner(context, view)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -335,7 +341,7 @@ class TicTacToeViewModel : ViewModel() {
 
             delay(ONE_SECOND_IN_MILLIS)
 
-            resetUi(context, shouldResetScores = false, shouldResetModeButton = false)
+            resetUi(context, view, shouldResetScores = false, shouldResetModeButton = false)
         }
     }
 

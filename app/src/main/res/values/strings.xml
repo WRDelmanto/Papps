@@ -84,6 +84,8 @@
     <string name="image_downloading">Downloading %1$s</string>
     <string name="image_downloaded">%1$s Downloaded</string>
     <string name="mbps">Mbps</string>
+    <string name="player_one">Player 1</string>
+    <string name="player_two">Player 2</string>
 
     <!-- All Apps -->
     <!-- Body mass index -->
