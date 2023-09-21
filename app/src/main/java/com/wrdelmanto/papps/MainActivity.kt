@@ -328,6 +328,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun shouldActivateEasterEgg(isEasterEggActivated: Boolean) {
+        val nasaPictureOfTheDayDrawerIcon =
+            drawerItemsNavView.menu.findItem(R.id.drawer_nasa_picture_of_the_day)
+        nasaPictureOfTheDayDrawerIcon.isVisible = isEasterEggActivated
+
         val moneyConverterDrawerIcon = drawerItemsNavView.menu.findItem(R.id.drawer_money_converter)
         moneyConverterDrawerIcon.isVisible = isEasterEggActivated
 
