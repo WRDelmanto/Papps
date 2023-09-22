@@ -332,6 +332,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawerItemsNavView.menu.findItem(R.id.drawer_nasa_picture_of_the_day)
         nasaPictureOfTheDayDrawerIcon.isVisible = isEasterEggActivated
 
+        val speedTestDrawerIcon = drawerItemsNavView.menu.findItem(R.id.drawer_speed_test)
+        speedTestDrawerIcon.isVisible = isEasterEggActivated
+
         val moneyConverterDrawerIcon = drawerItemsNavView.menu.findItem(R.id.drawer_money_converter)
         moneyConverterDrawerIcon.isVisible = isEasterEggActivated
 

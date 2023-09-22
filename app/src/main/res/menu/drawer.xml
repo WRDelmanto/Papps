@@ -52,7 +52,9 @@
                 <item
                     android:id="@+id/drawer_speed_test"
                     android:icon="@drawable/speed_test_logo"
-                    android:title="@string/app_name_speed_test" />
+                    android:title="@string/app_name_speed_test"
+                    android:visible="false"
+                    tools:visible="true" />
             </menu>
         </item>
     </group>

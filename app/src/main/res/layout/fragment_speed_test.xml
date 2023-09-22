@@ -140,10 +140,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
+                    android:ellipsize="end"
+                    android:lines="1"
                     android:text="@{speedTestViewModel.networkTypeName}"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/dark_gray"
-                    android:textSize="@dimen/font_size_normal_above"
+                    android:textSize="@dimen/font_size_normal"
                     tools:text="Wifi - Operadora" />
             </TableRow>
 
@@ -163,10 +165,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
+                    android:ellipsize="end"
+                    android:lines="1"
                     android:text="@{speedTestViewModel.publicIpAddress}"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/dark_gray"
-                    android:textSize="@dimen/font_size_normal_above"
+                    android:textSize="@dimen/font_size_normal"
                     tools:text="XXX.XXX.XXX.XXX" />
             </TableRow>
 
@@ -186,10 +190,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
+                    android:ellipsize="end"
+                    android:lines="1"
                     android:text="@{speedTestViewModel.networkRegion}"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/dark_gray"
-                    android:textSize="@dimen/font_size_normal_above"
+                    android:textSize="@dimen/font_size_normal"
                     tools:text="Brasil - São Paulo" />
             </TableRow>
 
