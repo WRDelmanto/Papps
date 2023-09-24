@@ -91,7 +91,7 @@ class RandomQuoteViewModel : ViewModel() {
                         )
 
                         _currentQuote.value = pensadorData.frases[numberOfRequestedQuotes - 1].texto
-                    } while (pensadorData.frases[numberOfRequestedQuotes - 1].texto.length >= 500)
+                    } while (pensadorData.frases[numberOfRequestedQuotes - 1].texto.length >= MAX_CHARACTERS_ALLOWED)
                 }
                 joinAll(generateNextAuthor, generateNextQuote)
 
@@ -103,5 +103,9 @@ class RandomQuoteViewModel : ViewModel() {
                 setLoadedState()
             }
         } else setErrorState()
+    }
+
+    private companion object {
+        const val MAX_CHARACTERS_ALLOWED = 350
     }
 }
