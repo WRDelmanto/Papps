@@ -24,12 +24,12 @@ class BodyMassIndexViewModel : ViewModel() {
 
     fun resetUi(context: Context) {
         _height.value = SP_BMI_HEIGHT.let {
-            val hs = getSharedPreferences(context, it, Int)
+            val hs = getSharedPreferences(context, it, String)
             hs ?: "1.75"
         }.toString()
 
         _weight.value = SP_BMI_WEIGHT.let {
-            val hs = getSharedPreferences(context, it, Int)
+            val hs = getSharedPreferences(context, it, String)
             hs ?: "75"
         }.toString()
 
