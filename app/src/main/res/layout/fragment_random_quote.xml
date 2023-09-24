@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_elements_normal"
             android:ellipsize="end"
+            android:lines="1"
             android:text="@{randomQuoteViewModel.currentAuthor}"
             android:textSize="@dimen/font_size_normal_above"
             app:layout_constraintBottom_toTopOf="@+id/random_quote_reset_button"
