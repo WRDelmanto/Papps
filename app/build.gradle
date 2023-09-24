@@ -16,9 +16,9 @@ android {
 
         // Play Store values
         def majorUpdate = "1"
-        def apps = "7"
+        def apps = "6"
         def games = "4"
-        versionCode 7 // Value that the stores use to identify that there has been an update.
+        versionCode 8 // Value that the stores use to identify that there has been an update.
         versionName "$majorUpdate.$apps.$games.$versionCode" // Value that is shown to the user.
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
