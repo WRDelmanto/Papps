@@ -1,6 +1,9 @@
 package com.wrdelmanto.papps.ui.settings
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
@@ -10,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.wrdelmanto.papps.MainActivity
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.SettingsActivityBinding
 import com.wrdelmanto.papps.utils.MAIL_SUBJECT
@@ -47,6 +51,11 @@ class SettingsActivity : AppCompatActivity() {
             override fun handleOnBackPressed() {
                 logD { "onBackPressed" }
 
+                val intent = Intent(applicationContext, MainActivity::class.java)
+
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TOP or FLAG_ACTIVITY_CLEAR_TASK)
+
+                startActivity(intent)
                 finish()
             }
         })
