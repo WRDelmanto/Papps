@@ -1,6 +1,5 @@
 package com.wrdelmanto.papps.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +8,7 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.wrdelmanto.papps.databinding.FragmentHomeBinding
 
-class HomeFragment(
-    private var context: Context
-) : Fragment() {
+class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 
     private lateinit var homeLogo: ImageView

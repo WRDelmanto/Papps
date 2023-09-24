@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.BuildConfig
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.SharedViewModel.Companion.EN_US_LANGUAGE
+import com.wrdelmanto.papps.SharedViewModel.Companion.PT_BR_LANGUAGE
 import com.wrdelmanto.papps.utils.SP_CURRENT_LANGUAGE
 import com.wrdelmanto.papps.utils.SP_EASTER_EGG
 import com.wrdelmanto.papps.utils.getSharedPreferences
@@ -74,9 +76,9 @@ class SettingsViewModel : ViewModel() {
                 context.resources, R.drawable.flag_brazil, null
             )
 
-            else -> {
-                null
-            }
+            else -> ResourcesCompat.getDrawable(
+                context.resources, R.drawable.ic_empty, null
+            )
         }
     }
 
@@ -103,7 +105,5 @@ class SettingsViewModel : ViewModel() {
 
     private companion object {
         const val CLICKS_TO_ACTIVATE_EASTER_EGG = 5
-        const val EN_US_LANGUAGE = "en-US"
-        const val PT_BR_LANGUAGE = "pt-BR"
     }
 }

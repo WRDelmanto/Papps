@@ -60,5 +60,8 @@ class SharedViewModel : ViewModel() {
         const val UNSCRAMBLE = "UNSCRAMBLE"
         const val SPEED_TEST = "SPEED_TEST"
         const val EMPTY_STRING = ""
+
+        const val EN_US_LANGUAGE = "en-US"
+        const val PT_BR_LANGUAGE = "pt-BR"
     }
 }

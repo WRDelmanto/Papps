@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.LocaleListCompat
 import androidx.core.view.GravityCompat.START
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -42,18 +43,20 @@ import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.random.randomQuote.RandomQuoteFragment
 import com.wrdelmanto.papps.apps.speedTest.SpeedTestFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
-import com.wrdelmanto.papps.databinding.MainFragmentBinding
+import com.wrdelmanto.papps.databinding.MainActivityBinding
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
 import com.wrdelmanto.papps.games.rockPaperScissors.RockPaperScissorsFragment
 import com.wrdelmanto.papps.games.tipTacToe.TicTacToeFragment
 import com.wrdelmanto.papps.games.unscramble.UnscrambleFragment
 import com.wrdelmanto.papps.ui.home.HomeFragment
 import com.wrdelmanto.papps.ui.settings.SettingsActivity
+import com.wrdelmanto.papps.utils.SP_CURRENT_LANGUAGE
+import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.setupNavigationAndStatusBar
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private lateinit var binding: MainFragmentBinding
+    private lateinit var binding: MainActivityBinding
 
     private val sharedViewModel: SharedViewModel by viewModels()
 
@@ -80,10 +83,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = MainFragmentBinding.inflate(layoutInflater)
+        binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        activityMain = binding.mainFragment
+        activityMain = binding.mainActivity
         homeFragmentContainer = findViewById(R.id.home_fragment_container)
 
         // Handle onBackPressed
@@ -114,7 +117,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         randomBottomNavMenuRandomnumber =
             randomBottomNavMenu.menu.findItem(R.id.random_bottom_nav_menu_random_number)
 
-        switchFragment(homeFragmentContainer.id, HomeFragment(applicationContext), HOME)
+        switchFragment(homeFragmentContainer.id, HomeFragment(), HOME)
     }
 
     override fun onResume() {
@@ -125,6 +128,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Adjust navigation and status bar
         setupNavigationAndStatusBar(applicationContext, window)
+
+        val currentLanguage = SP_CURRENT_LANGUAGE.let {
+            val eg = getSharedPreferences(this, it, String)
+            eg ?: SharedViewModel.EN_US_LANGUAGE
+        }.toString()
+
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(currentLanguage))
+
+        logD { "currentLanguage=$currentLanguage" }
 
         initiateListeners()
         initiateObservers()
@@ -323,7 +335,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun goHomeFragment() {
-        switchFragment(homeFragmentContainer.id, HomeFragment(applicationContext), HOME)
+        switchFragment(homeFragmentContainer.id, HomeFragment(), HOME)
         activityMain.closeDrawer(START)
     }
 
