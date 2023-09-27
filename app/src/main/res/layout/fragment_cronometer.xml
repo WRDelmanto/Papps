@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cronometerViewModel"
+            type="com.wrdelmanto.papps.apps.cronometer.CronometerViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/cronometer_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{cronometerViewModel.cronometer}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_xlarge"
+            app:layout_constraintBottom_toBottomOf="@+id/cronometer_middle_guideline"
+            app:layout_constraintEnd_toEndOf="@+id/cronometer_middle_guideline_vertical"
+            app:layout_constraintStart_toStartOf="@+id/cronometer_middle_guideline_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="00:00.00" />
+
+        <ImageView
+            android:id="@+id/cronometer_play_button"
+            android:layout_width="@dimen/image_size_custom"
+            android:layout_height="@dimen/image_size_custom"
+            android:background="@drawable/ic_empty"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cronometer_middle_guideline_vertical"
+            app:layout_constraintStart_toStartOf="@+id/cronometer_middle_guideline_vertical"
+            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline" />
+
+        <ImageView
+            android:id="@+id/cronometer_pause_button"
+            android:layout_width="@dimen/image_size_custom"
+            android:layout_height="@dimen/image_size_custom"
+            android:background="@drawable/ic_empty"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_pause"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cronometer_middle_guideline_vertical"
+            app:layout_constraintStart_toStartOf="@+id/cronometer_middle_guideline_vertical"
+            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline" />
+
+        <ImageView
+            android:id="@+id/cronometer_stop_button"
+            android:layout_width="@dimen/image_size_normal"
+            android:layout_height="@dimen/image_size_normal"
+            android:background="@drawable/ic_empty"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/cronometer_middle_guideline_vertical"
+            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline" />
+
+        <ImageView
+            android:id="@+id/cronometer_lap_button"
+            android:layout_width="@dimen/image_size_normal"
+            android:layout_height="@dimen/image_size_normal"
+            android:background="@drawable/ic_empty"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cronometer_middle_guideline_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/cronometer_middle_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/cronometer_middle_guideline_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

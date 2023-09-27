@@ -38,9 +38,7 @@
                 <item
                     android:id="@+id/drawer_nasa_picture_of_the_day"
                     android:icon="@drawable/nasa_picture_of_the_day_logo"
-                    android:title="@string/app_name_nasa_picture_of_the_day"
-                    android:visible="false"
-                    tools:visible="true" />
+                    android:title="@string/app_name_nasa_picture_of_the_day" />
                 <item
                     android:id="@+id/drawer_random_number"
                     android:icon="@drawable/random_number_logo"
@@ -55,6 +53,10 @@
                     android:title="@string/app_name_speed_test"
                     android:visible="false"
                     tools:visible="true" />
+                <item
+                    android:id="@+id/drawer_cronometer"
+                    android:icon="@drawable/cronometer_logo"
+                    android:title="@string/app_name_cronometer" />
             </menu>
         </item>
     </group>

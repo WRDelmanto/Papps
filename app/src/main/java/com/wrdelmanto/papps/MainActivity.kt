@@ -21,6 +21,7 @@ import com.google.android.material.navigation.NavigationView
 import com.wrdelmanto.papps.SharedViewModel.Companion.BODY_MASS_INDEX
 import com.wrdelmanto.papps.SharedViewModel.Companion.CLICK_COUNTER
 import com.wrdelmanto.papps.SharedViewModel.Companion.COIN_FLIPPER
+import com.wrdelmanto.papps.SharedViewModel.Companion.CRONOMETER
 import com.wrdelmanto.papps.SharedViewModel.Companion.DICES
 import com.wrdelmanto.papps.SharedViewModel.Companion.HOME
 import com.wrdelmanto.papps.SharedViewModel.Companion.MONEY_CONVERTER
@@ -35,6 +36,7 @@ import com.wrdelmanto.papps.SharedViewModel.Companion.TIP
 import com.wrdelmanto.papps.SharedViewModel.Companion.UNSCRAMBLE
 import com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexFragment
 import com.wrdelmanto.papps.apps.clickCounter.ClickCounterFragment
+import com.wrdelmanto.papps.apps.cronometer.CronometerFragment
 import com.wrdelmanto.papps.apps.dice.DicesFragment
 import com.wrdelmanto.papps.apps.moneyConverter.MoneyConverterFragment
 import com.wrdelmanto.papps.apps.nasaPictureOfTheDay.NasaPictureOfTheDayFragment
@@ -268,6 +270,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 homeFragmentContainer.id, RandomQuoteFragment(applicationContext), RANDOM_QUOTE
             )
 
+            R.id.drawer_cronometer -> switchFragment(
+                homeFragmentContainer.id, CronometerFragment(applicationContext), CRONOMETER
+            )
+
             // Games
             R.id.drawer_coin_flipper -> switchFragment(
                 homeFragmentContainer.id, CoinFlipperFragment(applicationContext), COIN_FLIPPER
@@ -340,10 +346,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun shouldActivateEasterEgg(isEasterEggActivated: Boolean) {
-        val nasaPictureOfTheDayDrawerIcon =
-            drawerItemsNavView.menu.findItem(R.id.drawer_nasa_picture_of_the_day)
-        nasaPictureOfTheDayDrawerIcon.isVisible = isEasterEggActivated
-
         val speedTestDrawerIcon = drawerItemsNavView.menu.findItem(R.id.drawer_speed_test)
         speedTestDrawerIcon.isVisible = isEasterEggActivated
 

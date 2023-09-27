@@ -13,10 +13,11 @@
     <string name="drawer_header_title">@string/app_name</string>
 
     <!-- Drawer Items -->
-    <string name="app_name_random_letter">Randon Letter</string>
+    <string name="app_name_random_letter">Random Letter</string>
     <string name="app_name_random_number">Random Number</string>
     <string name="app_name_nasa_picture_of_the_day">Nasa - Picture of the Day</string>
     <string name="app_name_tip">Tip</string>
+    <string name="app_name_cronometer">Cronometer</string>
     <string name="app_name_click_counter">Click Counter</string>
     <string name="app_name_money_converter">Money Exchange</string>
     <string name="app_name_dices">Dice</string>
