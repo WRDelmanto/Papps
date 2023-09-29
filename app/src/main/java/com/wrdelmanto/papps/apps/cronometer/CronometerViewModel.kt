@@ -1,6 +1,5 @@
 package com.wrdelmanto.papps.apps.cronometer
 
-import android.content.Context
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import com.wrdelmanto.papps.utils.logD
 import java.time.Duration
 
+@RequiresApi(Build.VERSION_CODES.S)
 class CronometerViewModel : ViewModel() {
     private val _cronometer = MutableLiveData<String>()
     val cronometer: LiveData<String> = _cronometer
@@ -22,27 +22,33 @@ class CronometerViewModel : ViewModel() {
     private val _isRunning = MutableLiveData(false)
     val isRunning: LiveData<Boolean> = _isRunning
 
+    private val _lapList = MutableLiveData(listOf<String>().toMutableList())
+    val lapList: LiveData<MutableList<String>> = _lapList
+
     private var startTime: Long = 0
     private var elapsedTime: Long = 0
 
-    private var lapList = mutableListOf<String>()
-
     private val handler = Handler(Looper.getMainLooper())
 
-    private val chronometerRunnable = object : Runnable {
-        @RequiresApi(Build.VERSION_CODES.S)
-        override fun run() {
+    private val chronometerRunnable: Runnable by lazy {
+        Runnable {
             elapsedTime = SystemClock.elapsedRealtime() - startTime
             updateCronometerTime(elapsedTime)
-            handler.post(this)
+            handler.post(chronometerRunnable)
         }
     }
 
+    init {
+        resetUi()
+    }
+
     @RequiresApi(Build.VERSION_CODES.S)
-    fun resetUi() {
-        elapsedTime = 0
+    private fun resetUi() {
         startTime = 0
-        lapList.clear()
+        elapsedTime = 0
+        _lapList.value?.clear()
+        // So that the observer can see that the list has changed
+        this._lapList.value = _lapList.value
         _isRunning.value = false
         _hasStarted.value = false
 
@@ -70,16 +76,18 @@ class CronometerViewModel : ViewModel() {
     fun addNewLap() {
         val newLap = _cronometer.value.toString()
 
-        if (newLap !in lapList) {
-            lapList.add(newLap)
+        if (!_lapList.value?.contains(newLap)!!) {
+            _lapList.value?.add(newLap)
+            _lapList.value!!.sortDescending()
+            // So that the observer can see that the list has changed
+            this._lapList.value = _lapList.value
 
             logD { "New lap added=$newLap" }
-            logD { "Lap list=$lapList" }
+            logD { "Lap list=${_lapList.value}" }
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    fun stopCronometer(context: Context) {
+    fun stopCronometer() {
         handler.removeCallbacks(chronometerRunnable)
 
         logD { "stopCronometer" }
@@ -94,7 +102,7 @@ class CronometerViewModel : ViewModel() {
         val hours = duration.toHoursPart()
         val minutes = duration.toMinutesPart()
         val seconds = duration.toSecondsPart()
-        val milliseconds = duration.toMillisPart()
+        val milliseconds = duration.toMillisPart() / 10
 
         logD {
             "cronometer=${
@@ -107,13 +115,12 @@ class CronometerViewModel : ViewModel() {
         _cronometer.value = if (hours == 0) String.format(
             MINUTES_SECONDS_MILLISECONDS_FORMAT, minutes, seconds, milliseconds
         )
-        else String.format(
-            HOURS_MINUTES_SECONDS_MILLISECONDS_FORMAT, hours, minutes, seconds, milliseconds
-        )
+        else String.format(HOURS_MINUTES_SECONDS_FORMAT, hours, minutes, seconds)
     }
 
     private companion object {
-        const val MINUTES_SECONDS_MILLISECONDS_FORMAT = "%02d:%02d.%02d"
+        const val HOURS_MINUTES_SECONDS_FORMAT = "%d:%02d:%02d"
         const val HOURS_MINUTES_SECONDS_MILLISECONDS_FORMAT = "%d:%02d:%02d.%02d"
+        const val MINUTES_SECONDS_MILLISECONDS_FORMAT = "%02d:%02d.%02d"
     }
 }

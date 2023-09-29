@@ -12,6 +12,8 @@ import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.wrdelmanto.papps.databinding.FragmentCronometerBinding
 
 class CronometerFragment(
@@ -25,6 +27,8 @@ class CronometerFragment(
     private lateinit var pauseButton: ImageView
     private lateinit var lapButton: ImageView
     private lateinit var stopButton: ImageView
+
+    private lateinit var lapListRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -46,17 +50,17 @@ class CronometerFragment(
         lapButton = binding.cronometerLapButton
         stopButton = binding.cronometerStopButton
 
+        lapListRecyclerView = binding.cronometerLaps
+
+        lapListRecyclerView.layoutManager = LinearLayoutManager(context)
+        lapListRecyclerView.adapter =
+            CronometerAdapter(cronometerViewModel.lapList.value?.toTypedArray()!!)
+
         initiateListeners()
         initiateObservers()
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    override fun onResume() {
-        super.onResume()
-
-        cronometerViewModel.resetUi()
-    }
-
     override fun onDestroy() {
         disableListeners()
         disableObservers()
@@ -69,9 +73,10 @@ class CronometerFragment(
         playButton.setOnClickListener { cronometerViewModel.startCronometer() }
         pauseButton.setOnClickListener { cronometerViewModel.pauseCronometer() }
         lapButton.setOnClickListener { cronometerViewModel.addNewLap() }
-        stopButton.setOnClickListener { cronometerViewModel.stopCronometer(context) }
+        stopButton.setOnClickListener { cronometerViewModel.stopCronometer() }
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     private fun initiateObservers() {
         cronometerViewModel.hasStarted.observe(viewLifecycleOwner) { hasStarted ->
             if (hasStarted) {
@@ -91,6 +96,9 @@ class CronometerFragment(
                 pauseButton.visibility = GONE
             }
         }
+        cronometerViewModel.lapList.observe(viewLifecycleOwner) { lapList ->
+            lapListRecyclerView.adapter = CronometerAdapter(lapList.toTypedArray())
+        }
     }
 
     private fun disableListeners() {
@@ -100,6 +108,7 @@ class CronometerFragment(
         stopButton.setOnClickListener(null)
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     private fun disableObservers() {
         cronometerViewModel.isRunning.observe(viewLifecycleOwner) { }
     }

@@ -27,54 +27,78 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="00:00.00" />
 
-        <ImageView
-            android:id="@+id/cronometer_play_button"
-            android:layout_width="@dimen/image_size_custom"
-            android:layout_height="@dimen/image_size_custom"
-            android:background="@drawable/ic_empty"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_play"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cronometer_middle_guideline_vertical"
-            app:layout_constraintStart_toStartOf="@+id/cronometer_middle_guideline_vertical"
-            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cronometer_laps"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="@dimen/margin_elements_large"
+            android:orientation="vertical"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/cronometer_main_buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cronometer_timer" />
 
-        <ImageView
-            android:id="@+id/cronometer_pause_button"
-            android:layout_width="@dimen/image_size_custom"
-            android:layout_height="@dimen/image_size_custom"
-            android:background="@drawable/ic_empty"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_pause"
-            android:visibility="gone"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cronometer_main_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cronometer_middle_guideline_vertical"
-            app:layout_constraintStart_toStartOf="@+id/cronometer_middle_guideline_vertical"
-            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline">
+
+            <ImageView
+                android:id="@+id/cronometer_play_button"
+                android:layout_width="@dimen/image_size_custom"
+                android:layout_height="@dimen/image_size_custom"
+                android:background="@drawable/ic_empty"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_play"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/cronometer_pause_button"
+                android:layout_width="@dimen/image_size_custom"
+                android:layout_height="@dimen/image_size_custom"
+                android:background="@drawable/ic_empty"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_pause"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/cronometer_stop_button"
             android:layout_width="@dimen/image_size_normal"
             android:layout_height="@dimen/image_size_normal"
+            android:layout_marginStart="@dimen/margin_elements_normal"
             android:background="@drawable/ic_empty"
             android:contentDescription="@null"
+            android:padding="@dimen/padding_elements_small"
             android:src="@drawable/ic_stop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/cronometer_middle_guideline_vertical"
-            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline" />
+            app:layout_constraintBottom_toBottomOf="@id/cronometer_main_buttons"
+            app:layout_constraintStart_toEndOf="@id/cronometer_main_buttons"
+            app:layout_constraintTop_toTopOf="@id/cronometer_main_buttons" />
 
         <ImageView
             android:id="@+id/cronometer_lap_button"
             android:layout_width="@dimen/image_size_normal"
             android:layout_height="@dimen/image_size_normal"
+            android:layout_marginEnd="@dimen/margin_elements_normal"
             android:background="@drawable/ic_empty"
             android:contentDescription="@null"
+            android:padding="@dimen/padding_elements_small"
             android:src="@drawable/ic_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cronometer_middle_guideline_vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/cronometer_middle_guideline" />
+            app:layout_constraintBottom_toBottomOf="@id/cronometer_main_buttons"
+            app:layout_constraintEnd_toStartOf="@id/cronometer_main_buttons"
+            app:layout_constraintTop_toTopOf="@id/cronometer_main_buttons" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/cronometer_middle_guideline"
