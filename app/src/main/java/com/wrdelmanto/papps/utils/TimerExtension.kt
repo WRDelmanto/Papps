@@ -2,22 +2,22 @@ package com.wrdelmanto.papps.utils
 
 import android.os.CountDownTimer
 
-private var isTimerRunning = false
+private var isTimeRunning = false
 
 /**
- * Check if a timer is running.
+ * Check if a time is running.
  *
- * @return isTimerStillRunning
+ * @return isTime1StillRunning
  */
-fun isTimerRunning(): Boolean = isTimerRunning
+fun isTimeRunning(): Boolean = isTimeRunning
 
 /**
- * Setup timer.
+ * Setup time.
  *
  * @param milliseconds
  */
-fun startTimer(milliseconds: Long) {
-    isTimerRunning = true
+fun startTime(milliseconds: Long) {
+    isTimeRunning = true
     object : CountDownTimer(milliseconds, 10) {
         override fun onTick(millisUntilFinished: Long) {
             val percentage = ((milliseconds - millisUntilFinished) * 100 / milliseconds).toString()
@@ -25,7 +25,7 @@ fun startTimer(milliseconds: Long) {
             logD { "$percentage % - $millis/$milliseconds" }
         }
         override fun onFinish() {
-            isTimerRunning = false
+            isTimeRunning = false
             logD { "100 % - $milliseconds/$milliseconds" }
         }
     }.start()
