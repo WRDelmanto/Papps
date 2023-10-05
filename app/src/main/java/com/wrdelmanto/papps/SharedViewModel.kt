@@ -40,6 +40,7 @@ class SharedViewModel : ViewModel() {
             SPEED_TEST -> context.resources.getString(R.string.app_name_speed_test)
             RANDOM_QUOTE -> context.resources.getString(R.string.app_name_random_quote)
             CRONOMETER -> context.resources.getString(R.string.app_name_cronometer)
+            TIMER -> context.resources.getString(R.string.app_name_timer)
             else -> EMPTY_STRING
         }
     }
@@ -56,6 +57,7 @@ class SharedViewModel : ViewModel() {
         const val RANDOM_QUOTE = "RANDOM_QUOTE"
         const val TIP = "TIP"
         const val CRONOMETER = "CRONOMETER"
+        const val TIMER = "TIMER"
         const val COIN_FLIPPER = "COIN_FLIPPER"
         const val TIC_TAC_TOE = "TIC_TAC_TOE"
         const val ROCK_PAPER_SCISSORS = "ROCK_PAPER_SCISSORS"

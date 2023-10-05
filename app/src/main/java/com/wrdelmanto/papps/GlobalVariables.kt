@@ -1,5 +1,7 @@
 package com.wrdelmanto.papps
 
+const val ONE_HOUR_IN_MILLIS = 3600000L
+const val ONE_MINUTE_IN_MILLIS = 60000L
 const val ONE_SECOND_IN_MILLIS = 1000L
 const val THREE_QUARTERS_SECOND_IN_MILLIS = 750L
 const val HALF_SECOND_IN_MILLIS = 500L

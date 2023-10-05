@@ -32,6 +32,7 @@ import com.wrdelmanto.papps.SharedViewModel.Companion.RANDOM_QUOTE
 import com.wrdelmanto.papps.SharedViewModel.Companion.ROCK_PAPER_SCISSORS
 import com.wrdelmanto.papps.SharedViewModel.Companion.SPEED_TEST
 import com.wrdelmanto.papps.SharedViewModel.Companion.TIC_TAC_TOE
+import com.wrdelmanto.papps.SharedViewModel.Companion.TIMER
 import com.wrdelmanto.papps.SharedViewModel.Companion.TIP
 import com.wrdelmanto.papps.SharedViewModel.Companion.UNSCRAMBLE
 import com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexFragment
@@ -44,6 +45,7 @@ import com.wrdelmanto.papps.apps.random.randomLetter.RandomLetterFragment
 import com.wrdelmanto.papps.apps.random.randomNumber.RandomNumberFragment
 import com.wrdelmanto.papps.apps.random.randomQuote.RandomQuoteFragment
 import com.wrdelmanto.papps.apps.speedTest.SpeedTestFragment
+import com.wrdelmanto.papps.apps.timer.TimerFragment
 import com.wrdelmanto.papps.apps.tip.TipFragment
 import com.wrdelmanto.papps.databinding.MainActivityBinding
 import com.wrdelmanto.papps.games.coinFlipper.CoinFlipperFragment
@@ -272,6 +274,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             R.id.drawer_cronometer -> switchFragment(
                 homeFragmentContainer.id, CronometerFragment(applicationContext), CRONOMETER
+            )
+
+            R.id.drawer_timer -> switchFragment(
+                homeFragmentContainer.id, TimerFragment(applicationContext), TIMER
             )
 
             // Games

@@ -1,0 +1,231 @@
+package com.wrdelmanto.papps.apps.timer
+
+import android.os.Build
+import android.os.CountDownTimer
+import androidx.annotation.RequiresApi
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.wrdelmanto.papps.ONE_HOUR_IN_MILLIS
+import com.wrdelmanto.papps.ONE_MINUTE_IN_MILLIS
+import com.wrdelmanto.papps.ONE_SECOND_IN_MILLIS
+import com.wrdelmanto.papps.utils.logD
+import java.time.Duration
+
+@RequiresApi(Build.VERSION_CODES.S)
+class TimerViewModel : ViewModel() {
+    private val _timer = MutableLiveData<String>()
+    val timer: LiveData<String> = _timer
+
+    private val _hours = MutableLiveData("00")
+    val hours: LiveData<String> = _hours
+
+    private val _minutes = MutableLiveData("30")
+    val minutes: LiveData<String> = _minutes
+
+    private val _seconds = MutableLiveData("00")
+    val seconds: LiveData<String> = _seconds
+
+    private val _hasStarted = MutableLiveData(false)
+    val hasStarted: LiveData<Boolean> = _hasStarted
+
+    private val _isRunning = MutableLiveData(false)
+    val isRunning: LiveData<Boolean> = _isRunning
+
+    private val _hasFinished = MutableLiveData(false)
+    val hasFinished: LiveData<Boolean> = _hasFinished
+
+    private var countDownTimer: Long = 0
+    private var initialTimer: Long = 1800000
+
+    private lateinit var countDownTimerObject: CountDownTimer
+
+    private fun countDownTimer(cdTimer: Long, isStarting: Boolean = false) {
+        if (isStarting) {
+            countDownTimerObject = object : CountDownTimer(
+                cdTimer + ONE_SECOND_IN_MILLIS, ONE_SECOND_IN_MILLIS
+            ) {
+                override fun onTick(millisUntilFinished: Long) {
+                    countDownTimer = millisUntilFinished
+                    updateTimerTime()
+                }
+
+                override fun onFinish() {
+                    _isRunning.value = false
+                    _hasFinished.value = true
+
+                    logD { "onFinish - countDownTimer=${_timer.value}" }
+                    resetUi()
+                }
+            }.start()
+        } else try {
+            countDownTimerObject.cancel()
+            updateTimerTime()
+        } catch (exception: Exception) {
+            logD { exception.toString() }
+        }
+    }
+
+    init {
+        resetUi()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun resetUi() {
+        _isRunning.value = false
+        _hasStarted.value = false
+        _hasFinished.value = false
+
+        logD { "resetUi" }
+
+        countDownTimer = initialTimer
+        countDownTimer(countDownTimer, isStarting = false)
+    }
+
+    fun startTimer() {
+        if (countDownTimer == 0L) return
+
+        _isRunning.value = true
+
+        updateCountDownTimer()
+
+        countDownTimer(countDownTimer, isStarting = true)
+
+        if (_hasStarted.value == true) logD { "startTimer" }
+        else {
+            _hasStarted.value = true
+            initialTimer = countDownTimer
+
+            logD { "resumeTimer" }
+        }
+    }
+
+    fun pauseTimer() {
+        _isRunning.value = false
+        countDownTimer(countDownTimer, isStarting = false)
+
+        logD { "pauseTimer" }
+    }
+
+    fun stopTimer() {
+        logD { "stopTimer" }
+
+        resetUi()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.S)
+    private fun updateTimerTime() {
+        val duration = Duration.ofMillis(countDownTimer)
+
+        val tempHours = duration.toHoursPart()
+        val tempMinutes = duration.toMinutesPart()
+        val tempSeconds = duration.toSecondsPart()
+
+        _hours.value = tempHours.toString()
+        _minutes.value = tempMinutes.toString()
+        _seconds.value = tempSeconds.toString()
+
+        _timer.value =
+            String.format(HOURS_MINUTES_SECONDS_FORMAT, tempHours, tempMinutes, tempSeconds)
+        updateCountDownTimer()
+
+        logD {
+            "timer=${
+                String.format(
+                    HOURS_MINUTES_SECONDS_FORMAT, tempHours, tempMinutes, tempSeconds
+                )
+            }"
+        }
+    }
+
+    fun updateHoursInput(newHoursInput: String) {
+        _hours.value = newHoursInput
+
+        updateCountDownTimer()
+        updateTimerTime()
+    }
+
+    fun updateMinutesInput(newMinutesInput: String) {
+        _minutes.value = newMinutesInput
+
+        updateCountDownTimer()
+        updateTimerTime()
+    }
+
+    fun updateSecondsInput(newSecondsInput: String) {
+        _seconds.value = newSecondsInput
+
+        updateCountDownTimer()
+        updateTimerTime()
+    }
+
+    fun addFiveMinutes() {
+        if (_minutes.value?.toInt()!! >= FIFTY_FIVE_MINUTES) {
+            _minutes.value = (_minutes.value!!.toInt().minus(FIFTY_FIVE_MINUTES)).toString()
+
+            if (_hours.value?.toInt()!! == TWENTY_THREE_HOURS) _hours.value =
+                (hours.value!!.toInt().minus(TWENTY_THREE_HOURS)).toString()
+            else _hours.value = (hours.value!!.toInt().plus(ONE_HOUR)).toString()
+        } else _minutes.value = (_minutes.value?.toInt()?.plus(FIVE_MINUTES)).toString()
+
+        updateCountDownTimer()
+        updateTimerTime()
+    }
+
+    fun minusFiveMinutes() {
+        if (_minutes.value?.toInt()!! < FIVE_MINUTES) {
+            _minutes.value = (_minutes.value!!.toInt().plus(FIFTY_FIVE_MINUTES)).toString()
+
+            if (_hours.value?.toInt()!! < ONE_HOUR) _hours.value =
+                (hours.value!!.toInt().plus(TWENTY_THREE_HOURS)).toString()
+            else _hours.value = (hours.value!!.toInt().minus(ONE_HOUR)).toString()
+        } else _minutes.value = (_minutes.value?.toInt()?.minus(FIVE_MINUTES)).toString()
+
+        updateCountDownTimer()
+        updateTimerTime()
+    }
+
+    fun addTenMinutes() {
+        if (_minutes.value?.toInt()!! >= FIFTY_MINUTES) {
+            _minutes.value = (_minutes.value!!.toInt().minus(FIFTY_MINUTES)).toString()
+
+            if (_hours.value?.toInt()!! == TWENTY_THREE_HOURS) _hours.value =
+                (hours.value!!.toInt().minus(TWENTY_THREE_HOURS)).toString()
+            else _hours.value = (hours.value!!.toInt().plus(ONE_HOUR)).toString()
+        } else _minutes.value = (_minutes.value?.toInt()?.plus(TEN_MINUTES)).toString()
+
+        updateCountDownTimer()
+        updateTimerTime()
+    }
+
+    fun minusTenMinutes() {
+        if (_minutes.value?.toInt()!! < TEN_MINUTES) {
+            _minutes.value = (_minutes.value!!.toInt().plus(FIFTY_MINUTES)).toString()
+
+            if (_hours.value?.toInt()!! < ONE_HOUR) _hours.value =
+                (hours.value!!.toInt().plus(TWENTY_THREE_HOURS)).toString()
+            else _hours.value = (hours.value!!.toInt().minus(ONE_HOUR)).toString()
+        } else _minutes.value = (_minutes.value?.toInt()?.minus(TEN_MINUTES)).toString()
+
+        updateCountDownTimer()
+        updateTimerTime()
+    }
+
+    private fun updateCountDownTimer() {
+        countDownTimer = (_hours.value?.toLong()?.times(ONE_HOUR_IN_MILLIS))?.plus(
+            _minutes.value?.toLong()?.times(ONE_MINUTE_IN_MILLIS)!!
+        )?.plus(
+            _seconds.value?.toLong()?.times(ONE_SECOND_IN_MILLIS)!!
+        )!!
+    }
+
+    private companion object {
+        const val HOURS_MINUTES_SECONDS_FORMAT = "%02d:%02d:%02d"
+        const val TWENTY_THREE_HOURS = 23
+        const val ONE_HOUR = 1
+        const val FIFTY_FIVE_MINUTES = 55
+        const val FIFTY_MINUTES = 50
+        const val TEN_MINUTES = 10
+        const val FIVE_MINUTES = 5
+    }
+}

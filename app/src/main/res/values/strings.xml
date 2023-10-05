@@ -18,6 +18,7 @@
     <string name="app_name_nasa_picture_of_the_day">Nasa - Picture of the Day</string>
     <string name="app_name_tip">Tip</string>
     <string name="app_name_cronometer">Cronometer</string>
+    <string name="app_name_timer">Timer</string>
     <string name="app_name_click_counter">Click Counter</string>
     <string name="app_name_money_converter">Money Exchange</string>
     <string name="app_name_dices">Dice</string>
@@ -130,6 +131,12 @@
     <string name="tip_round_up_total_text">Round up Total</string>
     <string name="tip_value_hint"><font size="12">Type the bill value, ex: $ 37.50</font></string>
     <string name="tip_total">Total</string>
+
+    <!-- Timer -->
+    <string name="timer_plus_five">+5</string>
+    <string name="timer_minus_five">-5</string>
+    <string name="timer_plus_ten">+10</string>
+    <string name="timer_minus_ten">-10</string>
 
     <!-- All Games -->
     <!-- Coin Flipper -->

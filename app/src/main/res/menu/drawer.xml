@@ -57,6 +57,10 @@
                     android:id="@+id/drawer_cronometer"
                     android:icon="@drawable/cronometer_logo"
                     android:title="@string/app_name_cronometer" />
+                <item
+                    android:id="@+id/drawer_timer"
+                    android:icon="@drawable/timer_logo"
+                    android:title="@string/app_name_timer" />
             </menu>
         </item>
     </group>
