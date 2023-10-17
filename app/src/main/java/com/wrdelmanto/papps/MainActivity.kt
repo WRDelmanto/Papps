@@ -327,28 +327,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun switchFragment(fragmentId: Int, newFragment: Fragment, fragmentName: String) {
         try {
             val fragmentManager = supportFragmentManager.beginTransaction()
-
-            if (supportFragmentManager.findFragmentById(fragmentId) == null) {
-                fragmentManager.add(fragmentId, newFragment, fragmentName)
-                logD { "Fragment added: $fragmentName" }
-            } else if (supportFragmentManager.fragments[0].tag != fragmentName) {
-                fragmentManager.replace(fragmentId, newFragment, fragmentName)
-                logD { "Fragment replaced: $fragmentName" }
+            fragmentManager.run {
+                replace(fragmentId, newFragment, fragmentName)
+                commit()
             }
 
             appBarTitle.text = sharedViewModel.getCurrentTitle(applicationContext, fragmentName)
             randomBottomNavMenu.isVisible = sharedViewModel.shouldShowRandomBottomNavMenu()
 
-            fragmentManager.addToBackStack(null)
-            fragmentManager.commit()
+            logD { "New fragment: ${appBarTitle.text}" }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
     private fun goHomeFragment() {
-        switchFragment(homeFragmentContainer.id, HomeFragment(), HOME)
         activityMain.closeDrawer(START)
+        switchFragment(homeFragmentContainer.id, HomeFragment(), HOME)
     }
 
     private fun shouldActivateEasterEgg(isEasterEggActivated: Boolean) {
