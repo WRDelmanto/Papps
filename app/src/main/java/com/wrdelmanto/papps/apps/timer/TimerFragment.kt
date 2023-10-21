@@ -16,13 +16,14 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.wrdelmanto.papps.ONE_SECOND_IN_MILLIS
 import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentTimerBinding
+import com.wrdelmanto.papps.utils.logD
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 class TimerFragment(
     private val context: Context
@@ -45,6 +46,7 @@ class TimerFragment(
     private lateinit var stopButton: ImageView
 
     private lateinit var timertime: TextView
+    private lateinit var timerTimeCircularProgressIndicator: CircularProgressIndicator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -75,6 +77,7 @@ class TimerFragment(
         stopButton = binding.timerStopButton
 
         timertime = binding.timerTime
+        timerTimeCircularProgressIndicator = binding.timerTimeCircularProgressIndicator
 
         setupNumberPickers()
 
@@ -119,6 +122,7 @@ class TimerFragment(
                 minuteNumberPicker.visibility = GONE
                 secondNumberPicker.visibility = GONE
                 timertime.visibility = VISIBLE
+                timerTimeCircularProgressIndicator.visibility = VISIBLE
                 plusFive.visibility = GONE
                 minusFive.visibility = GONE
                 plusTen.visibility = GONE
@@ -129,6 +133,7 @@ class TimerFragment(
                 minuteNumberPicker.visibility = VISIBLE
                 secondNumberPicker.visibility = VISIBLE
                 timertime.visibility = GONE
+                timerTimeCircularProgressIndicator.visibility = GONE
                 plusFive.visibility = VISIBLE
                 minusFive.visibility = VISIBLE
                 plusTen.visibility = VISIBLE
@@ -150,11 +155,13 @@ class TimerFragment(
                     val beep = RingtoneManager.getRingtone(
                         context, RingtoneManager.getDefaultUri(TYPE_ALARM)
                     )
+                    logD { "Starting beep" }
                     beep.play()
 
                     delay(ONE_SECOND_IN_MILLIS)
 
                     beep.stop()
+                    logD { "Ending beep" }
                 }
             }
         }
@@ -194,35 +201,28 @@ class TimerFragment(
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun setupNumberPickers() {
-        hourNumberPicker.apply {
-            setFormatter {
-                String.format("%02d", it)
+        listOf(hourNumberPicker, minuteNumberPicker, secondNumberPicker).forEach { numberPicker ->
+            numberPicker.apply {
+                setFormatter {
+                    String.format("%02d", it)
+                }
+                textSize = context.resources.getDimension(R.dimen.font_size_large)
+                minValue = 0
+                wrapSelectorWheel = true
             }
-            textSize = context.resources.getDimension(R.dimen.font_size_large)
-            minValue = 0
+        }
+
+        hourNumberPicker.apply {
             maxValue = 23
             value = 0
-            wrapSelectorWheel = true
         }
         minuteNumberPicker.apply {
-            setFormatter {
-                String.format("%02d", it)
-            }
-            textSize = context.resources.getDimension(R.dimen.font_size_large)
-            minValue = 0
             maxValue = 59
             value = 30
-            wrapSelectorWheel = true
         }
         secondNumberPicker.apply {
-            setFormatter {
-                String.format("%02d", it)
-            }
-            textSize = context.resources.getDimension(R.dimen.font_size_large)
-            minValue = 0
             maxValue = 59
             value = 0
-            wrapSelectorWheel = true
         }
     }
 }

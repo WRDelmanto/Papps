@@ -44,17 +44,6 @@
             app:layout_constraintStart_toEndOf="@id/timer_number_picker_minutes"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:progress="25"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/timer_middle_guideline"
-            app:layout_constraintEnd_toEndOf="@id/timer_middle_guideline_vertical"
-            app:layout_constraintStart_toStartOf="@id/timer_middle_guideline_vertical"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/timer_time"
             android:layout_width="wrap_content"
@@ -68,6 +57,21 @@
             app:layout_constraintStart_toStartOf="@id/timer_middle_guideline_vertical"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="00:00.00" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/timer_time_circular_progress_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:progress="@{timerViewModel.timerProgress}"
+            android:visibility="visible"
+            app:indicatorColor="@color/color_secondary"
+            app:layout_constraintBottom_toBottomOf="@id/timer_middle_guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:trackColor="@color/light_gray"
+            app:trackThickness="1dp"
+            tools:progress="75" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/timer_fast_container"
