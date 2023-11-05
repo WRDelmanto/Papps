@@ -1,8 +1,10 @@
 package com.wrdelmanto.papps.apps.nasaPictureOfTheDay
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +12,11 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageView
-import android.widget.MediaController
 import android.widget.ProgressBar
-import android.widget.VideoView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SwitchCompat
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -33,6 +36,7 @@ import com.wrdelmanto.papps.utils.putSharedPreferences
 import com.wrdelmanto.papps.utils.showNormalToast
 import com.wrdelmanto.papps.utils.startRotatingAnimation
 
+@SuppressLint("SetJavaScriptEnabled")
 class NasaPictureOfTheDayFragment(
     private val context: Context
 ) : Fragment() {
@@ -43,9 +47,8 @@ class NasaPictureOfTheDayFragment(
     private val androidDownloader = AndroidDownloader(context)
 
     private lateinit var picture: ImageView
-    private lateinit var video: VideoView
-    private lateinit var videoControllers: MediaController
-    private lateinit var pictureLoading: ProgressBar
+    private lateinit var video: WebView
+    private lateinit var contentLoading: ProgressBar
     private lateinit var downloadButton: ConstraintLayout
     private lateinit var downloadIcon: ImageView
     private lateinit var downloadIconDone: ImageView
@@ -55,7 +58,7 @@ class NasaPictureOfTheDayFragment(
     private lateinit var loadedGroup: Group
 
     private lateinit var internetError: ImageView
-    private lateinit var pictureInternetError: ImageView
+    private lateinit var contentInternetError: ImageView
 
     var contentLoaded = false
 
@@ -76,7 +79,7 @@ class NasaPictureOfTheDayFragment(
 
         picture = binding.nasaPictureOfTheDayPicture
         video = binding.nasaPictureOfTheDayVideo
-        pictureLoading = binding.nasaPictureOfTheDayPictureLoading
+        contentLoading = binding.nasaPictureOfTheDayContentLoading
         downloadButton = binding.nasaPictureOfTheDayPictureDownloadContainer
         downloadIcon = binding.nasaPictureOfTheDayPictureDownload
         downloadIconDone = binding.nasaPictureOfTheDayPictureDownloadDone
@@ -86,7 +89,7 @@ class NasaPictureOfTheDayFragment(
         loadedGroup = binding.nasaPictureOfTheDayGroupLoaded
 
         internetError = binding.nasaPictureOfTheDayInternetError
-        pictureInternetError = binding.nasaPictureOfTheDayPictureInternetError
+        contentInternetError = binding.nasaPictureOfTheDayContentInternetError
 
         initiateListeners()
         initiateDownloadObservers()
@@ -164,7 +167,6 @@ class NasaPictureOfTheDayFragment(
     @RequiresApi(Build.VERSION_CODES.M)
     private fun initiateListeners() {
         picture.setOnClickListener { openFullScreen() }
-        // TODO: video.setOnClickListener { openYoutube() }
         downloadButton.setOnClickListener { downloadPicture() }
         automaticDownloadSwitch.setOnCheckedChangeListener { _, isChecked ->
             nasaPictureOfTheDayViewModel.updateAutomaticDownload(isChecked)
@@ -173,7 +175,7 @@ class NasaPictureOfTheDayFragment(
             )
         }
         internetError.setOnClickListener { nasaPictureOfTheDayViewModel.getNasaData() }
-        pictureInternetError.setOnClickListener {
+        contentInternetError.setOnClickListener {
             if (nasaPictureOfTheDayViewModel.mediaType.value == "image") displayPicture()
             else displayVideo()
         }
@@ -230,11 +232,10 @@ class NasaPictureOfTheDayFragment(
 
     private fun disableListeners() {
         picture.setOnClickListener(null)
-        // TODO: video.setOnClickListener(null)
         downloadButton.setOnClickListener(null)
         automaticDownloadSwitch.addTextChangedListener(null)
         internetError.setOnClickListener(null)
-        pictureInternetError.setOnClickListener(null)
+        contentInternetError.setOnClickListener(null)
     }
 
     private fun displayPicture() {
@@ -244,51 +245,21 @@ class NasaPictureOfTheDayFragment(
                 @RequiresApi(Build.VERSION_CODES.M)
                 override fun onSuccess() {
                     contentLoaded = true
-                    pictureLoading.visibility = GONE
-                    pictureInternetError.visibility = GONE
+                    contentLoading.visibility = GONE
+                    contentInternetError.visibility = GONE
                     downloadButton.visibility = VISIBLE
                     if (nasaPictureOfTheDayViewModel.automaticDownload.value == true) downloadPicture()
                 }
 
                 override fun onError(e: java.lang.Exception?) {
-                    pictureLoading.visibility = GONE
+                    contentLoading.visibility = GONE
                     downloadButton.visibility = GONE
-                    pictureInternetError.visibility = VISIBLE
+                    contentInternetError.visibility = VISIBLE
                     if (checkInternetConnection(context)) showNormalToast(
                         context, context.resources.getString(R.string.unexpected_error)
                     )
                 }
             })
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun displayVideo() {
-        videoControllers.apply {
-            MediaController(context)
-            setAnchorView(this@NasaPictureOfTheDayFragment.video)
-        }
-        video.apply {
-            setMediaController(videoControllers)
-            setVideoURI(Uri.parse(nasaPictureOfTheDayViewModel.url.value))
-            requestFocus()
-            start()
-            setOnCompletionListener {
-                contentLoaded = true
-                pictureLoading.visibility = GONE
-                pictureInternetError.visibility = GONE
-                downloadButton.visibility = GONE
-            }
-            setOnErrorListener { _, _, _ ->
-                pictureLoading.visibility = GONE
-                downloadButton.visibility = GONE
-                pictureInternetError.visibility = VISIBLE
-                if (checkInternetConnection(context)) showNormalToast(
-                    context, context.resources.getString(R.string.unexpected_error)
-                )
-
-                false
-            }
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -313,5 +284,56 @@ class NasaPictureOfTheDayFragment(
         )
     }
 
-    // TODO: Display video
+    private fun openYoutube() {
+        // TODO: ?
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun displayVideo() {
+        // TODO: ?
+        video.apply {
+            webViewClient = WebViewClient()
+            webChromeClient = CustomChromeClient()
+            settings.javaScriptEnabled = true
+            settings.allowFileAccess = true
+            loadUrl("https://www.youtube.com/embed/YE7VzlLtp-4")
+        }
+    }
+
+    private inner class CustomChromeClient : WebChromeClient() {
+        private var mCustomView: View? = null
+        private var mCustomViewCallback: CustomViewCallback? = null
+        private var mOriginalOrientation = 0
+        private var mOriginalSystemUiVisibility = 0
+
+        override fun getDefaultVideoPoster(): Bitmap? {
+            return if (mCustomView == null) {
+                null
+            } else BitmapFactory.decodeResource(context.resources, 2130837573)
+        }
+
+        override fun onHideCustomView() {
+//            (window.decorView as FrameLayout).removeView(mCustomView)
+//            mCustomView = null
+//            window.decorView.systemUiVisibility = mOriginalSystemUiVisibility
+//            requestedOrientation = mOriginalOrientation
+//            mCustomViewCallback!!.onCustomViewHidden()
+//            mCustomViewCallback = null
+        }
+
+        override fun onShowCustomView(
+            paramView: View?, paramCustomViewCallback: CustomViewCallback?
+        ) {
+            if (mCustomView != null) {
+                onHideCustomView()
+                return
+            }
+//            mCustomView = paramView
+//            mOriginalSystemUiVisibility = window.decorView.systemUiVisibility
+//            mOriginalOrientation = requestedOrientation
+//            mCustomViewCallback = paramCustomViewCallback
+//            (window.decorView as FrameLayout).addView(mCustomView, FrameLayout.LayoutParams(-1, -1))
+//            window.decorView.systemUiVisibility = 3846 or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        }
+    }
 }

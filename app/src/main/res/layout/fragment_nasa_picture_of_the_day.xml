@@ -15,6 +15,107 @@
         android:layout_height="match_parent"
         android:padding="@dimen/padding_edges">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/nasa_picture_of_the_day_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/nasa_picture_of_the_day_picture_automatic_download_container"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/nasa_picture_of_the_day_picture"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@color/light_gray" />
+
+            <WebView
+                android:id="@+id/nasa_picture_of_the_day_video"
+                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragmentX"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/nasa_picture_of_the_day_content_loading"
+                android:layout_width="@dimen/image_size_large"
+                android:layout_height="@dimen/image_size_large"
+                android:layout_centerHorizontal="true"
+                app:layout_constraintBottom_toBottomOf="@+id/nasa_picture_of_the_day_picture"
+                app:layout_constraintEnd_toEndOf="@+id/nasa_picture_of_the_day_picture"
+                app:layout_constraintStart_toStartOf="@+id/nasa_picture_of_the_day_picture"
+                app:layout_constraintTop_toTopOf="@+id/nasa_picture_of_the_day_picture"
+                tools:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/nasa_picture_of_the_day_content_internet_error"
+                android:layout_width="@dimen/image_size_large"
+                android:layout_height="@dimen/image_size_large"
+                android:background="@drawable/ic_connection_error"
+                android:contentDescription="@null"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/nasa_picture_of_the_day_picture"
+                app:layout_constraintEnd_toEndOf="@+id/nasa_picture_of_the_day_picture"
+                app:layout_constraintStart_toStartOf="@+id/nasa_picture_of_the_day_picture"
+                app:layout_constraintTop_toTopOf="@+id/nasa_picture_of_the_day_picture" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/nasa_picture_of_the_day_picture_download_container"
+                android:layout_width="@dimen/image_size_small"
+                android:layout_height="@dimen/image_size_small"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/nasa_picture_of_the_day_picture"
+                app:layout_constraintEnd_toEndOf="@+id/nasa_picture_of_the_day_picture"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/nasa_picture_of_the_day_picture_download_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/general_background"
+                    android:contentDescription="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/nasa_picture_of_the_day_picture_download"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_download"
+                    android:contentDescription="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/nasa_picture_of_the_day_picture_download_done"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_download_done"
+                    android:contentDescription="@null"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageView
             android:id="@+id/nasa_picture_of_the_day_internet_error"
             android:layout_width="@dimen/image_size_large"
@@ -37,103 +138,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/nasa_picture_of_the_day_picture"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@null"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/nasa_picture_of_the_day_picture_automatic_download_container"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/light_gray" />
-
-        <VideoView
-            android:id="@+id/nasa_picture_of_the_day_video"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/nasa_picture_of_the_day_picture_automatic_download_container"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ProgressBar
-            android:id="@+id/nasa_picture_of_the_day_picture_loading"
-            android:layout_width="@dimen/image_size_large"
-            android:layout_height="@dimen/image_size_large"
-            android:layout_centerHorizontal="true"
-            app:layout_constraintBottom_toBottomOf="@+id/nasa_picture_of_the_day_picture"
-            app:layout_constraintEnd_toEndOf="@+id/nasa_picture_of_the_day_picture"
-            app:layout_constraintStart_toStartOf="@+id/nasa_picture_of_the_day_picture"
-            app:layout_constraintTop_toTopOf="@+id/nasa_picture_of_the_day_picture"
-            tools:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/nasa_picture_of_the_day_picture_internet_error"
-            android:layout_width="@dimen/image_size_large"
-            android:layout_height="@dimen/image_size_large"
-            android:background="@drawable/ic_connection_error"
-            android:contentDescription="@null"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/nasa_picture_of_the_day_picture"
-            app:layout_constraintEnd_toEndOf="@+id/nasa_picture_of_the_day_picture"
-            app:layout_constraintStart_toStartOf="@+id/nasa_picture_of_the_day_picture"
-            app:layout_constraintTop_toTopOf="@+id/nasa_picture_of_the_day_picture" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/nasa_picture_of_the_day_picture_download_container"
-            android:layout_width="@dimen/image_size_small"
-            android:layout_height="@dimen/image_size_small"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/nasa_picture_of_the_day_picture"
-            app:layout_constraintEnd_toEndOf="@+id/nasa_picture_of_the_day_picture"
-            tools:visibility="visible">
-
-            <ImageView
-                android:id="@+id/nasa_picture_of_the_day_picture_download_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/general_background"
-                android:contentDescription="@null"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/nasa_picture_of_the_day_picture_download"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_download"
-                android:contentDescription="@null"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/nasa_picture_of_the_day_picture_download_done"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_download_done"
-                android:contentDescription="@null"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <LinearLayout
             android:id="@+id/nasa_picture_of_the_day_picture_automatic_download_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/margin_elements_small"
             app:layout_constraintBottom_toBottomOf="@id/nasa_picture_of_the_day_middle_guide_line"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nasa_picture_of_the_day_picture">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <TextView
                 android:id="@+id/nasa_picture_of_the_day_picture_automatic_download_message"
@@ -249,7 +260,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="nasa_picture_of_the_day_picture, nasa_picture_of_the_day_picture_loading, nasa_picture_of_the_day_picture_automatic_download_container, nasa_picture_of_the_day_middle_line, nasa_picture_of_the_day_title, nasa_picture_of_the_day_body"
+            app:constraint_referenced_ids="nasa_picture_of_the_day_content_container, nasa_picture_of_the_day_picture_automatic_download_container, nasa_picture_of_the_day_middle_line, nasa_picture_of_the_day_title, nasa_picture_of_the_day_body"
             tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
