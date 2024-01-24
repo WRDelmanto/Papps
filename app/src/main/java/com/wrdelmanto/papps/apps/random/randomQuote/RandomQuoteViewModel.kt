@@ -54,15 +54,17 @@ class RandomQuoteViewModel : ViewModel() {
     }
 
     fun resetUi(context: Context) {
-        _currentQuote.value = SP_RQ_QUOTE.let {
-            val hs = getSharedPreferences(context, it, String)
-            hs ?: ""
-        }.toString()
+        _currentQuote.value =
+            SP_RQ_QUOTE.let {
+                val hs = getSharedPreferences(context, it, String)
+                hs ?: ""
+            }.toString()
 
-        _currentAuthor.value = SP_RQ_AUTHOR.let {
-            val hs = getSharedPreferences(context, it, String)
-            hs ?: ""
-        }.toString()
+        _currentAuthor.value =
+            SP_RQ_AUTHOR.let {
+                val hs = getSharedPreferences(context, it, String)
+                hs ?: ""
+            }.toString()
 
         generateNextQuote(context)
     }
@@ -70,39 +72,48 @@ class RandomQuoteViewModel : ViewModel() {
     private fun generateNextQuote(context: Context) {
         if (checkInternetConnection(context) && pensadorQuoteState == PensadorQuoteState.LOADED) {
             generateNextQuoteJob?.cancel()
-            generateNextQuoteJob = viewModelScope.launch {
-                setLoadingState()
+            generateNextQuoteJob =
+                viewModelScope.launch {
+                    setLoadingState()
 
-                val generateNextAuthor = launch {
-                    var tempAuthor: String
+                    val generateNextAuthor =
+                        launch {
+                            var tempAuthor: String
 
-                    do tempAuthor = allAuthorsList.random()
-                    while (tempAuthor == _currentAuthor.value)
+                            do tempAuthor = allAuthorsList.random()
+                            while (tempAuthor == _currentAuthor.value)
 
-                    _currentAuthor.value = tempAuthor
+                            _currentAuthor.value = tempAuthor
+                        }
+                    val generateNextQuote =
+                        launch {
+                            do {
+                                val numberOfRequestedQuotes = (1..99).random()
+
+                                pensadorData =
+                                    PensadorAPI.retrofitService.getPensadorData(
+                                        _currentAuthor.value.toString().replace(" ", "_")
+                                            .lowercase(Locale.ROOT),
+                                        numberOfRequestedQuotes,
+                                    )
+
+                                _currentQuote.value = pensadorData.frases[pensadorData.total - 1].texto
+                            } while (pensadorData.frases[numberOfRequestedQuotes - 1].texto.length >= MAX_CHARACTERS_ALLOWED)
+                        }
+                    joinAll(generateNextAuthor, generateNextQuote)
+
+                    putSharedPreferences(context, SP_RQ_QUOTE, _currentQuote.value.toString())
+                    putSharedPreferences(context, SP_RQ_AUTHOR, _currentAuthor.value.toString())
+
+                    logD {
+                        "Author=${_currentAuthor.value}, termoDePesquisa=${pensadorData.termoDePesquisa}, total=${pensadorData.total}, Quote=${_currentQuote.value}"
+                    }
+
+                    setLoadedState()
                 }
-                val generateNextQuote = launch {
-                    do {
-                        val numberOfRequestedQuotes = (1..20).random()
-
-                        pensadorData = PensadorAPI.retrofitService.getPensadorData(
-                            _currentAuthor.value.toString().replace(" ", "_")
-                                .lowercase(Locale.ROOT), numberOfRequestedQuotes
-                        )
-
-                        _currentQuote.value = pensadorData.frases[numberOfRequestedQuotes - 1].texto
-                    } while (pensadorData.frases[numberOfRequestedQuotes - 1].texto.length >= MAX_CHARACTERS_ALLOWED)
-                }
-                joinAll(generateNextAuthor, generateNextQuote)
-
-                putSharedPreferences(context, SP_RQ_QUOTE, _currentQuote.value.toString())
-                putSharedPreferences(context, SP_RQ_AUTHOR, _currentAuthor.value.toString())
-
-                logD { "Author=${_currentAuthor.value}, termoDePesquisa=${pensadorData.termoDePesquisa}, total=${pensadorData.total}, Quote=${_currentQuote.value}" }
-
-                setLoadedState()
-            }
-        } else setErrorState()
+        } else {
+            setErrorState()
+        }
     }
 
     private companion object {
