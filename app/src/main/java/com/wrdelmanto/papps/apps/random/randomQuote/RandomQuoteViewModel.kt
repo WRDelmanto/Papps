@@ -98,7 +98,7 @@ class RandomQuoteViewModel : ViewModel() {
                                     )
 
                                 _currentQuote.value = pensadorData.frases[pensadorData.total - 1].texto
-                            } while (pensadorData.frases[numberOfRequestedQuotes - 1].texto.length >= MAX_CHARACTERS_ALLOWED)
+                            } while (pensadorData.frases[pensadorData.total - 1].texto.length >= MAX_CHARACTERS_ALLOWED)
                         }
                     joinAll(generateNextAuthor, generateNextQuote)
 
