@@ -39,6 +39,9 @@
     <dimen name="font_size_large">36sp</dimen>
     <dimen name="font_size_xlarge">64sp</dimen>
 
+    <!-- Tip Percentage -->
+    <dimen name="tip_percentage_width">36dp</dimen>
+
     <!-- Tic Tac Toe -->
     <dimen name="tic_tac_toe_main_container_width">330dp</dimen>
     <dimen name="tic_tac_toe_main_container_height">330dp</dimen>

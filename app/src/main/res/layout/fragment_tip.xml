@@ -106,12 +106,12 @@
 
         <TextView
             android:id="@+id/tip_percentage"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/tip_percentage_width"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_elements_large"
             android:text="@{@string/multable_live_data_int_with_percentage(tipViewModel.tipPercentage)}"
             android:textSize="@dimen/font_size_normal"
-            app:layout_constraintEnd_toEndOf="@+id/tip_tip"
+            app:layout_constraintEnd_toStartOf="@+id/tip_percentage_seek_bar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tip_value_input"
             tools:text="@string/ten_percent" />
@@ -132,11 +132,12 @@
 
         <TextView
             android:id="@+id/tip_tip"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_elements_large"
             android:text="@string/app_name_tip"
             android:textSize="@dimen/font_size_normal"
+            app:layout_constraintEnd_toEndOf="@+id/tip_percentage"
             app:layout_constraintStart_toStartOf="@+id/tip_percentage"
             app:layout_constraintTop_toBottomOf="@+id/tip_percentage" />
 
