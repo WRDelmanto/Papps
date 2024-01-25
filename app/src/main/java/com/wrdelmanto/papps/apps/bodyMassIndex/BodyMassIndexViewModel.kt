@@ -23,15 +23,17 @@ class BodyMassIndexViewModel : ViewModel() {
     val bmi: LiveData<String> = _bmi
 
     fun resetUi(context: Context) {
-        _height.value = SP_BMI_HEIGHT.let {
-            val hs = getSharedPreferences(context, it, String)
-            hs ?: "1.75"
-        }.toString()
+        _height.value =
+            SP_BMI_HEIGHT.let {
+                val hs = getSharedPreferences(context, it, String)
+                hs ?: "1.75"
+            }.toString()
 
-        _weight.value = SP_BMI_WEIGHT.let {
-            val hs = getSharedPreferences(context, it, String)
-            hs ?: "75"
-        }.toString()
+        _weight.value =
+            SP_BMI_WEIGHT.let {
+                val hs = getSharedPreferences(context, it, String)
+                hs ?: "75"
+            }.toString()
 
         calculateBMI(context)
     }
@@ -48,13 +50,14 @@ class BodyMassIndexViewModel : ViewModel() {
         if (!isNumeric(_height.value.toString()) || !isNumeric(_weight.value.toString())) return
 
         putSharedPreferences(context, SP_BMI_HEIGHT, _height.value!!)
-        putSharedPreferences(context, SP_BMI_WEIGHT, _height.value!!)
+        putSharedPreferences(context, SP_BMI_WEIGHT, _weight.value!!)
 
-        _bmi.value = roundTo2Decimals(
-            _weight.value?.toDouble()!!.div(
-                _height.value!!.toDouble().times(_height.value!!.toDouble())
+        _bmi.value =
+            roundTo2Decimals(
+                _weight.value?.toDouble()!!.div(
+                    _height.value!!.toDouble().times(_height.value!!.toDouble()),
+                ),
             )
-        )
 
         logD { "Height=${_height.value}, Weight=${_weight.value}, BMI=${_bmi.value}" }
     }
