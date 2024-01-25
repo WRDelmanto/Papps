@@ -131,14 +131,13 @@
             tools:text="24.49"
             tools:textColor="@color/green" />
 
-        <ImageView
+        <com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexResultLineIndicator
             android:id="@+id/body_mass_index_result_line_indicator"
             android:layout_width="0dp"
             android:layout_height="@dimen/line_height"
             android:adjustViewBounds="true"
             android:contentDescription="@null"
             android:scaleType="center"
-            android:src="@drawable/body_mass_index_result_line_indicator"
             app:layout_constraintBottom_toTopOf="@+id/body_mass_index_description_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
