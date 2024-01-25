@@ -47,17 +47,21 @@ class BodyMassIndexViewModel : ViewModel() {
     }
 
     fun calculateBMI(context: Context) {
-        if (!isNumeric(_height.value.toString()) || !isNumeric(_weight.value.toString())) return
+        if (!isNumeric(_height.value.toString()) || !isNumeric(_weight.value.toString())) {
+            _bmi.value = "?"
 
-        putSharedPreferences(context, SP_BMI_HEIGHT, _height.value!!)
-        putSharedPreferences(context, SP_BMI_WEIGHT, _weight.value!!)
+            return
+        } else {
+            putSharedPreferences(context, SP_BMI_HEIGHT, _height.value!!)
+            putSharedPreferences(context, SP_BMI_WEIGHT, _weight.value!!)
 
-        _bmi.value =
-            roundTo2Decimals(
-                _weight.value?.toDouble()!!.div(
-                    _height.value!!.toDouble().times(_height.value!!.toDouble()),
-                ),
-            )
+            _bmi.value =
+                roundTo2Decimals(
+                    _weight.value?.toDouble()!!.div(
+                        _height.value!!.toDouble().times(_height.value!!.toDouble()),
+                    ),
+                )
+        }
 
         logD { "Height=${_height.value}, Weight=${_weight.value}, BMI=${_bmi.value}" }
     }

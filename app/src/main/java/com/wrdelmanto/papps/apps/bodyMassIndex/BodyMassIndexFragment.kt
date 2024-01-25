@@ -17,7 +17,7 @@ import com.wrdelmanto.papps.R
 import com.wrdelmanto.papps.databinding.FragmentBodyMassIndexBinding
 
 class BodyMassIndexFragment(
-    private val context: Context
+    private val context: Context,
 ) : Fragment() {
     private lateinit var binding: FragmentBodyMassIndexBinding
 
@@ -29,7 +29,9 @@ class BodyMassIndexFragment(
     private lateinit var bmiOutput: TextView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentBodyMassIndexBinding.inflate(layoutInflater)
 
@@ -37,7 +39,10 @@ class BodyMassIndexFragment(
     }
 
     @RequiresApi(M)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.bodyMassIndexViewModel = bodyMassIndexViewModel
@@ -65,64 +70,98 @@ class BodyMassIndexFragment(
     }
 
     private fun initiateListeners() {
-        heightInput.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                bodyMassIndexViewModel.updateHeight(s.toString())
-                bodyMassIndexViewModel.calculateBMI(context)
-            }
+        heightInput.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {
+                    bodyMassIndexViewModel.updateHeight(s.toString())
+                    bodyMassIndexViewModel.calculateBMI(context)
+                }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // Do nothing
-            }
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                    // Do nothing
+                }
 
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // Do nothing
-            }
-        })
+                override fun onTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    // Do nothing
+                }
+            },
+        )
 
-        weightInput.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                bodyMassIndexViewModel.updateWeight(s.toString())
-                bodyMassIndexViewModel.calculateBMI(context)
-            }
+        weightInput.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {
+                    bodyMassIndexViewModel.updateWeight(s.toString())
+                    bodyMassIndexViewModel.calculateBMI(context)
+                }
 
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                // Do nothing
-            }
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+                    // Do nothing
+                }
 
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // Do nothing
-            }
-        })
+                override fun onTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    before: Int,
+                    count: Int,
+                ) {
+                    // Do nothing
+                }
+            },
+        )
     }
 
     @RequiresApi(M)
     private fun initiateObservers() {
         bodyMassIndexViewModel.bmi.observe(viewLifecycleOwner) {
             when {
-                it.toDouble() < 18.50 -> bmiOutput.setTextColor(
-                    resources.getColor(
-                        R.color.light_blue, null
-                    )
-                )
+                it == "?" -> bmiOutput.setTextColor(resources.getColor(R.color.black, null))
 
-                it.toDouble() in 18.50..24.90 -> bmiOutput.setTextColor(
-                    resources.getColor(
-                        R.color.green, null
+                it.toDouble() < 18.50 ->
+                    bmiOutput.setTextColor(
+                        resources.getColor(
+                            R.color.light_blue,
+                            null,
+                        ),
                     )
-                )
 
-                it.toDouble() in 24.90..30.00 -> bmiOutput.setTextColor(
-                    resources.getColor(
-                        R.color.orange, null
+                it.toDouble() in 18.50..24.90 ->
+                    bmiOutput.setTextColor(
+                        resources.getColor(
+                            R.color.green,
+                            null,
+                        ),
                     )
-                )
 
-                it.toDouble() > 30.00 -> bmiOutput.setTextColor(
-                    resources.getColor(
-                        R.color.red, null
+                it.toDouble() in 24.90..30.00 ->
+                    bmiOutput.setTextColor(
+                        resources.getColor(
+                            R.color.orange,
+                            null,
+                        ),
                     )
-                )
+
+                it.toDouble() > 30.00 ->
+                    bmiOutput.setTextColor(
+                        resources.getColor(
+                            R.color.red,
+                            null,
+                        ),
+                    )
 
                 else -> bmiOutput.setTextColor(resources.getColor(R.color.black, null))
             }
