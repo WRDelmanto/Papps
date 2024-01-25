@@ -14,6 +14,9 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.R
+import com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexViewModel.Companion.NORMAL_BMI
+import com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexViewModel.Companion.OVERWEIGHT_BMI
+import com.wrdelmanto.papps.apps.bodyMassIndex.BodyMassIndexViewModel.Companion.UNDERWEIGHT_BMI
 import com.wrdelmanto.papps.databinding.FragmentBodyMassIndexBinding
 
 class BodyMassIndexFragment(
@@ -131,7 +134,8 @@ class BodyMassIndexFragment(
             when {
                 it == "?" -> bmiOutput.setTextColor(resources.getColor(R.color.black, null))
 
-                it.toDouble() < 18.50 ->
+                // Underweight
+                it.toDouble() < UNDERWEIGHT_BMI ->
                     bmiOutput.setTextColor(
                         resources.getColor(
                             R.color.light_blue,
@@ -139,7 +143,8 @@ class BodyMassIndexFragment(
                         ),
                     )
 
-                it.toDouble() in 18.50..24.90 ->
+                // Normal
+                it.toDouble() in UNDERWEIGHT_BMI..NORMAL_BMI ->
                     bmiOutput.setTextColor(
                         resources.getColor(
                             R.color.green,
@@ -147,7 +152,8 @@ class BodyMassIndexFragment(
                         ),
                     )
 
-                it.toDouble() in 24.90..30.00 ->
+                // Overweight
+                it.toDouble() in NORMAL_BMI..OVERWEIGHT_BMI ->
                     bmiOutput.setTextColor(
                         resources.getColor(
                             R.color.orange,
@@ -155,7 +161,8 @@ class BodyMassIndexFragment(
                         ),
                     )
 
-                it.toDouble() > 30.00 ->
+                // Obese
+                it.toDouble() > OVERWEIGHT_BMI ->
                     bmiOutput.setTextColor(
                         resources.getColor(
                             R.color.red,

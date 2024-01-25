@@ -65,4 +65,10 @@ class BodyMassIndexViewModel : ViewModel() {
 
         logD { "Height=${_height.value}, Weight=${_weight.value}, BMI=${_bmi.value}" }
     }
+
+    companion object {
+        const val UNDERWEIGHT_BMI = 18.50
+        const val NORMAL_BMI = 24.90
+        const val OVERWEIGHT_BMI = 30.00
+    }
 }
