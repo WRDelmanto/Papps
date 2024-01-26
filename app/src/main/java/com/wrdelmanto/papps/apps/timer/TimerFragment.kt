@@ -26,7 +26,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class TimerFragment(
-    private val context: Context
+    private val context: Context,
 ) : Fragment() {
     private lateinit var binding: FragmentTimerBinding
 
@@ -49,7 +49,9 @@ class TimerFragment(
     private lateinit var timerTimeCircularProgressIndicator: CircularProgressIndicator
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentTimerBinding.inflate(layoutInflater)
 
@@ -57,7 +59,10 @@ class TimerFragment(
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.timerViewModel = timerViewModel
@@ -88,7 +93,6 @@ class TimerFragment(
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onDestroy() {
         disableListeners()
-        disableObservers()
 
         super.onDestroy()
     }
@@ -152,9 +156,11 @@ class TimerFragment(
         timerViewModel.hasFinished.observe(viewLifecycleOwner) { hasFinished ->
             if (hasFinished) {
                 MainScope().launch {
-                    val beep = RingtoneManager.getRingtone(
-                        context, RingtoneManager.getDefaultUri(TYPE_ALARM)
-                    )
+                    val beep =
+                        RingtoneManager.getRingtone(
+                            context,
+                            RingtoneManager.getDefaultUri(TYPE_ALARM),
+                        )
                     logD { "Starting beep" }
                     beep.play()
 
@@ -181,22 +187,12 @@ class TimerFragment(
         minuteNumberPicker.setOnValueChangedListener(null)
         secondNumberPicker.setOnValueChangedListener(null)
         plusFive.setOnClickListener(null)
-        plusFive.setOnClickListener(null)
+        minusFive.setOnClickListener(null)
         plusTen.setOnClickListener(null)
-        plusTen.setOnClickListener(null)
+        minusTen.setOnClickListener(null)
         playButton.setOnClickListener(null)
         pauseButton.setOnClickListener(null)
         stopButton.setOnClickListener(null)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    private fun disableObservers() {
-        timerViewModel.isRunning.observe(viewLifecycleOwner) { }
-        timerViewModel.isRunning.observe(viewLifecycleOwner) { }
-        timerViewModel.hasFinished.observe(viewLifecycleOwner) { }
-        timerViewModel.hours.observe(viewLifecycleOwner) { }
-        timerViewModel.minutes.observe(viewLifecycleOwner) { }
-        timerViewModel.seconds.observe(viewLifecycleOwner) { }
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)

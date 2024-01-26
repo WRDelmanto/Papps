@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wrdelmanto.papps.databinding.FragmentCronometerBinding
 
 class CronometerFragment(
-    private val context: Context
+    private val context: Context,
 ) : Fragment() {
     private lateinit var binding: FragmentCronometerBinding
 
@@ -31,7 +31,9 @@ class CronometerFragment(
     private lateinit var lapListRecyclerView: RecyclerView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCronometerBinding.inflate(layoutInflater)
 
@@ -39,7 +41,10 @@ class CronometerFragment(
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.cronometerViewModel = cronometerViewModel
@@ -63,7 +68,6 @@ class CronometerFragment(
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onDestroy() {
         disableListeners()
-        disableObservers()
 
         super.onDestroy()
     }
@@ -106,10 +110,5 @@ class CronometerFragment(
         pauseButton.setOnClickListener(null)
         lapButton.setOnClickListener(null)
         stopButton.setOnClickListener(null)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.S)
-    private fun disableObservers() {
-        cronometerViewModel.isRunning.observe(viewLifecycleOwner) { }
     }
 }

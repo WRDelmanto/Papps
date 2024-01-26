@@ -94,12 +94,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         homeFragmentContainer = findViewById(R.id.home_fragment_container)
 
         // Handle onBackPressed
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                // Do nothing
-                logD { "onBackPressed" }
-            }
-        })
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Do nothing
+                    logD { "onBackPressed" }
+                }
+            },
+        )
 
         // App bar
         drawerIcon = findViewById(R.id.app_bar_main_drawer_icon)
@@ -133,10 +136,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Adjust navigation and status bar
         setupNavigationAndStatusBar(applicationContext, window)
 
-        val currentLanguage = SP_CURRENT_LANGUAGE.let {
-            val eg = getSharedPreferences(this, it, String)
-            eg ?: SharedViewModel.EN_US_LANGUAGE
-        }.toString()
+        val currentLanguage =
+            SP_CURRENT_LANGUAGE.let {
+                val eg = getSharedPreferences(this, it, String)
+                eg ?: SharedViewModel.EN_US_LANGUAGE
+            }.toString()
 
         AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(currentLanguage))
 
@@ -148,7 +152,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onPause() {
         disableListeners()
-        disableObservers()
 
         super.onPause()
     }
@@ -163,14 +166,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Drawer
         drawerItemsNavView.setNavigationItemSelectedListener { menuItem ->
             onNavigationItemSelected(
-                menuItem
+                menuItem,
             )
         }
 
         // Drawer bottom
         drawerBottomNavView.setNavigationItemSelectedListener { menuItem ->
             onNavigationItemSelected(
-                menuItem
+                menuItem,
             )
         }
 
@@ -201,10 +204,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         randomBottomNavMenu.setOnItemSelectedListener(null)
     }
 
-    private fun disableObservers() {
-        sharedViewModel.easterEggActivated.removeObserver {}
-    }
-
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         setupNavigationAndStatusBar(applicationContext, window)
@@ -216,29 +215,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (menuItem.itemId) {
             // Drawer
             // Apps
-            R.id.drawer_click_counter -> switchFragment(
-                homeFragmentContainer.id, ClickCounterFragment(applicationContext), CLICK_COUNTER
-            )
+            R.id.drawer_click_counter ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    ClickCounterFragment(applicationContext),
+                    CLICK_COUNTER,
+                )
 
-            R.id.drawer_money_converter -> switchFragment(
-                homeFragmentContainer.id,
-                MoneyConverterFragment(applicationContext),
-                MONEY_CONVERTER
-            )
+            R.id.drawer_money_converter ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    MoneyConverterFragment(applicationContext),
+                    MONEY_CONVERTER,
+                )
 
-            R.id.drawer_body_mass_index -> switchFragment(
-                homeFragmentContainer.id, BodyMassIndexFragment(applicationContext), BODY_MASS_INDEX
-            )
+            R.id.drawer_body_mass_index ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    BodyMassIndexFragment(applicationContext),
+                    BODY_MASS_INDEX,
+                )
 
-            R.id.drawer_dices -> switchFragment(
-                homeFragmentContainer.id, DicesFragment(applicationContext), DICES
-            )
+            R.id.drawer_dices ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    DicesFragment(applicationContext),
+                    DICES,
+                )
 
             R.id.drawer_random_letter -> {
                 switchFragment(
                     homeFragmentContainer.id,
                     RandomLetterFragment(applicationContext),
-                    RANDOM_LETTER
+                    RANDOM_LETTER,
                 )
                 checkRandomLetterAtRandomBottomNavMenu()
             }
@@ -247,7 +256,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 switchFragment(
                     homeFragmentContainer.id,
                     NasaPictureOfTheDayFragment(applicationContext),
-                    NASA_PICTURE_OF_THE_DAY
+                    NASA_PICTURE_OF_THE_DAY,
                 )
             }
 
@@ -255,61 +264,92 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 switchFragment(
                     homeFragmentContainer.id,
                     RandomNumberFragment(applicationContext),
-                    RANDOM_NUMBER
+                    RANDOM_NUMBER,
                 )
                 checkRandomNumberAtRandomBottomNavMenu()
             }
 
-            R.id.drawer_tip -> switchFragment(
-                homeFragmentContainer.id, TipFragment(applicationContext), TIP
-            )
+            R.id.drawer_tip ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    TipFragment(applicationContext),
+                    TIP,
+                )
 
-            R.id.drawer_speed_test -> switchFragment(
-                homeFragmentContainer.id, SpeedTestFragment(applicationContext), SPEED_TEST
-            )
+            R.id.drawer_speed_test ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    SpeedTestFragment(applicationContext),
+                    SPEED_TEST,
+                )
 
-            R.id.drawer_random_quote -> switchFragment(
-                homeFragmentContainer.id, RandomQuoteFragment(applicationContext), RANDOM_QUOTE
-            )
+            R.id.drawer_random_quote ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    RandomQuoteFragment(applicationContext),
+                    RANDOM_QUOTE,
+                )
 
-            R.id.drawer_cronometer -> switchFragment(
-                homeFragmentContainer.id, CronometerFragment(applicationContext), CRONOMETER
-            )
+            R.id.drawer_cronometer ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    CronometerFragment(applicationContext),
+                    CRONOMETER,
+                )
 
-            R.id.drawer_timer -> switchFragment(
-                homeFragmentContainer.id, TimerFragment(applicationContext), TIMER
-            )
+            R.id.drawer_timer ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    TimerFragment(applicationContext),
+                    TIMER,
+                )
 
             // Games
-            R.id.drawer_coin_flipper -> switchFragment(
-                homeFragmentContainer.id, CoinFlipperFragment(applicationContext), COIN_FLIPPER
-            )
+            R.id.drawer_coin_flipper ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    CoinFlipperFragment(applicationContext),
+                    COIN_FLIPPER,
+                )
 
-            R.id.drawer_tic_tac_toe -> switchFragment(
-                homeFragmentContainer.id, TicTacToeFragment(applicationContext), TIC_TAC_TOE
-            )
+            R.id.drawer_tic_tac_toe ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    TicTacToeFragment(applicationContext),
+                    TIC_TAC_TOE,
+                )
 
-            R.id.drawer_rock_paper_scissors -> switchFragment(
-                homeFragmentContainer.id,
-                RockPaperScissorsFragment(applicationContext),
-                ROCK_PAPER_SCISSORS
-            )
+            R.id.drawer_rock_paper_scissors ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    RockPaperScissorsFragment(applicationContext),
+                    ROCK_PAPER_SCISSORS,
+                )
 
-            R.id.drawer_unscramble -> switchFragment(
-                homeFragmentContainer.id, UnscrambleFragment(applicationContext), UNSCRAMBLE
-            )
+            R.id.drawer_unscramble ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    UnscrambleFragment(applicationContext),
+                    UNSCRAMBLE,
+                )
 
             // Drawer bottom
             R.id.drawer_bottom_settings -> openSettingsActivity()
 
             // Random bottom nav menu
-            R.id.random_bottom_nav_menu_random_letter -> switchFragment(
-                homeFragmentContainer.id, RandomLetterFragment(applicationContext), RANDOM_LETTER
-            )
+            R.id.random_bottom_nav_menu_random_letter ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    RandomLetterFragment(applicationContext),
+                    RANDOM_LETTER,
+                )
 
-            R.id.random_bottom_nav_menu_random_number -> switchFragment(
-                homeFragmentContainer.id, RandomNumberFragment(applicationContext), RANDOM_NUMBER
-            )
+            R.id.random_bottom_nav_menu_random_number ->
+                switchFragment(
+                    homeFragmentContainer.id,
+                    RandomNumberFragment(applicationContext),
+                    RANDOM_NUMBER,
+                )
         }
 
         activityMain.closeDrawer(START)
@@ -324,7 +364,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         randomBottomNavMenuRandomnumber.isChecked = true
     }
 
-    private fun switchFragment(fragmentId: Int, newFragment: Fragment, fragmentName: String) {
+    private fun switchFragment(
+        fragmentId: Int,
+        newFragment: Fragment,
+        fragmentName: String,
+    ) {
         try {
             val fragmentManager = supportFragmentManager.beginTransaction()
             fragmentManager.run {
@@ -336,8 +380,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             randomBottomNavMenu.isVisible = sharedViewModel.shouldShowRandomBottomNavMenu()
 
             logD { "New fragment: ${appBarTitle.text}" }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (exception: Exception) {
+            exception.printStackTrace()
         }
     }
 
