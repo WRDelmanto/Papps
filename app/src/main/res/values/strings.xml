@@ -22,7 +22,7 @@
     <string name="app_name_click_counter">Click Counter</string>
     <string name="app_name_money_converter">Money Exchange</string>
     <string name="app_name_dices">Dice</string>
-    <string name="app_name_coin_flipper">Heads and Tails</string>
+    <string name="app_name_coin_flipper">Coin Flipper</string>
     <string name="app_name_unscramble">Unscramble (pt-BR)</string>
     <string name="app_name_tic_tac_toe">Tic Tac Toe</string>
     <string name="app_name_rock_paper_scissors">Rock Paper Scissors</string>
