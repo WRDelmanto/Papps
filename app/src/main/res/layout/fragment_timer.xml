@@ -64,7 +64,7 @@
             android:layout_height="0dp"
             android:progress="@{timerViewModel.timerProgress}"
             android:visibility="visible"
-            app:indicatorColor="@color/color_secondary"
+            app:indicatorColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/timer_middle_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
