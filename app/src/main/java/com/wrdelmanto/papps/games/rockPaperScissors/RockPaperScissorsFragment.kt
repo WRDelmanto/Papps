@@ -15,7 +15,7 @@ import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.databinding.FragmentRockPaperScissorsBinding
 
 class RockPaperScissorsFragment(
-    private val context: Context
+    private val context: Context,
 ) : Fragment() {
     private lateinit var binding: FragmentRockPaperScissorsBinding
 
@@ -38,14 +38,19 @@ class RockPaperScissorsFragment(
     private lateinit var twoPlayersModeGroup: Group
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentRockPaperScissorsBinding.inflate(layoutInflater)
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.rockPaperScissorsViewModel = rockPaperScissorsViewModel
@@ -74,7 +79,7 @@ class RockPaperScissorsFragment(
     override fun onResume() {
         super.onResume()
 
-        rockPaperScissorsViewModel.resetUi(context)
+        rockPaperScissorsViewModel.resetUi(context, true)
     }
 
     override fun onDestroy() {
@@ -86,22 +91,25 @@ class RockPaperScissorsFragment(
     private fun initiateListeners() {
         primaryChoiceRock.setOnClickListener {
             rockPaperScissorsViewModel.primaryChoice(
-                context, "Rock"
+                context,
+                "Rock",
             )
         }
         primaryChoicePaper.setOnClickListener {
             rockPaperScissorsViewModel.primaryChoice(
-                context, "Paper"
+                context,
+                "Paper",
             )
         }
         primaryChoiceScissors.setOnClickListener {
             rockPaperScissorsViewModel.primaryChoice(
-                context, "Scissors"
+                context,
+                "Scissors",
             )
         }
         resetButton.setOnClickListener {
             rockPaperScissorsViewModel.resetUi(
-                context
+                context,
             )
         }
 
@@ -109,17 +117,20 @@ class RockPaperScissorsFragment(
 
         secondaryChoiceRock.setOnClickListener {
             rockPaperScissorsViewModel.secondaryChoice(
-                context, "Rock"
+                context,
+                "Rock",
             )
         }
         secondaryChoicePaper.setOnClickListener {
             rockPaperScissorsViewModel.secondaryChoice(
-                context, "Paper"
+                context,
+                "Paper",
             )
         }
         secondaryChoiceScissors.setOnClickListener {
             rockPaperScissorsViewModel.secondaryChoice(
-                context, "Scissors"
+                context,
+                "Scissors",
             )
         }
     }
