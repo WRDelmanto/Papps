@@ -23,12 +23,13 @@ import kotlinx.coroutines.launch
  * @param view
  */
 fun startBlinkingAnimation(view: View) {
-    val animation = AlphaAnimation(0.0f, 1.0f).apply {
-        duration = ONE_SECOND_IN_MILLIS
-        startOffset = 20
-        repeatMode = REVERSE
-        repeatCount = INFINITE
-    }
+    val animation =
+        AlphaAnimation(0.0f, 1.0f).apply {
+            duration = ONE_SECOND_IN_MILLIS
+            startOffset = 20
+            repeatMode = REVERSE
+            repeatCount = INFINITE
+        }
 
     view.apply {
         isVisible = true
@@ -42,7 +43,10 @@ fun startBlinkingAnimation(view: View) {
  * @param view
  * @param shouldStillBeVisible
  */
-fun stopBlinkingAnimation(view: View, shouldStillBeVisible: Boolean = false) {
+fun stopBlinkingAnimation(
+    view: View,
+    shouldStillBeVisible: Boolean = false,
+) {
     view.apply {
         clearAnimation()
         isVisible = shouldStillBeVisible
@@ -56,7 +60,7 @@ fun stopBlinkingAnimation(view: View, shouldStillBeVisible: Boolean = false) {
  */
 fun startTiltingAnimation(view: View) {
     ObjectAnimator.ofFloat(view, "rotation", 0f, 10f, 0f, -10f, 0f).apply {
-        duration = ONE_SECOND_IN_MILLIS
+        duration = HALF_SECOND_IN_MILLIS
         start()
     }
 
@@ -88,7 +92,11 @@ fun startRotatingAnimation(view: View) {
  * @param finalColor
  * @param view
  */
-fun changeColorGradually(initialColor: ColorDrawable, finalColor: ColorDrawable, view: View) {
+fun changeColorGradually(
+    initialColor: ColorDrawable,
+    finalColor: ColorDrawable,
+    view: View,
+) {
     val transitionDrawable = TransitionDrawable(arrayOf(initialColor, finalColor))
 
     transitionDrawable.startTransition(HALF_SECOND_IN_MILLIS.toInt())
@@ -106,7 +114,11 @@ fun changeColorGradually(initialColor: ColorDrawable, finalColor: ColorDrawable,
  * @param middleColor
  * @param view
  */
-fun changeColorGraduallyAndRollback(initialColor: ColorDrawable, middleColor: ColorDrawable, view: View) {
+fun changeColorGraduallyAndRollback(
+    initialColor: ColorDrawable,
+    middleColor: ColorDrawable,
+    view: View,
+) {
     MainScope().launch {
         changeColorGradually(initialColor, middleColor, view)
         delay(HALF_SECOND_IN_MILLIS)

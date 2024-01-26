@@ -7,14 +7,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wrdelmanto.papps.HALF_SECOND_IN_MILLIS
 import com.wrdelmanto.papps.R
-import com.wrdelmanto.papps.THREE_QUARTERS_SECOND_IN_MILLIS
 import com.wrdelmanto.papps.utils.SP_D_DICE_HISTORY
 import com.wrdelmanto.papps.utils.getSharedPreferences
 import com.wrdelmanto.papps.utils.logD
 import com.wrdelmanto.papps.utils.putSharedPreferences
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Random
 
 class DicesViewModel : ViewModel() {
     private val _diceImage = MutableLiveData<Drawable>()
@@ -39,11 +41,14 @@ class DicesViewModel : ViewModel() {
 
     private var isFirstTime = true
 
+    private var updateDiceHistoryJob: Job? = null
+
     fun resetUi(context: Context) {
-        diceHistory = SP_D_DICE_HISTORY.let {
-            val lh = getSharedPreferences(context, it, String)
-            lh ?: "*****"
-        }.toString()
+        diceHistory =
+            SP_D_DICE_HISTORY.let {
+                val lh = getSharedPreferences(context, it, String)
+                lh ?: "*****"
+            }.toString()
 
         updateDiceHistory()
 
@@ -51,42 +56,122 @@ class DicesViewModel : ViewModel() {
     }
 
     fun rollDice(context: Context) {
-        val diceResult = (1..6).random()
+        val diceResult = Random().nextInt(DICE_SIDES) + 1
 
-        if (diceHistory.length >= 5) diceHistory = diceHistory.dropLast(1)
+        if (diceHistory.length >= DICE_HISTORY_SIZE) diceHistory = diceHistory.dropLast(1)
         diceHistory = diceResult.toString() + diceHistory
 
         putSharedPreferences(context, SP_D_DICE_HISTORY, diceHistory)
 
         viewModelScope.launch {
-            if (!isFirstTime) delay(THREE_QUARTERS_SECOND_IN_MILLIS)
+            if (!isFirstTime) delay(HALF_SECOND_IN_MILLIS)
             isFirstTime = false
 
-            _diceImage.value = when (diceResult) {
-                1 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_1, null)
-                2 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_2, null)
-                3 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_3, null)
-                4 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_4, null)
-                5 -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_5, null)
-                else -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_6, null)
-            }
+            _diceImage.value =
+                when (diceResult) {
+                    DICE_SIDE_ONE ->
+                        ResourcesCompat.getDrawable(
+                            context.resources,
+                            R.drawable.dice_1,
+                            null,
+                        )
+
+                    DICE_SIDE_TWO ->
+                        ResourcesCompat.getDrawable(
+                            context.resources,
+                            R.drawable.dice_2,
+                            null,
+                        )
+
+                    DICE_SIDE_THREE ->
+                        ResourcesCompat.getDrawable(
+                            context.resources,
+                            R.drawable.dice_3,
+                            null,
+                        )
+
+                    DICE_SIDE_FOUR ->
+                        ResourcesCompat.getDrawable(
+                            context.resources,
+                            R.drawable.dice_4,
+                            null,
+                        )
+
+                    DICE_SIDE_FIVE ->
+                        ResourcesCompat.getDrawable(
+                            context.resources,
+                            R.drawable.dice_5,
+                            null,
+                        )
+
+                    DICE_SIDE_SIX ->
+                        ResourcesCompat.getDrawable(
+                            context.resources,
+                            R.drawable.dice_6,
+                            null,
+                        )
+
+                    else -> ResourcesCompat.getDrawable(context.resources, R.drawable.dice_6, null)
+                }
         }
 
         logD { "diceResult=$diceResult, diceHistory=$diceHistory" }
 
-        updateDiceHistory()
+        updateDiceHistoryJob?.cancel()
+        updateDiceHistoryJob =
+            viewModelScope.launch {
+                delay(HALF_SECOND_IN_MILLIS)
+                updateDiceHistory()
+            }
     }
 
     private fun updateDiceHistory() {
         _historyFirst.value =
-            if (diceHistory[0].toString() == "*") "" else diceHistory[0].toString()
+            if (diceHistory[DICE_FIRST_HISTORY_RESULT].toString() == "*") {
+                ""
+            } else {
+                diceHistory[DICE_FIRST_HISTORY_RESULT].toString()
+            }
         _historySecond.value =
-            if (diceHistory[1].toString() == "*") "" else diceHistory[1].toString()
+            if (diceHistory[DICE_SECOND_HISTORY_RESULT].toString() == "*") {
+                ""
+            } else {
+                diceHistory[DICE_SECOND_HISTORY_RESULT].toString()
+            }
         _historyThird.value =
-            if (diceHistory[2].toString() == "*") "" else diceHistory[2].toString()
+            if (diceHistory[DICE_THIRD_HISTORY_RESULT].toString() == "*") {
+                ""
+            } else {
+                diceHistory[DICE_THIRD_HISTORY_RESULT].toString()
+            }
         _historyFourth.value =
-            if (diceHistory[3].toString() == "*") "" else diceHistory[3].toString()
+            if (diceHistory[DICE_FOURTH_HISTORY_RESULT].toString() == "*") {
+                ""
+            } else {
+                diceHistory[DICE_FOURTH_HISTORY_RESULT].toString()
+            }
         _historyFifth.value =
-            if (diceHistory[4].toString() == "*") "" else diceHistory[4].toString()
+            if (diceHistory[DICE_FIFTH_HISTORY_RESULT].toString() == "*") {
+                ""
+            } else {
+                diceHistory[DICE_FIFTH_HISTORY_RESULT].toString()
+            }
+    }
+
+    private companion object {
+        const val DICE_SIDES = 6
+        const val DICE_SIDE_ONE = 1
+        const val DICE_SIDE_TWO = 2
+        const val DICE_SIDE_THREE = 3
+        const val DICE_SIDE_FOUR = 4
+        const val DICE_SIDE_FIVE = 5
+        const val DICE_SIDE_SIX = 6
+
+        const val DICE_HISTORY_SIZE = 5
+        const val DICE_FIRST_HISTORY_RESULT = 0
+        const val DICE_SECOND_HISTORY_RESULT = 1
+        const val DICE_THIRD_HISTORY_RESULT = 2
+        const val DICE_FOURTH_HISTORY_RESULT = 3
+        const val DICE_FIFTH_HISTORY_RESULT = 4
     }
 }
