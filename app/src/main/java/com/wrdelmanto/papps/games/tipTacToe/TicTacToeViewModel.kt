@@ -79,11 +79,13 @@ class TicTacToeViewModel : ViewModel() {
     private val _playerTwoScore = MutableLiveData<String>()
     val playerTwoScore: LiveData<String> = _playerTwoScore
 
+    private val _activePlayer = MutableLiveData(1)
+    val activePlayer: LiveData<Int> = _activePlayer
+
     private var playerOne = ArrayList<Int>()
     private var playerTwo = ArrayList<Int>()
     private var winnerButtons = listOf<Int>()
 
-    private var activePlayer = 1
     private var isTwoPlayersModeEnabled = false
 
     private lateinit var initialColor: ColorDrawable
@@ -98,7 +100,7 @@ class TicTacToeViewModel : ViewModel() {
         isFirstTime: Boolean = false,
         wasATie: Boolean = false,
         shouldResetScores: Boolean = true,
-        shouldResetModeButton: Boolean = true
+        shouldResetModeButton: Boolean = true,
     ) {
         initialColor = context.resources.getColor(R.color.white, null).toDrawable()
         highlightedColor = context.resources.getColor(R.color.green, null).toDrawable()
@@ -139,54 +141,68 @@ class TicTacToeViewModel : ViewModel() {
             _playerTwoScore.value = "0"
         }
 
-        if (isFirstTime || shouldResetModeButton) _modeButton.value =
-            context.resources.getString(R.string.one_player_mode)
+        if (isFirstTime || shouldResetModeButton) {
+            _modeButton.value =
+                context.resources.getString(R.string.one_player_mode)
+        }
 
         logD { "resetUi" }
 
         when {
             _winner.value == 1 -> {
                 _winner.value = -1
-                activePlayer = 1
+                _activePlayer.value = 1
             }
 
             _winner.value == 2 -> {
                 _winner.value = -1
-                activePlayer = 2
+                _activePlayer.value = 2
 
                 if (!isTwoPlayersModeEnabled) {
                     viewModelScopeJob?.cancel()
-                    viewModelScopeJob = viewModelScope.launch {
-                        delay(ONE_QUARTER_SECOND_IN_MILLIS)
-                        autoPlay(context, view)
-                    }
+                    viewModelScopeJob =
+                        viewModelScope.launch {
+                            delay(ONE_QUARTER_SECOND_IN_MILLIS)
+                            autoPlay(context, view)
+                        }
                 }
             }
 
             wasATie -> {
                 _winner.value = -1
 
-                if (activePlayer == 1) {
-                    activePlayer = 2
+                if (_activePlayer.value == 1) {
+                    _activePlayer.value = 2
                     if (!isTwoPlayersModeEnabled) {
                         viewModelScopeJob?.cancel()
-                        viewModelScopeJob = viewModelScope.launch {
-                            delay(ONE_QUARTER_SECOND_IN_MILLIS)
-                            autoPlay(context, view)
-                        }
+                        viewModelScopeJob =
+                            viewModelScope.launch {
+                                delay(ONE_QUARTER_SECOND_IN_MILLIS)
+                                autoPlay(context, view)
+                            }
                     }
-                } else activePlayer = 1
+                } else {
+                    _activePlayer.value = 1
+                }
             }
+
+            else -> _activePlayer.value = 1
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun updateGameMode(context: Context, view: View) {
+    fun updateGameMode(
+        context: Context,
+        view: View,
+    ) {
         isTwoPlayersModeEnabled = !isTwoPlayersModeEnabled
 
-        if (isTwoPlayersModeEnabled) _modeButton.value =
-            context.resources.getString(R.string.two_player_mode)
-        else _modeButton.value = context.resources.getString(R.string.one_player_mode)
+        if (isTwoPlayersModeEnabled) {
+            _modeButton.value =
+                context.resources.getString(R.string.two_player_mode)
+        } else {
+            _modeButton.value = context.resources.getString(R.string.one_player_mode)
+        }
 
         resetUi(context, view, shouldResetScores = true, shouldResetModeButton = false)
 
@@ -194,7 +210,10 @@ class TicTacToeViewModel : ViewModel() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun autoPlay(context: Context, view: View) {
+    private fun autoPlay(
+        context: Context,
+        view: View,
+    ) {
         var cellId = TicTacToeAI.smartAutoPlay(playerOne, playerTwo)
 
         while (cellId == -1 || playerOne.contains(cellId) || playerTwo.contains(cellId)) {
@@ -205,8 +224,12 @@ class TicTacToeViewModel : ViewModel() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun buttonSelected(context: Context, view: View, buttonSelected: TextView) {
-        if (activePlayer == 1) {
+    fun buttonSelected(
+        context: Context,
+        view: View,
+        buttonSelected: TextView,
+    ) {
+        if (_activePlayer.value == 1) {
             val cellId = convertButtonTextIntoCellId(view, buttonSelected)
 
             buttonSelected.text = X_ANSWER
@@ -227,8 +250,11 @@ class TicTacToeViewModel : ViewModel() {
                 sort()
             }
 
-            if (!isTwoPlayersModeEnabled) logD { "Auto Play - cellId=$cellId" }
-            else logD { "Player two - cellId=$cellId" }
+            if (!isTwoPlayersModeEnabled) {
+                logD { "Auto Play - cellId=$cellId" }
+            } else {
+                logD { "Player two - cellId=$cellId" }
+            }
         }
 
         buttonSelected.isEnabled = false
@@ -237,7 +263,10 @@ class TicTacToeViewModel : ViewModel() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun checkWinner(context: Context, view: View) {
+    private fun checkWinner(
+        context: Context,
+        view: View,
+    ) {
         if (checkWinnerRows() != -1) _winner.value = checkWinnerRows()
         if (checkWinnerCollumns() != -1) _winner.value = checkWinnerCollumns()
         if (checkWinnerCrosses() != -1) _winner.value = checkWinnerCrosses()
@@ -246,12 +275,16 @@ class TicTacToeViewModel : ViewModel() {
             if (_winner.value == 1) {
                 logD { "Player one wins" }
                 _playerOneScore.value = _playerOneScore.value?.toInt()?.plus(1).toString()
-                logD { "playerOne=$playerOne, playerTwo=$playerTwo, playerOneScore=${_playerOneScore.value}, playerTwoScore=${_playerTwoScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
+                logD {
+                    "playerOne=$playerOne, playerTwo=$playerTwo, playerOneScore=${_playerOneScore.value}, playerTwoScore=${_playerTwoScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled"
+                }
                 highlightWinnerButtons(context, view)
             } else {
                 logD { "Player two wins" }
                 _playerTwoScore.value = _playerTwoScore.value?.toInt()?.plus(1).toString()
-                logD { "playerOne=$playerOne, playerTwo=$playerTwo, playerOneScore=${_playerOneScore.value}, playerTwoScore=${_playerTwoScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
+                logD {
+                    "playerOne=$playerOne, playerTwo=$playerTwo, playerOneScore=${_playerOneScore.value}, playerTwoScore=${_playerTwoScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled"
+                }
                 highlightWinnerButtons(context, view)
             }
         } else if (playerOne.size + playerTwo.size >= 9) {
@@ -261,15 +294,19 @@ class TicTacToeViewModel : ViewModel() {
                 view,
                 wasATie = true,
                 shouldResetScores = false,
-                shouldResetModeButton = false
+                shouldResetModeButton = false,
             )
         } else {
-            logD { "playerOne=$playerOne, playerTwo=$playerTwo, playerOneScore=${_playerOneScore.value}, playerTwoScore=${_playerTwoScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled" }
+            logD {
+                "playerOne=$playerOne, playerTwo=$playerTwo, playerOneScore=${_playerOneScore.value}, playerTwoScore=${_playerTwoScore.value}, isTwoPlayersModeEnabled=$isTwoPlayersModeEnabled"
+            }
 
-            if (activePlayer == 1) {
-                activePlayer = 2
+            if (_activePlayer.value == 1) {
+                _activePlayer.value = 2
                 if (!isTwoPlayersModeEnabled) autoPlay(context, view)
-            } else activePlayer = 1
+            } else {
+                _activePlayer.value = 1
+            }
         }
     }
 
@@ -366,30 +403,43 @@ class TicTacToeViewModel : ViewModel() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun highlightWinnerButtons(context: Context, view: View) {
+    private fun highlightWinnerButtons(
+        context: Context,
+        view: View,
+    ) {
         viewModelScopeJob?.cancel()
-        viewModelScopeJob = viewModelScope.launch {
-            logD { "Highlighting winner buttons" }
+        viewModelScopeJob =
+            viewModelScope.launch {
+                logD { "Highlighting winner buttons" }
 
-            delay(ONE_QUARTER_SECOND_IN_MILLIS)
+                delay(ONE_QUARTER_SECOND_IN_MILLIS)
 
-            changeColorGraduallyAndRollback(
-                initialColor, highlightedColor, convertCellIdIntoTextView(view, winnerButtons[0])
-            )
-            changeColorGraduallyAndRollback(
-                initialColor, highlightedColor, convertCellIdIntoTextView(view, winnerButtons[1])
-            )
-            changeColorGraduallyAndRollback(
-                initialColor, highlightedColor, convertCellIdIntoTextView(view, winnerButtons[2])
-            )
+                changeColorGraduallyAndRollback(
+                    initialColor,
+                    highlightedColor,
+                    convertCellIdIntoTextView(view, winnerButtons[0]),
+                )
+                changeColorGraduallyAndRollback(
+                    initialColor,
+                    highlightedColor,
+                    convertCellIdIntoTextView(view, winnerButtons[1]),
+                )
+                changeColorGraduallyAndRollback(
+                    initialColor,
+                    highlightedColor,
+                    convertCellIdIntoTextView(view, winnerButtons[2]),
+                )
 
-            delay(ONE_SECOND_IN_MILLIS)
+                delay(ONE_SECOND_IN_MILLIS)
 
-            resetUi(context, view, shouldResetScores = false, shouldResetModeButton = false)
-        }
+                resetUi(context, view, shouldResetScores = false, shouldResetModeButton = false)
+            }
     }
 
-    private fun convertButtonTextIntoCellId(view: View, buttonSelected: TextView): Int {
+    private fun convertButtonTextIntoCellId(
+        view: View,
+        buttonSelected: TextView,
+    ): Int {
         return when (buttonSelected) {
             view.findViewById<TextView>(R.id.tic_tac_toe_a11) -> 1
             view.findViewById<TextView>(R.id.tic_tac_toe_a12) -> 2
@@ -404,7 +454,10 @@ class TicTacToeViewModel : ViewModel() {
         }
     }
 
-    private fun convertCellIdIntoTextView(view: View, cellId: Int): TextView {
+    private fun convertCellIdIntoTextView(
+        view: View,
+        cellId: Int,
+    ): TextView {
         return when (cellId) {
             1 -> view.findViewById(R.id.tic_tac_toe_a11)
             2 -> view.findViewById(R.id.tic_tac_toe_a12)

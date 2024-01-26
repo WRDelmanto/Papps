@@ -12,9 +12,11 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.wrdelmanto.papps.databinding.FragmentTicTacToeBinding
+import com.wrdelmanto.papps.utils.addUnderlineTextView
+import com.wrdelmanto.papps.utils.removeUnderlineTextView
 
 class TicTacToeFragment(
-    private val context: Context
+    private val context: Context,
 ) : Fragment() {
     private lateinit var binding: FragmentTicTacToeBinding
 
@@ -30,11 +32,16 @@ class TicTacToeFragment(
     private lateinit var a32Button: TextView
     private lateinit var a33Button: TextView
 
+    private lateinit var playerOne: TextView
+    private lateinit var playerTwo: TextView
+
     private lateinit var modeButton: Button
     private lateinit var resetButton: Button
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentTicTacToeBinding.inflate(layoutInflater)
 
@@ -42,7 +49,10 @@ class TicTacToeFragment(
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.ticTacToeViewModel = ticTacToeViewModel
@@ -57,6 +67,11 @@ class TicTacToeFragment(
         a31Button = binding.ticTacToeA31
         a32Button = binding.ticTacToeA32
         a33Button = binding.ticTacToeA33
+
+        playerOne = binding.ticTacToePrimary
+        playerTwo = binding.ticTacToeSecondary
+
+        addUnderlineTextView(playerOne)
 
         modeButton = binding.ticTacToeModeButton
         resetButton = binding.ticTacToeResetButton
@@ -82,62 +97,94 @@ class TicTacToeFragment(
     private fun initiateListeners() {
         a11Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a11Button
+                context,
+                requireView(),
+                a11Button,
             )
         }
         a12Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a12Button
+                context,
+                requireView(),
+                a12Button,
             )
         }
         a13Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a13Button
+                context,
+                requireView(),
+                a13Button,
             )
         }
         a21Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a21Button
+                context,
+                requireView(),
+                a21Button,
             )
         }
         a22Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a22Button
+                context,
+                requireView(),
+                a22Button,
             )
         }
         a23Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a23Button
+                context,
+                requireView(),
+                a23Button,
             )
         }
         a31Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a31Button
+                context,
+                requireView(),
+                a31Button,
             )
         }
         a32Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a32Button
+                context,
+                requireView(),
+                a32Button,
             )
         }
         a33Button.setOnClickListener {
             ticTacToeViewModel.buttonSelected(
-                context, requireView(), a33Button
+                context,
+                requireView(),
+                a33Button,
             )
         }
 
         modeButton.setOnClickListener { ticTacToeViewModel.updateGameMode(context, requireView()) }
         resetButton.setOnClickListener {
             ticTacToeViewModel.resetUi(
-                context, requireView(), shouldResetModeButton = false
+                context,
+                requireView(),
+                shouldResetModeButton = false,
             )
         }
     }
 
     private fun initiateObservers() {
         ticTacToeViewModel.winner.observe(viewLifecycleOwner) { winner ->
-            if (winner != -1) disableAllButtons()
-            else enableAllButtons()
+            if (winner != -1) {
+                disableAllButtons()
+            } else {
+                enableAllButtons()
+            }
+        }
+        ticTacToeViewModel.activePlayer.observe(viewLifecycleOwner) { activePlayer ->
+            if (activePlayer == 1) {
+                addUnderlineTextView(playerOne)
+                removeUnderlineTextView(playerTwo)
+            } else {
+                removeUnderlineTextView(playerOne)
+                addUnderlineTextView(playerTwo)
+            }
         }
     }
 
