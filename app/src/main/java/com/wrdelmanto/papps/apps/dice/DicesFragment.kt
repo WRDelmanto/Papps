@@ -11,13 +11,17 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.wrdelmanto.papps.HALF_SECOND_IN_MILLIS
 import com.wrdelmanto.papps.databinding.FragmentDicesBinding
 import com.wrdelmanto.papps.utils.startBlinkingAnimation
 import com.wrdelmanto.papps.utils.startTiltingAnimation
 import com.wrdelmanto.papps.utils.stopBlinkingAnimation
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class DicesFragment(
-    private val context: Context
+    private val context: Context,
 ) : Fragment() {
     private lateinit var binding: FragmentDicesBinding
 
@@ -29,14 +33,19 @@ class DicesFragment(
     private lateinit var resultImage: ImageView
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentDicesBinding.inflate(layoutInflater)
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.dicesViewModel = dicesViewModel
@@ -65,11 +74,18 @@ class DicesFragment(
         super.onDestroy()
     }
 
-    private fun initiateListeners() = clickAnywhereButton.setOnClickListener {
-        stopBlinkingAnimation(clickAnywhereMessage)
-        startTiltingAnimation(resultImage)
-        dicesViewModel.rollDice(context)
-    }
+    private fun initiateListeners() =
+        clickAnywhereButton.setOnClickListener {
+            clickAnywhereButton.isClickable = false
+            stopBlinkingAnimation(clickAnywhereMessage)
+            startTiltingAnimation(resultImage)
+            dicesViewModel.rollDice(context)
+
+            MainScope().launch {
+                delay(HALF_SECOND_IN_MILLIS)
+                clickAnywhereButton.isClickable = true
+            }
+        }
 
     private fun disableListeners() = clickAnywhereButton.setOnClickListener(null)
 }
