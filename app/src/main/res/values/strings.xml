@@ -76,7 +76,7 @@
     <string name="won">Won</string>
     <string name="lost">Lost</string>
     <string name="highScore">Record</string>
-    <string name="current_score">Current score</string>
+    <string name="current_score">Current Score</string>
     <string name="one_player_mode">1 player</string>
     <string name="two_player_mode">2 players</string>
     <string name="height">Height</string>
