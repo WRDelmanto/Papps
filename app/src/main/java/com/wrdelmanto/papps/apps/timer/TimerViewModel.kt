@@ -12,6 +12,7 @@ import com.wrdelmanto.papps.ONE_SECOND_IN_MILLIS
 import com.wrdelmanto.papps.utils.logD
 import java.time.Duration
 
+@Suppress("TooManyFunctions")
 @RequiresApi(Build.VERSION_CODES.S)
 class TimerViewModel : ViewModel() {
     private val _timer = MutableLiveData<String>()
@@ -39,7 +40,7 @@ class TimerViewModel : ViewModel() {
     val hasFinished: LiveData<Boolean> = _hasFinished
 
     private var countDownTimer: Long = 0
-    private var initialTimer: Long = 1800000
+    private var initialTimer: Long = THIRTY_MINUTES_IN_MILLISECONDS
     private var lastTimer: String = ""
 
     private lateinit var countDownTimerObject: CountDownTimer
@@ -48,29 +49,36 @@ class TimerViewModel : ViewModel() {
         resetUi()
     }
 
-    private fun countDownTimer(timerRemaining: Long, isStarting: Boolean = false) {
+    @Suppress("TooGenericExceptionCaught")
+    private fun countDownTimer(
+        timerRemaining: Long,
+        isStarting: Boolean = false,
+    ) {
         if (isStarting) {
-            countDownTimerObject = object : CountDownTimer(timerRemaining, 1) {
-                override fun onTick(millisUntilFinished: Long) {
-                    countDownTimer = millisUntilFinished
-                    logD { countDownTimer.toString() }
-                    _timerProgress.value = (100 * millisUntilFinished / initialTimer).toInt()
-                    updateTimer()
-                }
+            countDownTimerObject =
+                object : CountDownTimer(timerRemaining, 1) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        countDownTimer = millisUntilFinished
+                        logD { countDownTimer.toString() } // Testing only
+                        _timerProgress.value = (CONVERT_INTO_PERCENTAGE * millisUntilFinished / initialTimer).toInt()
+                        updateTimer()
+                    }
 
-                override fun onFinish() {
-                    _isRunning.value = false
-                    _hasFinished.value = true
+                    override fun onFinish() {
+                        _isRunning.value = false
+                        _hasFinished.value = true
 
-                    logD { "onFinish - countDownTimer=${_timer.value}" }
-                    resetUi()
-                }
-            }.start()
-        } else try {
-            countDownTimerObject.cancel()
-            updateTimer()
-        } catch (exception: Exception) {
-            logD { exception.toString() }
+                        logD { "onFinish - countDownTimer=${_timer.value}" }
+                        resetUi()
+                    }
+                }.start()
+        } else {
+            try {
+                countDownTimerObject.cancel()
+                updateTimer()
+            } catch (exception: Exception) {
+                logD { exception.toString() }
+            }
         }
     }
 
@@ -98,7 +106,10 @@ class TimerViewModel : ViewModel() {
             logD {
                 "timer=${
                     String.format(
-                        HOURS_MINUTES_SECONDS_FORMAT, tempHours, tempMinutes, tempSeconds
+                        HOURS_MINUTES_SECONDS_FORMAT,
+                        tempHours,
+                        tempMinutes,
+                        tempSeconds,
                     )
                 }"
             }
@@ -127,7 +138,7 @@ class TimerViewModel : ViewModel() {
         _isRunning.value = true
 
         // TODO: pause resume time between
-        // TODO: 0 time start
+        // TODO: Between 1 and 0 seconds time resume
 
         if (_hasStarted.value == false) {
             logD { "startTimer" }
@@ -181,10 +192,15 @@ class TimerViewModel : ViewModel() {
         if (_minutes.value?.toInt()!! >= FIFTY_FIVE_MINUTES) {
             _minutes.value = (_minutes.value!!.toInt().minus(FIFTY_FIVE_MINUTES)).toString()
 
-            if (_hours.value?.toInt()!! == TWENTY_THREE_HOURS) _hours.value =
-                (hours.value!!.toInt().minus(TWENTY_THREE_HOURS)).toString()
-            else _hours.value = (hours.value!!.toInt().plus(ONE_HOUR)).toString()
-        } else _minutes.value = (_minutes.value?.toInt()?.plus(FIVE_MINUTES)).toString()
+            if (_hours.value?.toInt()!! == TWENTY_THREE_HOURS) {
+                _hours.value =
+                    (hours.value!!.toInt().minus(TWENTY_THREE_HOURS)).toString()
+            } else {
+                _hours.value = (hours.value!!.toInt().plus(ONE_HOUR)).toString()
+            }
+        } else {
+            _minutes.value = (_minutes.value?.toInt()?.plus(FIVE_MINUTES)).toString()
+        }
 
         updateCountDownTimer()
         updateTimer()
@@ -194,10 +210,15 @@ class TimerViewModel : ViewModel() {
         if (_minutes.value?.toInt()!! < FIVE_MINUTES) {
             _minutes.value = (_minutes.value!!.toInt().plus(FIFTY_FIVE_MINUTES)).toString()
 
-            if (_hours.value?.toInt()!! < ONE_HOUR) _hours.value =
-                (hours.value!!.toInt().plus(TWENTY_THREE_HOURS)).toString()
-            else _hours.value = (hours.value!!.toInt().minus(ONE_HOUR)).toString()
-        } else _minutes.value = (_minutes.value?.toInt()?.minus(FIVE_MINUTES)).toString()
+            if (_hours.value?.toInt()!! < ONE_HOUR) {
+                _hours.value =
+                    (hours.value!!.toInt().plus(TWENTY_THREE_HOURS)).toString()
+            } else {
+                _hours.value = (hours.value!!.toInt().minus(ONE_HOUR)).toString()
+            }
+        } else {
+            _minutes.value = (_minutes.value?.toInt()?.minus(FIVE_MINUTES)).toString()
+        }
 
         updateCountDownTimer()
         updateTimer()
@@ -207,10 +228,15 @@ class TimerViewModel : ViewModel() {
         if (_minutes.value?.toInt()!! >= FIFTY_MINUTES) {
             _minutes.value = (_minutes.value!!.toInt().minus(FIFTY_MINUTES)).toString()
 
-            if (_hours.value?.toInt()!! == TWENTY_THREE_HOURS) _hours.value =
-                (hours.value!!.toInt().minus(TWENTY_THREE_HOURS)).toString()
-            else _hours.value = (hours.value!!.toInt().plus(ONE_HOUR)).toString()
-        } else _minutes.value = (_minutes.value?.toInt()?.plus(TEN_MINUTES)).toString()
+            if (_hours.value?.toInt()!! == TWENTY_THREE_HOURS) {
+                _hours.value =
+                    (hours.value!!.toInt().minus(TWENTY_THREE_HOURS)).toString()
+            } else {
+                _hours.value = (hours.value!!.toInt().plus(ONE_HOUR)).toString()
+            }
+        } else {
+            _minutes.value = (_minutes.value?.toInt()?.plus(TEN_MINUTES)).toString()
+        }
 
         updateCountDownTimer()
         updateTimer()
@@ -220,10 +246,15 @@ class TimerViewModel : ViewModel() {
         if (_minutes.value?.toInt()!! < TEN_MINUTES) {
             _minutes.value = (_minutes.value!!.toInt().plus(FIFTY_MINUTES)).toString()
 
-            if (_hours.value?.toInt()!! < ONE_HOUR) _hours.value =
-                (hours.value!!.toInt().plus(TWENTY_THREE_HOURS)).toString()
-            else _hours.value = (hours.value!!.toInt().minus(ONE_HOUR)).toString()
-        } else _minutes.value = (_minutes.value?.toInt()?.minus(TEN_MINUTES)).toString()
+            if (_hours.value?.toInt()!! < ONE_HOUR) {
+                _hours.value =
+                    (hours.value!!.toInt().plus(TWENTY_THREE_HOURS)).toString()
+            } else {
+                _hours.value = (hours.value!!.toInt().minus(ONE_HOUR)).toString()
+            }
+        } else {
+            _minutes.value = (_minutes.value?.toInt()?.minus(TEN_MINUTES)).toString()
+        }
 
         updateCountDownTimer()
         updateTimer()
@@ -245,5 +276,7 @@ class TimerViewModel : ViewModel() {
         const val FIFTY_MINUTES = 50
         const val TEN_MINUTES = 10
         const val FIVE_MINUTES = 5
+        const val THIRTY_MINUTES_IN_MILLISECONDS = 1800000L
+        const val CONVERT_INTO_PERCENTAGE = 100
     }
 }
