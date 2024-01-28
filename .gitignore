@@ -15,3 +15,7 @@
 local.properties
 .idea/sonarlint/
 .idea/deploymentTargetDropDown.xml
+.idea/appInsightsSettings.xml
+.idea/misc.xml
+.idea/sonarlint/issuestore/index.pb
+.idea/sonarlint/securityhotspotstore/index.pb
